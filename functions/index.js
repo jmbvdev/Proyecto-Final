@@ -22,7 +22,7 @@ app.get("/users", async (req, res) => {
     res.status(500).json(error);
   }
 });
-
+// prueba
 app.post("/users", async (req, res) => {
   try {
     const user = {
