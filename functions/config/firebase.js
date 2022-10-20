@@ -11,4 +11,6 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+//COMENTARIO DE PRUEBA
+
 module.exports = { admin, db };
