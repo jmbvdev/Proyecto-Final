@@ -7,12 +7,13 @@ const updateProduct = require("../controllers/updateProduct.js");
 const productsRoute = Router();
 
 productsRoute
-  .get("/all", async (req, res) => {
+  .get("/all", async (req, res, next) => {
     try {
       const products = await getAllProducts();
       res.status(200).send(products);
     } catch (err) {
-      return res.status(404).send(err.message);
+      err.status = 404;
+      next(err);
     }
   })
   .get("/:type", async (req, res) => {
@@ -21,7 +22,8 @@ productsRoute
       const products = await getAllProductsByType(type);
       res.status(200).send(products);
     } catch (err) {
-      return res.status(404).send(err.message);
+      err.status = 404;
+      next(err);
     }
   })
   .get("/", async (req, res) => {
@@ -37,7 +39,8 @@ productsRoute
       const product = await getProductById(id);
       res.status(200).send(product);
     } catch (err) {
-      res.status(404).send(err.message);
+      err.status = 404;
+      next(err);
     }
   })
   .post("/create", async (req, res) => {
@@ -73,7 +76,8 @@ productsRoute
         });
       }
     } catch (err) {
-      res.status(404).send(err.message);
+      err.status = 404;
+      next(err);
     }
   })
   .put(":id/edit", async (req, res) => {
@@ -94,7 +98,8 @@ productsRoute
       await deleteProduct();
       res.status(200).send({ message: "Delete completed" });
     } catch (err) {
-      res.status(404).send(err.message);
+      err.status = 404;
+      next(err);
     }
   });
 
