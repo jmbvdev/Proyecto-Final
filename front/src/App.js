@@ -1,13 +1,18 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Componentprueba from "./components/prueba.jsx";
-import Create from "./components/create/create.jsx";
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+
 
 function App() {
   return (
     <div className="App">
-      <Componentprueba />
-      <Create />
+        <Nav/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
+
     </div>
   );
 }
