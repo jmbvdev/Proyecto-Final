@@ -26,13 +26,13 @@ productsRoute
       next(err);
     }
   })
-  .get("/", async (req, res) => {
+  /* .get("/", async (req, res) => {
     const name = req.query.name;
     if (!name) next();
     else {
       //firebase no soporta buscar una subquery name, asiq no serviria para la barra de busqueda escirbir monstera y que el name sea monstera deliciosa, porque es una substring. hay q usar un servicio externo. averiguar sobre Elastic que es el que recomienda firebase.
     }
-  })
+  }) */
   .get(":id", async (req, res) => {
     const id = req.params.id;
     try {
