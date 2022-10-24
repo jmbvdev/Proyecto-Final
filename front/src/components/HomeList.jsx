@@ -5,6 +5,7 @@ import { AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 
 const HomeList = () => {
+
     const plants=[
         {
             name: "Ficus Burgundy",
