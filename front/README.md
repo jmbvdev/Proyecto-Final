@@ -71,13 +71,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Dario Kinkela
 Prueba_0
-.
-.
-.
-.
-.
-.
-.
-.
-.
+
 vamos a ver si colisiona esta cosa
+
+prueba
+
+Estoy en mi rama main prueba1
