@@ -25,6 +25,7 @@ align-content: center;
   }
   .logo {
   width: 130px;
+  height: 60px;
   margin-left: 30px;
   caret-color: transparent;
   cursor: pointer;
