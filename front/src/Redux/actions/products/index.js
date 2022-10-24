@@ -4,10 +4,15 @@ import {
   EDIT_PRODUCT,
   DELETE_PRODUCT,
 } from "./actiontypes";
+import axios from "axios";
 
 export const GetAllProducts = () => {
   return async (dispatch) => {
-    dispatch({ type: GET_ALL_PRODUCTS });
+    axios
+      .get(
+        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/all"
+      )
+      .then((res) => dispatch({ type: GET_ALL_PRODUCTS, payload: res.data }));
   };
 };
 
