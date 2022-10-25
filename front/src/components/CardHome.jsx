@@ -1,8 +1,7 @@
 import React from 'react';
-import s from "../styles/card.module.css"
+import s from "../styles/cardHome.module.css"
 
-
-const Card = ({plant}) => {
+const CardHome = ({plant}) => {
     return (
         <div className={s.container_card}>
                     <div className={s.card}>
@@ -13,7 +12,7 @@ const Card = ({plant}) => {
                         <div className={s.specs}>
                             <p>{plant.name}</p>
                             <b>$65</b>
-                         
+                      
                     
                         </div>
                     </div>
@@ -21,4 +20,4 @@ const Card = ({plant}) => {
     );
 };
 
-export default Card;
+export default CardHome;

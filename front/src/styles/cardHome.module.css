@@ -19,7 +19,6 @@
 .card_overlay{
     position: absolute;
     margin-top: 10px;
-    width: 100%;
     height: 350px;
     top: 0;
     bottom: 0;
@@ -46,11 +45,6 @@
 }
 .card_overlay:hover{
     opacity: 1;
- 
-}
-.card_overlay button:hover{
-    background-color:#607b3eb7;
-   
 }
 .specs{
     display: flex;
