@@ -4,6 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Plants from "./pages/Plants";
+import PlantsDetails from "./pages/PlantsDetails";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/plants" element={<Plants/>}/>
-        <Route path="/details/:id" element={<Plants/>}/>
+        <Route path="/plants/details/:id" element={<PlantsDetails/>}/>
       </Routes>
 
     </div>
