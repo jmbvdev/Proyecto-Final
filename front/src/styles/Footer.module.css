@@ -1,0 +1,62 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins|Roboto");
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.copyright {
+    margin-top: 25px;
+    margin-right: 10px;
+    font-family: "Inter", sans-serif;
+}
+
+
+.color {
+    color: #adb4a2;
+}
+
+
+.fondo {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 15%;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #adb4a2;
+    cursor: pointer;
+    background-image: linear-gradient(rgba(95, 135, 63, 0.9), rgba(19, 84, 34, 0.9)), url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1")
+}
+
+
+.github {
+    margin-top: 20px;
+    font-size: 30px;
+
+}
+
+
+.instagram {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+
+.logo {
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+
+.twitter {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+
+.whatsapp {
+    margin-top: 20px;
+    font-size: 30px;
+}

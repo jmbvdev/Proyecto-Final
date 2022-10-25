@@ -1,0 +1,44 @@
+.flechas{
+    
+    border-radius: 9px;   
+    color:rgb(164, 164, 130);
+    font-size: 50px;
+    padding:25px;
+    margin-top: 200px;
+    margin-left: 5px;
+    
+}
+
+
+.imagen{
+    margin-left: 0.5%;    
+    margin-right: 1%;    
+    height:auto;
+    width:80%;
+    display: inline-block;
+    
+   
+    
+}
+
+
+.texto{
+    color: rgb(162, 195, 159) ;
+    font-family: "Comic Neue", cursive;
+    font-size: 20px;
+    text-align: center;
+       
+}
+
+
+.todo{
+    display: inline-block;      
+    width:100%;
+    height: auto;
+   
+    
+}
+
+
+
+/* //absolute bg-[#6b7280] hover:bg-hoverMenu rounded-full p-5 translate-x-60 animate-bounce */
