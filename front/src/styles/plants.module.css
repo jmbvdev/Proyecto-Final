@@ -1,0 +1,221 @@
+.banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    background-image: linear-gradient(rgba(110, 169, 135, 0.682),rgb(167, 191, 173)), url("https://img.rawpixel.com/private/static/images/website/2022-05/rm255-sasi-15.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=2e9aa5796da70fcd0ed6068e96e566ac"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    caret-color: transparent;
+
+}
+.filters_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.plants img{
+    width: 250px;
+}
+.contact{
+    background-color: #2d384e;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 0px 12px 12px 12px;
+    margin-top: 20px;
+    font-size: small;
+    cursor: pointer;
+    font-family: "Dosis", sans-serif;
+   
+}
+.plants button:hover{
+    background-color: #2d384ecb;
+ 
+}
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+    
+}
+.title{
+    font-weight:  600;
+    margin-left: 3rem;
+    text-align: left;
+    width: 150px;
+    margin-bottom:  10px; 
+    font-size:  24px; 
+    line-height:  40px; 
+    margin-top:  50px; 
+    font-family: Inter, sans-serif; 
+    color: #3f423a; 
+    border-bottom: #3f423a solid 2px;
+}
+.filters_container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.categories{
+    display: flex;
+    gap: 20px;
+}
+.indoor{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    color: #fff;
+    border-radius: 12px 0px 12px 0px;
+    background-image: url("https://media.architecturaldigest.com/photos/5dcde00380598800086215f6/16:9/w_2560%2Cc_limit/Osofsky_Oct19-5.jpg");
+    background-size: cover;
+}
+.indoor p{
+    font-family: "Poppins";
+    background-color: #3753495b;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    border-radius: 5px 5px 5px 0px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.indoor:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.outdoor{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    color: #fff;
+    border-radius: 12px 0px 12px 0px;
+    background-image: url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/container-gardening-ideas-woman-watering-flower-pots-1659383731.jpeg");
+    background-size: cover;
+}
+.outdoor:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.outdoor p{
+    font-family: "Poppins";
+    background-color: #3753495b;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    border-radius: 5px 5px 5px 0px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.pet{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    color: #fff;
+    border-radius: 12px 0px 12px 0px;
+    background-image: url("https://myanimals.com/wp-content/uploads/2018/10/Cat-eyeing-up-a-plant.jpg");
+    background-size: cover;
+}
+.pet:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.pet p{
+    font-family: "Poppins";
+    background-color: #3753495b;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    border-radius: 5px 5px 5px 0px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.easy{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    color: #fff;
+    border-radius: 12px 0px 12px 0px;
+    background-image: url("https://www.reviewgeek.com/p/uploads/2020/11/b7f72457.png?width=400");
+    background-size: contain;
+}
+.easy:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.easy p{
+    font-family: "Poppins";
+    background-color: #3753495b;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    border-radius: 5px 5px 5px 0px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.table{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    color: #fff;
+    border-radius: 12px 0px 12px 0px;
+    background-image: url("https://media.architecturaldigest.com/photos/5c363f18cd9ad05aac56b996/4:3/w_2131,h_1598,c_limit/Annette-OBrien-for-The-Design-Files.jpg");
+    background-size: cover;
+}
+.table:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.table p{
+    font-family: "Poppins";
+    background-color: #3753495b;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    border-radius: 5px 5px 5px 0px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
