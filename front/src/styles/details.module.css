@@ -112,6 +112,7 @@ font-weight:bold ;
     padding: 10px;
     caret-color: transparent;
 }
+
 .cart:hover{
     background-color:rgb(9, 102, 74) ;
     cursor: pointer;

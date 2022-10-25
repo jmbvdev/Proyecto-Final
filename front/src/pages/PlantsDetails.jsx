@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import {useDispatch, useSelector}from "react-redux"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GetProductDetails } from '../Redux/actions/products';
 import {GiTable} from "react-icons/gi"
 import {TbPlant2} from "react-icons/tb"
@@ -10,22 +10,24 @@ import s from "../styles/details.module.css"
 import { useState } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 
+
 const PlantsDetails = () => {
     const dispatch= useDispatch()
+    const navigate= useNavigate()
 //     const plant= useSelector((state)=>state.productsReducer.productDetails.data)
     
 //     const id= useParams().id
     
 //   console.log(plant)
-const [quantity, setQuantity]= useState(0)
+const [quantity, setQuantity]= useState(1)
     useEffect(()=>{
         // dispatch(GetProductDetails(id))
         
         
 
     },[quantity])
-    function handleMinus(quantity) {
-        if (quantity-1) {
+    function handleMinus() {
+        if (quantity<1) {
             setQuantity(0)
         }else{
 
@@ -34,7 +36,9 @@ const [quantity, setQuantity]= useState(0)
         
     }
 
-
+function handleCart() {
+    navigate("/cart")
+}
         
     const plant={
         "details": "Take a closer look at the Arrowhead White Butterfly, and you’ll find that its leaves actually feature marbling in a variety of vibrant green shades. You can showcase this unique variegation by training your Syngonium podophyllum to climb trellises and ladder stands in the same way it climbs trees in its native rainforests!",
@@ -85,8 +89,8 @@ const [quantity, setQuantity]= useState(0)
                     <h3>$ {plant.price}</h3>
                 </div>
                 <div className={s.quantity}>
-                    <button onClick={()=>handleMinus(quantity)}>-</button>
-                    <p>{quantity}</p>
+                    <button onClick={()=>setQuantity(quantity-1)}>-</button>
+                    <p>{quantity<1?0:quantity}</p>
                     <button onClick={()=>setQuantity(quantity+1)}>+</button>
 
 
@@ -100,7 +104,7 @@ const [quantity, setQuantity]= useState(0)
 
 
 
-           <button className={s.cart}>Add to Cart</button>
+           <button onClick={handleCart} className={s.cart}>Add to Cart</button>
            </div>
         
         </div>
