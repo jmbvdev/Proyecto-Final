@@ -21,6 +21,7 @@ export const GetAllProducts = () => {
   };
 };
 
+
 export const createProduct = (data) => {
   return async (dispatch) => {
     let response = await axios.post(
@@ -31,6 +32,7 @@ export const createProduct = (data) => {
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
+
 
 export const EditProduct = (id, data) => {
   return async (dispatch) => {
