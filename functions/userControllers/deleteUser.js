@@ -1,12 +1,9 @@
-const { getAuth, deleteUser } = require("firebase/auth")
+const {admin} = require("../config/firebase.js");
 
 module.exports = async function deleteAccount(id){
-    const auth = getAuth(id);
-    const user = auth.currentUser;
+    const auth = admin.auth();
 
-    deleteUser(user).then(()=> {
-        alert('the user has been deleted!')
-    }).catch((error)=> {
-        alert('An error ocurred')
-    })
+
+    await auth.deleteUser(id);
+    return
 }

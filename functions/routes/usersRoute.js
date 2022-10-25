@@ -1,38 +1,52 @@
 const { Router } = require("express");
-const createUser = require("../userControllers/createUser");
-const loginUser = require("../userControllers/loginUser");
+const createAccount = require("../userControllers/createUser");
+const updateUser = require("../userControllers/updateUser");
+const deleteAccount = require("../userControllers/deleteUser");
+const getAllUsers = require("../userControllers/getUsers");
+
 
 const usersRoute = Router();
 
 usersRoute
-    .post("/register", async(req, res) => {
+    .get("/all", async (req, res, next) => {
+        try{
+            const allUsers = await getAllUsers();
+            res.status(200).send(allUsers)
+        }catch(err){
+            next(err)
+        }
+    })
+    .post("/register", async(req, res, next) => {
         try {
-            const {email, username, password} = req.body;
-            const user = await createUser(username, password, email)
-            console.log(user);
-            res.status(201).redirect('/');
+            const {displayName, password, email, photoURL} = req.body;
+            const user = await createAccount(displayName, password, email, photoURL)
+
+            res.status(201).send(user.toJSON());
         }
         catch(err){
-            res.status(404).send(err)
+            next(err)
         }
     })
-    .post("/login", async(req, res) => {
-        try{
-            const {email, password} = req.body;
-            const user = await loginUser(email, password);
-            res.status(201).redirect('/');
-        } catch(err){
-            res.status(404).send(err);
-        }
-    })
-    .delete("/:id", async (req, res) => {
+    .delete("/:id", async (req, res, next) => {
         try{
             const {id} = req.params;
-            const deleted = await deleteAccount(id)
-            res.status(200).send(`user ${id} has been succesfully removed`)
+            console.log(id)
+            await deleteAccount(id)
+            res.status(203).send(`user ${id} has been succesfully removed`)
 
         }catch(err){
-            res.status(400).send({err: 'something went wrong'})
+            next(err)
+        }
+    })
+    .put("/:id", async (req, res, next)=> {
+        try{
+            const {displayName, password, email, phoneNumber, photoURL, role} = req.body;
+            const {id} = req.params;
+            const user = await updateUser(id, displayName, password, email, phoneNumber, photoURL, role);
+            res.status(200).send([user.toJSON(), user.customClaims]);
+
+        }catch(err){
+            next(err);
         }
     })
 
