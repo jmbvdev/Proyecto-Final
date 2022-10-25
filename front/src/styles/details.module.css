@@ -9,6 +9,7 @@
 .container img{
     width: 400px;
     min-width: 340px;
+    caret-color: transparent;
 
 }
 .details{
@@ -19,6 +20,7 @@
    justify-content: left;
    text-align: left;
    gap: 1.5rem;
+   caret-color: transparent;
 }
 .details h1{
     font-family: "Lora", sans-serif;
@@ -36,10 +38,12 @@
     font-size: small;
     line-height: 1.5rem;
     width: 80%;
+    caret-color: transparent;
 }
 .categories{
     display: flex;
     gap: 2rem;
+    caret-color: transparent;
 }
 .categories_container{
 display: flex;
@@ -67,22 +71,28 @@ font-weight:bold ;
 }
 .quantity{
     display: flex;
-    width: 200px;
+    width: 180px;
     justify-content: center;
     align-items: center;
     text-align: center;
+    caret-color: transparent;
 }
 .price{
     display: flex;
     gap: 3rem;
+    caret-color: transparent;
 }
 .quantity button{
-    width: 50px;
-    height: 35px;
+    width: 45px;
+    height: 25px;
     background-color: rgba(9, 102, 74, 0.713);
-    border-radius: 50%;
+    border-radius: 8px;
     color: #fff;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 .quantity button:hover{
     background-color: rgb(9, 102, 74);
@@ -90,5 +100,40 @@ font-weight:bold ;
 .quantity p{
     font-weight: bold;
     font-size: large;
+    
 
+}
+
+.cart{
+    background-color:rgba(9, 102, 74, 0.713) ;
+    width: 40%;
+    color: #fff;
+    font-size: medium;
+    padding: 10px;
+    caret-color: transparent;
+}
+.cart:hover{
+    background-color:rgb(9, 102, 74) ;
+    cursor: pointer;
+}
+.favorites{
+    display: flex;
+
+
+ 
+ 
+}
+.favorites h4{
+    display: block;
+ 
+    width: 90px;
+}
+.hearth{
+    font-size: 2rem;
+    color:rgba(9, 102, 74, 0.713) ;
+
+}
+.hearth:hover{
+  color: rgb(9, 102, 74) ;
+  cursor: pointer;
 }

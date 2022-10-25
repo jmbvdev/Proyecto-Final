@@ -8,6 +8,7 @@ import {TbPlant2} from "react-icons/tb"
 import {FaDog} from "react-icons/fa"
 import s from "../styles/details.module.css"
 import { useState } from 'react';
+import { AiFillHeart } from 'react-icons/ai';
 
 const PlantsDetails = () => {
     const dispatch= useDispatch()
@@ -92,11 +93,15 @@ const [quantity, setQuantity]= useState(0)
                 </div>
 
             </div>
+            <div className={s.favorites}>
+                <h4>Add to favorites</h4>
+                <button><AiFillHeart className={s.hearth}/></button>
+            </div>
 
 
 
+           <button className={s.cart}>Add to Cart</button>
            </div>
-           <button></button>
         
         </div>
     );
