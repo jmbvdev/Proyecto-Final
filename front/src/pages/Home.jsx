@@ -5,6 +5,7 @@ import SearchBox from '../components/SearchBox';
 
 
 const Home = () => {
+  
 
     return (
         <div className='home'>
