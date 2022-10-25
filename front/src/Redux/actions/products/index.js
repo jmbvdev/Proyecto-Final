@@ -21,17 +21,14 @@ export const GetAllProducts = () => {
   };
 };
 
-export const CreateProduct = (data) => {
+export const createProduct = (data) => {
   return async (dispatch) => {
-    axios
-      .post(
-        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",
-        data
-      )
-      .then((res) => {
-        window.alert(res.data.message);
-        dispatch({ type: CREATE_PRODUCT, payload: res.data.product });
-      });
+    let response = await axios.post(
+      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",
+      data
+    );
+    // console.log(response.data);
+    return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
 
