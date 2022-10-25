@@ -16,17 +16,16 @@ const getBackgroundSize = () => {
 
     return (
       <div className={s.container}>
-        <div className={s.filters_container}>
-         
             <div className={s.size_container}>
-                <p>Size</p>
+                <p className={s.size_title}>size</p>
                 <div className={s.size}>
                     <button>mini</button>
                     <button>medium</button>
                     <button>small</button>
                     <button>large</button>
                 </div>
-                <div>
+             </div>
+                <div className={s.price}>
                 <h4>Filter price: {value}$</h4>
                 <input
                     className={s.slider}
@@ -38,8 +37,6 @@ const getBackgroundSize = () => {
                     value={value}
                 />
                 </div>
-             </div>
-        </div>
       </div>
     );
 };

@@ -844,7 +844,6 @@ console.log(arr.sort((a,b)=>a-b))
             </div>
             <div className={s.list_container}>
                 <div className={s.list_title}>
-                    <h3 className={s.title}>All Plants</h3>
                     <div className={s.filters_container}>
                        <PriceFilter/>
                        <div className={s.categories}>
@@ -856,6 +855,7 @@ console.log(arr.sort((a,b)=>a-b))
                        </div>
 
                     </div>
+                    <h3 className={s.title}>All Plants</h3>
                     <div className={s.list}>
                         
                    {

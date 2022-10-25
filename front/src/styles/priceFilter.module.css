@@ -1,16 +1,26 @@
 .container{
-    width: 250px;
-    text-align: left;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    
     margin: 30px;
     
  
   
 }
+.price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+}
 .filters_container{
     display: flex;
    
     width: 100%;
-    margin-left: 3rem;
+  
 }
 input[type="range"] {
     appearance: none;
@@ -40,38 +50,54 @@ input[type="range"] {
  font-family: "Dosis", sans-serif;
  font-weight: 700;
 
+
 }
 .size_container{
    display: flex;
-   flex-direction: column;
    justify-content: center;
    justify-items: center;
-   align-items: left;
-   text-align: left;
+   align-items: center;
+   text-align: center;
+
 
 }
 .size{
     display: flex;
-    width: 200px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
+    margin-right: 30px;
+    caret-color: transparent;
+
 }
-.filters_container p{
+.size_title{
     font-family: "Poppins";
-    font-weight: 600;
+    font-weight: bold;
+    margin-left: 10px;
+    caret-color: transparent;
+    margin-right: 10px;
+
 }
 .size button{
-    background-color: #2e6837a3;
+    background-color:transparent;
     margin: 5px;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: medium;
-    color: white;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#365d3c;
     font-family: "Josefin Sans";
     cursor: pointer;
 }
+.size button:hover{
+    color: #fff;
+
+}
 .indoor{
-    width: 120px;
+    width: 220px;
     background-color: #365d3c;
     height: 90px;
+}
+.price{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

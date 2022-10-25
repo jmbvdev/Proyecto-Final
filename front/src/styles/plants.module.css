@@ -12,7 +12,10 @@
     caret-color: transparent;
 
 }
-
+.filters_container{
+    display: flex;
+    flex-direction: column;
+}
 
 .plants img{
     width: 250px;
@@ -64,8 +67,8 @@
     gap: 20px;
 }
 .indoor{
-    width: 180px;
-    height: 100px;
+    width: 240px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,8 +98,8 @@
 }
 
 .outdoor{
-    width: 180px;
-    height: 100px;
+    width: 240px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +108,7 @@
     color: #fff;
     border-radius: 12px 0px 12px 0px;
     background-image: url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/container-gardening-ideas-woman-watering-flower-pots-1659383731.jpeg");
-    background-size: contain;
+    background-size: cover;
 }
 .outdoor:hover{
     opacity: 0.8;
@@ -125,8 +128,8 @@
     align-items: center;
 }
 .pet{
-    width: 180px;
-    height: 100px;
+    width: 240px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +138,7 @@
     color: #fff;
     border-radius: 12px 0px 12px 0px;
     background-image: url("https://myanimals.com/wp-content/uploads/2018/10/Cat-eyeing-up-a-plant.jpg");
-    background-size: contain;
+    background-size: cover;
 }
 .pet:hover{
     opacity: 0.8;
@@ -156,8 +159,8 @@
 }
 
 .easy{
-    width: 180px;
-    height: 100px;
+    width: 240px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,8 +190,8 @@
 }
 
 .table{
-    width: 180px;
-    height: 100px;
+    width: 240px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -197,7 +200,7 @@
     color: #fff;
     border-radius: 12px 0px 12px 0px;
     background-image: url("https://media.architecturaldigest.com/photos/5c363f18cd9ad05aac56b996/4:3/w_2131,h_1598,c_limit/Annette-OBrien-for-The-Design-Files.jpg");
-    background-size: contain;
+    background-size: cover;
 }
 .table:hover{
     opacity: 0.8;
