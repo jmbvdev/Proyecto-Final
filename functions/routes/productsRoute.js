@@ -3,7 +3,7 @@ const getAllProducts = require("../controllers/getAllProducts.js");
 const getAllProductsByType = require("../controllers/getAllProductsByType.js");
 const getProductById = require("../controllers/getProductById.js");
 const updateProduct = require("../controllers/updateProduct.js");
-const createProduct = require("../controllers/createProduct.js");
+const createNewProduct = require("../controllers/createProduct.js");
 const deleteProduct = require("../controllers/deleteProduct.js");
 
 const productsRoute = Router();
@@ -31,38 +31,50 @@ productsRoute
   })
   .post("/create", async (req, res, next) => {
     //revisar la parte de como devuelvo el producto creado
-    const { categories, details, image, name, price, size, stock, type } =
-      req.body;
+    const {
+      categories,
+      details,
+      imageUrl,
+      planter,
+      name,
+      price,
+      size,
+      stock,
+      type,
+      uid,
+    } = req.body;
     try {
       if (
         !categories ||
         !details ||
-        !image ||
+        !imageUrl ||
+        !planter ||
         !name ||
         !price ||
         !size ||
         !stock ||
-        !type
+        !type ||
+        !uid
       ) {
-        return res.status(404).send("You miss an atribute");
+        return res.status(404).send("You miss an attribute");
       } else {
         const product = {
           categories,
           details,
-          image,
+          imageUrl,
+          planter,
           name,
           price,
           size,
           stock,
           type,
+          uid,
         };
-        const id = await createProduct(product);
+        const id = await createNewProduct(product, uid);
         res.status(203).send({
           message: "Created",
-          product: {
-            id: id.id,
-            data: product,
-          },
+          id: id.id,
+          data: product,
         });
       }
     } catch (err) {

@@ -4,15 +4,14 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 
-
 function App() {
   return (
     <div className="App">
-        <Nav/>
+      <Nav />
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Home />} />
+        <Route exact path="/create" element={<Home />} />
       </Routes>
-
     </div>
   );
 }

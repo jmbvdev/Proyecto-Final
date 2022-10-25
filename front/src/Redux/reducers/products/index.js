@@ -18,7 +18,8 @@ export default function productsReducer(state = initialState, action) {
     return { ...state, allProducts: action.payload };
   }
   if (action.type === CREATE_PRODUCT) {
-    return { ...state, allProducts: [...state.allProducts, action.payload] };
+    //return { ...state, allProducts: [...state.allProducts, action.payload] };
+    return state;
   }
   /* if (action.type === EDIT_PRODUCT) {
     return { ...state, allProducts: action.payload };
