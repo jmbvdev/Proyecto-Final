@@ -59,8 +59,10 @@ productsRoute
         const id = await createProduct(product);
         res.status(203).send({
           message: "Created",
-          id: id.id,
-          data: product,
+          product: {
+            id: id.id,
+            data: product,
+          },
         });
       }
     } catch (err) {
