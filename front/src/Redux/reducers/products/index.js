@@ -8,6 +8,7 @@ import {
   GET_PRODUCT_DETAILS,
 } from "../../actions/products/actiontypes.js";
 
+
 const initialState = {
   allProducts: [],
   productDetails: {},

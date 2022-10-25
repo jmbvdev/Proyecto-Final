@@ -73,8 +73,20 @@ productsRoute
 
   .post("/create", async (req, res, next) => {
     //revisar la parte de como devuelvo el producto creado
-    const { categories, details, imageUrl, planter, name, price, size, stock, type, uid } =
-      req.body;
+
+    const {
+      categories,
+      details,
+      imageUrl,
+      planter,
+      name,
+      price,
+      size,
+      stock,
+      type,
+      uid,
+    } = req.body;
+
     try {
       if (
         !categories ||
@@ -100,13 +112,13 @@ productsRoute
           size,
           stock,
           type,
-          uid
+          uid,
         };
         const id = await createNewProduct(product, uid);
         res.status(203).send({
           message: "Created",
           id: id.id,
-          data: product
+          data: product,
         });
       }
     } catch (err) {
