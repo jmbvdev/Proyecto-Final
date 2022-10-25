@@ -60,3 +60,35 @@ font-weight:bold ;
 .table{
     font-size: 2.5rem;
 }
+.price h3{
+    font-weight: 600;
+    color: rgb(9, 102, 74);
+
+}
+.quantity{
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.price{
+    display: flex;
+    gap: 3rem;
+}
+.quantity button{
+    width: 50px;
+    height: 35px;
+    background-color: rgba(9, 102, 74, 0.713);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+}
+.quantity button:hover{
+    background-color: rgb(9, 102, 74);
+}
+.quantity p{
+    font-weight: bold;
+    font-size: large;
+
+}

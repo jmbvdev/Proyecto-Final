@@ -7,6 +7,7 @@ import {GiTable} from "react-icons/gi"
 import {TbPlant2} from "react-icons/tb"
 import {FaDog} from "react-icons/fa"
 import s from "../styles/details.module.css"
+import { useState } from 'react';
 
 const PlantsDetails = () => {
     const dispatch= useDispatch()
@@ -15,10 +16,25 @@ const PlantsDetails = () => {
 //     const id= useParams().id
     
 //   console.log(plant)
-//     useEffect(()=>{
-//         dispatch(GetProductDetails(id))
+const [quantity, setQuantity]= useState(0)
+    useEffect(()=>{
+        // dispatch(GetProductDetails(id))
+        
+        
 
-//     },[])
+    },[quantity])
+    function handleMinus(quantity) {
+        if (quantity-1) {
+            setQuantity(0)
+        }else{
+
+            setQuantity(quantity-1)
+        }
+        
+    }
+
+
+        
     const plant={
         "details": "Take a closer look at the Arrowhead White Butterfly, and you’ll find that its leaves actually feature marbling in a variety of vibrant green shades. You can showcase this unique variegation by training your Syngonium podophyllum to climb trellises and ladder stands in the same way it climbs trees in its native rainforests!",
         "type": "plant",
@@ -37,6 +53,7 @@ const PlantsDetails = () => {
             "large"
         ]
     }
+
     return (
         <div className={s.container}>
            <img src={plant.image} alt="" />
@@ -60,6 +77,20 @@ const PlantsDetails = () => {
                 <span>{plant.categories[2]&&plant.categories[2]==="tabletop"?"TABLETOP":plant.categories[2]&&plant.categories[2]==="pet friendly"? "PET FRIENDLY":"EASY CARE"}</span>
                 </div>
                
+            </div>
+            <div className={s.price}>
+                <div>
+                    <h4>Price</h4>
+                    <h3>$ {plant.price}</h3>
+                </div>
+                <div className={s.quantity}>
+                    <button onClick={()=>handleMinus(quantity)}>-</button>
+                    <p>{quantity}</p>
+                    <button onClick={()=>setQuantity(quantity+1)}>+</button>
+
+
+                </div>
+
             </div>
 
 
