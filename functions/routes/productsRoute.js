@@ -29,8 +29,51 @@ productsRoute
       next(err);
     }
   })
+  // .post("/create", async (req, res, next) => {
+  //   //revisar la parte de como devuelvo el producto creado
+  //   const { categories, details, image, name, price, size, stock, type } =
+  //     req.body;
+  //   try {
+  //     if (
+  //       !categories ||
+  //       !details ||
+  //       !image ||
+  //       !name ||
+  //       !price ||
+  //       !size ||
+  //       !stock ||
+  //       !type
+  //     ) {
+  //       return res.status(404).send("You miss an atribute");
+  //     } else {
+  //       const product = {
+  //         categories,
+  //         details,
+  //         image,
+  //         name,
+  //         price,
+  //         size,
+  //         stock,
+  //         type,
+  //       };
+  //       const id = await createProduct(product);
+  //       res.status(203).send({
+  //         message: "Created",
+  //         product: {
+  //           id: id.id,
+  //           data: product,
+  //         },
+  //       });
+  //     }
+  //   } catch (err) {
+  //     err.status = 404;
+  //     next(err);
+  //   }
+  // })
+
   .post("/create", async (req, res, next) => {
     //revisar la parte de como devuelvo el producto creado
+
     const {
       categories,
       details,
@@ -43,6 +86,7 @@ productsRoute
       type,
       uid,
     } = req.body;
+
     try {
       if (
         !categories ||
@@ -82,6 +126,7 @@ productsRoute
       next(err);
     }
   })
+
   .put("/:id/edit", async (req, res, next) => {
     //revisar como devuelvo el producto updateado
     const id = req.params.id;

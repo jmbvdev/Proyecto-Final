@@ -6,6 +6,7 @@ import {
   FILTER_BY,
   ORDER_BY,
   GET_PRODUCT_DETAILS,
+  IS_SEARCH
 } from "./actiontypes";
 import axios from "axios";
 
@@ -21,6 +22,7 @@ export const GetAllProducts = () => {
   };
 };
 
+
 export const createProduct = (data) => {
   return async (dispatch) => {
     let response = await axios.post(
@@ -31,6 +33,7 @@ export const createProduct = (data) => {
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
+
 
 export const EditProduct = (id, data) => {
   return async (dispatch) => {
@@ -85,3 +88,9 @@ export const GetProductDetails = (id) => {
       );
   };
 };
+
+export function setSearch() {
+  return {
+    type: IS_SEARCH,
+  };
+}
