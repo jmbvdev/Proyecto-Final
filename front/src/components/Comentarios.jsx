@@ -1,80 +1,56 @@
 import s from "../styles/Comentarios.module.css";
-import { BsFillHandThumbsUpFill } from 'react-icons/bs'
-import gustavo from "../images/fotos perfil/gustavo.jpg"
-import Christian from "../images/fotos perfil/cristian cordoba.jpg"
-import andres from '../images/fotos perfil/andres.jpg'
-import dario from "../images/fotos perfil/dario.jpg"
-
+import Tarjeta from './Tarjeta a'
+import Tarjetab from './Tarjeta b'
+import Tarjetac from './Tarjeta c'
+import { FaDotCircle } from 'react-icons/fa'
+import { BsCircle, BsFillCaretLeftFill } from "react-icons/bs";
+import { BsFillCaretRightFill } from 'react-icons/bs';
 
 const Comentarios = () => {
 
-
-    return (
-
-        <div >
-            <div className={s.titulo}>
-            <h3 >Testimonials</h3>
-            </div>
-            <div className={s.envolver}>
-            <div className={s.tarjeta}>
-                <div className={s.contenedor}>
-                    <div className={s.imagen}>
-                        <img src={gustavo} />
-                    </div>
-                    <span >"Excelente atencion y el servicio"</span>
-                </div>
-                <div className={s.pulgar}>
-                    <BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill />
-                </div>
-                <br/>
-                <div className={s.letras}>
-                <span >Gustavo </span>
-                </div>
-            </div>
-            <div className={s.tarjeta}>
-                <div className={s.contenedor}>
-                <div className={s.imagen}>
-                    <img src={dario} />
-                    </div>
-                 <span className={s.letras}>"Cumplieron con mis Expectativas"</span>
-                </div>
-                <div className={s.pulgar}>
-                    <BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill />
-                </div>
-                <br/>
-                <div className={s.letras}>
-                <span >Dario </span>
-                </div>
-            </div>
-            < div className={s.tarjeta}>
-                <div className={s.contenedor}>
-                <div className={s.imagen}>
-                    <img src={andres} />
-                </div>
-                <span className={s.letras}>"Tardaron en realizar el envio"</span>
-                </div>
-                <div className={s.pulgar}>
-                    <BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill />
-                </div>
-                <br/>
-                <div className={s.letras}>
-                <span >Andres </span>
-                </div>
-            </div>
-            {/* < div className={s.tarjeta}>
-            <div className={s.imagen}>
-                <img src={Christian} />
-                </div>
-                                <span className={s.letras}>"Son los mejores"</span>
-                                <div className={s.pulgar}>
-                                <BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill /><BsFillHandThumbsUpFill />
-                                </div>
-                               <h3 className={s.letras}>Christian </h3>
-                                        </div> */}
-</div>
-
+  return (
+    <div>
+      <div className={s.titulo}>
+        <h3 >Testimonials</h3>
+      </div>
+      <div className={s.conteItemscarousel}  >
+        <div className={s.itemcarousel} id="fot1">
+          <div className={s.tarjetacarousel}>
+            <Tarjeta />
+          </div>
+          <div className={s.flechascarousel}>
+            <a href="#fot3" className={s.flechaccion}><BsFillCaretLeftFill /></a>
+            <a href="#fot2" className={s.flechaccion}><BsFillCaretRightFill /></a>
+          </div>
         </div>
-    )
+        <div className={s.itemcarousel}>
+          <div className={s.tarjetacarousel} id="fot2">
+            <Tarjetab />
+          </div>
+          <div className={s.flechascarousel}>
+            <a href="#fot1" className={s.flechaccion}><BsFillCaretLeftFill /></a>
+            <a href="#fot3" className={s.flechaccion}><BsFillCaretRightFill /></a>
+          </div>
+        </div>
+        <div className={s.itemcarousel}>
+          <div className={s.tarjetacarousel} id="fot3">
+            <Tarjetac />
+          </div>
+          <div className={s.flechascarousel}>
+            <a href="#fot2" className={s.flechaccion}><BsFillCaretLeftFill /></a>
+            <a href="#fot1" className={s.flechaccion}><BsFillCaretRightFill /></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a href="#fot1" className={s.punto}><FaDotCircle /></a>
+        <a href="#fot2" className={s.punto}><FaDotCircle /></a>
+        <a href="#fot3" className={s.punto}><FaDotCircle /></a>
+
+      </div>
+    </div>
+  )
+
 }
 
 export default Comentarios

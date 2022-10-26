@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "../styles/homeList.module.css"
 import Card from './Card';
-import Carousel from './Carousel'
+
 import Comentarios from './Comentarios'
 import { AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
@@ -100,7 +100,7 @@ const HomeList = () => {
     ]
     return (
         <>
-        <Carousel/>
+       
            <h3 className={s.title}>All Plants</h3> 
         <div className={s.container}>
            <div className={s.list}>

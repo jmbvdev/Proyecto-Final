@@ -1,79 +1,51 @@
 
-import { useEffect, useState } from "react";
-import s from "../styles/Carousel.module.css"
-import {BsFillCaretLeftFill} from "react-icons/bs"
-import {BsFillCaretRightFill} from 'react-icons/bs'
+import s from '../styles/Carousel.module.css';
+import {BsCircle, BsFillCaretLeftFill} from "react-icons/bs";
+import {BsFillCaretRightFill} from 'react-icons/bs';
+import {FaDotCircle} from 'react-icons/fa'
+import foto1 from '../images/carousel/art.png'
+import foto2 from '../images/carousel/big.png'
+import foto3 from '../images/carousel/hoya.png'
 
-
-export default function Carousel() {
-    let img1 =
-      "https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_bromeliad-vriesea-intenso-orange_small_bryant_cream_variant.jpg?v=1655215164";
-    let img2 =
-      "https://cdn.sanity.io/images/y346iw48/production/0b8007aa28a7fb37800f81f0011f9e2e2b81bed3-2820x1953.jpg?w=1536&h=1064&auto=format";
-    let img3 =
-      "https://www.hogarmania.com/archivos/202210/macetas-para-decorar-hogar-en-halloween-668x400x80xX-1.jpg";
-    let img4 =
-      "https://static.vecteezy.com/system/resources/previews/000/425/737/non_2x/delivery-man-with-box-postman-design-isolated-on-white-background-courier-in-hat-and-uniform-with-package-vector.jpg";
-    let images = [img1, img2, img3, img4];
-  
-    let text1 =
-      "Nuestro nuevo ingreso.";
-    let text2 =
-      "La mejor calidad en Accesorios e insumos.";
-    let text3 = "Celebramos Halloween con nuestras macetas especiales.";
-    let text4 = "Hacemos envios a todo el pais.";
-    let texts = [text1, text2, text3, text4];
-    let [index, setIndex] = useState(0);
-    let time;
-  
-    function handleButtonLeft() {
-      clearTimeout(time);
-      index > 0 ? setIndex(index - 1) : setIndex(images.length - 1);
-    }
-  
-    function handleButtonRight() {
-      clearTimeout(time);
-      index === images.length - 1 ? setIndex(0) : setIndex(index + 1);
-    }
-  
-    useEffect(() => {
-      time = setTimeout(handleButtonRight, 5000);
-    }, [index]);
-  
+ export default function Carousel() {
     return (
-      <div >
-          <div className={s.todo}>
-        
-        <div >
-            <button
-              onClick={handleButtonLeft}
-               className={s.flechas}
-            ><BsFillCaretLeftFill/></button>
-          </div>
-  
-  <div className={s.texto}>
-          <img
-            src={images[index]}
-            alt="image not found"
-            className={s.imagen}
-            
-          />
-          <br/>
-          <span >
-          
-            {texts[index]}
-          </span>
-        </div>
-  
-            
-          <div >
-            <button
-              onClick={handleButtonRight}
-              className={s.flechas}
-            ><BsFillCaretRightFill/></button>
-          </div>
-        </div>
-        </div>
-      
-    );
-  }
+      <div>
+      <div className={s.conteItemscarousel}  >
+        <div className={s.itemcarousel} id="foto1">
+            <div className={s.tarjetacarousel}>
+                        <img src={foto1} className={s.imagen}/>
+                        </div>                        
+                        <div className={s.flechascarousel}>
+                          <a href="#foto3" className={s.flechaccion}><BsFillCaretLeftFill/></a>
+                          <a href="#foto2" className={s.flechaccion}><BsFillCaretRightFill/></a>
+                        </div>
+                                    </div>
+                                    <div className={s.itemcarousel}>
+            <div className={s.tarjetacarousel}  id="foto2">
+            <img src={foto2} className={s.imagen}/>
+                        </div>                        
+                        <div className={s.flechascarousel}>
+                        <a href="#foto1" className={s.flechaccion}><BsFillCaretLeftFill/></a>
+                        <a href="#foto3" className={s.flechaccion}><BsFillCaretRightFill/></a>
+                        </div>
+                                    </div>     
+                                    <div className={s.itemcarousel}>
+            <div className={s.tarjetacarousel} id="foto3">
+            <img src={foto3} className={s.imagen}/>
+                        </div>                        
+                        <div className={s.flechascarousel}>
+                        <a href="#foto2" className={s.flechaccion}><BsFillCaretLeftFill/></a>
+                        <a href="#foto1" className={s.flechaccion}><BsFillCaretRightFill/></a>
+                        </div>
+                                    </div> 
+                    
+            </div>
+            <div>
+            <a href="#foto1" className={s.punto}><FaDotCircle/></a>
+            <a href="#foto2" className={s.punto}><FaDotCircle/></a>
+            <a href="#foto3" className={s.punto}><FaDotCircle/></a>
+                                                  
+              </div>   
+            </div>
+    )
+}  

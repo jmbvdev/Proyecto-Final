@@ -1,75 +1,66 @@
-.tarjeta{
-    
-    border-color: rgb(232, 237, 231);
-    border-style:groove;
-    justify-content: space-around;
-    margin-left: 5%;
-    margin-right: 5%;
-   margin-top: 5%;
-    width:25%;
-    height: auto;
-    padding: 10px;
-    text-align: right;
-    border-radius: 5px;
-    background: white;
-    margin-bottom: 3%;
-}
-
-
-
-.contenedor{
-    display: flex;
-flex-wrap: wrap;
-justify-content:space-around;
-}
-
-
-
-.pulgar{ color: #bdb346;
-margin-right: 10px;}
-
-
-.letras{
-    color: #683f18;
-    font-family: "Inter", sans-serif;
-}
-
-.letras span{
-    
-    margin-right: 10px ;
-    margin-top: 45px;
-}
-
-.envolver{
-    background-image: linear-gradient(rgba(125, 146, 108, 0.9), rgba(118, 160, 128, 0.9)), url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1");
-    border-style: groove;
-    border-color: beige;
-    margin-left: 3px;
-    margin-right: 3px;
-    border-radius: 5px;
-    display: inline-flex;
-    width: 98%;
-    margin-top: 25px;
-    ;
-}
-.imagen{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.conteItemscarousel {
+    height: 300px;
     overflow: hidden;
-    display: block;
-    flex-direction: column;
-}
-.imagen img{
-    width: 100%;
-    height: 100%;
-    object-fit: center;
+    width: 77%;
+    margin-left: 9%;
 }
 
-.titulo{
+
+.flechaccion {
+    color: white;
+    cursor: pointer;
+}
+
+
+.flechascarousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
+    font-size: 35px;
+
+}
+
+
+.imagen {
+    height: 110%;
+    width: 100%;
+}
+
+
+.itemcarousel {
+    background-image: linear-gradient(rgba(177, 198, 160, 0.9), rgba(181, 210, 188, 0.9)), url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1");
+    height: 100%;
+    position: relative;
+    border-radius: 5px;
+}
+
+
+.punto {
+    display: inline-flex;
+    margin-top: 5px;
+    margin-left: 2px;
+    color: rgb(173, 214, 182);
+    justify-content: center;
+}
+
+
+.tarjetacarousel {
+    height: 100%;
+    color: blanchedalmond;
+    text-decoration: none;
+
+}
+
+
+.titulo {
     justify-items: center;
     color: rgba(118, 160, 128, 0.9);
     font-size: 25px;
-    font-family: "Inter", sans-serif;
+    font-family: "Lore", sans-serif;
     margin-top: 25%;
 }
