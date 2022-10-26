@@ -2,6 +2,7 @@
     position: relative; 
     width: 300px; 
     height: 100%; 
+  
 
   
  
@@ -11,6 +12,7 @@
     width: 270px;
     height: 430px;
     margin-top: 10px;
+  
 }
 .card img{
     width: 100%;
@@ -51,6 +53,7 @@
     flex-direction: column;
     text-align: left;
     padding-bottom: 3rem;
+
 }
 .specs p{
     display: block; 
@@ -58,4 +61,5 @@
     font-weight: 500; 
     font-family: 'Lora', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
+
 }
