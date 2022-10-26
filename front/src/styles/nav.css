@@ -1,6 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Poppins|Roboto"); 
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -25,6 +23,7 @@ align-content: center;
   }
   .logo {
   width: 130px;
+  height: 60px;
   margin-left: 30px;
   caret-color: transparent;
   cursor: pointer;
@@ -91,7 +90,7 @@ align-content: center;
  
   }
   .sign-in-button{
-    background-color: #697952;
+    background-color: #475533;
     color: aliceblue;
     font-family: "Pippins", sans-serif;
     border-radius: 5px;
@@ -119,7 +118,7 @@ align-content: center;
     margin-left: 15px;
     transform: rotate(90deg);
     font-size: 30px;
-    color: #697952;
+    color: #475533;
     width: 40px;
     cursor: pointer;
     position: relative;
@@ -144,20 +143,15 @@ align-content: center;
     position: relative;
     margin-right: 20px;
 width: 80px;
-cursor: pointer;
-
-
-
-   
-  
+cursor: pointer;  
   }
   .bag-icon{
     margin-left: 15px;
     font-size: 30px;
-    color: #697952;
+    color: #475533;
   }
   .bag-quantity{
-    background-color: #697952;
+    background-color: #475533;
 position: absolute;
     width: 20px;
     height: 20px;
@@ -170,7 +164,7 @@ position: absolute;
   .favorite-icon{
     
     font-size: 30px;
-    color: #697952;
+    color: #475533;
     width: 40px;
     cursor: pointer;
   }

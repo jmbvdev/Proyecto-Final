@@ -1,6 +1,8 @@
 import React from 'react';
 import s from "../styles/homeList.module.css"
 import Card from './Card';
+import Comentarios from './Comentarios'
+import CardHome from './CardHome';
 import { AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 
@@ -98,13 +100,13 @@ const HomeList = () => {
     ]
     return (
         <>
+       
            <h3 className={s.title}>All Plants</h3> 
         <div className={s.container}>
            <div className={s.list}>
             {
                 plants.map(plant=>(
-                    
-                    <Card key={plant.name} plant={plant}/>
+                    <CardHome key={plant.name} plant={plant}/>
                 ))
             }
 
@@ -116,6 +118,7 @@ const HomeList = () => {
             <Link className={s.show_a} to="/plants">show all   <AiOutlineRight className={s.show_arrow} /></Link>
           
            </div>
+           <Comentarios/>
         </>
     );
 };

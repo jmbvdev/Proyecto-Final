@@ -1,0 +1,118 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    
+    margin: 30px;
+    
+ 
+  
+}
+.size_container{
+   display: flex;
+   justify-content: center;
+   justify-items: center;
+   align-items: center;
+   text-align: center;
+
+
+}
+.size{
+    display: flex;
+    margin-right: 30px;
+    caret-color: transparent;
+
+}
+.size_title{
+    font-family: "Poppins";
+    font-weight: bold;
+    margin-left: 10px;
+    caret-color: transparent;
+    margin-right: 10px;
+
+}
+
+.size_btn{
+    background-color:transparent;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#365d3c;
+    font-family: "Josefin Sans";
+    cursor: pointer;
+}
+.active_mini{
+    background-color:#365d3c;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#fff;
+    font-family: "Josefin Sans";
+    cursor: pointer;
+   }
+   .active_medium{
+    background-color:#365d3c;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#fff;
+    font-family: "Josefin Sans";
+    cursor: pointer;
+   }
+   .active_small{
+    background-color:#365d3c;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#fff;
+    font-family: "Josefin Sans";
+    cursor: pointer;
+   }
+   .active_large{
+    background-color:#365d3c;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: #365d3c 2px solid;
+    color:#fff;
+    font-family: "Josefin Sans";
+    cursor: pointer;
+   }
+.size button:hover{
+    color: #fff;
+
+}
+.price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    cursor: pointer;
+}
+.price_icon{
+ font-size: 35px;
+ color: #033a0b;
+}
+
+.direction_icon{
+    font-size: 27px;
+    color: #033a0b;
+    position: relative;
+    right: 13px;
+   }
