@@ -1,0 +1,217 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins|Roboto"); 
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  li {
+    list-style-type: none;
+  }
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+align-content: center;
+    align-items: center;
+    height: 12vh;
+   
+  }
+  .logo {
+  width: 130px;
+  height: 60px;
+  margin-left: 30px;
+  caret-color: transparent;
+  cursor: pointer;
+  }
+  .nav-left{
+    display: flex;
+  }
+  .nav-links {
+    display: flex;
+    width: 85%;
+  }
+  
+  .nav-links li {
+    color: rgba(3, 17, 5, 0.948); 
+    font-size: 20px; 
+    padding: 20px 20px; 
+    letter-spacing:-1px;
+    font-weight:500;
+    caret-color: transparent;
+  }
+  .nav-links li:hover {
+    color:#697952;
+  }
+  .link{
+ 
+      font-size: 20px;
+      text-decoration: none;
+      position: relative;
+      caret-color: transparent;
+  }
+      .link::after{
+        bottom: -4px;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        color: #697952;
+        background-color:#697952;
+        opacity: 0.6;
+        transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
+        width: 0;
+      }
+      .link:hover::after{
+        color:#697952;
+        width: 100%;
+        opacity: 0.9;
+      }
+
+  .mobile-menu-icon {
+    display: none;
+  }
+  button {
+    border: none;
+    text-decoration: none;
+    font-size: 20px;
+    background: none;
+  }
+  .login-icon{
+    font-size: auto;
+    caret-color: transparent;
+    position: relative;
+    top: 2.5px;
+ 
+  }
+  .sign-in-button{
+    background-color: #697952;
+    color: aliceblue;
+    font-family: "Pippins", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: auto;
+    font-size: medium;
+    padding: 5px 10px;
+    caret-color: transparent;
+
+  }
+  .sign-in-button:hover{
+  background-color: #697952ce;
+  }
+  .sign-in-button a{
+    color: white;
+    text-decoration: none;
+   
+   
+  }
+  .icons-container{
+  display: flex;
+  }
+  .search-icon{
+    margin-left: 15px;
+    transform: rotate(90deg);
+    font-size: 30px;
+    color: #697952;
+    width: 40px;
+    cursor: pointer;
+    position: relative;
+  }
+  /* .search-hover{
+    position: absolute;
+    display: inline;
+    background-color: #009e1d32;
+    top: 70px;
+    border-radius: 20px;
+    right: 0;
+    min-width: 340px;
+    height: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  } */
+  .bag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin-right: 20px;
+width: 80px;
+cursor: pointer;
+
+
+
+   
+  
+  }
+  .bag-icon{
+    margin-left: 15px;
+    font-size: 30px;
+    color: #697952;
+  }
+  .bag-quantity{
+    background-color: #697952;
+position: absolute;
+    width: 20px;
+    height: 20px;
+    color: white;
+    border-radius: 50%;
+    top: 15px;
+    right: 20px;
+    caret-color: transparent;
+  }
+  .favorite-icon{
+    
+    font-size: 30px;
+    color: #697952;
+    width: 40px;
+    cursor: pointer;
+  }
+ 
+  @media (max-width: 768px) {
+    .logo {
+      display: flex;
+      position: absolute;
+      top: 15px;
+      left: 35px;
+      caret-color: transparent;
+    }
+    .nav-links {
+      display: none;
+      caret-color: transparent;
+    }
+    .nav-links-mobile {
+      position: absolute;
+      display: block;
+      list-style: none;
+      box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+      left: 0;
+      top: 10%;
+      transition: all 0.5s ease-in-out;
+      width: 100%;
+      background-color: white;
+    }
+    ul li {
+      padding: 32px;
+      width: 100%;
+      transition: all 0.5s ease-in-out;
+      text-align: center;
+      caret-color: transparent;
+    }
+    .mobile-menu-icon {
+      position: absolute;
+      display: block;
+      right: 20px;
+    }
+    .hero h1 {
+      font-size: 50px;
+    }
+  }
