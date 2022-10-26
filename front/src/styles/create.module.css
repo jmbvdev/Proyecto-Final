@@ -18,7 +18,7 @@
   width: 450px;
   height: auto;
   min-width: 340px;
-background-color: rgba(255, 255, 255, 0.047);
+background-color: rgba(255, 255, 255, 0.045);
 
 }
 .form h2{
@@ -132,6 +132,7 @@ gap: 4px;
     cursor: pointer;
     font-family: "Josefin Sans",sans-serif;
     font-size: medium;
+    caret-color: transparent;
  }
  .create_btn:hover{
     background-color:rgba(16, 123, 43, 0.704) ;
