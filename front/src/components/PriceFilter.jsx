@@ -4,7 +4,7 @@ import s from"../styles/priceFilter.module.css"
 
 const PriceFilter = () => {
     const [value, setValue] = useState(0);
-    console.log(value)
+  
     
 const max = 375;
 function handleChange(e) {
@@ -26,7 +26,7 @@ const getBackgroundSize = () => {
                 </div>
              </div>
                 <div className={s.price}>
-                <h4>Filter price: {value}$</h4>
+                <h4>Min price: {value}$</h4>
                 <input
                     className={s.slider}
                     type="range"
