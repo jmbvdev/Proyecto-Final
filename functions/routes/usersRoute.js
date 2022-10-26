@@ -3,6 +3,9 @@ const createAccount = require("../userControllers/createUser");
 const updateUser = require("../userControllers/updateUser");
 const deleteAccount = require("../userControllers/deleteUser");
 const getAllUsers = require("../userControllers/getUsers");
+const getUserByMail = require("../userControllers/getUserByMail");
+const getUserById = require("../userControllers/getUserById");
+
 
 
 const usersRoute = Router();
@@ -14,6 +17,26 @@ usersRoute
             res.status(200).send(allUsers)
         }catch(err){
             next(err)
+        }
+    })
+    .get("/", async (req, res, next) => {
+        try{
+            const {email} = req.query;
+            const searchedUser = await getUserByMail(email);
+            res.status(200).send(searchedUser);
+
+        }catch(err){
+            next(err)
+        }
+    })
+    .get("/:id", async (req, res, next) => {
+        try{
+            const {id} = req.params;
+            const searched = await getUserById(id);
+            res.status(200).send(searched);
+            
+        }catch(err){
+            next(err);
         }
     })
     .post("/register", async(req, res, next) => {
