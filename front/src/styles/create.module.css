@@ -1,0 +1,143 @@
+
+.container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(#1320197b,rgba(11, 20, 12, 0.688)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+}
+.form{
+    
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 500px;
+  padding: 20px;
+  width: 450px;
+  height: auto;
+  min-width: 340px;
+background-color: rgba(255, 255, 255, 0.047);
+
+}
+.form h2{
+    font-family: "Inter",sans-serif;
+    color: #fff;
+    font-weight: lighter;
+    caret-color: transparent;
+
+}
+.image_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    cursor: pointer;
+    caret-color: transparent;
+  
+}
+
+.image_input button{
+    color: #fff;
+}
+.image_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.image_btn p{
+    color: #fff;
+    font-family: "Josefin Sans", sans-serif;
+    caret-color: transparent;
+}
+.input_container input{
+    font-family: inherit;
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid rgb(205, 202, 202);
+  outline: 0;
+  font-size: 1rem;
+  color: #fff;
+  padding: 10px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+}
+.input_container input::placeholder{
+    color:rgba(255, 255, 255, 0.625);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .form {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  .categories{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+    caret-color: transparent;
+
+  }
+  .categories label{
+    color: #fff;
+    font-size: medium;
+    font-weight: solid;
+    font-family: "Josefin Sans";
+    font-size: medium;
+
+  }
+  .categories select{
+    padding: 0px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .categories select option{
+    cursor: pointer;
+    
+  }
+  .categories_option{
+    display: flex;
+    flex-direction: row;
+ 
+    justify-content: center;
+    align-items: center;
+gap: 4px;
+  }
+  .categories_option button{
+    color: rgba(253, 87, 87, 0.644);
+    font-size: medium;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+ .categories_option p{
+    color:#fff;
+    font-size: small;
+    font-weight: bold;
+  }
+ .create_btn{
+    background-color: rgba(16, 123, 43, 0.378);
+    color: #fff;
+    padding:  6px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: "Josefin Sans",sans-serif;
+    font-size: medium;
+ }
+ .create_btn:hover{
+    background-color:rgba(16, 123, 43, 0.704) ;
+ }
+ .errors{
+    color:rgba(253, 87, 87, 0.644);
+    font-size:14px;
+    font-family: "Inter",sans-serif;
+ }
