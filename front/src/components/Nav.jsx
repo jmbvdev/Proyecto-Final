@@ -7,10 +7,19 @@ import { HiOutlineShoppingBag} from 'react-icons/hi';
 import logo from "../images/logo.jpg"
 
 import  "../styles/nav.css"
+import { setSearch } from '../Redux/actions/products';
+import { useDispatch } from 'react-redux';
+
 
 const Nav = () => {
+ 
   
     const [Mobile, setMobile] = useState(false)
+    const dispatch= useDispatch()
+    function handleSearch() {
+     dispatch(setSearch())
+      
+    }
     return (
         <>
         <nav className='navbar'>
@@ -44,10 +53,7 @@ const Nav = () => {
           <div className='icons-container'>
             <button className='sign-in-button'><FiLogIn className='login-icon'/> <Link to='/sign-in' className='sing-in-link'>Sign in </Link></button>
             <FiHeart className='favorite-icon'/>
-            <RiSearchLine className='search-icon'/>
-            {/* <div className='search-hover'>
-              k
-            </div> */}
+            <RiSearchLine onClick={handleSearch} className='search-icon'/>
             <div className='bag'>
             <HiOutlineShoppingBag className='bag-icon'/>
             <div className='bag-quantity'>0</div>

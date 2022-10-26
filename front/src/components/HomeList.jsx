@@ -1,10 +1,11 @@
 import React from 'react';
 import s from "../styles/homeList.module.css"
-import Card from './Card';
+import CardHome from './CardHome';
 import { AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 
 const HomeList = () => {
+
     const plants=[
         {
             name: "Ficus Burgundy",
@@ -102,8 +103,7 @@ const HomeList = () => {
            <div className={s.list}>
             {
                 plants.map(plant=>(
-                    
-                    <Card key={plant.name} plant={plant}/>
+                    <CardHome key={plant.name} plant={plant}/>
                 ))
             }
 
