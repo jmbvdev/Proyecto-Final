@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { GetAllProducts } from '../Redux/actions/products';
 import Card from '../components/Card';
 import PriceFilter from '../components/PriceFilter';
+import Categories from '../components/Categories';
 const Plants = () => {
     const dispatch= useDispatch()
     const navigate= useNavigate()
@@ -846,13 +847,7 @@ console.log(arr.sort((a,b)=>a-b))
                 <div className={s.list_title}>
                     <div className={s.filters_container}>
                        <PriceFilter/>
-                       <div className={s.categories}>
-                        <div className={s.indoor}><p>indoor</p></div>
-                        <div className={s.outdoor}><p>outdoor</p></div>
-                        <div className={s.pet}><p>pet friendly</p></div>
-                        <div className={s.easy}><p>easy care</p></div>
-                        <div className={s.table}><p>tabletop</p></div>
-                       </div>
+                       <Categories/>
 
                     </div>
                     <h3 className={s.title}>All Plants</h3>
