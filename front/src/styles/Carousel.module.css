@@ -1,0 +1,53 @@
+.conteItemscarousel{
+    border:5px,solid,black;
+    height: 700px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.imagen{
+    height:100%;
+    width:100%;
+}
+
+.punto{
+    display: inline-flex;
+    margin-top: 5px;
+    margin-left: 5px;
+    color: rgb(126, 194, 141);
+    justify-content: center;
+}
+
+.itemcarousel{
+    
+    
+    height:100%;    
+    position: relative;
+   }
+
+.tarjetacarousel{
+    height:100%;
+    color: blanchedalmond;
+    text-decoration: none;
+    
+}
+
+.flechascarousel{
+    height:100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 35px;
+   
+}
+
+.flechaccion{
+    color: white;
+    cursor: pointer;
+}
+
+/* //absolute bg-[#6b7280] hover:bg-hoverMenu rounded-full p-5 translate-x-60 animate-bounce */
