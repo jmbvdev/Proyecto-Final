@@ -18,8 +18,6 @@ const Card = ({plant,id}) => {
                         <div className={s.specs}>
                             <p>{plant.name}</p>
                             <b>{plant.price}</b>
-                         
-                    
                         </div>
                     </div>
                 </div>
