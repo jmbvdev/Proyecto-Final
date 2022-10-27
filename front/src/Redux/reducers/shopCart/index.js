@@ -29,6 +29,7 @@ export default function shopCartReducer(state = initialState, action) {
     ) {
       return state;
     }
+  
     return {
       products: [...state.products, { ...action.payload, count: 1 }],
     };
@@ -42,7 +43,7 @@ export default function shopCartReducer(state = initialState, action) {
   }
   if (action.type === CHANGE_QUANTITY) {
     const products = Array.from(state.products).map((p) => {
-      if ((p.id = action.payload[0])) {
+      if ((p.id == action.payload[0])) {
         return { ...p, count: p.count + action.payload[1] };
       } else return p;
     });

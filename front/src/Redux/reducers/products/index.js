@@ -34,13 +34,25 @@ export default function productsReducer(state = initialState, action) {
     };
   }
   if (action.type === ORDER_BY) {
-    return { ...state, allProducts: action.payload };
+    let products = Array.from(state.allProducts);
+    products= products.sort((a,b)=>{
+      if (action.payload==="asc") {
+        return a.data.price-b.data.price
+      }else{
+        return b.data.price-a.data.price
+      }
+    })
+
+    return { ...state, allProducts: products };
   }
   if (action.type === FILTER_BY) {
     let products = Array.from(state.allProducts);
     products = filterby(products, action.payload[0], "type");
     products = filterby(products, action.payload[1], "size");
     products = filterby(products, action.payload[2], "categorie");
+    if (products.length===0) {
+      products=[{message:"Doesn't found plant"}]
+    }
     //products = filterby(products, action.payload[3], "indoor/outdoor");
     return { ...state, allProducts: products };
   }
