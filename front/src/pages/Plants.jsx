@@ -8,10 +8,12 @@ import { GetAllProducts } from '../Redux/actions/products';
 import Card from '../components/Card';
 import PriceFilter from '../components/PriceFilter';
 import Categories from '../components/Categories';
+import { useState } from 'react';
 const Plants = () => {
     const dispatch= useDispatch()
     const navigate= useNavigate()
     const plants = useSelector(state=>state.productsReducer.allProducts)
+    
     useEffect(()=>{
         if (!plants[0]) {
             dispatch(GetAllProducts())
