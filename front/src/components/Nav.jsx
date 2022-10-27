@@ -36,7 +36,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
       })
       .catch((err) => console.log(err));
     } 
-     
+
   let total=0
   for (let i = 0; i < plants.length; i++) {
              total+=plants[i].count
