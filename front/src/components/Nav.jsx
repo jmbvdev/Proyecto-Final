@@ -34,7 +34,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
           setUser(null);
           setAuthState('login');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));}
       
   let total=0
   for (let i = 0; i < plants.length; i++) {
@@ -96,5 +96,6 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
       </>
     );
 };
+
 
 export default Nav;
