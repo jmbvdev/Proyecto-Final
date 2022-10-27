@@ -8,7 +8,7 @@ import logo from "../images/logo.jpg"
 
 import  "../styles/nav.css"
 import { setSearch } from '../Redux/actions/products';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Nav = () => {
@@ -17,10 +17,19 @@ const Nav = () => {
     const [Mobile, setMobile] = useState(false)
     const navigate= useNavigate()
     const dispatch= useDispatch()
+    const plants = useSelector(state=>state.shopCartReducer.products)
+
     function handleSearch() {
      dispatch(setSearch())
       
     }
+
+  let total=0
+  for (let i = 0; i < plants.length; i++) {
+             total+=plants[i].count
+    
+  }
+
     return (
         <>
         <nav className='navbar'>
@@ -57,7 +66,8 @@ const Nav = () => {
             <RiSearchLine onClick={handleSearch} className='search-icon'/>
             <div className='bag' onClick={()=>navigate("/cart")}>
             <HiOutlineShoppingBag className='bag-icon'/>
-            <div className='bag-quantity'>0</div>
+            <div className='bag-quantity'>
+              <p className='total'>{total}</p></div>
 
             </div>
           <button className='mobile-menu-icon' onClick={() => setMobile(!Mobile)}>
