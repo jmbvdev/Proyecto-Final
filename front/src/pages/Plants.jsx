@@ -6,10 +6,9 @@ import {useSelector, useDispatch} from "react-redux"
 import { useEffect } from 'react';
 import { GetAllProducts } from '../Redux/actions/products';
 import Card from '../components/Card';
-import PriceFilter from '../components/PriceFilter';
-import Categories from '../components/Categories';
 import Loading from "../components/Loading"
 import { useState } from 'react';
+import FiltersComponents from '../components/FiltersComponents';
 const Plants = () => {
     const dispatch= useDispatch()
     const navigate= useNavigate()
@@ -858,15 +857,12 @@ const Plants = () => {
                 <div className={s.list_container}>
                     <div className={s.list_title}>
                         <div className={s.filters_container}>
-                           <PriceFilter />
-                           <Categories/>
-    
+                            <FiltersComponents/>
+                           
                         </div>
                         <h3 className={s.title}>All Plants</h3>
                         <div className={s.list}>
-                            {/* {
-                                plants.message&& <h1>{plants.message}</h1>
-                            } */}
+                         
                        {
                         plants.map((plant)=>(
                             <Card key={plant.id} id={plant.id} plant={plant.data}/>

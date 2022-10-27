@@ -1,7 +1,6 @@
 .container{
     position: relative; 
     width: 100%; 
-
     padding-top: 80px; 
     background-color: #fff;
     text-align: left;
@@ -9,8 +8,6 @@
     justify-content: center;
     align-items: center;
     display: flex;
-
-
 }
 .title{
     font-weight:  600;
