@@ -2,10 +2,6 @@
     position: relative; 
     width: 300px; 
     height: 100%; 
-
-  
- 
-    
 }
 .card{
     width: 270px;
@@ -19,13 +15,12 @@
 .card_overlay{
     position: absolute;
     margin-top: 10px;
-    width: 100%;
+    width: 90%;
     height: 350px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    width: 270px;
     opacity: 0;
     visibility: none;
     transition: .5s ease;

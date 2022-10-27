@@ -55,7 +55,7 @@ export const purchase = (cart) => {
       "aca va la ruta del back que agrega el pedido a un usuario en particular",
       cart
     );
-    console.log(res.data);
+  
     return dispatch({ type: PURCHASE });
   };
 };
