@@ -25,7 +25,7 @@ function App() {
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart/>} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
