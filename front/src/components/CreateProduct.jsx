@@ -6,6 +6,8 @@ import { getPictureUrl, setPlantImage } from '../firebase/Controllers'
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../Redux/actions/products/index"
 import { validate } from '../Util/validate';
+import {BsImageFill}from "react-icons/bs"
+import s from "../styles/create.module.css"
 
 
 
@@ -114,43 +116,46 @@ const CreateProduct = () => {
 
 
     return (
-        <div>
-            <br />
-            <h2>agregar plantas</h2>
-            <div>
-                <div>
-                    <button type="button" onClick={handleOpenfilePicker}>Choose new plant picture</button>
+        <div className={s.container}>
+        
+                <form onSubmit={handleOnSubmit} className={s.form}>
+            <h2>Create your own plant</h2>
+                <div className={s.image_input}>
+                    <div className={s.image_btn}>
+                    <button type="button" onClick={handleOpenfilePicker}><BsImageFill/></button>
+                    <p>add image</p>
+
+                    </div>
                     <input ref={fileRef} type="file" style={{ display: 'none' }} onChange={handleChangefile} />
                 </div>
-                <form onSubmit={handleOnSubmit}>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="text" name="name" placeholder="name" onChange={handleOnChange} />
-                        {error.name && <p>{error.name}</p>}
+                        {error.name && <p className={s.errors}>{error.name}</p>}
                     </div>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="text" name="details" placeholder="details" onChange={handleOnChange} />
-                        {error.details && <p>{error.details}</p>}
+                        {error.details && <p className={s.errors}>{error.details}</p>}
                     </div>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="text" name="planter" placeholder="planter" onChange={handleOnChange} />
                     </div>
 
-                    <div>
-                        <input type="text" name="price" placeholder="price" onChange={handleOnChange} />
+                    <div className={s.input_container}>
+                        <input type="number" name="price" placeholder="price" onChange={handleOnChange} />
                     </div>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="text" name="size" placeholder="size" onChange={handleOnChange} />
                     </div>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="number" name="stock" placeholder="stock" onChange={handleOnChange} />
                     </div>
 
-                    <div>
+                    <div className={s.input_container}>
                         <input type="text" name="type" placeholder="type" onChange={handleOnChange} />
                     </div>
 
@@ -158,26 +163,30 @@ const CreateProduct = () => {
                         <input type="text" name="categories" placeholder="categories" onChange={handleOnChange} />
                     </div> */}
 
+                    <div className={s.categories}>
+
                     <label>Categories: </label>
                     <select onChange={handleCategories}>
                         <option value="select">Seleccionar...</option>
                         {
                             allCategories.map((el, i) =>
-                                <option key={i} value={el}>{el}</option>
+                                <option  key={i} value={el}>{el}</option>
                             )
                         }
                     </select>
 
+                    </div>
+
                     <div>
                         {
                             input.categories.map(el =>
-                                <div >
+                                <div className={s.categories_option} >
                                     <button type="button" onClick={() => handleDeleteCategories(el)}>x</button>
                                     <p>{el}</p>
                                 </div>
                             )
                         }
-                        {error.categories && <span>  {error.categories}</span>}
+                        {error.categories && <span className={s.errors}>  {error.categories}</span>}
                     </div>
 
 
@@ -190,10 +199,10 @@ const CreateProduct = () => {
                     </div> */}
 
                     <div>
-                        <button type="submit" >Enviar</button>
+                        <button type="submit" className={s.create_btn} >create</button>
                     </div>
                 </form>
-            </div>
+           
 
         </div>
 

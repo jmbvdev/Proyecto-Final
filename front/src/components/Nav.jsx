@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RiSearchLine } from 'react-icons/ri';
 import { FiHeart , FiLogIn} from 'react-icons/fi';
 import { HiOutlineShoppingBag} from 'react-icons/hi';
@@ -17,6 +17,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
  
   
     const [Mobile, setMobile] = useState(false)
+    const navigate= useNavigate()
     const dispatch= useDispatch()
     function handleSearch() {
      dispatch(setSearch())
@@ -37,7 +38,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
         <nav className='navbar'>
         
           <div className='nav-left'>
-          <img className='logo' src={logo} alt="" />
+          <img className='logo' src={logo} alt="logo" onClick={()=>navigate("/")} />
           <ul className={Mobile ? "nav-links-mobile" : "nav-links"} onClick={() => setMobile(false)}>
             <Link to='/' >
               <li><p className='link'>Home</p></li>
@@ -71,7 +72,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
             
             <FiHeart className='favorite-icon'/>
             <RiSearchLine onClick={handleSearch} className='search-icon'/>
-            <div className='bag'>
+            <div className='bag' onClick={()=>navigate("/cart")}>
             <HiOutlineShoppingBag className='bag-icon'/>
             <div className='bag-quantity'>0</div>
 

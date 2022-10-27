@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import HomeList from '../components/HomeList';
+import Carousel from '../components/Carousel';
 import PopularPlants from '../components/PopularPlants';
-import SearchBox from '../components/SearchBox';
+
 
 
 const Home = () => {
@@ -10,11 +10,10 @@ const Home = () => {
   
 
     return (
-        <div className='home'>
-          
+        <div className='home'>        
+          <Carousel/>
           <PopularPlants/>
-          <HomeList/>
-            
+          <HomeList/>            
         </div>
     );
 };

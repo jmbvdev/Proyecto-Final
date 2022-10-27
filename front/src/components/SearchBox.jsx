@@ -16,7 +16,7 @@ const SearchBox = () => {
     return (
         <div className={s.container}>
             
-            <button onClick={handleClose} className={s.close}><GrClose/></button>
+            <button onClick={handleClose} className={s.close}><GrClose className={s.close_icon}/></button>
             <form action="" className={s.search}>
 
                 <input type="text" placeholder='search a plant' name='q' />

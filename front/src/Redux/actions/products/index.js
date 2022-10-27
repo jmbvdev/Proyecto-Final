@@ -64,17 +64,13 @@ export const DeleteProduct = (id) => {
 
 //ordenar por precio asc or desc
 export const OrderBy = (order) => {
-  return async (dispatch) => {
-    dispatch({ type: ORDER_BY });
-  };
+  return { type: ORDER_BY, payload: order };
 };
 
-//por tipo de producto (plant, planter, accessory) es string, por size (es array), por categorie (es array), por interior/exterior(string), por precio(int).
-
-export const FilterBy = (filter) => {
-  return async (dispatch) => {
-    dispatch({ type: FILTER_BY });
-  };
+//por tipo de producto (plant, planter, accessory) es string, por size (es array), por categorie (es array), por interior/exterior(string), por precio(int). manejarlo en un estado local que vaya cambiando los filtros. el estado local seria un array:
+// ["all" (o "plant"...), "all" or "medium", "all" or "pet friendly", "all" (o "interior"...)]
+export const FilterBy = (filt) => {
+  return { type: FILTER_BY, payload: filt };
 };
 
 export const GetProductDetails = (id) => {
