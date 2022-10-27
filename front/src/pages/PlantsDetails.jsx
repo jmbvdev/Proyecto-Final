@@ -37,7 +37,8 @@ const PlantsDetails = () => {
         price: plant.price,
         name: plant.name,
         stock: plant.stock,
-      })
+
+      },quantity)
     );
   }
 
@@ -82,9 +83,9 @@ const PlantsDetails = () => {
               <h3>$ {plant?.price}</h3>
             </div>
             <div className={s.quantity}>
-              <button onClick={() => setQuantity(quantity - 1)}>-</button>
-              <p>{quantity < 1 ? 0 : quantity}</p>
-              <button onClick={() => setQuantity(quantity + 1)}>+</button>
+              <button disabled={quantity==1} onClick={() => setQuantity(quantity - 1)}>-</button>
+              <p>{quantity}</p>
+              <button disabled={quantity==plant?.stock} onClick={() => setQuantity(quantity + 1)}>+</button>
             </div>
           </div>
           <div className={s.favorites}>
