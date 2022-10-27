@@ -23,7 +23,7 @@ const HomeList = () => {
         <div className={s.container}>
           <div className={s.list}>
             {plants.map((plant) => (
-              <CardHome key={plant.name} plant={plant} />
+              <CardHome key={plant.id} plant={plant} />
             ))}
           </div>
         </div>
