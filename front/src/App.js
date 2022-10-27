@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Plants from "./pages/Plants";
 import PlantsDetails from "./pages/PlantsDetails";
 import Cart from "./pages/Cart"
+import Auth from "./auth/Auth";
+
 
 function App() {
   const isSearch= useSelector(state=>state.productsReducer.isSearch)
@@ -22,6 +24,7 @@ function App() {
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart/>} />
+        <Route path="/sign-in" element={<Auth />} />
       </Routes>
     </div>
   );
