@@ -21,10 +21,10 @@ export const saveCart = (user) => {
   };
 };
 
-export const addProduct = (product) => {
+export const addProduct = (product,n) => {
   return {
     type: ADD_PRODUCT,
-    payload: product,
+    payload: [product,n],
   };
 };
 

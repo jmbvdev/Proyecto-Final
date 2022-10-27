@@ -31,7 +31,7 @@ export default function shopCartReducer(state = initialState, action) {
     }
   
     return {
-      products: [...state.products, { ...action.payload, count: 1 }],
+      products: [...state.products, { ...action.payload[0], count: action.payload[1] }],
     };
   }
   if (action.type === DELETE_PRODUCT) {
