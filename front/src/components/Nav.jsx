@@ -7,14 +7,13 @@ import { HiOutlineShoppingBag} from 'react-icons/hi';
 import logo from "../images/logo.jpg"
 
 import  "../styles/nav.css"
-import { setSearch } from '../Redux/actions/products';
 import { auth } from '../firebase/firebase';
 import { signOut } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 
-const Nav = ({user, authState, setAuthState, setUser}) => {
+const Nav = ({user, authState, setAuthState, setUser, setIsSearch}) => {
  
   
     const [Mobile, setMobile] = useState(false)
@@ -22,11 +21,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
     const dispatch= useDispatch()
     const plants = useSelector(state=>state.shopCartReducer.products)
 
-    function handleSearch() {
-     dispatch(setSearch())
-      
-    }
-
+ 
 
     const signOutHandler = () => {
       signOut(auth)
@@ -81,7 +76,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
             }
             
             <FiHeart className='favorite-icon'/>
-            <RiSearchLine onClick={handleSearch} className='search-icon'/>
+            <RiSearchLine  className='search-icon' onClick={setIsSearch}/>
             <div className='bag' onClick={()=>navigate("/cart")}>
             <HiOutlineShoppingBag className='bag-icon'/>
             <div className='bag-quantity'>

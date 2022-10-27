@@ -17,7 +17,9 @@ const FiltersComponents = () => {
     const[orderPrice, setOrderPrice]= useState(false)
 
 
-   
+    function resetFilter() {
+      setFilters(["all", "all", "all", "all"]);
+    }
     const dispatch= useDispatch()
 
     useEffect(() => {
@@ -77,6 +79,7 @@ function handleEasy() {
       <div className={s.filters}>
         <div className={s.container}>
           <div className={s.size_container}>
+            <button onClick={resetFilter}>reset</button>
             <select
               onChange={(e) => handleSize(e)}
               name=""
