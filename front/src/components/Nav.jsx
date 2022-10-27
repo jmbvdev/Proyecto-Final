@@ -8,10 +8,13 @@ import logo from "../images/logo.jpg"
 
 import  "../styles/nav.css"
 import { setSearch } from '../Redux/actions/products';
+import { auth } from '../firebase/firebase';
+import { signOut } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Nav = () => {
+
+const Nav = ({user, authState, setAuthState, setUser}) => {
  
   
     const [Mobile, setMobile] = useState(false)
@@ -24,10 +27,20 @@ const Nav = () => {
       
     }
 
+
+    const signOutHandler = () => {
+      signOut(auth)
+      .then(() => {
+          setUser(null);
+          setAuthState('login');
+      })
+      .catch((err) => console.log(err));
+      
   let total=0
   for (let i = 0; i < plants.length; i++) {
              total+=plants[i].count
     
+
   }
 
     return (
@@ -61,7 +74,12 @@ const Nav = () => {
           </div>
          
           <div className='icons-container'>
+            {
+            authState === 'logged' ?
+            <button className='sign-in-button' onClick={signOutHandler}><FiLogIn className='login-icon'/> Sign out </button> : 
             <button className='sign-in-button'><FiLogIn className='login-icon'/> <Link to='/sign-in' className='sing-in-link'>Sign in </Link></button>
+            }
+            
             <FiHeart className='favorite-icon'/>
             <RiSearchLine onClick={handleSearch} className='search-icon'/>
             <div className='bag' onClick={()=>navigate("/cart")}>
