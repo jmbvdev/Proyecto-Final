@@ -8,6 +8,7 @@ import { GetAllProducts } from '../Redux/actions/products';
 import Card from '../components/Card';
 import PriceFilter from '../components/PriceFilter';
 import Categories from '../components/Categories';
+import Loading from "../components/Loading"
 import { useState } from 'react';
 const Plants = () => {
     const dispatch= useDispatch()
@@ -877,7 +878,7 @@ const Plants = () => {
                 
     
                 </div>
-            </div>: <h2>gfd</h2>
+            </div>: <Loading/>
             }
             </>
 

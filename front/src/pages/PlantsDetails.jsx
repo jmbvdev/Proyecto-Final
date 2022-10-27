@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import {useDispatch, useSelector}from "react-redux"
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { GetProductDetails } from '../Redux/actions/products';
 import {GiTable} from "react-icons/gi"
 import {TbPlant2} from "react-icons/tb"
@@ -15,7 +15,6 @@ import Loading from '../components/Loading';
 
 const PlantsDetails = () => {
     const dispatch= useDispatch()
-    const navigate= useNavigate()
     const plant= useSelector((state)=>state.productsReducer.productDetails.data)
     const [isLoading, setIsLoading]= useState(true)
     
