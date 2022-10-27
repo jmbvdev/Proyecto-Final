@@ -5,7 +5,8 @@ import {
   DELETE_PRODUCT,
   ORDER_BY,
   FILTER_BY,
-  GET_PRODUCT_DETAILS,IS_SEARCH
+  GET_PRODUCT_DETAILS,IS_SEARCH,
+  CLEAR_DETAILS
 } from "../../actions/products/actiontypes.js";
 import { filterby } from "../../../utils/filterby.js";
 
@@ -59,9 +60,12 @@ export default function productsReducer(state = initialState, action) {
   if (action.type === GET_PRODUCT_DETAILS) {
     return { ...state, productDetails: action.payload };
   }
-  if (action.type === IS_SEARCH) {
-    return { ...state, isSearch: !state.isSearch};
+
+  if (action.type === CLEAR_DETAILS) {
+    return { ...state, productDetails: {} };
   }
+
+
 
   return state;
 }

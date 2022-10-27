@@ -6,7 +6,7 @@ import {
   FILTER_BY,
   ORDER_BY,
   GET_PRODUCT_DETAILS,
-  IS_SEARCH
+  CLEAR_DETAILS
 } from "./actiontypes";
 import axios from "axios";
 
@@ -85,8 +85,9 @@ export const GetProductDetails = (id) => {
   };
 };
 
-export function setSearch() {
+
+export function clearDetails() {
   return {
-    type: IS_SEARCH,
+    type: CLEAR_DETAILS,
   };
 }
