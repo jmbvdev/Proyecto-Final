@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { FilterBy } from '../Redux/actions/products';
 import s from "../styles/plants.module.css"
 
 const Categories = () => {
@@ -8,6 +10,14 @@ const Categories = () => {
     const [activePet, setActivePet]= useState(false)
     const [activeTable, setActiveTable]= useState(false)
     const [activeEasy, setActiveEasy]= useState(false)
+    const [filters, setFilters]= useState(["all", "all", "all", "all"])
+    const dispatch= useDispatch()
+    useEffect(()=>{
+        dispatch(FilterBy(filters))
+
+
+
+    },[filters, dispatch])
     function handleIndoor() {
         setActiveIndoor(!activeIndoor)
         
@@ -18,6 +28,10 @@ const Categories = () => {
     }
     function handlePet() {
         setActivePet(!activePet)
+        let arr=[...filters]
+arr[2]="pet friendly"
+setFilters(arr)
+
         
     }
     function handleTable() {
@@ -28,6 +42,8 @@ const Categories = () => {
         setActiveEasy(!activeEasy)
         
     }
+ 
+
     return (
         <div className={s.categories}>
                         <div onClick={()=>handleIndoor()} className={activeIndoor? s.indoor_active:s.indoor}><p>indoor</p></div>
