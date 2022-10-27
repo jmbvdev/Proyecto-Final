@@ -109,8 +109,6 @@ const HomeList = () => {
                     <CardHome key={plant.name} plant={plant}/>
                 ))
             }
-
-
            </div>
             
         </div>
@@ -118,7 +116,7 @@ const HomeList = () => {
             <Link className={s.show_a} to="/plants">show all   <AiOutlineRight className={s.show_arrow} /></Link>
           
            </div>
-           {/* <Comentarios/> */}
+        
         </>
     );
 };
