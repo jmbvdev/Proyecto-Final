@@ -53,10 +53,10 @@ function handleCart() {
              </div>
              <div className={s.categories}>
                      {
-                         plant.categories.map(p=>{
+                         plant?.categories && plant.categories?.map((p,i)=>{
                              return (
                              
-                             <div className={s.categories_container}>
+                             <div key={i} className={s.categories_container}>
                              {p.includes("tabletop")?<GiTable className={s.table}/>:p.includes("pet friendly")?<FaDog className={s.table}/>:p.includes("easy care")&&<TbPlant2 className={s.table}/>}
                              <span>{p.includes("tabletop")?"TABLETOP":p.includes("pet friendly")?"PET FRIENDLY": p.includes("easy care")&&"EASY CARE"}</span>                      
                                </div>
