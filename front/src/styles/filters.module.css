@@ -372,3 +372,10 @@
     justify-content: left;
     align-items: center;
 }
+
+.reset{
+   font-size: 35px;
+   margin-right: 20px;
+cursor: pointer;
+background-color: transparent;
+}

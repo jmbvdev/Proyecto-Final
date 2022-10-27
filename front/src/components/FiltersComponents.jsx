@@ -5,6 +5,7 @@ import {FaLongArrowAltDown,FaLongArrowAltUp} from "react-icons/fa"
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FilterBy, OrderBy } from '../Redux/actions/products';
+import {BiReset} from "react-icons/bi"
 import s from "../styles/filters.module.css"
 
 const FiltersComponents = () => {
@@ -78,8 +79,8 @@ function handleEasy() {
     return (
       <div className={s.filters}>
         <div className={s.container}>
+    <BiReset onClick={resetFilter} className={s.reset}/>
           <div className={s.size_container}>
-            <button onClick={resetFilter}>reset</button>
             <select
               onChange={(e) => handleSize(e)}
               name=""
