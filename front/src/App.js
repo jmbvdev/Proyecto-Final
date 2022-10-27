@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import CreateProduct from "./components/CreateProduct";
@@ -15,11 +14,19 @@ import Auth from "./auth/Auth";
 
 
 function App() {
-  const isSearch= useSelector(state=>state.productsReducer.isSearch)
+  const [isSearch, setIsSearch]=useState(false)
+  function handleSearch() {
+    setIsSearch((isSearch)=>!isSearch)
+  }
+  
   return (
     <div className="App">
-      <Nav />      
-      {isSearch && <SearchBox />}
+
+      <Nav setIsSearch={handleSearch}/>  
+      {
+        isSearch&&
+       <SearchBox setIsSearch={handleSearch} />
+      }    
       <Routes>
         <Route path="/" element={<Home />} />
         <Route exact path="/create" element={<CreateProduct />} />
