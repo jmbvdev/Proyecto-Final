@@ -1,14 +1,18 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.container{
+.container {
   width: 100%;
   min-height: 40vh;
   padding: 5%;
-  background-image: linear-gradient(rgba(57, 76, 40, 0.708),rgba(23, 55, 30, 0.9)), url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1"); 
+  background-image: linear-gradient(
+      rgba(57, 76, 40, 0.708),
+      rgba(23, 55, 30, 0.9)
+    ),
+    url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,44 +20,62 @@
   align-items: center;
   justify-content: center;
 }
-.search{
-width: 100%;
-max-width:700px;
-background: rgba(255, 255, 255, 0.5);
-display: flex;
-align-items: center;
-border-radius: 60px;
-padding: 10px 20px;
+.search {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+}
 
-}
-.search input{
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding:10px;
-    font-size: 20px;
-    color: #063108;
-}
-
-.search button{
-    font-size: 30px;
-    color: #042406;
-    position: relative;
-    top: 3px;
-    cursor: pointer;
-}
-.search input::placeholder{
-    color:#071c089d; ;
-}
-.close{
-    position: absolute;
-    right: 30px;
-    top: 110px;
-    font-size: 30px;
+.search button {
+  font-size: 30px;
+  color: #042406;
+  position: relative;
+  top: 3px;
   cursor: pointer;
-
 }
-.close_icon{
-    color: #fff;
+.search input::placeholder {
+  color: #071c089d;
+}
+.close {
+  position: absolute;
+  right: 30px;
+  top: 110px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.close_icon {
+  color: #fff;
+}
+
+.prueba {
+  width: 50px;
+}
+
+.pruebaContainer {
+  position: fixed;
+  top: 38%;
+  left: 40%;
+  width: 20%;
+  z-index: 10;
+}
+
+.pruebaContainertwo {
+  padding: 0 1rem;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
 }

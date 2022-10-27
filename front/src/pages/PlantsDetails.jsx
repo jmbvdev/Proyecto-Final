@@ -30,69 +30,78 @@ const PlantsDetails = () => {
 
   function handleCart() {
     dispatch(
-      addProduct({
-        id,
-        image: plant.image,
-        price: plant.price,
-        name: plant.name,
-        stock: plant.stock,
-
-      },quantity)
+      addProduct(
+        {
+          id,
+          image: plant.image,
+          price: plant.price,
+          name: plant.name,
+          stock: plant.stock,
+        },
+        quantity
+      )
     );
   }
 
-  return (
-    
-        plant?.name ? <div className={s.container}>
-        <img src={plant?.image} alt="" />
-        <div className={s.details}>
-          <h1>{plant?.name} </h1>
+  return plant?.name ? (
+    <div className={s.container}>
+      <img src={plant?.image} alt="" />
+      <div className={s.details}>
+        <h1>{plant?.name} </h1>
+        <div>
+          <h4>Description</h4>
+          <p>{plant?.details}</p>
+        </div>
+        <div className={s.categories}>
+          {plant?.categories &&
+            plant.categories?.map((p, i) => {
+              return (
+                <div key={i} className={s.categories_container}>
+                  {p.includes("tabletop") ? (
+                    <GiTable className={s.table} />
+                  ) : p.includes("pet friendly") ? (
+                    <FaDog className={s.table} />
+                  ) : (
+                    p.includes("easy care") && <TbPlant2 className={s.table} />
+                  )}
+                  <span>
+                    {p.includes("tabletop")
+                      ? "TABLETOP"
+                      : p.includes("pet friendly")
+                      ? "PET FRIENDLY"
+                      : p.includes("easy care") && "EASY CARE"}
+                  </span>
+                </div>
+              );
+            })}
+        </div>
+        <div className={s.price}>
           <div>
-            <h4>Description</h4>
-            <p>{plant?.details}</p>
+            <h4>Price</h4>
+            <h3>$ {plant?.price}</h3>
           </div>
-          <div className={s.categories}>
-            {plant?.categories &&
-              plant.categories?.map((p, i) => {
-                return (
-                  <div key={i} className={s.categories_container}>
-                    {p.includes("tabletop") ? (
-                      <GiTable className={s.table} />
-                    ) : p.includes("pet friendly") ? (
-                      <FaDog className={s.table} />
-                    ) : (
-                      p.includes("easy care") && (
-                        <TbPlant2 className={s.table} />
-                      )
-                    )}
-                    <span>
-                      {p.includes("tabletop")
-                        ? "TABLETOP"
-                        : p.includes("pet friendly")
-                        ? "PET FRIENDLY"
-                        : p.includes("easy care") && "EASY CARE"}
-                    </span>
-                  </div>
-                );
-              })}
-          </div>
-          <div className={s.price}>
-            <div>
-              <h4>Price</h4>
-              <h3>$ {plant?.price}</h3>
-            </div>
-            <div className={s.quantity}>
-              <button disabled={quantity==1} onClick={() => setQuantity(quantity - 1)}>-</button>
-              <p>{quantity}</p>
-              <button disabled={quantity==plant?.stock} onClick={() => setQuantity(quantity + 1)}>+</button>
-            </div>
-          </div>
-          <div className={s.favorites}>
-            <h4>Add to favorites</h4>
-            <button>
-              <AiFillHeart className={s.hearth} />
+          <div className={s.quantity}>
+            <button
+              disabled={quantity == 1}
+              onClick={() => setQuantity(quantity - 1)}
+            >
+              -
+            </button>
+            <p>{quantity}</p>
+            <button
+              disabled={quantity == plant?.stock}
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              +
             </button>
           </div>
+        </div>
+        <div className={s.favorites}>
+          <h4>Add to favorites</h4>
+          <button>
+            <AiFillHeart className={s.hearth} />
+          </button>
+        </div>
 
         <button onClick={handleCart} className={s.cart}>
           Add to Cart
