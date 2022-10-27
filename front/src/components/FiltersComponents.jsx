@@ -58,9 +58,14 @@ function handleOutdoor() {
     
 }
 function handlePet() {
-    setActivePet(!activePet)
-    let arr=[...filters]
-arr[2]="pet friendly"
+  setActivePet(!activePet)
+  let arr=[...filters]
+  if (arr[2]=="pet friendly") {
+    arr[2]="all"
+  }else{
+
+    arr[2]="pet friendly"
+  }
 setFilters(arr)
 
     
