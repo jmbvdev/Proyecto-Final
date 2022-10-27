@@ -157,9 +157,13 @@ position: absolute;
     height: 20px;
     color: white;
     border-radius: 50%;
+  
     top: 15px;
     right: 20px;
     caret-color: transparent;
+  }
+  .total{
+    font-size: small;
   }
   .favorite-icon{
     

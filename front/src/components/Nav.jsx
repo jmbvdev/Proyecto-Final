@@ -8,9 +8,10 @@ import logo from "../images/logo.jpg"
 
 import  "../styles/nav.css"
 import { setSearch } from '../Redux/actions/products';
-import { useDispatch } from 'react-redux';
 import { auth } from '../firebase/firebase';
 import { signOut } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 
 const Nav = ({user, authState, setAuthState, setUser}) => {
@@ -19,10 +20,13 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
     const [Mobile, setMobile] = useState(false)
     const navigate= useNavigate()
     const dispatch= useDispatch()
+    const plants = useSelector(state=>state.shopCartReducer.products)
+
     function handleSearch() {
      dispatch(setSearch())
       
     }
+
 
     const signOutHandler = () => {
       signOut(auth)
@@ -31,6 +35,12 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
           setAuthState('login');
       })
       .catch((err) => console.log(err));
+      
+  let total=0
+  for (let i = 0; i < plants.length; i++) {
+             total+=plants[i].count
+    
+
   }
 
     return (
@@ -74,7 +84,8 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
             <RiSearchLine onClick={handleSearch} className='search-icon'/>
             <div className='bag' onClick={()=>navigate("/cart")}>
             <HiOutlineShoppingBag className='bag-icon'/>
-            <div className='bag-quantity'>0</div>
+            <div className='bag-quantity'>
+              <p className='total'>{total}</p></div>
 
             </div>
           <button className='mobile-menu-icon' onClick={() => setMobile(!Mobile)}>
