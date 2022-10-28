@@ -40,6 +40,7 @@ const SearchBox = ({ setIsSearch }) => {
             onChange={handelOnChange}
             placeholder="search a plant"
             name="q"
+            autoComplete="off"
           />
 
           <button type="submit">
