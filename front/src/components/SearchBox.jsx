@@ -28,7 +28,7 @@ const SearchBox = ({ setIsSearch }) => {
     .slice(0, 5);
 
   return (
-    <div>
+    <div >
       <div className={s.container}>
         <button onClick={setIsSearch} className={s.close}>
           <GrClose className={s.close_icon} />
@@ -47,7 +47,8 @@ const SearchBox = ({ setIsSearch }) => {
           </button>
         </form>
       </div>
-      <div className={s.pruebaContainer}>
+      <div className={s.container_search}>
+        <div className={s.search_results}>
         {search &&
           findResults.map((p) => {
             return (
@@ -55,13 +56,15 @@ const SearchBox = ({ setIsSearch }) => {
                 onClick={() => {
                   handleClick(p.id);
                 }}
-                className={s.pruebaContainertwo}
+                className={s.search_card}
               >
-                <img className={s.prueba} src={p.data.image} alt="" />
+                <img className={s.search_image} src={p.data.image} alt="" />
                 <p>{p.data.name}</p>
               </div>
             );
           })}
+
+        </div>
       </div>
     </div>
   );
