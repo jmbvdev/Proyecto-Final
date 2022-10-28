@@ -3,12 +3,14 @@ import {
   GET_USER_DETAIL,
   CREATE_USER,
   EDIT_USER,
-  DELETE_USER
+  DELETE_USER,
+  USER_ONLINE
 } from "../../actions/users/action-types.js";
 
 const initialState = {
   users: [],
   userDetail: {},
+  online:false
   
 };
 
@@ -40,6 +42,11 @@ export default function usersReducer(state = initialState, action) {
       return {
         ...state,
         users: state.users.filter(u => u.id !== action.payload)
+      }
+    case USER_ONLINE:
+      return {
+        ...state,
+        online: !state.online
       }
     default:
       return state;

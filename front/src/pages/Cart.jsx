@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { changeQuantity, deleteProduct } from "../Redux/actions/shopCart";
+import {
+  changeQuantity,
+  deleteProduct,
+  deleteAll,
+} from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
 
 const Cart = () => {
@@ -15,6 +19,10 @@ const Cart = () => {
   //     dispatch(deleteProduct(id))
 
   // }
+
+  function handleDeleteAll() {
+    dispatch(deleteAll());
+  }
 
   function handleQuantity(id, value) {
     setQuantity((q) => q + value);
@@ -34,6 +42,7 @@ const Cart = () => {
     <div className={s.cart_container}>
       <div className={s.product}>
         <h3 className={s.title}>Your cart</h3>
+        <button onClick={handleDeleteAll}>Clear All</button>
         {plants.map((p) => {
           return (
             <>
