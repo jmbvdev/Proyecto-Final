@@ -6,7 +6,7 @@
 }
 .container {
   width: 100%;
-  min-height: 80vh;
+ height: 100vh;
   padding: 5%;
   background-image: linear-gradient(
       rgba(57, 76, 40, 0.708),
@@ -73,7 +73,7 @@ z-index: 2;
 
 .container_search{
   position: absolute;
-  top: 166px;
+  top: 200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -96,6 +96,11 @@ z-index: 0;
  font-family: "Poppins";
 
 }
+.search_card:first-child {
+  border-radius: 10px 10px 0px 0px;
+ 
+ 
+ }
 .search_card:last-child {
  border-radius: 0px 0px 10px 10px;
 
@@ -111,7 +116,7 @@ z-index: 0;
 
 .search_results{
   width: 100%;
-  max-width: 550px;
+  max-width: 850px;
   padding: 5%;
   border-radius: 20px;
 }
