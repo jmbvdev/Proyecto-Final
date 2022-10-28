@@ -27,8 +27,6 @@ const SearchBox = ({ setIsSearch }) => {
     })
     .slice(0, 5);
 
-  console.log(findResults);
-
   return (
     <div>
       <div className={s.container}>
