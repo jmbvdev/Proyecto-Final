@@ -5,6 +5,7 @@ import {ImLocation} from "react-icons/im"
 import {BsTelephoneFill} from "react-icons/bs"
 import {GrMail}from "react-icons/gr"
 import {AiFillFacebook}from "react-icons/ai"
+import logo from "../images/logo-sinfondo.png"
 import '../styles/Footer.css'
 
 
@@ -15,18 +16,7 @@ const Footer = () => {
         <footer className="footer-distributed">
 
         <div className="footer-left">
-            <h3>Calathea<span>Market</span></h3>
-
-            <p className="footer-links">
-                <a href="#">Home</a>
-                |
-                <a href="#">About</a>
-                |
-                <a href="#">Plants</a>
-                |
-                <a href="#">Contact</a>
-
-            </p>
+            <img src={logo} className="logo_footer" alt="" />
 
             <p className="footer-company-name">Copyright © 2022 <strong>Calathea Market</strong> All rights reserved</p>
         </div>

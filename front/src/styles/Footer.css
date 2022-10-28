@@ -13,13 +13,16 @@ footer {
 }
 
 .footer-distributed {
-    background-color: #2d2a30;
+  
+    background-image: linear-gradient(rgb(203, 226, 210),rgba(110, 169, 135, 0.359)), url("https://img.rawpixel.com/private/static/images/website/2022-05/rm255-sasi-15.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=2e9aa5796da70fcd0ed6068e96e566ac"); 
+    background-repeat: no-repeat;
+    background-size: cover; 
     box-sizing: border-box;
     width: 100%;
     text-align: left;
     font-family: "Poppins";
     font-weight: 400;
-    padding: 50px 50px 60px 50px;
+    padding: 30px 50px 20px 50px;
    
 }
 
@@ -34,23 +37,15 @@ footer {
     width: 30%;
 }
 
-.footer-distributed h3 {
-    color: #ffffff;
-    font: normal 36px 'Cookie', cursive;
-    margin: 0;
-}
 
 
 .footer-distributed h3 span {
     color:#425a21f5;
 }
 
-/* Footer links */
 
-.footer-distributed .footer-links {
-    color: #ffffff;
-    margin: 20px 0 12px;
-}
+
+
 
 .footer-distributed .footer-links a {
     display: inline-block;
@@ -60,10 +55,10 @@ footer {
 }
 
 .footer-distributed .footer-company-name {
-    color: #8f9296;
-    font-size: 14px;
+    color: #151515;
+    font-size: small;
     font-weight: normal;
-    margin: 0;
+  margin-top: 20px;
 }
 
 /* Footer Center */
@@ -73,8 +68,8 @@ footer {
 }
 
 .footer-distributed .footer-center i {
-    background-color: #33383b;
-    color: #ffffff;
+    
+    color:  #2d2a30;
     font-size: 25px;
     width: 38px;
     height: 38px;
@@ -95,7 +90,7 @@ footer {
 
 .footer-distributed .footer-center p {
     display: inline-block;
-    color: #ffffff;
+    color:  #2d2a30;
     vertical-align: middle;
     margin: 0;
 }
@@ -108,7 +103,7 @@ footer {
 }
 
 .footer-distributed .footer-center p a {
-    color: #9dad86f5;
+    color: #2d2a30;
     text-decoration: none;
     font-family: "Poppins", sans-serif;
     font-weight: lighter;
@@ -123,7 +118,7 @@ footer {
 
 .footer-distributed .footer-company-about {
     line-height: 20px;
-    color: #92999f;
+    color:  #2d2a30;
     font-size: 13px;
     font-weight: normal;
     margin: 0;
@@ -131,34 +126,38 @@ footer {
 
 .footer-distributed .footer-company-about span {
     display: block;
-    color: #ffffff;
+    color:  #2d2a30;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 .footer-distributed .footer-icons {
-    margin-top: 25px;
+    margin-top: 20px;
    
+}
+.logo_footer{
+    width: 200px;
+    height: 90px;
 }
 
 .footer-distributed .footer-icons a {
     display: inline-block;
-    width: 35px;
-    height: 35px;
+    
+   
     cursor: pointer;
-    background-color: #33383b;
-    border-radius: 2px;
-    font-size: 25px;
-    color: #ffffff;
+    background-color:transparent;
+
+    font-size: 40px;
+    color:  #2d2a30;
     text-align: center;
-    line-height: 35px;
-    margin-right: 3px;
-    margin-bottom: 5px;
+    margin-right: 20px;
+   
 }
 
 .footer-distributed .footer-icons a:hover {
-    background-color: #425a21f5;
+
+    color:  #453656;
 }
 
 .footer-links a:hover {
