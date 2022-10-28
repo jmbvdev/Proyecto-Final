@@ -18,7 +18,6 @@ export const saveCart = (user) => {
       console.log(res.data);
       return dispatch({ type: SAVE_CART });
     }
-    /* aca iria la logica para pegarle a las cookies o al localStorage en caso de que el usuario no este registrado, y despacharia la misma action */
   };
 };
 
@@ -55,7 +54,7 @@ export const purchase = (cart) => {
       "aca va la ruta del back que agrega el pedido a un usuario en particular",
       cart
     );
-  
+
     return dispatch({ type: PURCHASE });
   };
 };
@@ -68,8 +67,5 @@ export const loadCart = (user) => {
       );
       return dispatch({ type: LOAD_CART, payload: res.data });
     }
-    /* 
-    aca iria la logica en el caso de q no haya usuario q me cargue al carrito lo que tengo en localStorage o en las cookies
-    */
   };
 };

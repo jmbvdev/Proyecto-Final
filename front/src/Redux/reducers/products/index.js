@@ -6,7 +6,6 @@ import {
   ORDER_BY,
   FILTER_BY,
   GET_PRODUCT_DETAILS,
-  IS_SEARCH,
   CLEAR_DETAILS,
 } from "../../actions/products/actiontypes.js";
 import { filterby } from "../../../utils/filterby.js";
@@ -51,7 +50,7 @@ export default function productsReducer(state = initialState, action) {
       }
     });
 
-    return { ...state, allProducts: products, productsBackUp: products };
+    return { ...state, allProducts: products };
   }
   if (action.type === FILTER_BY) {
     let products = Array.from(state.productsBackUp);
