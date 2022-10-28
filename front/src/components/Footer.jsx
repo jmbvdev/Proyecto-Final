@@ -40,7 +40,7 @@ const Footer = () => {
         <div class="footer-right">
             <p class="footer-company-about">
                 <span>About the company</span>
-                <strong>Calathea Market</strong> is a Plants Ecommerce 
+                <strong>Calathea Market</strong> is an e-commerce created for plant lovers, we help you create an environment full of life with plants for all tastes such as easy care, pet friendly, indoor, outdoor, etc. 
             </p>
             <div class="footer-icons">
                 <a href="#"><TiSocialInstagram /></a>
