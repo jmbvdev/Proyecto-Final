@@ -89,7 +89,7 @@ export default function Login({setAuthState, setUser}){
         </div>
             </div>
             <div className={s.image}>
-                <img src={diferent} alt="" />
+                <img src={diferent} alt="img" loading="lazy" />
 
             </div>
             </div>
