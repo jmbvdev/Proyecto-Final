@@ -51,16 +51,32 @@ function handleSize(e) {
 }
 function handleIndoor() {
     setActiveIndoor(!activeIndoor)
+    let arr=[...filters]
+    if (arr[2]==="indoor") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="indoor"
+    }
+    setFilters(arr)
     
 }
 function handleOutdoor() {
     setActiveOutoor(!activeOutdoor)
+    let arr=[...filters]
+    if (arr[2]==="outdoor") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="outdoor"
+    }
+    setFilters(arr)
     
 }
 function handlePet() {
   setActivePet(!activePet)
   let arr=[...filters]
-  if (arr[2]=="pet friendly") {
+  if (arr[2]==="pet friendly") {
     arr[2]="all"
   }else{
 
@@ -72,10 +88,25 @@ setFilters(arr)
 }
 function handleTable() {
     setActiveTable(!activeTable)
-    
+    let arr=[...filters]
+    if (arr[2]==="tabletop") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="tabletop"
+    }
+    setFilters(arr)
 }
 function handleEasy() {
     setActiveEasy(!activeEasy)
+    let arr=[...filters]
+    if (arr[2]==="easy care") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="easy care"
+    }
+    setFilters(arr)
     
 }
 

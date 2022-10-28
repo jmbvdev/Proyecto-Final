@@ -6,7 +6,7 @@
 }
 .container {
   width: 100%;
-  min-height: 40vh;
+  min-height: 80vh;
   padding: 5%;
   background-image: linear-gradient(
       rgba(57, 76, 40, 0.708),
@@ -17,7 +17,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  align-items: center;
+  align-items:flex-start;
   justify-content: center;
 }
 .search {
@@ -25,7 +25,7 @@
   max-width: 700px;
   background: rgba(255, 255, 255, 0.5);
   display: flex;
-  align-items: center;
+z-index: 2;
   border-radius: 60px;
   padding: 10px 20px;
 }
@@ -60,22 +60,58 @@
   color: #fff;
 }
 
-.prueba {
-  width: 50px;
+.search_image {
+  width: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-right: 30px;
+  font-family: "Dosis";
+  font-weight: bold;
 }
 
-.pruebaContainer {
-  position: fixed;
-  top: 38%;
-  left: 40%;
-  width: 20%;
-  z-index: 10;
+
+.container_search{
+  position: absolute;
+  top: 166px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+border-radius: 20px;
+
+ 
+
 }
 
-.pruebaContainertwo {
-  padding: 0 1rem;
+.search_card {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: space-between;
+display: flex;
+z-index: 0;
+
+
+}
+.search_card p {
+ font-family: "Poppins";
+
+}
+.search_card:last-child {
+ border-radius: 0px 0px 10px 10px;
+
+
+}
+.search_card:hover {
+
+  background-color: rgba(9, 170, 49, 0.326);
+  cursor: pointer;
+
+
+}
+
+.search_results{
+  width: 100%;
+  max-width: 550px;
+  padding: 5%;
+  border-radius: 20px;
 }
