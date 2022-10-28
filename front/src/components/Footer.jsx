@@ -6,52 +6,84 @@ import {BsTelephoneFill} from "react-icons/bs"
 import {GrMail}from "react-icons/gr"
 import {AiFillFacebook}from "react-icons/ai"
 import logo from "../images/logo-sinfondo.png"
-import '../styles/Footer.css'
+import s from "../styles/footer.module.css"
+
 
 
 
 
 const Footer = () => {
     return (
-        <footer className="footer-distributed">
+      <footer className={s.footer_distributed}>
+        <div className={s.footer_left}>
+          <img src={logo} className={s.logo_footer} alt="" />
 
-        <div className="footer-left">
-            <img src={logo} className="logo_footer" alt="" />
-
-            <p className="footer-company-name">Copyright © 2022 <strong>Calathea Market</strong> All rights reserved</p>
+          <p className={s.footer_company_name}>
+            Copyright © 2022 <strong>Calathea Market</strong> All rights
+            reserved
+          </p>
         </div>
 
-        <div class="footer-center">
-            <div>
-               <i><ImLocation/></i> 
-                <p><span>Buenos Aires</span>
-                    Argentina</p>
-            </div>
-
-            <div>
-            <i><BsTelephoneFill/></i> 
-                <p>+51 770317305</p>
-            </div>
-            <div>
-            <i><GrMail/></i> 
-                <p><a href="calatheaMarket@gmail.com">calatheaMarket@gmail.com</a></p>
-            </div>
-        </div>
-        <div class="footer-right">
-            <p class="footer-company-about">
-                <span>About the company</span>
-                <strong>Calathea Market</strong> is an e-commerce created for plant lovers, we help you create an environment full of life with plants for all tastes such as easy care, pet friendly, indoor, outdoor, etc. 
+        <div class={s.footer_center}>
+          <div>
+            <i>
+              <ImLocation />
+            </i>
+            <p>
+              <span>Buenos Aires</span>
+              Argentina
             </p>
-            <div class="footer-icons">
-                <a href="#"><TiSocialInstagram /></a>
-                <a href="#"><FaGithubSquare/></a>
-                <a href="#"><AiFillFacebook/></a>
-            </div>
+          </div>
+
+          <div>
+            <i>
+              <BsTelephoneFill />
+            </i>
+            <p>+51 770317305</p>
+          </div>
+          <div>
+            <i>
+              <GrMail />
+            </i>
+            <p>
+              <a href="calatheaMarket@gmail.com">calatheaMarket@gmail.com</a>
+            </p>
+          </div>
         </div>
-    </footer>
-
-
-    )
+        <div class={s.footer_right}>
+          <p class={s.footer_company_about}>
+            <span>About the company</span>
+            <strong>Calathea Market</strong> is an e-commerce created for plant
+            lovers, we help you create an environment full of life with plants
+            for all tastes such as easy care, pet friendly, indoor, outdoor,
+            etc.
+          </p>
+          <div class={s.footer_icons}>
+            <a
+              href="https://www.instagram.com/calatheamarkets/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TiSocialInstagram />
+            </a>
+            <a
+              href="https://github.com/jmbvdev/Proyecto-Final/tree/main"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithubSquare />
+            </a>
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <AiFillFacebook />
+            </a>
+          </div>
+        </div>
+      </footer>
+    );
     
 }
 

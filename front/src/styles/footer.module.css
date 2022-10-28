@@ -12,7 +12,7 @@ footer {
     }
 }
 
-.footer-distributed {
+.footer_distributed {
     box-shadow: 0 19px 30px rgba(0, 0, 0, 0.679), 0 15px 40px rgba(0, 0, 0, 0.759);
   
     background-image: linear-gradient(rgb(203, 226, 210),rgba(110, 169, 135, 0.359)), url("https://img.rawpixel.com/private/static/images/website/2022-05/rm255-sasi-15.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=2e9aa5796da70fcd0ed6068e96e566ac"); 
@@ -27,20 +27,20 @@ footer {
    
 }
 
-.footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+.footer_distributed .footer_left, .footer_distributed .footer_center, .footer_distributed .footer_right {
     display: inline-block;
     vertical-align: top;
 }
 
 /* Footer left */
 
-.footer-distributed .footer-left {
+.footer_distributed .footer_left {
     width: 30%;
 }
 
 
 
-.footer-distributed h3 span {
+.footer_distributed h3 span {
     color:#425a21f5;
 }
 
@@ -48,14 +48,14 @@ footer {
 
 
 
-.footer-distributed .footer-links a {
+.footer_distributed .footer_links a {
     display: inline-block;
     line-height: 1.8;
     text-decoration: none;
     color: inherit;
 }
 
-.footer-distributed .footer-company-name {
+.footer_distributed .footer_company_name {
     color: #151515;
     font-size: small;
     font-weight: normal;
@@ -64,11 +64,11 @@ footer {
 
 /* Footer Center */
 
-.footer-distributed .footer-center {
+.footer_distributed .footer_center {
     width: 35%;
 }
 
-.footer-distributed .footer-center i {
+.footer_distributed .footer_center i {
     
     color:  #2d2a30;
     font-size: 25px;
@@ -84,26 +84,26 @@ footer {
     font-size: 25px;
    
 } */
-.footer-distributed .footer-center i.fa-envelope {
+.footer_distributed .footer_center i.fa_envelope {
     font-size: 17px;
     line-height: 38px;
 }
 
-.footer-distributed .footer-center p {
+.footer_distributed .footer_center p {
     display: inline-block;
     color:  #2d2a30;
     vertical-align: middle;
     margin: 0;
 }
 
-.footer-distributed .footer-center p span {
+.footer_distributed .footer_center p span {
     display: block;
     font-weight: normal;
     font-size: 14px;
     line-height: 2;
 }
 
-.footer-distributed .footer-center p a {
+.footer_distributed .footer_center p a {
     color: #2d2a30;
     text-decoration: none;
     font-family: "Poppins", sans-serif;
@@ -113,11 +113,11 @@ footer {
 
 /* Footer Right */
 
-.footer-distributed .footer-right {
+.footer_distributed .footer_right {
     width: 30%;
 }
 
-.footer-distributed .footer-company-about {
+.footer_distributed .footer_company_about {
     line-height: 20px;
     color:  #2d2a30;
     font-size: 13px;
@@ -125,16 +125,16 @@ footer {
     margin: 0;
 }
 
-.footer-distributed .footer-company-about span {
+.footer_distributed .footer_company_about span {
     display: block;
     color:  #2d2a30;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.footer-distributed .footer-icons {
-    margin-top: 20px;
+.footer_distributed .footer_icons {
+    margin-top: 10px;
    
 }
 .logo_footer{
@@ -142,7 +142,7 @@ footer {
     height: 90px;
 }
 
-.footer-distributed .footer-icons a {
+.footer_distributed .footer_icons a {
     display: inline-block;
     
    
@@ -156,23 +156,23 @@ footer {
    
 }
 
-.footer-distributed .footer-icons a:hover {
+.footer_distributed .footer_icons a:hover {
 
     color:  #453656;
 }
 
-.footer-links a:hover {
+.footer_links a:hover {
     color: #425a21f5;
 }
 
 @media (max-width: 880px) {
-    .footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+    .footer_distributed .footer_left, .footer_distributed .footer_center, .footer_distributed .footer_right {
         display: block;
         width: 100%;
         margin-bottom: 40px;
         text-align: center;
     }
-    .footer-distributed .footer-center i {
+    .footer_distributed .footer_center i {
         margin-left: 0;
     }
 }       
