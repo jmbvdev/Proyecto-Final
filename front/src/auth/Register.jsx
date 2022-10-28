@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../Redux/actions/users/index';
+import { createUser, userOnline } from '../Redux/actions/users/index';
 import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
+import { signOut, sendEmailVerification } from 'firebase/auth';
 
 
 export default function Register() {
@@ -16,6 +17,7 @@ export default function Register() {
     const [input, setInput] = React.useState(initialState);
 
     const [password2, setPassword2] = React.useState('');
+    const online = useSelector(state => state.usersReducer.online)
     const dispatch = useDispatch();
     const history = useNavigate();
 
@@ -30,7 +32,10 @@ export default function Register() {
             dispatch(createUser(input));
             setInput(initialState);
             alert('User succesfully created!');
-            history("/");
+          
+                sendEmailVerification(auth.currentUser)
+            
+            history("/sign-in");
         }
     }
 
