@@ -71,7 +71,10 @@ export const loadCart = (user) => {
 
   for (let i = 0; i < localStorage.length; i++) {
     let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    local.push(oneproduc);
+    if (oneproduc.id && oneproduc.count && oneproduc.name) {
+      local.push(oneproduc);
+    }
+    
   }
 
   return { type: LOAD_CART, payload: local };

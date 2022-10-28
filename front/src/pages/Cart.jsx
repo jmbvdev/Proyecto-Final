@@ -43,7 +43,7 @@ const Cart = () => {
       <div className={s.product}>
         <h3 className={s.title}>Your cart</h3>
         <button onClick={handleDeleteAll}>Clear All</button>
-        {plants.map((p) => {
+        {plants?.map((p) => {
           return (
             <>
               <div className={s.list}>

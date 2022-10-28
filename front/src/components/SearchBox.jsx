@@ -1,23 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import { GrClose } from "react-icons/gr";
 import s from "../styles/searchBox.module.css";
 import { useNavigate } from "react-router-dom";
+import { clearDetails, GetProductDetails } from "../Redux/actions/products";
 
 const SearchBox = ({ setIsSearch }) => {
   const plants = useSelector((state) => state.productsReducer.productsBackUp);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   function handelOnChange(e) {
     setSearch(e.target.value);
   }
 
   function handleClick(id) {
+    dispatch(clearDetails());
     setIsSearch();
     navigate(`plants/details/${id}`);
+    dispatch(GetProductDetails(id));
     setSearch("");
   }
 
