@@ -1,59 +1,122 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.container{
+.container {
   width: 100%;
-  min-height: 40vh;
+ height: 100vh;
   padding: 5%;
-  background-image: linear-gradient(rgba(57, 76, 40, 0.708),rgba(23, 55, 30, 0.9)), url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1"); 
+  background-image: linear-gradient(
+      rgba(57, 76, 40, 0.708),
+      rgba(23, 55, 30, 0.9)
+    ),
+    url("https://i0.wp.com/enabrilhojasmil.com/wp-content/uploads/2017/07/En_Abril_Hojas_Mil_Calathea.jpg?resize=1100%2C733&ssl=1");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  align-items: center;
+  align-items:flex-start;
   justify-content: center;
 }
-.search{
-width: 100%;
-max-width:700px;
-background: rgba(255, 255, 255, 0.5);
+.search {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+z-index: 2;
+  border-radius: 60px;
+  padding: 10px 20px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+}
+
+.search button {
+  font-size: 30px;
+  color: #042406;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+.search input::placeholder {
+  color: #071c089d;
+}
+.close {
+  position: absolute;
+  right: 30px;
+  top: 110px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.close_icon {
+  color: #fff;
+}
+
+.search_image {
+  width: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-right: 30px;
+  font-family: "Dosis";
+  font-weight: bold;
+}
+
+
+.container_search{
+  position: absolute;
+  top: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+border-radius: 20px;
+
+ 
+
+}
+
+.search_card {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
 display: flex;
-align-items: center;
-border-radius: 60px;
-padding: 10px 20px;
+z-index: 0;
+
 
 }
-.search input{
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding:10px;
-    font-size: 20px;
-    color: #063108;
-}
+.search_card p {
+ font-family: "Poppins";
 
-.search button{
-    font-size: 30px;
-    color: #042406;
-    position: relative;
-    top: 3px;
-    cursor: pointer;
 }
-.search input::placeholder{
-    color:#071c089d; ;
+.search_card:first-child {
+  border-radius: 10px 10px 0px 0px;
+ 
+ 
+ }
+.search_card:last-child {
+ border-radius: 0px 0px 10px 10px;
+
+
 }
-.close{
-    position: absolute;
-    right: 30px;
-    top: 110px;
-    font-size: 30px;
+.search_card:hover {
+
+  background-color: rgba(9, 170, 49, 0.326);
   cursor: pointer;
 
+
 }
-.close_icon{
-    color: #fff;
+
+.search_results{
+  width: 100%;
+  max-width: 850px;
+  padding: 5%;
+  border-radius: 20px;
 }

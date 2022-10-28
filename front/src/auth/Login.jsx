@@ -6,8 +6,8 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from  "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { userOnline } from '../Redux/actions/users/index';
-
-
+import s from "../styles/login.module.css"
+import diferent from "../images/diferent.jpg";
 
 
 
@@ -47,42 +47,57 @@ export default function Login({setAuthState, setUser}){
 
 
     return (
-        <div>
-        <h1>Welcome Back</h1>
+        <div className={s.container}>
+            <div className={s.wraper}>
+            <div className={s.login}>
+            <div className={s.specs} >
+        <h2 className={s.login_title}>Welcome Back</h2>
         <p>Please enter your details.</p>
         <div>
-            <div>
-                <label>Email</label>
-                <input 
+            <div className={s.input_container}>
+               
+                <input  className={s.input_text}
+                type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"/>
+                    placeholder="email"
+                
+                  
+                    />
             </div>
-            <div>
-                <label>Password</label>
+            <div className={s.input_container}>
                 <input 
+                    className={s.input_text} 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your email" type={"password"}/>
+                    placeholder="password" type={"password"}/>
             </div>
             <div>
-                <div>
-                    <input  type="checkbox" id='remember'/>
-                    <label for="remember">Remember for 30 days</label>
+                <div className={s.check}>
+                    <input className={s.check_input} type="checkbox" id='remember'/>
+                    <label className={s.check_label}  for="remember">Remember for 30 days</label>
                 </div>
-                <button>Forgot password</button>
+                <button className={s.forgot_btn}>Forgot password</button>
             </div>
-            <div>
-                <button onClick={handleLogin}>Sign in</button>
-                <button onClick={handleGoogle}>
+            <div className={s.sign_btn_container}>
+                <button onClick={handleLogin} className={s.sign_login}>SIGN IN</button>
+                <button onClick={handleGoogle} className={s.login_google} >
                         Sign in with Google
                 </button>
             </div>
-            <div>
+            <div className={s.register}>
                 <p>Don't have an account?</p>
-                <button onClick={() => setAuthState('register')}>Sign up</button>
+                <button onClick={() => setAuthState('register')}>SIGN UP</button>
+            </div>
+
             </div>
         </div>
+            </div>
+            <div className={s.image}>
+                <img src={diferent} alt="img" loading="lazy" />
+
+            </div>
+            </div>
     </div>
     )
 }

@@ -5,6 +5,7 @@ import {FaLongArrowAltDown,FaLongArrowAltUp} from "react-icons/fa"
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FilterBy, OrderBy } from '../Redux/actions/products';
+import {BiReset} from "react-icons/bi"
 import s from "../styles/filters.module.css"
 
 const FiltersComponents = () => {
@@ -17,7 +18,9 @@ const FiltersComponents = () => {
     const[orderPrice, setOrderPrice]= useState(false)
 
 
-   
+    function resetFilter() {
+      setFilters(["all", "all", "all", "all"]);
+    }
     const dispatch= useDispatch()
 
     useEffect(() => {
@@ -48,26 +51,62 @@ function handleSize(e) {
 }
 function handleIndoor() {
     setActiveIndoor(!activeIndoor)
+    let arr=[...filters]
+    if (arr[2]==="indoor") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="indoor"
+    }
+    setFilters(arr)
     
 }
 function handleOutdoor() {
     setActiveOutoor(!activeOutdoor)
+    let arr=[...filters]
+    if (arr[2]==="outdoor") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="outdoor"
+    }
+    setFilters(arr)
     
 }
 function handlePet() {
-    setActivePet(!activePet)
-    let arr=[...filters]
-arr[2]="pet friendly"
+  setActivePet(!activePet)
+  let arr=[...filters]
+  if (arr[2]==="pet friendly") {
+    arr[2]="all"
+  }else{
+
+    arr[2]="pet friendly"
+  }
 setFilters(arr)
 
     
 }
 function handleTable() {
     setActiveTable(!activeTable)
-    
+    let arr=[...filters]
+    if (arr[2]==="tabletop") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="tabletop"
+    }
+    setFilters(arr)
 }
 function handleEasy() {
     setActiveEasy(!activeEasy)
+    let arr=[...filters]
+    if (arr[2]==="easy care") {
+      arr[2]="all"
+    }else{
+  
+      arr[2]="easy care"
+    }
+    setFilters(arr)
     
 }
 
@@ -76,6 +115,7 @@ function handleEasy() {
     return (
       <div className={s.filters}>
         <div className={s.container}>
+    <BiReset onClick={resetFilter} className={s.reset}/>
           <div className={s.size_container}>
             <select
               onChange={(e) => handleSize(e)}
