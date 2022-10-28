@@ -28,13 +28,14 @@ const SearchBox = ({ setIsSearch }) => {
     .slice(0, 5);
 
   return (
-    <div >
+    <div>
       <div className={s.container}>
         <button onClick={setIsSearch} className={s.close}>
           <GrClose className={s.close_icon} />
         </button>
         <form action="" className={s.search}>
           <input
+            autoComplete="off"
             type="text"
             value={search}
             onChange={handelOnChange}
@@ -49,21 +50,20 @@ const SearchBox = ({ setIsSearch }) => {
       </div>
       <div className={s.container_search}>
         <div className={s.search_results}>
-        {search &&
-          findResults.map((p) => {
-            return (
-              <div
-                onClick={() => {
-                  handleClick(p.id);
-                }}
-                className={s.search_card}
-              >
-                <img className={s.search_image} src={p.data.image} alt="" />
-                <p>{p.data.name}</p>
-              </div>
-            );
-          })}
-
+          {search &&
+            findResults.map((p) => {
+              return (
+                <div
+                  onClick={() => {
+                    handleClick(p.id);
+                  }}
+                  className={s.search_card}
+                >
+                  <img className={s.search_image} src={p.data.image} alt="" />
+                  <p>{p.data.name}</p>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
