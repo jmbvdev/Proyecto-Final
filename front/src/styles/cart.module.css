@@ -48,7 +48,7 @@
 }
 .check{
     width: 30%;
-    height: 50vh;
+    height: auto;
     right: 100px;
    margin: 35px;
     border-radius: 30px;
