@@ -1,21 +1,43 @@
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../Redux/actions/users/index';
 import { auth } from '../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Register() {
 
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password1, setPassword1] = React.useState('');
+    const initialState = {
+        displayName: '',
+        password: '',
+        email: '',
+    };
+
+    const [input, setInput] = React.useState(initialState);
+
     const [password2, setPassword2] = React.useState('');
+    const dispatch = useDispatch();
+    const history = useNavigate();
+
+    React.useEffect(() => {
+        setInput(prev => ({ ...prev, [input.name]: input.value}))
+    }, [input.name, input.value])
 
 
     const handleOnSubmit = (e) => {
-        if(email !== null && password1 !== null && password2 !== null && password1 === password2) {
+        if(input.displayName !==null && input.email !== null && input.password !== null && password2 !== null && input.password === password2) {
             e.preventDefault();
-
+            dispatch(createUser(input));
+            setInput(initialState);
+            alert('User succesfully created!');
+            history("/");
         }
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        //setError(validate({...input, [e.target.name] : e.target.value}))
+        setInput({...input, [e.target.name] : e.target.value})
     }
 
     return (
@@ -26,22 +48,25 @@ export default function Register() {
             <div>
                 <label>Display Name</label>
                 <input 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    name= "displayName"
+                    value={input.displayName}
+                    onChange={handleChange}
                     placeholder="Enter your complete Name"/>
             </div>
             <div>
                 <label>Email</label>
                 <input 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    name= "email"
+                    value={input.email}
+                    onChange={handleChange}
                     placeholder="Enter your email"/>
             </div>
             <div>
                 <label>Password</label>
                 <input 
-                    value={password1}
-                    onChange={(e) => setPassword1(e.target.value)}
+                    name= "password"
+                    value={input.password}
+                    onChange={handleChange}
                     placeholder="Enter your password" 
                     type={"password"}/>
                 <input 

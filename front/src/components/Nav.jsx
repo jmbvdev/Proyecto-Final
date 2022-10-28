@@ -11,16 +11,18 @@ import { setSearch } from '../Redux/actions/products';
 import { auth } from '../firebase/firebase';
 import { signOut } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { userOnline } from '../Redux/actions/users/index';
 
 
 
-const Nav = ({user, authState, setAuthState, setUser}) => {
+const Nav = ({user, setUser}) => {
  
   
     const [Mobile, setMobile] = useState(false)
     const navigate= useNavigate()
     const dispatch= useDispatch()
     const plants = useSelector(state=>state.shopCartReducer.products)
+    const online = useSelector(state => state.usersReducer.online)
 
     function handleSearch() {
      dispatch(setSearch())
@@ -32,7 +34,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
       signOut(auth)
       .then(() => {
           setUser(null);
-          setAuthState('login');
+          dispatch(userOnline())
       })
       .catch((err) => console.log(err));
     } 
@@ -76,7 +78,7 @@ const Nav = ({user, authState, setAuthState, setUser}) => {
          
           <div className='icons-container'>
             {
-            authState === 'logged' ?
+            online === true ?
             <button className='sign-in-button' onClick={signOutHandler}><FiLogIn className='login-icon'/> Sign out </button> : 
             <button className='sign-in-button'><FiLogIn className='login-icon'/> <Link to='/sign-in' className='sing-in-link'>Sign in </Link></button>
             }
