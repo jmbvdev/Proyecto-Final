@@ -3,7 +3,8 @@ import {
     GET_USER_DETAIL,
     CREATE_USER,
     EDIT_USER,
-    DELETE_USER
+    DELETE_USER,
+    USER_ONLINE
   } from "../../actions/users/action-types.js";
 
 
@@ -81,5 +82,13 @@ export const deleteUser = (id) => {
             })
         })
     }
+};
+
+export const userOnline = () => {
+    return {
+        type: USER_ONLINE
+    }
 }
+
+
 
