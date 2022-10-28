@@ -82,14 +82,14 @@ const PlantsDetails = () => {
           </div>
           <div className={s.quantity}>
             <button
-              disabled={quantity == 1}
+              disabled={quantity === 1}
               onClick={() => setQuantity(quantity - 1)}
             >
               -
             </button>
             <p>{quantity}</p>
             <button
-              disabled={quantity == plant?.stock}
+              disabled={quantity === plant?.stock}
               onClick={() => setQuantity(quantity + 1)}
             >
               +
