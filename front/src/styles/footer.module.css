@@ -140,6 +140,7 @@ footer {
 .logo_footer{
     width: 200px;
     height: 90px;
+    caret-color: transparent;
 }
 
 .footer_distributed .footer_icons a {

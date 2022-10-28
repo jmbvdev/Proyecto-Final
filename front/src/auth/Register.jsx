@@ -4,6 +4,8 @@ import { createUser, userOnline } from '../Redux/actions/users/index';
 import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { signOut, sendEmailVerification } from 'firebase/auth';
+import s from "../styles/register.module.css"
+import plans from "../images/plans.jpg";
 
 
 export default function Register() {
@@ -46,44 +48,57 @@ export default function Register() {
     }
 
     return (
-        <div>
-        <h1>Register</h1>
-        <p>Welcome! Please create your account.</p>
+        <div className={s.container}>
+            <div className={s.wraper}>
+            <div className={s.image}>
+                    <img src={plans} alt="" />
+                </div>
+                <div className={s.register}>
+                    
+
+        <h1 className={s.title}>Register</h1>
+        <p className={s.welcome}>Create an account.</p>
         <form onSubmit={(e) => handleOnSubmit(e)}>
-            <div>
-                <label>Display Name</label>
+            <div className={s.input_container}>
+            
                 <input 
+                className={s.input_text}
                     name= "displayName"
                     value={input.displayName}
                     onChange={handleChange}
-                    placeholder="Enter your complete Name"/>
+                    placeholder="Complete name"/>
             </div>
-            <div>
-                <label>Email</label>
+            <div className={s.input_container}>
+        
                 <input 
+                className={s.input_text}
                     name= "email"
                     value={input.email}
                     onChange={handleChange}
-                    placeholder="Enter your email"/>
+                    placeholder="Email"/>
             </div>
-            <div>
-                <label>Password</label>
+            <div className={s.input_container}>
+
                 <input 
+                className={s.input_text}
                     name= "password"
                     value={input.password}
                     onChange={handleChange}
-                    placeholder="Enter your password" 
+                    placeholder="Password" 
                     type={"password"}/>
                 <input 
+                className={s.input_text}
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
                     placeholder="Repeat your password" 
                     type={"password"}/>
             </div>
-            <div>
-                <button type='submit'>Register</button>
+            <div >
+                <button className={s.register_btn} type='submit'>SIGN UP</button>
             </div>
         </form>
+                </div>
+            </div>
     </div>
     )
 }

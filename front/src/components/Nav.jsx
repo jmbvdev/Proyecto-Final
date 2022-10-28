@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
 import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import logo from "../images/logo.jpg";
+import logo from "../images/logo-sinfondo.png";
 import { loadCart } from "../Redux/actions/shopCart/index.js";
 import  "../styles/nav.css"
 

@@ -4,10 +4,8 @@ import { signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from  "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { userOnline } from '../Redux/actions/users/index';
 import s from "../styles/login.module.css"
-import diferent from "../images/diferent.jpg";
+import diferent from "../images/diferent.jpg"
 
 
 
@@ -16,15 +14,13 @@ export default function Login({setAuthState, setUser}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useNavigate();
-    const dispatch = useDispatch();
-    const online = useSelector(state => state.usersReducer.online)
 
     const handleLogin = () => {
         if(email !== null && password !== null) {
             signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 setUser(email)
-                dispatch(userOnline())
+                setAuthState('logged')
                 history("/")
             })
             .catch((err) => alert(err));
@@ -39,7 +35,6 @@ export default function Login({setAuthState, setUser}){
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user= result.user;
-            dispatch(userOnline())
             history("/");
         }).catch((err) => alert(err)) 
     }
@@ -94,7 +89,7 @@ export default function Login({setAuthState, setUser}){
         </div>
             </div>
             <div className={s.image}>
-                <img src={diferent} alt="img" loading="lazy" />
+                <img src={diferent} alt="img"  />
 
             </div>
             </div>

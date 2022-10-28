@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    caret-color: transparent;
 }
 .monstera{
     width: 540px;
