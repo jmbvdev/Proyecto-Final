@@ -5,34 +5,28 @@ import CreateProduct from "./components/CreateProduct";
 import Nav from "./components/Nav";
 import SearchBox from "./components/SearchBox";
 import Home from "./pages/Home";
-import Footer from './components/Footer'
+import Footer from "./components/Footer";
 import Plants from "./pages/Plants";
 import PlantsDetails from "./pages/PlantsDetails";
-import Cart from "./pages/Cart"
+import Cart from "./pages/Cart";
 import Auth from "./auth/Auth";
 
-
-
 function App() {
-  const [isSearch, setIsSearch]=useState(false)
+  const [isSearch, setIsSearch] = useState(false);
   function handleSearch() {
-    setIsSearch((isSearch)=>!isSearch)
+    setIsSearch((isSearch) => !isSearch);
   }
-  
+
   return (
     <div className="App">
-
-      <Nav setIsSearch={handleSearch}/>  
-      {
-        isSearch&&
-       <SearchBox setIsSearch={handleSearch} />
-      }    
+      <Nav setIsSearch={handleSearch} />
+      {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route exact path="/create" element={<CreateProduct />} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
-        <Route path="/cart" element={<Cart/>} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<Auth />} />
       </Routes>
       <Footer />
