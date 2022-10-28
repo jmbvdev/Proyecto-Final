@@ -35,7 +35,7 @@ export default function Register() {
           
                 sendEmailVerification(auth.currentUser)
             
-            history("/sign-in");
+            history("/");
         }
     }
 
