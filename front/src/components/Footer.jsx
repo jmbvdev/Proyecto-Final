@@ -24,7 +24,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div class={s.footer_center}>
+        <div className={s.footer_center}>
           <div>
             <i>
               <ImLocation />
@@ -50,15 +50,15 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <div class={s.footer_right}>
-          <p class={s.footer_company_about}>
+        <div className={s.footer_right}>
+          <p className={s.footer_company_about}>
             <span>About the company</span>
             <strong>Calathea Market</strong> is an e-commerce created for plant
             lovers, we help you create an environment full of life with plants
             for all tastes such as easy care, pet friendly, indoor, outdoor,
             etc.
           </p>
-          <div class={s.footer_icons}>
+          <div className={s.footer_icons}>
             <a
               href="https://www.instagram.com/calatheamarkets/"
               target="_blank"
