@@ -45,7 +45,7 @@ const PlantsDetails = () => {
 
   return plant?.name ? (
     <div className={s.container}>
-      <img src={plant?.image} loading="lazy" alt="plant" />
+      <img src={plant?.image} alt="" />
       <div className={s.details}>
         <h1>{plant?.name} </h1>
         <div>

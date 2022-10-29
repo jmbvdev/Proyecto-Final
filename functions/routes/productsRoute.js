@@ -77,22 +77,23 @@ productsRoute
     const {
       categories,
       details,
-      imageUrl,
-      planter,
+      image,
+      // planter,
       name,
       price,
       size,
       stock,
       type,
       uid,
+      logicalDeletion
     } = req.body;
 
     try {
       if (
         !categories ||
         !details ||
-        !imageUrl ||
-        !planter ||
+        !image ||
+        // !planter ||
         !name ||
         !price ||
         !size ||
@@ -105,21 +106,18 @@ productsRoute
         const product = {
           categories,
           details,
-          imageUrl,
-          planter,
+          image,
+          // planter,
           name,
           price,
           size,
           stock,
           type,
           uid,
+          logicalDeletion
         };
-        const id = await createNewProduct(product, uid);
-        res.status(203).send({
-          message: "Created",
-          id: id.id,
-          data: product,
-        });
+        const newProduct = await createNewProduct(product, uid);
+        res.status(203).send({ newProduct });
       }
     } catch (err) {
       err.status = 404;
