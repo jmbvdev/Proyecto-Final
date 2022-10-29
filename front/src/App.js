@@ -11,6 +11,7 @@ import PlantsDetails from "./pages/PlantsDetails";
 import Cart from "./pages/Cart";
 import Auth from "./auth/Auth";
 import CreatePlant from "./pages/CreatePlant";
+import EditPlant from "./pages/EditPlant";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<Auth />} />
+        <Route exact path="/plants/details/:id" element={<EditPlant/>} /> 
       </Routes>
       <Footer />
     </div>

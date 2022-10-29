@@ -8,12 +8,11 @@ import s from "../styles/showPlant.module.css"
 
 import { AiFillHeart } from 'react-icons/ai';
 
-const ShowPlant = ({imageUrl, name, details, categories, price, logicalDeletion, type, stock }) => {
+const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, type, stock, size }) => {
     return (
                 <div className={s.container}>
 
-                    <img src={imageUrl} alt="" />
-
+                    <img src={image} alt="" />
                     <div className={s.details}>
 
                         <h1>{name} </h1>
@@ -24,17 +23,18 @@ const ShowPlant = ({imageUrl, name, details, categories, price, logicalDeletion,
                         </div>
 
                         <div className={s.categories}>
-                            {  categories && categories?.map((p, i) => {
-                                   return (
+                            {
+                                categories && categories?.map((p, i) => {
+                                    return (
 
-                                       <div key={i} className={s.categories_container}>
-                                           {p.includes("tabletop") ? <GiTable className={s.table} /> : p.includes("pet friendly") ? <FaDog className={s.table} /> : p.includes("easy care") && <TbPlant2 className={s.table} />}
-                                           <span>{p.includes("tabletop") ? "TABLETOP" : p.includes("pet friendly") ? "PET FRIENDLY" : p.includes("easy care") && "EASY CARE"}</span>
-                                       </div>
-                                   );
-                               })
-                           }
-                           
+                                        <div key={i} className={s.categories_container}>
+                                            {p.includes("tabletop") ? <GiTable className={s.table} /> : p.includes("pet friendly") ? <FaDog className={s.table} /> : p.includes("easy care") && <TbPlant2 className={s.table} />}
+                                            <span>{p.includes("tabletop") ? "TABLETOP" : p.includes("pet friendly") ? "PET FRIENDLY" : p.includes("easy care") && "EASY CARE"}</span>
+                                        </div>
+                                    );
+                                })
+                            }
+
                         </div>
                         
                         <div className={s.price}>
@@ -43,8 +43,28 @@ const ShowPlant = ({imageUrl, name, details, categories, price, logicalDeletion,
                                 <h3>$ {price}</h3>
                             </div>
                        <div>
+
+                       <div>
+                            <h4>Size: </h4>
+                            <p>{size}</p>
+                        </div>
+
+                        <div>
+                            <h4>Stock: </h4>
+                            <p>{stock}</p>
+                        </div>
+
+
+                        <div>
+                            <h4>Type: </h4>
+                            <p>{type}</p>
+                        </div>
+
+                        
+
+                        
                         <h4>Show</h4>
-                        {logicalDeletion?<p>Not show</p>:<p>Yes show</p>}
+                        {logicalDeletion ? <p>OFF</p> : <p>ON</p>}
                        </div>
 
                        <div>

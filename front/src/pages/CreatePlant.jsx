@@ -12,26 +12,26 @@ import s from "../styles/createPlant.module.css"
 
 
 const allCategories = ["easy care", "tabletop", "pet friendly"]
+const allSize = ["mini", "small", "medium", "large"]
 const imageExample = "https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_faux-spider-plant_medium_grant_cream.jpg?v=1661444123"
-const detailExample = "Add a pop of serenity to your tablescape with this popular Phalaenopsis orchid. One of the easiest varieties to grow as a houseplant—it is affectionately called the beginner orchid. You may notice a small number of blooms on your orchid upon delivery. These blooms will open quicker in a warm indoor setting. It will typically bloom about once a year, for up to three months. After a blooming cycle, the flowers will wilt and fall off. This is the orchid’s way to store up energy to re-bloom again next season."
+const detailExample = "Example of detail: In order for your client to better appreciate your product, you can enter more details of it"
 
 
 const CreatePlant = () => {
     const dispatch = useDispatch()
 
-    const [imageUrl, setImageUrl] = useState("")
+    const [image, setImage] = useState("")
     const [uid, setUid] = useState("")
     const [error, setError] = useState({})
 
     const [input, setInput] = useState({
         categories: [],
         details: "",
-        planter: "",
         name: "",
-        price: "",
-        size: "",
+        price: 0,
+        size: [],
         stock: 0,
-        type: "",
+        type: "plant",
         logicalDeletion: false
     })
 
@@ -44,86 +44,143 @@ const CreatePlant = () => {
     };
 
     const handleChangefile = (e) => {
-        const files = e.target.files
-        const fileReader = new FileReader()
-        const id = uuidv4()
-        setUid(id)
-        console.log(id)
-        if (fileReader && files && files.length > 0) {
-            fileReader.readAsArrayBuffer(files[0])
-            fileReader.onload = async function () {
-                const imageData = fileReader.result
-                // setImage(imageData)
-                const res = await setPlantImage(id, imageData)
-                console.log(res)
-                const url = await getPictureUrl(id)
-                if (url) {
-                    setImageUrl(url)
-                }
-            }
-        }
-    }
+      const files = e.target.files
+      const fileReader = new FileReader()
+      const id = uuidv4()
+      setUid(id)
+      console.log(id)
+      if (fileReader && files && files.length > 0) {
+          fileReader.readAsArrayBuffer(files[0])
+          fileReader.onload = async function () {
+              const imageData = fileReader.result
+              // setImage(imageData)
+              const res = await setPlantImage(id, imageData)
+              console.log(res)
+              const url = await getPictureUrl(id)
+              if (url) {
+                  setImage(url)
+              }
+          }
+      }
+  }
 
-    const handleOnChange = (e) => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-        setError(validate({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
+  const handleOnChange = (e) => {
+    setInput({
+        ...input,
+        [e.target.name]: e.target.value
+    })
+    setError(validate({
+        ...input,
+        [e.target.name]: e.target.value
+    }))
 
-    }
+}
+    
+function handleOnSubmit(e) {
+  e.preventDefault();
+  if (!input.categories.length ||
+      !input.details ||
+      !input.image ||
+      !input.name ||
+      !input.price ||
+      !input.size.length ||
+      !input.stock ||
+      !input.type) {
+      return alert("Faltan datos")
+  }
 
-    function handleOnSubmit(e) {
-        e.preventDefault();
-        const product = {
-            uid: uid,
-            categories: input.categories,
-            details: input.details,
-            imageUrl: imageUrl,
-            planter: input.planter,
-            name: input.name,
-            price: input.price,
-            size: input.size,
-            stock: input.stock,
-            type: input.type,
-            logicalDeletion: input.logicalDeletion
-        }
-        dispatch(createProduct(product))
-    }
+  const product = {
+      uid: uid,
+      categories: input.categories,
+      details: input.details,
+      image: image,
+      // planter: input.planter,
+      name: input.name,
+      price: input.price,
+      size: input.size,
+      stock: input.stock,
+      type: input.type,
+      logicalDeletion: input.logicalDeletion
+  }
+  dispatch(createProduct(product))
+  alert("Create")
+}
 
-    const handleCategories = (e) => {
-        if (e.target.value !== "select" && !input.categories.includes(e.target.value)) {
-            setInput({
-                ...input,
-                categories: [...input.categories, e.target.value]
-            })
-            setError(validate({
-                ...input,
-                categories: [...input.categories, e.target.value]
-            }))
-        }
-    }
+const handleCategories = (e) => {
+  if (e.target.value !== "select" && !input.categories.includes(e.target.value)) {
+      setInput({
+          ...input,
+          categories: [...input.categories, e.target.value]
+      })
+      setError(validate({
+          ...input,
+          categories: [...input.categories, e.target.value]
+      }))
+  }
+}
 
-    const handleDeleteCategories = (e) => {
-        setInput({
-            ...input,
-            categories: input.categories.filter(el => el !== e)
-        })
-        setError(validate({
-            ...input,
-            categories: input.categories.filter(el => el !== e)
-        }))
-    }
+const handleDeleteCategories = (e) => {
+  setInput({
+      ...input,
+      categories: input.categories.filter(el => el !== e)
+  })
+  setError(validate({
+      ...input,
+      categories: input.categories.filter(el => el !== e)
+  }))
+}
 
-    const handleLogicalDeletion = (e) => {
-        setInput({
-            ...input,
-            logicalDeletion: e.target.value
-        })
-    }
+const handlePrice = (e) => {
+  setInput({
+      ...input,
+      price: parseInt(e.target.value)
+  })
+  setError(validate({
+      ...input,
+      price: parseInt(e.target.value)
+  }))
+}
+
+const handleSize = (e) => {
+  if (e.target.value !== "select") {
+      setInput({
+          ...input,
+          size: [e.target.value]
+      })
+      setError(validate({
+          ...input,
+          size: [e.target.value]
+      }))
+  }
+
+}
+
+const handleDeleteSize = () => {
+  setInput({
+      ...input,
+      size: []
+  })
+  setError(validate({
+      ...input,
+      size: []
+  }))
+}
+
+const handleStock = (e) => {
+  setInput({
+      ...input,
+      stock: parseInt(e.target.value)
+  })
+  setError(validate({
+      ...input,
+      stock: parseInt(e.target.value)
+  }))
+}
+
+const handleShow = () => setInput({
+  ...input,
+  logicalDeletion: !input.logicalDeletion
+})
 
     return (
       <div className={s.container}>
@@ -167,7 +224,7 @@ const CreatePlant = () => {
                 />
                 {error.details && <p className={s.errors}>{error.details}</p>}
               </div>
-
+              {/* 
               <div className={s.input_container}>
                 <input
                   type="text"
@@ -176,41 +233,37 @@ const CreatePlant = () => {
                   className={s.input_text}
                   onChange={handleOnChange}
                 />
-              </div>
+              </div> */}
 
               <div className={s.input_container}>
+               
                 <input
                   type="number"
                   name="price"
                   placeholder="price"
                   className={s.input_text}
-                  onChange={handleOnChange}
+                  onChange={handlePrice}
+                  min="1"
+                  max="1000000"
                 />
+                {error.price && <p className={s.errors}>{error.price}</p>}
               </div>
 
               <div className={s.input_container}>
-                <input
-                  type="text"
-                  name="size"
-                  placeholder="size"
-                  className={s.input_text}
-                  onChange={handleOnChange}
-                />
-              </div>
-
-              <div className={s.input_container}>
+             
                 <input
                   type="number"
                   name="stock"
                   placeholder="stock"
                   className={s.input_text}
-                  onChange={handleOnChange}
+                  onChange={handleStock}
                   min="1"
-                  max="5"
+                  max="1000000"
                 />
+                {error.stock && <p className={s.errors}>{error.stock}</p>}
               </div>
 
-              <div className={s.input_container}>
+              {/* <div className={s.input_container}>
                 <input
                   type="text"
                   name="type"
@@ -218,24 +271,46 @@ const CreatePlant = () => {
                   className={s.input_text}
                   onChange={handleOnChange}
                 />
-              </div>
+              </div> */}
 
               {/* <div>
                             <input type="text" name="categories" placeholder="categories" onChange={handleOnChange} />
                         </div> */}
               <div className={s.selects_container}>
-                  <select onChange={handleCategories} className={s.select_style}>
-                    <option value="select">CATEGORIES</option>
-                    {allCategories.map((el, i) => (
-                      <option key={i} value={el}>
-                        {el}
-                      </option>
-                    ))}
-                  </select>
-               
+                <select onChange={handleSize}>
+                  <option value="select">SIZE</option>
+                  {allSize.map((el, i) => (
+                    <option key={i} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                {input.size.length ? (
+                  <div className={s.categories_option}>
+                    <button type="button" onClick={handleDeleteSize}>
+                      x
+                    </button>
+                    <p>{input.size[0]}</p>
+                  </div>
+                ) : null}
+                {error.size && <span className={s.errors}>{error.size}</span>}
+              </div>
+
+              <div className={s.selects_container}>
+                <select onChange={handleCategories}>
+                  <option value="select">CATEGORIES</option>
+                  {allCategories.map((el, i) => (
+                    <option key={i} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </select>
+
                 <div className={s.categories_option}>
                   {input.categories.map((el) => (
-                    <div className={s.categories_option} >
+                    <div className={s.categories_option}>
                       <button
                         type="button"
                         onClick={() => handleDeleteCategories(el)}
@@ -250,32 +325,37 @@ const CreatePlant = () => {
                   )}
                 </div>
 
-                <select onChange={handleLogicalDeletion}>
-                  <option value="select">LOGICAL ERASE</option>
-                  <option value={false}>SHOW</option>
-                  <option value={true}>HIDE</option>
-                </select>
+                <div className={s.show_btn}>
+                  <label>Show: </label>
+                  <button type="button" onClick={handleShow}>
+                    Switch
+                  </button>
+                </div>
               </div>
 
               <div>
-                <button type="submit" className={s.create_btn}>
-                 CREATE
+                <button
+                  type="submit"
+                  disabled={Object.keys(error).length ? true : false}
+                  className={s.create_btn}
+                >
+                  CREATE
                 </button>
               </div>
             </form>
           </div>
           <div className={s.right}>
             <ShowPlant
-              categories={input.categories}
-              imageUrl={imageUrl || imageExample}
-              details={input.details || detailExample}
-              planter={input.planter}
-              name={input.name || "Petite Sunset Orchid"}
-              price={input.price || "90"}
-              size={input.size}
-              stock={input.stock || 10}
-              type={input.type || "exterior"}
-              logicalDeletion={input.logicalDeletion}
+             categories={input.categories}
+             image={image || imageExample}
+             details={input.details || detailExample}
+             // planter={input.planter}
+             name={input.name || "Name example"}
+             price={input.price || "99"}
+             size={(input.size.length && input.size) || "Size example"}
+             stock={input.stock || 99}
+             type={input.type || "exterior"}
+             logicalDeletion={input.logicalDeletion}
             />
           </div>
         </div>

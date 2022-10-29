@@ -25,12 +25,13 @@ export default function productsReducer(state = initialState, action) {
     };
   }
   if (action.type === CREATE_PRODUCT) {
-    // return { ...state, allProducts: [...state.allProducts, action.payload] };
-    return state;
+    return { ...state, allProducts: [...state.allProducts, action.payload] };
+    // return state
   }
-  /* if (action.type === EDIT_PRODUCT) {
-    return { ...state, allProducts: action.payload };
-  } */
+   if (action.type === EDIT_PRODUCT) {
+   // return { ...state, allProducts: action.payload };
+   return state;
+  } 
   if (action.type === DELETE_PRODUCT) {
     return {
       ...state,
