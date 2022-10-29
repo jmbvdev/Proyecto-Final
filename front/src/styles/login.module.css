@@ -191,7 +191,7 @@ right: 20px;
   font-size: 14px;
   font-weight: 500;
   
-  background-color: #9a6b06;
+  background-color: #ac6b45;
   margin-top: 20px;
   margin-bottom: 10px;
 
@@ -200,7 +200,7 @@ right: 20px;
   }
   .sign_login:hover{
     cursor: pointer;
-    background-color: #c08504;
+    background-color: #bd612c;
   }
   .register p{
     font-size: small;

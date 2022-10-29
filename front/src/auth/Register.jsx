@@ -1,59 +1,104 @@
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser, userOnline } from '../Redux/actions/users/index';
 import { auth } from '../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
+import { signOut, sendEmailVerification } from 'firebase/auth';
+import s from "../styles/register.module.css"
+import plans from "../images/plans.jpg";
 
 
 export default function Register() {
 
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password1, setPassword1] = React.useState('');
+    const initialState = {
+        displayName: '',
+        password: '',
+        email: '',
+    };
+
+    const [input, setInput] = React.useState(initialState);
+
     const [password2, setPassword2] = React.useState('');
+    const online = useSelector(state => state.usersReducer.online)
+    const dispatch = useDispatch();
+    const history = useNavigate();
+
+    React.useEffect(() => {
+        setInput(prev => ({ ...prev, [input.name]: input.value}))
+    }, [input.name, input.value])
 
 
     const handleOnSubmit = (e) => {
-        if(email !== null && password1 !== null && password2 !== null && password1 === password2) {
+        if(input.displayName !==null && input.email !== null && input.password !== null && password2 !== null && input.password === password2) {
             e.preventDefault();
-
+            dispatch(createUser(input));
+            setInput(initialState);
+            alert('User succesfully created!');
+          
+                sendEmailVerification(auth.currentUser)
+            
+            history("/");
         }
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        //setError(validate({...input, [e.target.name] : e.target.value}))
+        setInput({...input, [e.target.name] : e.target.value})
+    }
+
     return (
-        <div>
-        <h1>Register</h1>
-        <p>Welcome! Please create your account.</p>
+        <div className={s.container}>
+            <div className={s.wraper}>
+            <div className={s.image}>
+                    <img src={plans} alt="" />
+                </div>
+                <div className={s.register}>
+                    
+
+        <h1 className={s.title}>Register</h1>
+        <p className={s.welcome}>Create an account.</p>
         <form onSubmit={(e) => handleOnSubmit(e)}>
-            <div>
-                <label>Display Name</label>
+            <div className={s.input_container}>
+            
                 <input 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your complete Name"/>
+                className={s.input_text}
+                    name= "displayName"
+                    value={input.displayName}
+                    onChange={handleChange}
+                    placeholder="Complete name"/>
             </div>
-            <div>
-                <label>Email</label>
+            <div className={s.input_container}>
+        
                 <input 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"/>
+                className={s.input_text}
+                    name= "email"
+                    value={input.email}
+                    onChange={handleChange}
+                    placeholder="Email"/>
             </div>
-            <div>
-                <label>Password</label>
+            <div className={s.input_container}>
+
                 <input 
-                    value={password1}
-                    onChange={(e) => setPassword1(e.target.value)}
-                    placeholder="Enter your password" 
+                className={s.input_text}
+                    name= "password"
+                    value={input.password}
+                    onChange={handleChange}
+                    placeholder="Password" 
                     type={"password"}/>
                 <input 
+                className={s.input_text}
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
                     placeholder="Repeat your password" 
                     type={"password"}/>
             </div>
-            <div>
-                <button type='submit'>Register</button>
+            <div >
+                <button className={s.register_btn} type='submit'>SIGN UP</button>
             </div>
         </form>
+                </div>
+            </div>
     </div>
     )
 }
