@@ -6,7 +6,7 @@ const modifyOrder = require("../ordersControllers/modifyOrder.js");
 const ordersRoute = Router();
 
 ordersRoute
-  .get("/orders/cart/:id", async (req, res, next) => {
+  .get("/cart/:id", async (req, res, next) => {
     try {
       const { id } = req.params;
       let cart = await getCart(id);
@@ -15,7 +15,7 @@ ordersRoute
       return next(err);
     }
   })
-  .get("/orders/:id", async (req, res, next) => {
+  .get("/:id", async (req, res, next) => {
     try {
       const { id } = req.params;
       let orders = await getOrderForUserByID(id);
@@ -24,7 +24,7 @@ ordersRoute
       next(err);
     }
   })
-  .post("/orders/:id", async (req, res, next) => {
+  .post("/:id", async (req, res, next) => {
     //ruta a la que le pega cada vez que inicia secion por primera vez, o si no tiene nada guardado como cart y empieza a guardar cosas.
     try {
       const { id } = req.params;
@@ -35,7 +35,7 @@ ordersRoute
       next(err);
     }
   })
-  .put("/orders/:id", async (req, res, next) => {
+  .put("/:id", async (req, res, next) => {
     try {
       //este id no es del usuario sino de la orden
       const { id } = req.params;
