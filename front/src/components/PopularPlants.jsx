@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import img from "../images/popular.jpg"
+import img from "../images/popular.webp"
 import s from "../styles/popularPlants.module.css"
 
 
