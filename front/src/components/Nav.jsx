@@ -6,42 +6,29 @@ import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
 import { loadCart } from "../Redux/actions/shopCart/index.js";
-import  "../styles/nav.css"
+import "../styles/nav.css";
 
-import { auth } from '../firebase/firebase';
-import { signOut } from 'firebase/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { userOnline } from '../Redux/actions/users/index';
-
-
-
+import { auth } from "../firebase/firebase";
+import { signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { userOnline } from "../Redux/actions/users/index";
 
 const Nav = ({ setUser, setIsSearch }) => {
+  const [Mobile, setMobile] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const plants = useSelector((state) => state.shopCartReducer.products);
+  const online = useSelector((state) => state.usersReducer.online);
 
-
-
- 
-  
-    const [Mobile, setMobile] = useState(false)
-    const navigate= useNavigate()
-    const dispatch= useDispatch()
-    const plants = useSelector(state=>state.shopCartReducer.products)
-    const online = useSelector(state => state.usersReducer.online)
-
-
-
-    const signOutHandler = () => {
-      signOut(auth)
-      .then(() => {
-          setUser(null);
-          dispatch(userOnline())
-    })
+  const signOutHandler = () => {
+    signOut(auth).then(() => {
+      setUser(null);
+      dispatch(userOnline());
+    });
   };
 
-
-
   useEffect(() => {
-    dispatch(loadCart());
+    dispatch(loadCart(auth.currentUser.uid));
   }, []);
 
   let total = 0;
@@ -96,19 +83,19 @@ const Nav = ({ setUser, setIsSearch }) => {
           </ul>
         </div>
 
-
-         
-         
-          <div className='icons-container'>
-            {
-            online === true ?
-            <button className='sign-in-button' onClick={signOutHandler}><FiLogIn className='login-icon'/> Sign out </button> : 
-            <button className='sign-in-button'><FiLogIn className='login-icon'/> <Link to='/sign-in' className='sing-in-link'>Sign in </Link></button>
-            }
-
-
-
-
+        <div className="icons-container">
+          {online === true ? (
+            <button className="sign-in-button" onClick={signOutHandler}>
+              <FiLogIn className="login-icon" /> Sign out{" "}
+            </button>
+          ) : (
+            <button className="sign-in-button">
+              <FiLogIn className="login-icon" />{" "}
+              <Link to="/sign-in" className="sing-in-link">
+                Sign in{" "}
+              </Link>
+            </button>
+          )}
 
           <FiHeart className="favorite-icon" />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
@@ -117,7 +104,6 @@ const Nav = ({ setUser, setIsSearch }) => {
             <div className="bag-quantity">
               <p className="total">{total}</p>
             </div>
-
           </div>
           <button
             className="mobile-menu-icon"
