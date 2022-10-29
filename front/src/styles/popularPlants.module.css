@@ -1,11 +1,10 @@
 .popular{
-    margin-top: 5rem;
+    margin-top:10px;
     position: relative; 
     width: 100%; 
     max-width: 100%; 
     height: auto;
     padding-top: 85px; 
-    padding-top: 50px; 
     background-image: linear-gradient(rgba(214, 215, 213, 0.657),rgb(80, 82, 80)), url("https://img.freepik.com/free-photo/monstera-leafy-nature-background-wallpaper_53876-103973.jpg?w=2000"); 
     background-size: cover;
     background-repeat: no-repeat;
