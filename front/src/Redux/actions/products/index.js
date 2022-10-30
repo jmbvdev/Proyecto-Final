@@ -24,13 +24,8 @@ export const GetAllProducts = () => {
 
 export const createProduct = (data) => {
   return async (dispatch) => {
-    // let response = await axios.post(
-    //   "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",  // ruta definitiva
-    //   data
-    // );
-
     let response = await axios.post(
-      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",  // ruta de prueba
+      "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",
       data
     );
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
@@ -42,7 +37,7 @@ export const editProduct = (id, data) => {  // puse la primer letra en minuscula
     axios
           
     .put(
-      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,       //original
+      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,
       data
     )
       .then((res) => {
