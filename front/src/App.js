@@ -30,7 +30,7 @@ function App() {
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<Auth />} />
-        <Route exact path="/plants/details/:id" element={<EditPlant/>} /> 
+        <Route exact path="/plants/edit/:id" element={<EditPlant/>} /> 
       </Routes>
       <Footer />
     </div>
