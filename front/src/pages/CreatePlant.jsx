@@ -215,6 +215,7 @@ const handleShow = () => setInput({
               </div>
 
               <div className={s.input_container}>
+                
                 <input
                   type="text"
                   name="details"
