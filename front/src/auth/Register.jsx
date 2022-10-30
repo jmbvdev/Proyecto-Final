@@ -5,7 +5,7 @@ import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { signOut, sendEmailVerification } from 'firebase/auth';
 import s from "../styles/register.module.css"
-import plans from "../images/plans.jpg";
+import plans from "../images/plans.webp";
 
 
 export default function Register() {
