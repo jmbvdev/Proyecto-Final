@@ -6,6 +6,7 @@ import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userOnline } from "../Redux/actions/users/index";
+import { loadCart } from "../Redux/actions/shopCart/index.js";
 
 function Auth() {
   const [user, setUser] = React.useState(null);

@@ -9,7 +9,7 @@ module.exports = async function getOrderForUserByID(userID) {
   const orders = [];
   ordersSnapshot.forEach((order) => {
     orders.push({
-      id: order.id,
+      orderid: order.id,
       data: order.data(),
     });
   });

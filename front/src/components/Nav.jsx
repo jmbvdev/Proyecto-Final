@@ -7,7 +7,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
 import { loadCart } from "../Redux/actions/shopCart/index.js";
 import "../styles/nav.css";
-
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,8 +27,22 @@ const Nav = ({ setUser, setIsSearch }) => {
     });
   };
 
+  console.log(auth);
+
   useEffect(() => {
-    dispatch(loadCart(auth.currentUser.uid));
+    const unSubscribeAuth = onAuthStateChanged(
+      auth,
+      async (authenticatedUser) => {
+        dispatch(loadCart(authenticatedUser.uid));
+      }
+    );
+
+    return unSubscribeAuth;
+    /* console.log(auth.currentUser);
+    (async () => {
+      const currentUser = await auth.currentUser.uid;
+      dispatch(loadCart(currentUser));
+    })(); */
   }, []);
 
   let total = 0;

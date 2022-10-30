@@ -51,6 +51,7 @@ export const changeQuantity = (id, n) => {
 };
 
 export const deleteAll = () => {
+  //AGREGAR LA PARTE DE SI HAY USUARIO Y TOCA ESTE QUE BORRE SU CARRITO DEL BACK, TIPO ELIMINE ESE DOC
   localStorage.clear();
   return {
     type: DELETE_ALL,
@@ -58,6 +59,7 @@ export const deleteAll = () => {
 };
 
 export const purchase = (orderID, cart) => {
+  //ESTE VA INTEGRADO CON LA API DE MP
   return async (dispatch) => {
     await axios.put(
       `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${orderID}`,
@@ -68,6 +70,8 @@ export const purchase = (orderID, cart) => {
 };
 
 export const loadCart = (userID) => {
+  console.log(userID);
+  console.log(userID);
   if (userID) {
     return async (dispatch) => {
       let res = await axios.get(

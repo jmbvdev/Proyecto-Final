@@ -2,6 +2,7 @@ const { Router } = require("express");
 const getOrderForUserByID = require("../ordersControllers/getOrderForUserByID.js");
 const getCart = require("../ordersControllers/getCart.js");
 const modifyOrder = require("../ordersControllers/modifyOrder.js");
+const postOrder = require("../ordersControllers/postOrder.js");
 
 const ordersRoute = Router();
 
@@ -29,8 +30,8 @@ ordersRoute
     try {
       const { id } = req.params;
       const { cart } = req.body;
-      await postOrder(id, cart);
-      res.status(203).send("Order Accepted");
+      const order = await postOrder(id, cart);
+      res.status(203).send({ orderid: order.id });
     } catch (err) {
       next(err);
     }
@@ -40,7 +41,8 @@ ordersRoute
       //este id no es del usuario sino de la orden
       const { id } = req.params;
       const { cart, state } = req.body;
-      await modifyOrder(id, cart, state);
+      const reference = await modifyOrder(id, cart, state);
+      res.status(203).send(`The ${reference.id} has been modified`);
     } catch (err) {
       next(err);
     }

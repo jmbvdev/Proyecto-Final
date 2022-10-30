@@ -1,12 +1,12 @@
-const { db } = require("../config/firebase.js");
+const { db, admin } = require("../config/firebase.js");
 
 module.exports = async function postOrder(orderid, cart, state) {
   const order = {
     state: state,
-    date: "miercoles",
+    date: admin.firestore.FieldValue.serverTimestamp(),
     cart: cart,
   };
 
-  await db.collection("orders").doc(orderid).set(order, { merge: true });
-  return;
+  const reference = await db.collection("orders").doc(orderid).update(order);
+  return await reference.get();
 };
