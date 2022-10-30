@@ -1,7 +1,4 @@
-footer {
-    position: fixed;
-    bottom: 0;
-}
+
 
 @media (max-height:800px) {
     footer {
@@ -13,7 +10,7 @@ footer {
 }
 
 .footer_distributed {
-    box-shadow: 0 19px 30px rgba(0, 0, 0, 0.679), 0 15px 40px rgba(0, 0, 0, 0.759);
+    
   
     background-image: linear-gradient(rgb(203, 226, 210),rgba(110, 169, 135, 0.359)), url("https://img.rawpixel.com/private/static/images/website/2022-05/rm255-sasi-15.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=2e9aa5796da70fcd0ed6068e96e566ac"); 
     background-repeat: no-repeat;

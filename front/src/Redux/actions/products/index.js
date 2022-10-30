@@ -24,22 +24,27 @@ export const GetAllProducts = () => {
 
 export const createProduct = (data) => {
   return async (dispatch) => {
+    // let response = await axios.post(
+    //   "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",  // ruta definitiva
+    //   data
+    // );
+
     let response = await axios.post(
-      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",
+      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",  // ruta de prueba
       data
     );
-    // console.log(response.data);
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
 
-export const EditProduct = (id, data) => {
+export const editProduct = (id, data) => {  // puse la primer letra en minuscula
   return async (dispatch) => {
     axios
-      .put(
-        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,
-        data
-      )
+          
+    .put(
+      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,       //original
+      data
+    )
       .then((res) => {
         window.alert(res.data.message);
         dispatch({ type: EDIT_PRODUCT, payload: res.data });
