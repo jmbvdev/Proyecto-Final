@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
 import { GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
@@ -9,7 +9,7 @@ import { FaDog } from "react-icons/fa";
 import s from "../styles/details.module.css";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { addProduct } from "../Redux/actions/shopCart";
+import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 
 const PlantsDetails = () => {
@@ -18,6 +18,7 @@ const PlantsDetails = () => {
     (state) => state.productsReducer.productDetails.data
   );
 
+  const navigate = useNavigate();
   const id = useParams().id;
 
   const [quantity, setQuantity] = useState(1);
@@ -27,6 +28,11 @@ const PlantsDetails = () => {
       dispatch(clearDetails());
     };
   }, []);
+
+  function handleEdit(e) {
+    e.preventDefault();
+    navigate(`/plants/edit/${id}`);
+  }
 
   function handleCart() {
     dispatch(
@@ -107,6 +113,7 @@ const PlantsDetails = () => {
           Add to Cart
         </button>
       </div>
+      <button onClick={handleEdit}>EDIT</button>
     </div>
   ) : (
     <Loading />

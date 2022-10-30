@@ -21,6 +21,7 @@ const initialState = {
 };
 
 export default function shopCartReducer(state = initialState, action) {
+  console.log(state.products);
   if (action.type === ADD_PRODUCT) {
     if (
       state.products.filter((p) => {
@@ -61,7 +62,8 @@ export default function shopCartReducer(state = initialState, action) {
     return initialState;
   }
   if (action.type === LOAD_CART) {
-    return { products: action.payload };
+    if (action.payload.length > 0) return { products: action.payload };
+    else return state;
   }
   if (action.type === SAVE_CART) {
     return state;

@@ -9,16 +9,17 @@ import {
 } from "../../actions/shopCart/actiontypes.js";
 import axios from "axios";
 
-export const saveCart = (user) => {
+export const saveCart = (orderID, cart) => {
+  //orderID esta en cart.id
   return async (dispatch) => {
-    if (user) {
-      let res = await axios.put(
-        "ruta del back que me guard el carrito de ese usuario"
+    if (orderID) {
+      await axios.put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${orderID}`,
+        { cart: cart, state: "Pending" }
       );
-      console.log(res.data);
+
       return dispatch({ type: SAVE_CART });
     }
-    /* aca iria la logica para pegarle a las cookies o al localStorage en caso de que el usuario no este registrado, y despacharia la misma action */
   };
 };
 
@@ -50,38 +51,62 @@ export const changeQuantity = (id, n) => {
 };
 
 export const deleteAll = () => {
+  //AGREGAR LA PARTE DE SI HAY USUARIO Y TOCA ESTE QUE BORRE SU CARRITO DEL BACK, TIPO ELIMINE ESE DOC
   localStorage.clear();
   return {
     type: DELETE_ALL,
   };
 };
 
-export const purchase = (cart) => {
+export const purchase = (orderID, cart) => {
+  //ESTE VA INTEGRADO CON LA API DE MP
   return async (dispatch) => {
-    let res = await axios.post(
-      "aca va la ruta del back que agrega el pedido a un usuario en particular",
-      cart
+    await axios.put(
+      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${orderID}`,
+      { cart: cart, state: "Purchase init" }
     );
     return dispatch({ type: PURCHASE });
   };
 };
 
-export const loadCart = (user) => {
-  let local = [];
-
-  for (let i = 0; i < localStorage.length; i++) {
-    let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    local.push(oneproduc);
-  }
-
-  return { type: LOAD_CART, payload: local };
-
-  /*  return async (dispatch) => {
-    if (user) {
+export const loadCart = (userID) => {
+  if (userID) {
+    return async (dispatch) => {
       let res = await axios.get(
-        "ruta del back que me trae lo guardado en el carrito de ese usuario"
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/cart/${userID}`
       );
-      return dispatch({ type: LOAD_CART, payload: res.data });
+      if (res.data.data.length > 0) {
+        localStorage.clear();
+        dispatch({ type: LOAD_CART, payload: res.data.data });
+      } else {
+        let local = [];
+
+        for (let i = 0; i < localStorage.length; i++) {
+          let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
+          if (oneproduc.id && oneproduc.count && oneproduc.name) {
+            local.push(oneproduc);
+          }
+        }
+        if (local.length > 0) {
+          await axios.post(
+            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${userID}`,
+            { cart: local }
+          );
+          localStorage.clear();
+          return { type: LOAD_CART, payload: local };
+        }
+      }
+    };
+  } else {
+    let local = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+      let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (oneproduc.id && oneproduc.count && oneproduc.name) {
+        local.push(oneproduc);
+      }
     }
-  }; */
+
+    return { type: LOAD_CART, payload: local };
+  }
 };
