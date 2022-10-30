@@ -30,6 +30,9 @@ const Nav = ({ setUser, setIsSearch }) => {
   console.log(auth);
 
   useEffect(() => {
+    if (!auth.currentUser) {
+      dispatch(loadCart());
+    }
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {

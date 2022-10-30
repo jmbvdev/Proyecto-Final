@@ -70,8 +70,6 @@ export const purchase = (orderID, cart) => {
 };
 
 export const loadCart = (userID) => {
-  console.log(userID);
-  console.log(userID);
   if (userID) {
     return async (dispatch) => {
       let res = await axios.get(

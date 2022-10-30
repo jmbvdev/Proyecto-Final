@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -7,6 +7,7 @@ import {
   changeQuantity,
   deleteProduct,
   deleteAll,
+  saveCart,
 } from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
 
@@ -19,6 +20,11 @@ const Cart = () => {
   //     dispatch(deleteProduct(id))
 
   // }
+
+  //probando q funcione la ruta del back:
+  useEffect(() => {
+    return () => dispatch(saveCart("DKKA3Ib7Yt5ygZ6cwcZl", plants));
+  }, []);
 
   function handleDeleteAll() {
     dispatch(deleteAll());
