@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import empty from "../images/cart.webp"
+
 import {
   changeQuantity,
   deleteProduct,
@@ -13,7 +15,6 @@ import s from "../styles/cart.module.css";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
-  console.log(quantity);
   const plants = useSelector((state) => state.shopCartReducer.products);
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
@@ -35,16 +36,22 @@ const Cart = () => {
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price;
   }
-
+console.log(quantity)
   return (
     <div className={s.cart_container}>
-      <div className={s.product}>
+      {
+       sum>1?
+        <div className={s.product}>
         <h3 className={s.title}>Your cart</h3>
-        <button onClick={handleDeleteAll}>Clear All</button>
+
+        <button onClick={handleDeleteAll} className={s.clear}>Clear All</button>
         {plants?.map((p) => {
+
+
           return (
             <>
               <div className={s.list}>
+           
                 <div className={s.left}>
                   <img src={p.image} alt="" />
                   <div className={s.specs}>
@@ -85,7 +92,15 @@ const Cart = () => {
             </>
           );
         })}
-      </div>
+      </div > :
+         <div className={s.empty}>
+          <img src={empty} alt="empty" />
+          <h4>Your cart is empty</h4>
+        
+
+
+         </div>
+      }
       <div className={s.check}>
         <h3>ORDER SUMMARY</h3>
         <div className={s.summary}>

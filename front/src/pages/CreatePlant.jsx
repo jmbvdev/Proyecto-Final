@@ -195,6 +195,7 @@ const CreatePlant = () => {
     );
   };
 
+
   const handleShow = () =>
     setInput({
       ...input,
@@ -213,6 +214,7 @@ const CreatePlant = () => {
                   <BsImageFill />
                 </button>
                 <p>upload image</p>
+
               </div>
               <input
                 ref={fileRef}

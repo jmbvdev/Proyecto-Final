@@ -8,6 +8,7 @@ import { GetAllProducts } from "../Redux/actions/products";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
 import FiltersComponents from "../components/FiltersComponents";
+import EmptyPlant from "../components/EmptyPlant";
 const Plants = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Plants = () => {
     <>
       {plants?.length ? (
         plants[0].hasOwnProperty("message") ? (
-          <h2>{plants[0].message}</h2>
+          <EmptyPlant message={plants[0].message}/>
         ) : (
           <div className={s.plants}>
             <div className={s.banner}>
