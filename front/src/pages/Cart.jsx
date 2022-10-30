@@ -15,16 +15,8 @@ const Cart = () => {
   const [quantity, setQuantity] = useState(1);
   console.log(quantity);
   const plants = useSelector((state) => state.shopCartReducer.products);
+  const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
-  // function handleDelete(id) {
-  //     dispatch(deleteProduct(id))
-
-  // }
-
-  //probando q funcione la ruta del back:
-  useEffect(() => {
-    return () => dispatch(saveCart("DKKA3Ib7Yt5ygZ6cwcZl", plants));
-  }, []);
 
   function handleDeleteAll() {
     dispatch(deleteAll());

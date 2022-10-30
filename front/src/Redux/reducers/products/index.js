@@ -26,11 +26,18 @@ export default function productsReducer(state = initialState, action) {
   }
   if (action.type === CREATE_PRODUCT) {
     return { ...state, allProducts: [...state.allProducts, action.payload] };
-    // return state
   }
   if (action.type === EDIT_PRODUCT) {
-    // return { ...state, allProducts: action.payload };
-    return state;
+    return {
+      ...state,
+      allProducts: state.allProducts.map((p) => {
+        if (p.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return p;
+        }
+      }),
+    };
   }
   if (action.type === DELETE_PRODUCT) {
     return {

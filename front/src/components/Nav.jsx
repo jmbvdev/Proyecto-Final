@@ -5,13 +5,12 @@ import { RiSearchLine } from "react-icons/ri";
 import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
-import { loadCart } from "../Redux/actions/shopCart/index.js";
 import "../styles/nav.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { userOnline } from "../Redux/actions/users/index";
+import { userOnline, setCurrentUser } from "../Redux/actions/users/index";
 
 const Nav = ({ setUser, setIsSearch }) => {
   const [Mobile, setMobile] = useState(false);
@@ -26,27 +25,6 @@ const Nav = ({ setUser, setIsSearch }) => {
       dispatch(userOnline());
     });
   };
-
-  console.log(auth);
-
-  useEffect(() => {
-    if (!auth.currentUser) {
-      dispatch(loadCart());
-    }
-    const unSubscribeAuth = onAuthStateChanged(
-      auth,
-      async (authenticatedUser) => {
-        dispatch(loadCart(authenticatedUser.uid));
-      }
-    );
-
-    return unSubscribeAuth;
-    /* console.log(auth.currentUser);
-    (async () => {
-      const currentUser = await auth.currentUser.uid;
-      dispatch(loadCart(currentUser));
-    })(); */
-  }, []);
 
   let total = 0;
   for (let i = 0; i < plants.length; i++) {

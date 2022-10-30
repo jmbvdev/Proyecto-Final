@@ -14,23 +14,6 @@ function Auth() {
   const dispatch = useDispatch();
   const online = useSelector((state) => state.usersReducer.online);
 
-  React.useEffect(() => {
-    const unSubscribeAuth = onAuthStateChanged(
-      auth,
-      async (authenticatedUser) => {
-        if (authenticatedUser) {
-          setUser(authenticatedUser.email);
-          dispatch(userOnline());
-        } else {
-          setUser(null);
-          setAuthState("login");
-        }
-      }
-    );
-
-    return unSubscribeAuth;
-  }, [user]);
-
   if (authState === null) return <div>loading...</div>;
   if (authState === "login")
     return <Login setAuthState={setAuthState} setUser={setUser} />;

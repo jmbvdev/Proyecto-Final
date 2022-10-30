@@ -87,12 +87,14 @@ export const loadCart = (userID) => {
             local.push(oneproduc);
           }
         }
-        await axios.post(
-          `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${userID}`,
-          { cart: local }
-        );
-        localStorage.clear();
-        return { type: LOAD_CART, payload: local };
+        if (local.length > 0) {
+          await axios.post(
+            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${userID}`,
+            { cart: local }
+          );
+          localStorage.clear();
+          return { type: LOAD_CART, payload: local };
+        }
       }
     };
   } else {
