@@ -26,12 +26,19 @@ export default function productsReducer(state = initialState, action) {
   }
   if (action.type === CREATE_PRODUCT) {
     return { ...state, allProducts: [...state.allProducts, action.payload] };
-    // return state
   }
-   if (action.type === EDIT_PRODUCT) {
-   // return { ...state, allProducts: action.payload };
-   return state;
-  } 
+  if (action.type === EDIT_PRODUCT) {
+    return {
+      ...state,
+      allProducts: state.allProducts.map((p) => {
+        if (p.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return p;
+        }
+      }),
+    };
+  }
   if (action.type === DELETE_PRODUCT) {
     return {
       ...state,
@@ -57,7 +64,8 @@ export default function productsReducer(state = initialState, action) {
     let products = Array.from(state.productsBackUp);
     products = filterby(products, action.payload[0], "type");
     products = filterby(products, action.payload[1], "size");
-    products = filterby(products, action.payload[2], "categorie");
+    products = filterby(products, action.payload[2], "categories");
+    products = filterby(products, action.payload[3], "place");
     if (products.length === 0) {
       products = [{ message: "Doesn't found plant" }];
     }

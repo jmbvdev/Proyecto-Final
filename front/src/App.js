@@ -12,12 +12,33 @@ import Cart from "./pages/Cart";
 import Auth from "./auth/Auth";
 import CreatePlant from "./pages/CreatePlant";
 import EditPlant from "./pages/EditPlant";
+import NotFound from "./components/NotFound";
+import { auth } from "./firebase/firebase.js";
+import { useDispatch } from "react-redux";
+import { userOnline, setCurrentUser } from "./Redux/actions/users/index";
+import { loadCart } from "./Redux/actions/shopCart/index.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!auth.currentUser) dispatch(loadCart());
+    const unSubscribeAuth = onAuthStateChanged(
+      auth,
+      async (authenticatedUser) => {
+        if (authenticatedUser) {
+          dispatch(setCurrentUser(authenticatedUser));
+          dispatch(loadCart(authenticatedUser.uid));
+        }
+      }
+    );
+    return unSubscribeAuth;
+  }, []);
 
   return (
     <div className="App">
@@ -25,12 +46,13 @@ function App() {
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route exact path="/create" element={<CreatePlant/>} />
+        <Route exact path="/create" element={<CreatePlant />} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<Auth />} />
-        <Route exact path="/plants/details/:id" element={<EditPlant/>} /> 
+        <Route exact path="/plants/edit/:id" element={<EditPlant />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
