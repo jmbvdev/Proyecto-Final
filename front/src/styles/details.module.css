@@ -1,141 +1,131 @@
-.container{
-    display: flex;
-    justify-content: center;
-    justify-content: center;
-    margin: 30px;
-    width: 90%;
-    margin-bottom: 10rem;
-  
+.container {
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  margin: 30px;
+  width: 90%;
+  margin-bottom: 10rem;
 }
-.container img{
-    width: 400px;
-    min-width: 340px;
-    caret-color: transparent;
-
+.container img {
+  width: 400px;
+  min-width: 340px;
+  caret-color: transparent;
 }
-.details{
-    width: 40%;
-    margin: 20px;
-   display: flex;
-   flex-direction: column;
-   justify-content: left;
-   text-align: left;
-   gap: 1.5rem;
-   caret-color: transparent;
+.details {
+  width: 40%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  gap: 1.5rem;
+  caret-color: transparent;
 }
-.details h1{
-    font-family: "Lora", sans-serif;
-    border-bottom: 1px solid rgba(1, 47, 33, 0.561);
-    width: 450px;
-   
+.details h1 {
+  font-family: "Lora", sans-serif;
+  border-bottom: 1px solid rgba(1, 47, 33, 0.561);
+  width: 450px;
 }
-.details h4{
-    font-family: "Lora", sans-serif;
-    margin-bottom: 10px;
+.details h4 {
+  font-family: "Lora", sans-serif;
+  margin-bottom: 10px;
 }
-.details p{
-
-    font-family: "Poppins";
-    font-size: small;
-    line-height: 1.5rem;
-    width: 80%;
-    caret-color: transparent;
+.details p {
+  font-family: "Poppins";
+  font-size: small;
+  line-height: 1.5rem;
+  width: 80%;
+  caret-color: transparent;
 }
-.categories{
-    display: flex;
-    gap: 2rem;
-    caret-color: transparent;
+.categories {
+  display: flex;
+  gap: 2rem;
+  caret-color: transparent;
 }
-.categories_container{
-display: flex;
-width: 50px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-justify-items: center;
-justify-content: center;
-text-align: center;
+.categories_container {
+  display: flex;
+  width: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.categories_container span{
-    font-size: 12px;
-font-weight:bold ;
-    font-family: "Dosis";
-
+.categories_container span {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Dosis";
 }
-.table{
-    font-size: 2.5rem;
+.table {
+  font-size: 2.5rem;
 }
-.price h3{
-    font-weight: 600;
-    color: rgb(9, 102, 74);
-
+.price h3 {
+  font-weight: 600;
+  color: rgb(9, 102, 74);
 }
-.quantity{
-    display: flex;
-    width: 180px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    caret-color: transparent;
+.quantity {
+  display: flex;
+  width: 180px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  caret-color: transparent;
 }
-.price{
-    display: flex;
-    gap: 3rem;
-    caret-color: transparent;
+.price {
+  display: flex;
+  gap: 3rem;
+  caret-color: transparent;
 }
-.quantity button{
-    width: 45px;
-    height: 25px;
-    background-color: rgba(9, 102, 74, 0.713);
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+.quantity button {
+  width: 45px;
+  height: 25px;
+  background-color: rgba(9, 102, 74, 0.713);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
-.quantity button:hover{
-    background-color: rgb(9, 102, 74);
+.quantity button:hover {
+  background-color: rgb(9, 102, 74);
 }
-.quantity p{
-    font-weight: bold;
-    font-size: large;
-    
-
+.quantity p {
+  font-weight: bold;
+  font-size: large;
 }
 
-.cart{
-    background-color:rgba(9, 102, 74, 0.713) ;
-    width: 40%;
-    color: #fff;
-    font-size: medium;
-    padding: 10px;
-    caret-color: transparent;
+.cart {
+  background-color: rgba(9, 102, 74, 0.713);
+  width: 40%;
+  color: #fff;
+  font-size: medium;
+  padding: 10px;
+  caret-color: transparent;
 }
 
-.cart:hover{
-    background-color:rgb(9, 102, 74) ;
-    cursor: pointer;
+.cart:hover {
+  background-color: rgb(9, 102, 74);
+  cursor: pointer;
 }
-.favorites{
-    display: flex;
+.cart:disabled {
+  background-color: rgba(9, 102, 74, 0.295);
+}
+.favorites {
+  display: flex;
+}
+.favorites h4 {
+  display: block;
 
-
- 
- 
+  width: 90px;
 }
-.favorites h4{
-    display: block;
- 
-    width: 90px;
+.hearth {
+  font-size: 2rem;
+  color: rgba(9, 102, 74, 0.713);
 }
-.hearth{
-    font-size: 2rem;
-    color:rgba(9, 102, 74, 0.713) ;
-
-}
-.hearth:hover{
-  color: rgb(9, 102, 74) ;
+.hearth:hover {
+  color: rgb(9, 102, 74);
   cursor: pointer;
 }
