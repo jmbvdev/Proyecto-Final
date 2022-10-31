@@ -5,11 +5,10 @@ import { auth } from "../firebase/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import s from "../styles/login.module.css";
-import diferent from "../images/diferent.jpg";
+import diferent from "../images/diferent.wefirebabp";
 import { useDispatch } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
 import { setCurrentUser } from "../Redux/actions/users";
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,8 +19,8 @@ export default function Login() {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          console.log(auth)
-          dispatch(setCurrentUser(auth.currentUser))
+          console.log(auth);
+          dispatch(setCurrentUser(auth.currentUser));
 
           history("/");
         })
@@ -92,7 +91,8 @@ export default function Login() {
               </div>
               <div className={s.register}>
                 <p>Don't have an account?</p>
-                <button><Link to='/register'>SIGN UP</Link>                 
+                <button>
+                  <Link to="/register">SIGN UP</Link>
                 </button>
               </div>
             </div>
