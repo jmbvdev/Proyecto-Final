@@ -1,17 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser, userOnline } from "../Redux/actions/users/index";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { signOut, sendEmailVerification } from "firebase/auth";
+import { signOut, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import s from "../styles/register.module.css";
 import plans from "../images/plans.jpg";
 
 export default function Register() {
   const initialState = {
     displayName: "",
-    password: "",
     email: "",
+    password: "",
   };
 
   const [input, setInput] = React.useState(initialState);
@@ -34,12 +33,19 @@ export default function Register() {
       input.password === password2
     ) {
       e.preventDefault();
-      dispatch(createUser(input));
+      createUserWithEmailAndPassword(auth, input.email, input.password, input.displayName).then(
+        async ({ user }) => {
+
+          if (user.emailVerified === false) {
+            sendEmailVerification(auth.currentUser).then(async () => {
+              await signOut(auth);
+            });
+          }
+          
+        }
+      );
       setInput(initialState);
       alert("User succesfully created!");
-
-      sendEmailVerification(auth.currentUser);
-
       history("/");
     }
   };
