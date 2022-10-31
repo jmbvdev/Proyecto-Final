@@ -75,7 +75,7 @@ export const loadCart = (userID) => {
       let res = await axios.get(
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/cart/${userID}`
       );
-      if (res.data.data.length > 0) {
+      if (res.data.data?.length > 0) {
         localStorage.clear();
         dispatch({ type: LOAD_CART, payload: res.data.data });
       } else {

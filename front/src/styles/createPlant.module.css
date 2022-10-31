@@ -183,3 +183,18 @@ cursor: pointer;
     font-size: small;
     font-weight: bold;
   }
+.show_btn{
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    gap: 1rem;
+    cursor: pointer;
+    color:rgba(255, 255, 255, 0.625);
+}
+.show_btn label{
+    font-size: small;
+}
+.show_btn button{
+    color:rgba(255, 255, 255, 0.625);
+    cursor: pointer;
+}
