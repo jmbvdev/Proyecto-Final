@@ -3,14 +3,15 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useNavigate } from  "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import s from "../styles/login.module.css";
+import diferent from "../images/diferent.jpg";
 import { useDispatch } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
-import s from "../styles/login.module.css"
-import diferent from "../images/diferent.webp"
+import { setCurrentUser } from "../Redux/actions/users";
 
 
-export default function Login({ setAuthState, setUser }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
@@ -19,8 +20,9 @@ export default function Login({ setAuthState, setUser }) {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          setUser(email);
-          setAuthState("logged");
+          console.log(auth)
+          dispatch(setCurrentUser(auth.currentUser))
+
           history("/");
         })
         .catch((err) => alert(err));
@@ -90,8 +92,7 @@ export default function Login({ setAuthState, setUser }) {
               </div>
               <div className={s.register}>
                 <p>Don't have an account?</p>
-                <button onClick={() => setAuthState("register")}>
-                  SIGN UP
+                <button><Link to='/register'>SIGN UP</Link>                 
                 </button>
               </div>
             </div>
