@@ -15,12 +15,17 @@ import EditPlant from "./pages/EditPlant";
 import NotFound from "./components/NotFound";
 import { auth } from "./firebase/firebase.js";
 import { useDispatch, useSelector } from "react-redux";
-import { userOnline, setCurrentUser } from "./Redux/actions/users/index";
+import { setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
 import { onAuthStateChanged } from "firebase/auth";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Dashboard from "./auth/Dashboard";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
+
+  
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
@@ -43,6 +48,7 @@ function App() {
     return unSubscribeAuth;
   }, []);
 
+
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
@@ -53,7 +59,9 @@ function App() {
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/sign-in" element={<Auth />} />
+        <Route path="/sign-in" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

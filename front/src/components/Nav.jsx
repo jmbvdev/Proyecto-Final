@@ -12,17 +12,18 @@ import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userOnline, setCurrentUser } from "../Redux/actions/users/index";
 
-const Nav = ({ setUser, setIsSearch }) => {
+const Nav = ({ setIsSearch }) => {
   const [Mobile, setMobile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const plants = useSelector((state) => state.shopCartReducer.products);
-  const online = useSelector((state) => state.usersReducer.online);
+  const user = useSelector((state) => state.usersReducer.currentUser);
 
   const signOutHandler = () => {
     signOut(auth).then(() => {
-      setUser(null);
-      dispatch(userOnline());
+      console.log(auth)
+      dispatch(setCurrentUser(null))
+      navigate('/');
     });
   };
 
@@ -79,10 +80,13 @@ const Nav = ({ setUser, setIsSearch }) => {
         </div>
 
         <div className="icons-container">
-          {online === true ? (
+          {user !== null ? (
+            <div>
+            <Link to="/dashboard">{auth.currentUser.email}</Link>
             <button className="sign-in-button" onClick={signOutHandler}>
               <FiLogIn className="login-icon" /> Sign out{" "}
             </button>
+            </div>
           ) : (
             <button className="sign-in-button">
               <FiLogIn className="login-icon" />{" "}
