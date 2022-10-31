@@ -141,6 +141,7 @@ const FiltersComponents = () => {
       <div className={s.categories}>
         <div
           onClick={() => handleIndoor()}
+          style={{backgroundImage: `url(${indoor})`}}
           className={activeIndoor ? s.indoor_active : s.indoor}
         >
           <p>indoor</p>
