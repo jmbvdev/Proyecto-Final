@@ -15,7 +15,7 @@ const EmptyPlant = ({ message }) => {
           dispatch(GetAllProducts());
         }}
       >
-        Reset Filters
+        Click To Reset Filters
       </button>
     </div>
   );
