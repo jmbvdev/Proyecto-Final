@@ -6,6 +6,7 @@
     height: 100vh;
     background-image: linear-gradient(rgba(29, 59, 41, 0.507),rgba(113, 123, 113, 0.221)); 
     opacity: 0.8;
+    caret-color: transparent;
 }
 .container img{
     width: 50%;

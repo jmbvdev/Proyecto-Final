@@ -188,16 +188,23 @@ margin: 10px;
     flex-direction: column;
     align-items: center;
 
+
 }
 .empty img{
     width: 60%;
     margin-top: 30px;
+    opacity: 0.8;
+}
+.empty img:hover{
+    opacity: 1;
 }
 .empty h4{
     font-family: "Dosis";
     font-size: 30px;
     color: #353c2c;
+    opacity: 0.8;
 }
+
 .clear{
     font-size: 1rem;
     font-weight: bold;

@@ -7,7 +7,7 @@ const Carousel = () => {
   const navigate= useNavigate()
   return (
     <div className={s.container}>
-      <video src={video} autoPlay loop muted />
+      <video src={video} autoPlay loop muted  />
 
       <div className={s.content}>
         <h1>Welcome</h1>
