@@ -24,30 +24,26 @@ export const GetAllProducts = () => {
 
 export const createProduct = (data) => {
   return async (dispatch) => {
-    // let response = await axios.post(
-    //   "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",  // ruta definitiva
-    //   data
-    // );
-
     let response = await axios.post(
-      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",  // ruta de prueba
+      "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",
       data
     );
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
 
-export const editProduct = (id, data) => {  // puse la primer letra en minuscula
+export const editProduct = (id, data) => {
   return async (dispatch) => {
     axios
-          
-    .put(
-      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,       //original
-      data
-    )
+      .put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/edit`,
+        data
+      )
       .then((res) => {
-        window.alert(res.data.message);
-        dispatch({ type: EDIT_PRODUCT, payload: res.data });
+        window.alert(
+          `The product with ID: ${res.data.id} has been ${res.data.message}`
+        );
+        dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
       });
   };
 };
@@ -65,13 +61,10 @@ export const DeleteProduct = (id) => {
   };
 };
 
-//ordenar por precio asc or desc
 export const OrderBy = (order) => {
   return { type: ORDER_BY, payload: order };
 };
 
-//por tipo de producto (plant, planter, accessory) es string, por size (es array), por categorie (es array), por interior/exterior(string), por precio(int). manejarlo en un estado local que vaya cambiando los filtros. el estado local seria un array:
-// ["all" (o "plant"...), "all" or "medium", "all" or "pet friendly", "all" (o "interior"...)]
 export const FilterBy = (filt) => {
   return { type: FILTER_BY, payload: filt };
 };

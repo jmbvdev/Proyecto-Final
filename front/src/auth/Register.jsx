@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, userOnline } from '../Redux/actions/users/index';
@@ -10,96 +11,110 @@ import plans from "../images/plans.webp";
 
 
 export default function Register() {
+  const initialState = {
+    displayName: "",
+    password: "",
+    email: "",
+  };
 
-    const initialState = {
-        displayName: '',
-        password: '',
-        email: '',
-    };
+  const [input, setInput] = React.useState(initialState);
 
-    const [input, setInput] = React.useState(initialState);
+  const [password2, setPassword2] = React.useState("");
+  const online = useSelector((state) => state.usersReducer.online);
+  const dispatch = useDispatch();
+  const history = useNavigate();
 
-    const [password2, setPassword2] = React.useState('');
-    const online = useSelector(state => state.usersReducer.online)
-    const dispatch = useDispatch();
-    const history = useNavigate();
+  React.useEffect(() => {
+    setInput((prev) => ({ ...prev, [input.name]: input.value }));
+  }, [input.name, input.value]);
 
-    React.useEffect(() => {
-        setInput(prev => ({ ...prev, [input.name]: input.value}))
-    }, [input.name, input.value])
+  const handleOnSubmit = (e) => {
+    if (
+      input.displayName !== null &&
+      input.email !== null &&
+      input.password !== null &&
+      password2 !== null &&
+      input.password === password2
+    ) {
+      e.preventDefault();
+      dispatch(createUser(input));
+      setInput(initialState);
+      alert("User succesfully created!");
 
+      sendEmailVerification(auth.currentUser);
 
-    const handleOnSubmit = (e) => {
-        if(input.displayName !==null && input.email !== null && input.password !== null && password2 !== null && input.password === password2) {
-            e.preventDefault();
-            dispatch(createUser(input));
-            setInput(initialState);
-            alert('User succesfully created!');
-          
-                sendEmailVerification(auth.currentUser)
-            
-            history("/");
-        }
+      history("/");
     }
+  };
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        //setError(validate({...input, [e.target.name] : e.target.value}))
-        setInput({...input, [e.target.name] : e.target.value})
-    }
+  const handleChange = (e) => {
+    e.preventDefault();
+    //setError(validate({...input, [e.target.name] : e.target.value}))
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div className={s.container}>
-            <div className={s.wraper}>
-            <div className={s.image}>
-                    <img src={plans} alt="" />
-                </div>
-                <div className={s.register}>
-                    
-
-        <h1 className={s.title}>Register</h1>
-        <p className={s.welcome}>Create an account.</p>
-        <form onSubmit={(e) => handleOnSubmit(e)}>
+  return (
+    <div className={s.container}>
+      <div className={s.wraper}>
+        <div className={s.image}>
+          <img src={plans} alt="" />
+        </div>
+        <div className={s.register}>
+          <h1 className={s.title}>Register</h1>
+          <p className={s.welcome}>Create an account.</p>
+          <form onSubmit={(e) => handleOnSubmit(e)}>
             <div className={s.input_container}>
-            
-                <input 
+              <input
                 className={s.input_text}
-                    name= "displayName"
-                    value={input.displayName}
-                    onChange={handleChange}
-                    placeholder="Complete name"/>
-            </div>
-            <div className={s.input_container}>
-        
-                <input 
-                className={s.input_text}
-                    name= "email"
-                    value={input.email}
-                    onChange={handleChange}
-                    placeholder="Email"/>
+                name="displayName"
+                value={input.displayName}
+                onChange={handleChange}
+                placeholder="Complete name"
+              />
             </div>
             <div className={s.input_container}>
-
-                <input 
+              <input
                 className={s.input_text}
-                    name= "password"
-                    value={input.password}
-                    onChange={handleChange}
-                    placeholder="Password" 
-                    type={"password"}/>
-                <input 
+                name="email"
+                value={input.email}
+                onChange={handleChange}
+                placeholder="Email"
+              />
+            </div>
+            <div className={s.input_container}>
+              <input
                 className={s.input_text}
-                    value={password2}
-                    onChange={(e) => setPassword2(e.target.value)}
-                    placeholder="Repeat your password" 
-                    type={"password"}/>
+                name="password"
+                value={input.password}
+                onChange={handleChange}
+                placeholder="Password"
+                type={"password"}
+              />
+              <input
+                className={s.input_text}
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                placeholder="Repeat your password"
+                type={"password"}
+              />
             </div>
-            <div >
-                <button className={s.register_btn} type='submit'>SIGN UP</button>
+            <div>
+              <button
+                disabled={
+                  !input.displayName ||
+                  !input.email ||
+                  !input.password ||
+                  input.password !== password2
+                }
+                className={s.register_btn}
+                type="submit"
+              >
+                SIGN UP
+              </button>
             </div>
-        </form>
-                </div>
-            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    )
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -9,17 +9,15 @@ import {
   changeQuantity,
   deleteProduct,
   deleteAll,
+  saveCart,
 } from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
   const plants = useSelector((state) => state.shopCartReducer.products);
+  const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
-  // function handleDelete(id) {
-  //     dispatch(deleteProduct(id))
-
-  // }
 
   function handleDeleteAll() {
     dispatch(deleteAll());
@@ -45,8 +43,11 @@ const Cart = () => {
        sum>1?
         <div className={s.product}>
         <h3 className={s.title}>Your cart</h3>
+
         <button onClick={handleDeleteAll} className={s.clear}>Clear All</button>
-        {plants.map((p) => {
+        {plants?.map((p) => {
+
+
           return (
             <>
               <div className={s.list}>
