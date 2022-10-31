@@ -8,6 +8,7 @@ import s from "../styles/register.module.css"
 import plans from "../images/plans.webp";
 
 
+
 export default function Register() {
 
     const initialState = {

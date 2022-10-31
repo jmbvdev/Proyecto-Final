@@ -9,6 +9,7 @@ import Card from "../components/Card";
 import Loading from "../components/Loading";
 import FiltersComponents from "../components/FiltersComponents";
 import EmptyPlant from "../components/EmptyPlant";
+
 const Plants = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
