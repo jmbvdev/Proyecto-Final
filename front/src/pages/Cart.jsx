@@ -36,7 +36,7 @@ const Cart = () => {
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price;
   }
-console.log(quantity)
+
   return (
     <div className={s.cart_container}>
       {
