@@ -6,7 +6,6 @@ import { FaDog } from "react-icons/fa"
 import s from "../styles/showPlant.module.css"
 
 
-import { AiFillHeart } from 'react-icons/ai';
 
 const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, type, stock, size }) => {
     return (
@@ -17,8 +16,9 @@ const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, t
 
                         <h1>{name} </h1>
 
-                        <div>
+                        <div className={s.details_p}>
                             <h4>Description</h4>
+                            
                             <p>{details}</p>
                         </div>
 
@@ -37,14 +37,13 @@ const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, t
 
                         </div>
                         
+                       <div className={s.specs}>
                         <div className={s.price}>
                             <div>
                                 <h4>Price</h4>
                                 <h3>$ {price}</h3>
                             </div>
-                       <div>
-
-                       <div>
+                       <div >
                             <h4>Size: </h4>
                             <p>{size}</p>
                         </div>
@@ -55,23 +54,22 @@ const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, t
                         </div>
 
 
-                        <div>
+                      
+                       </div>
+                        <div className={s.types}>
                             <h4>Type: </h4>
                             <p>{type}</p>
-                        </div>
-
-                        
-
-                        
                         <h4>Show</h4>
                         {logicalDeletion ? <p>OFF</p> : <p>ON</p>}
-                       </div>
-
-                       <div>
-                        <h4>Type</h4>
-                        <p>{type}</p>
-                       </div>
                         </div>
+
+
+                     
+                        </div>
+
+                        
+
+                        
 
                        
                     </div>

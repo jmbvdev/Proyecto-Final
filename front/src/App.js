@@ -37,7 +37,10 @@ function App() {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
-          dispatch(setCurrentUser(authenticatedUser));
+          const role = await authenticatedUser.getIdTokenResult();
+          dispatch(
+            setCurrentUser({ ...authenticatedUser, role: role.claims.role })
+          );
           dispatch(loadCart(authenticatedUser.uid));
         }
       }

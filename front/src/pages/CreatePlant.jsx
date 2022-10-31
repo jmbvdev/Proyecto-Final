@@ -5,7 +5,7 @@ import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../Redux/actions/products/index";
 import { validate } from "../Util/validate";
-import { BsImageFill } from "react-icons/bs";
+import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
 
@@ -195,6 +195,7 @@ const CreatePlant = () => {
     );
   };
 
+
   const handleShow = () =>
     setInput({
       ...input,
@@ -213,6 +214,7 @@ const CreatePlant = () => {
                   <BsImageFill />
                 </button>
                 <p>upload image</p>
+
               </div>
               <input
                 ref={fileRef}
@@ -227,6 +229,7 @@ const CreatePlant = () => {
                 type="text"
                 name="name"
                 placeholder="name"
+                autoComplete="off"
                 className={s.input_text}
                 onChange={handleOnChange}
               />
@@ -237,6 +240,7 @@ const CreatePlant = () => {
               <input
                 type="text"
                 name="details"
+                autoComplete="off"
                 placeholder="details"
                 className={s.input_text}
                 onChange={handleOnChange}
@@ -343,9 +347,9 @@ const CreatePlant = () => {
               </div>
 
               <div className={s.show_btn}>
-                <label>Show: </label>
+                <label>show: </label>
                 <button type="button" onClick={handleShow}>
-                  Switch
+                  <BsEyeFill/>
                 </button>
               </div>
             </div>
