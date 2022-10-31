@@ -16,7 +16,7 @@ const PopularPlants = () => {
       useEffect(() => {
         dispatch(GetAllProducts());
       }, []);
-      console.log(plants)
+    
     return (
       <div className={s.popular}>
         <img src={img} className={s.image} alt="plant" />

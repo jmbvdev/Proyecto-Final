@@ -4,6 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp"
+import Swal from "sweetalert2"
 
 import {
   changeQuantity,
@@ -20,7 +21,20 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   function handleDeleteAll() {
-    dispatch(deleteAll());
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to remove all the products from the cart?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"green"
+    }).then(res=>{
+      if (res.isConfirmed) {
+        dispatch(deleteAll());
+      }
+    })
+  
   }
 
   function handleQuantity(id, value) {
@@ -29,8 +43,21 @@ const Cart = () => {
     dispatch(changeQuantity(id, value));
   }
   function handleDeletePlant(id) {
-    plants.filter((p) => p.id === id);
-    dispatch(deleteProduct(id));
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to remove this plant?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"green"
+    }).then(res=>{
+      if (res.isConfirmed) {
+        plants.filter((p) => p.id === id);
+        dispatch(deleteProduct(id));
+      }
+    })
+
   }
   let sum = 0;
   for (let i = 0; i < plants.length; i++) {

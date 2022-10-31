@@ -12,6 +12,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
+import Swal from "sweetalert2"
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,21 @@ const PlantsDetails = () => {
   }
 
   function handleCart() {
+    Swal.fire({
+      title:"Success",
+      text:"Your product was successfully added to cart",
+      icon:"success",
+      showDenyButton:true,
+      denyButtonText:"Go to cart",
+      denyButtonColor:"rgba(11, 115, 147, 0.713)",
+      confirmButtonText:"ok",
+      confirmButtonColor:"rgb(9, 102, 74)"
+    })
+    .then(res=>{
+      if (res.isDenied) {
+        navigate("/cart")
+      }
+    })
     dispatch(
       addProduct(
         {
@@ -48,6 +64,7 @@ const PlantsDetails = () => {
         quantity
       )
     );
+    
   }
 
   return plant?.name ? (
