@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(29, 59, 41, 0.507),rgba(113, 123, 113, 0.221)); 
+    opacity: 0.8;
+    caret-color: transparent;
+}
+.container img{
+    width: 50%;
+   
+}
+.container h2{
+    font-family: "Josefin Sans";
+    font-size: 2rem;
+}
+.container button{
+    font-family: "Inter";
+    margin-top: 20px;
+    background-color: rgb(18, 61, 18);
+    color: #fff;
+    padding:  7px 20px;
+    font-size: small;
+    border-radius: 5px;
+}
+.container button:hover{
+    background-color: rgba(10, 54, 10, 0.557);
+    cursor: pointer;
+}

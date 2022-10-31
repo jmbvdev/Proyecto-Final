@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FilterBy, OrderBy } from "../Redux/actions/products";
 import { BiReset } from "react-icons/bi";
+import indoor from "../images/indoor.webp";
 import s from "../styles/filters.module.css";
 
 const FiltersComponents = () => {
@@ -140,6 +141,7 @@ const FiltersComponents = () => {
       <div className={s.categories}>
         <div
           onClick={() => handleIndoor()}
+          style={{backgroundImage: `url(${indoor})`}}
           className={activeIndoor ? s.indoor_active : s.indoor}
         >
           <p>indoor</p>

@@ -9,14 +9,18 @@ import { FaDog } from "react-icons/fa";
 import s from "../styles/details.module.css";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
+import Swal from "sweetalert2"
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
   const plant = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
+  const currentUser = useSelector((state) => state.usersReducer.currentUser);
+  const cart = useSelector((state) => state.shopCartReducer.products);
 
   const navigate = useNavigate();
   const id = useParams().id;
@@ -35,6 +39,21 @@ const PlantsDetails = () => {
   }
 
   function handleCart() {
+    Swal.fire({
+      title:"Success",
+      text:"Your product was successfully added to cart",
+      icon:"success",
+      showDenyButton:true,
+      denyButtonText:"Go to cart",
+      denyButtonColor:"rgba(11, 115, 147, 0.713)",
+      confirmButtonText:"ok",
+      confirmButtonColor:"rgb(9, 102, 74)"
+    })
+    .then(res=>{
+      if (res.isDenied) {
+        navigate("/cart")
+      }
+    })
     dispatch(
       addProduct(
         {
@@ -47,6 +66,27 @@ const PlantsDetails = () => {
         quantity
       )
     );
+
+    if (currentUser) {
+      
+      dispatch(
+        saveCart(
+          [
+            ...cart,
+            {
+              id,
+              image: plant.image,
+              price: plant.price,
+              name: plant.name,
+              stock: plant.stock,
+              count: quantity,
+            },
+          ],
+          currentUser.uid
+        )
+      );
+    }
+
   }
 
   return plant?.name ? (
@@ -107,13 +147,21 @@ const PlantsDetails = () => {
           <button>
             <AiFillHeart className={s.hearth} />
           </button>
+        <div className={s.edit_btn}>
+          <h4>Edit</h4>
+      <button onClick={handleEdit}><FaRegEdit/></button>
+
+        </div>
         </div>
 
-        <button onClick={handleCart} className={s.cart}>
+        <button
+          disabled={cart.findIndex((e) => e.id === id) !== -1}
+          onClick={handleCart}
+          className={s.cart}
+        >
           Add to Cart
         </button>
       </div>
-      <button onClick={handleEdit}>EDIT</button>
     </div>
   ) : (
     <Loading />
