@@ -1,6 +1,6 @@
 import React from "react";
 import video from "../video/plants.mp4";
-import s from "../styles/carousel.module.css";
+import s from "../styles/Carousel.module.css";
 
 const Carousel = () => {
   return (
