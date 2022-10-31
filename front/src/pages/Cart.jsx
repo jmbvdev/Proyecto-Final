@@ -4,6 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp"
+import Swal from "sweetalert2"
 
 import {
   changeQuantity,
@@ -25,7 +26,21 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   function handleDeleteAll() {
-    dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
+
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to remove all the products from the cart?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      denyButtonColor:"#72CE65",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"#FF5733"
+    }).then(res=>{
+      if (res.isConfirmed) {
+      dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
+      }
+    })
   }
 
   function handleQuantity(id, value) {
@@ -41,17 +56,31 @@ const Cart = () => {
   }
 
   function handleDeletePlant(id) {
-    plants.filter((p) => p.id === id);
-    dispatch(deleteProduct(id));
-    if (currentUser) {
-      dispatch(
-        saveCart(
-          plants.filter((p) => p.id !== id),
-          currentUser.uid
-        )
-      );
-    }
-  }
+
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to remove this plant?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      denyButtonColor:"#72CE65",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"#FF5733"
+    }).then(res=>{
+      if (res.isConfirmed) {
+        plants.filter((p) => p.id === id);
+        dispatch(deleteProduct(id));
+        if (currentUser) {
+          dispatch(
+            saveCart(
+              plants.filter((p) => p.id !== id),
+              currentUser.uid
+            )
+          );
+        }
+      }
+    })}
+
   let sum = 0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price;
@@ -142,6 +171,6 @@ const Cart = () => {
       </div>
     </div>
   );
-};
+    }
 
-export default Cart;
+export default Cart
