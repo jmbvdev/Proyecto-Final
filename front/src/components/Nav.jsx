@@ -22,6 +22,7 @@ const Nav = ({ setIsSearch }) => {
   const signOutHandler = () => {
     signOut(auth).then(() => {
       console.log(auth)
+      dispatch(setCurrentUser(null))
       navigate('/');
     });
   };

@@ -9,14 +9,13 @@ const dispatch = useDispatch();
 const user = useSelector(state => state.usersReducer.currentUser);
 
 React.useEffect(() => {
-    dispatch(setCurrentUser(auth));
-    console.log(auth)
-    console.log(user)
+    dispatch(setCurrentUser(auth.currentUser));
 }, [])
 
 return (
     <div>
         <h2>{user.email}</h2>
+        <p>{user.displayName}</p>
     </div>
 )
 };

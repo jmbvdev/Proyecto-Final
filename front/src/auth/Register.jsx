@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import s from "../styles/register.module.css";
 import plans from "../images/plans.jpg";
+import { editUser } from "../Redux/actions/users";
 
 export default function Register() {
   const initialState = {
@@ -34,16 +35,18 @@ export default function Register() {
     ) {
       e.preventDefault();
       createUserWithEmailAndPassword(auth, input.email, input.password, input.displayName).then(
-        async ({ user }) => {
+        async (user) => {
 
           if (user.emailVerified === false) {
             sendEmailVerification(auth.currentUser).then(async () => {
               await signOut(auth);
+              history("/")
             });
           }
-          
+          dispatch(editUser(user.uid, {[user.displayName] : input.displayName}))
+          console.log(user)
         }
-      );
+        );
       setInput(initialState);
       alert("User succesfully created!");
       history("/");
