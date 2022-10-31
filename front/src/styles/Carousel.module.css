@@ -29,7 +29,7 @@ opacity: 0.95;
     align-items: center;
     color: #fff;
     caret-color: transparent;
-    z-index: 1;
+    z-index: 0;
   }
   
   
