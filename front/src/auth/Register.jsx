@@ -40,14 +40,14 @@ export default function Register() {
       e.preventDefault();
       createUserWithEmailAndPassword(auth, input.email, input.password, input.displayName).then(
         async (user) => {
-
+          
           if (user.emailVerified === false) {
             sendEmailVerification(auth.currentUser).then(async () => {
-              dispatch(editUser(auth.currentUser.uid, {["displayName"] : input.displayName}))
               await signOut(auth.currentUser).then(dispatch(setCurrentUser(null)));
               history("/")
             });
           }
+          dispatch(editUser(auth.currentUser.uid, {["displayName"] : input.displayName}))
         }
         );
       setInput(initialState);
