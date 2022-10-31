@@ -33,8 +33,9 @@ const Cart = () => {
       icon:"error",
       showDenyButton:true,
       denyButtonText:"No",
+      denyButtonColor:"#72CE65",
       confirmButtonText:"Yes",
-      confirmButtonColor:"green"
+      confirmButtonColor:"#FF5733"
     }).then(res=>{
       if (res.isConfirmed) {
       dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
@@ -62,22 +63,24 @@ const Cart = () => {
       icon:"error",
       showDenyButton:true,
       denyButtonText:"No",
+      denyButtonColor:"#72CE65",
       confirmButtonText:"Yes",
-      confirmButtonColor:"green"
+      confirmButtonColor:"#FF5733"
     }).then(res=>{
       if (res.isConfirmed) {
-       
-    dispatch(deleteProduct(id));
-    if (currentUser) {
-      dispatch(
-        saveCart(
-          plants.filter((p) => p.id !== id),
-          currentUser.uid
-        )
-      );
-    }
+        plants.filter((p) => p.id === id);
+        dispatch(deleteProduct(id));
+        if (currentUser) {
+          dispatch(
+            saveCart(
+              plants.filter((p) => p.id !== id),
+              currentUser.uid
+            )
+          );
+        }
+      }
+    })}
 
-  }
   let sum = 0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price;
@@ -168,6 +171,6 @@ const Cart = () => {
       </div>
     </div>
   );
-};
+    }
 
-export default Cart;
+export default Cart
