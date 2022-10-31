@@ -27,3 +27,8 @@ font-size: 2rem;
 position: relative;
 
 }
+.container button{
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bold;
+}

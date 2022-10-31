@@ -68,6 +68,7 @@ const PlantsDetails = () => {
     );
 
     if (currentUser) {
+      
       dispatch(
         saveCart(
           [
@@ -85,6 +86,7 @@ const PlantsDetails = () => {
         )
       );
     }
+
   }
 
   return plant?.name ? (
