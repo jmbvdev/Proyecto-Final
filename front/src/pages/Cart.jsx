@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,22 @@ import {
   deleteProduct,
   deleteAll,
   saveCart,
+  purchase,
 } from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
+import MercadoPago from "../mercadopago/mercadopago";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
+
+  const [pago, setPago] = useState(false);
+
   const plants = useSelector((state) => state.shopCartReducer.products);
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   function handleDeleteAll() {
+
     Swal.fire({
       title:"Warning",
       text:"Are you sure you want to remove all the products from the cart?",
@@ -31,10 +37,9 @@ const Cart = () => {
       confirmButtonColor:"green"
     }).then(res=>{
       if (res.isConfirmed) {
-        dispatch(deleteAll());
+      dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
       }
     })
-  
   }
 
   function handleQuantity(id, value) {
@@ -42,7 +47,15 @@ const Cart = () => {
 
     dispatch(changeQuantity(id, value));
   }
+
+  function handleOnPurchase(e) {
+    e.preventDefault();
+    if (!currentUser) navigate("/sign-in");
+    else setPago(true);
+  }
+
   function handleDeletePlant(id) {
+
     Swal.fire({
       title:"Warning",
       text:"Are you sure you want to remove this plant?",
@@ -53,10 +66,16 @@ const Cart = () => {
       confirmButtonColor:"green"
     }).then(res=>{
       if (res.isConfirmed) {
-        plants.filter((p) => p.id === id);
-        dispatch(deleteProduct(id));
-      }
-    })
+       
+    dispatch(deleteProduct(id));
+    if (currentUser) {
+      dispatch(
+        saveCart(
+          plants.filter((p) => p.id !== id),
+          currentUser.uid
+        )
+      );
+    }
 
   }
   let sum = 0;
@@ -142,7 +161,10 @@ const Cart = () => {
           <p>Estimated total</p>
           <span>${sum ? sum : 0.0}</span>
         </div>
-        <button className={s.checkout}>CHECKOUT NOW</button>
+        <button onClick={handleOnPurchase} className={s.checkout}>
+          CHECKOUT NOW
+        </button>
+        {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
       </div>
     </div>
   );

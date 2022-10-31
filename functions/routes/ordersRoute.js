@@ -3,10 +3,12 @@ const getOrderForUserByID = require("../ordersControllers/getOrderForUserByID.js
 const getCart = require("../ordersControllers/getCart.js");
 const modifyOrder = require("../ordersControllers/modifyOrder.js");
 const postOrder = require("../ordersControllers/postOrder.js");
-
+const deleteOrder = require("../ordersControllers/deleteOrder.js");
+const pagarProducto = require("../ordersControllers/mp.js");
 const ordersRoute = Router();
 
 ordersRoute
+  .post("/purchase", pagarProducto)
   .get("/cart/:id", async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -43,6 +45,16 @@ ordersRoute
       const { cart, state } = req.body;
       const reference = await modifyOrder(id, cart, state);
       res.status(203).send(`The ${reference.id} has been modified`);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .delete("/:id", async (req, res, next) => {
+    try {
+      //este id no es del usuario sino de la orden
+      const { id } = req.params;
+      await deleteOrder(id);
+      res.status(203).send(`The ${id} order has been deleted`);
     } catch (err) {
       next(err);
     }

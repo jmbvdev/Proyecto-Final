@@ -3,6 +3,7 @@ import video from "../video/plants.mp4";
 import s from "../styles/carousel.module.css";
 import { useNavigate } from "react-router-dom";
 
+
 const Carousel = () => {
   const navigate= useNavigate()
   return (

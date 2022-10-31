@@ -14,7 +14,7 @@ import CreatePlant from "./pages/CreatePlant";
 import EditPlant from "./pages/EditPlant";
 import NotFound from "./components/NotFound";
 import { auth } from "./firebase/firebase.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userOnline, setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
 import { onAuthStateChanged } from "firebase/auth";
@@ -32,7 +32,10 @@ function App() {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
-          dispatch(setCurrentUser(authenticatedUser));
+          const role = await authenticatedUser.getIdTokenResult();
+          dispatch(
+            setCurrentUser({ ...authenticatedUser, role: role.claims.role })
+          );
           dispatch(loadCart(authenticatedUser.uid));
         }
       }

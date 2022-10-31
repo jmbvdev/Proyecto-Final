@@ -9,8 +9,21 @@ module.exports = async function postOrder(id, cart) {
     date: admin.firestore.FieldValue.serverTimestamp(),
     cart: cart,
   };
+  const previosOrder = await db
+    .collection("orders")
+    .where("userID", "==", id)
+    .where("state", "==", "Pending")
+    .get();
+  let reference;
+  let array = [];
+  previosOrder.forEach((doc) => array.push(doc.id));
+  console.log(array);
+  if (array.length > 0)
+    await db.collection("orders").doc(array[0]).update(order);
+  else reference = await db.collection("orders").add(order);
 
-  const reference = await db.collection("orders").add(order);
-
-  return await reference.get();
+  return await db
+    .collection("orders")
+    .doc(reference?.id || array[0])
+    .get();
 };
