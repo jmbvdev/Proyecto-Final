@@ -21,7 +21,6 @@ const initialState = {
 };
 
 export default function shopCartReducer(state = initialState, action) {
-  console.log(state.products);
   if (action.type === ADD_PRODUCT) {
     if (
       state.products.filter((p) => {
@@ -68,6 +67,5 @@ export default function shopCartReducer(state = initialState, action) {
   if (action.type === SAVE_CART) {
     return state;
   }
-
   return state;
 }

@@ -18,6 +18,8 @@ const PlantsDetails = () => {
   const plant = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
+  const currentUser = useSelector((state) => state.usersReducer.currentUser);
+  const cart = useSelector((state) => state.shopCartReducer.products);
 
   const navigate = useNavigate();
   const id = useParams().id;
@@ -48,6 +50,24 @@ const PlantsDetails = () => {
         quantity
       )
     );
+    if (currentUser) {
+      dispatch(
+        saveCart(
+          [
+            ...cart,
+            {
+              id,
+              image: plant.image,
+              price: plant.price,
+              name: plant.name,
+              stock: plant.stock,
+              count: quantity,
+            },
+          ],
+          currentUser.uid
+        )
+      );
+    }
   }
 
   return plant?.name ? (
@@ -115,7 +135,11 @@ const PlantsDetails = () => {
         </div>
         </div>
 
-        <button onClick={handleCart} className={s.cart}>
+        <button
+          disabled={cart.findIndex((e) => e.id === id) !== -1}
+          onClick={handleCart}
+          className={s.cart}
+        >
           Add to Cart
         </button>
       </div>
