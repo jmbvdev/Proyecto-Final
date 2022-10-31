@@ -213,3 +213,6 @@ margin: 10px;
    position: relative;
    left: 40%;
 }
+.mercadopago{
+    display: none;
+}
