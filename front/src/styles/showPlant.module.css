@@ -32,10 +32,12 @@
 .details p{
  
     font-family: "Poppins";
+    display: block;
     font-size: smaller;
     line-height: 1.3rem;
     width: 100%;
     caret-color: transparent;
+    word-wrap: break-word;
 
    
 }
@@ -88,4 +90,9 @@ font-weight:bold ;
     display: flex;
     margin-top: 20px;
     gap: 1rem;
+}
+.details_p{
+    width: 320px;
+    overflow-y:scroll;
+    max-height: 150px;
 }

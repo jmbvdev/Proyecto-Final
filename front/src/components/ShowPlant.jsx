@@ -16,7 +16,7 @@ const ShowPlant = ({ image, name, details, categories, price, logicalDeletion, t
 
                         <h1>{name} </h1>
 
-                        <div>
+                        <div className={s.details_p}>
                             <h4>Description</h4>
                             
                             <p>{details}</p>

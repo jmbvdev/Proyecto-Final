@@ -9,12 +9,12 @@ import { FaDog } from "react-icons/fa";
 
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { BsImageFill } from "react-icons/bs";
+import { BsImageFill, BsEyeFill } from "react-icons/bs";
 
 import Loading from "../components/Loading";
 
 import { useRef } from "react";
-import s from "../styles/create.module.css";
+import s from "../styles/editPlant.module.css";
 import ShowProduct from "../components/ShowPlant";
 import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
 import { validateEdit } from "../Util/validateEdit";
@@ -193,25 +193,11 @@ const EditPlant = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <div>
-            <ShowProduct
-              image={image || plant?.image}
-              name={input.name || plant?.name}
-              details={input.details || plant?.details}
-              categories={
-                (input.categories.length && input.categories) ||
-                plant?.categories
-              }
-              price={(input.price !== 0 && input.price) || plant?.price}
-              logicalDeletion={input.logicalDeletion || plant?.logicalDeletion}
-              type={plant?.type}
-              stock={parseInt(input.stock) + parseInt(plant?.stock)}
-              size={(input.size.length && input.size) || plant?.size}
-            />
-
-            <div className={s.container}>
+          <div className={s.container}>
+            <div className={s.wraper} >
+              <div className={s.left}>
               <form onSubmit={handleOnSubmit} className={s.form}>
-                <h2>Edit plant</h2>
+                <h4>Edit plant</h4>
                 <div className={s.image_input}>
                   <div className={s.image_btn}>
                     <button type="button" onClick={handleOpenfilePicker}>
@@ -224,6 +210,7 @@ const EditPlant = () => {
                     type="file"
                     style={{ display: "none" }}
                     onChange={handleChangefile}
+                    
                   />
                 </div>
 
@@ -234,6 +221,7 @@ const EditPlant = () => {
                     placeholder="name"
                     autoComplete="off"
                     onChange={handleOnChange}
+                    className={s.input_text}
                   />
                   {error.name && <p className={s.errors}>{error.name}</p>}
                 </div>
@@ -244,6 +232,7 @@ const EditPlant = () => {
                     name="details"
                     placeholder="details"
                     autoComplete="off"
+                    className={s.input_text}
                     onChange={handleOnChange}
                   />
                   {error.details && <p className={s.errors}>{error.details}</p>}
@@ -254,11 +243,11 @@ const EditPlant = () => {
                                 </div> */}
 
                 <div className={s.input_container}>
-                  <label>Price: </label>
                   <input
                     type="number"
                     name="price"
                     placeholder="price"
+                    className={s.input_text}
                     onChange={handlePrice}
                     min="0"
                     max="1000000"
@@ -267,7 +256,6 @@ const EditPlant = () => {
                 </div>
 
                 <div className={s.input_container}>
-                  <label>Stock: </label>
                   <input
                     type="number"
                     name="stock"
@@ -275,21 +263,42 @@ const EditPlant = () => {
                     onChange={handleStock}
                     min="0"
                     max="1000000"
+                    className={s.input_text}
                   />
                   {error.stock && <p className={s.errors}>{error.stock}</p>}
                 </div>
 
-                <div>
-                  <label>Show: </label>
-                  <button type="button" onClick={handleShow}>
-                    Switch
-                  </button>
+              
+                <div className={s.selects_container}>
+                 
+                  <select onChange={handleCategories}>
+                    <option value="select">CATEGORIES</option>
+                    {allCategories.map((el, i) => (
+                      <option key={i} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
-                <div className={s.categories}>
-                  <label>Size: </label>
-                  <select onChange={handleSize}>
-                    <option value="select">Seleccionar...</option>
+                <div className={s.categories_option}>
+                  {input.categories.map((el) => (
+                    <div className={s.categories_option}>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteCategories(el)}
+                      >
+                        x
+                      </button>
+                      <p>{el}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className={s.selects_container}>
+         
+                  <select onChange={handleSize} >
+                    <option value="select">SIZE</option>
                     {allSize.map((el, i) => (
                       <option key={i} value={el}>
                         {el}
@@ -308,30 +317,11 @@ const EditPlant = () => {
                   ) : null}
                 </div>
 
-                <div className={s.categories}>
-                  <label>Categories: </label>
-                  <select onChange={handleCategories}>
-                    <option value="select">Select...</option>
-                    {allCategories.map((el, i) => (
-                      <option key={i} value={el}>
-                        {el}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  {input.categories.map((el) => (
-                    <div className={s.categories_option}>
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteCategories(el)}
-                      >
-                        x
-                      </button>
-                      <p>{el}</p>
-                    </div>
-                  ))}
+                <div className={s.show_btn}>
+                  <label>Show: </label>
+                  <button type="button" onClick={handleShow}>
+                  <BsEyeFill/>
+                  </button>
                 </div>
 
                 <div>
@@ -340,16 +330,35 @@ const EditPlant = () => {
                     disabled={Object.keys(error).length ? true : false}
                     className={s.create_btn}
                   >
-                    update
+                    UPDATE
                   </button>
                 </div>
-              </form>
-            </div>
-            <div>
-              <button type="button" onClick={handleDelete}>
+              <button type="button" onClick={handleDelete} className={s.delete_btn}>
                 DELETE
               </button>
+              </form>
+
+              </div>
+              
+            <div className={s.right}>
+            <ShowProduct
+         
+              image={image || plant?.image}
+              name={input.name || plant?.name}
+              details={input.details || plant?.details}
+              categories={
+                (input.categories.length && input.categories) ||
+                plant?.categories
+              }
+              price={(input.price !== 0 && input.price) || plant?.price}
+              logicalDeletion={input.logicalDeletion || plant?.logicalDeletion}
+              type={plant?.type}
+              stock={parseInt(input.stock) + parseInt(plant?.stock)}
+              size={(input.size.length && input.size) || plant?.size}
+            />
             </div>
+            </div>
+
           </div>
         )}
       </>
