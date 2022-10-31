@@ -1,19 +1,14 @@
-
- .container{
+.container{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     justify-items: center;
-    height: auto;
+   
     background-image: linear-gradient(rgba(189, 202, 195, 0.38),rgba(206, 208, 206, 0.763)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
     background-repeat: no-repeat;
     background-size: cover;
- 
-    
-
 }
-
 .wraper{
     width: 900px;
     min-width: 350px;
@@ -22,7 +17,7 @@
     justify-content: center;
     justify-items: center;
     align-items: center;
-    height: 700px;
+    height: 600px;
     background-color: #fff;
     padding: 10px;
     gap: 20px;
@@ -54,7 +49,7 @@ border-radius: 12px;
     align-items: center;
     border-radius: 10px;
 }
-  .input_container{
+.input_container{
     background-color: transparent;
  
 
@@ -145,8 +140,8 @@ cursor: pointer;
     background: #222;
 }
 .create_btn{
-  background-color: #ead2b8;
-  color:rgb(94, 94, 94);
+  background-color: #c09b74;
+  color:#fff;
   width: 100%;
   padding: 5px 10px;
   border-radius: 2px;
@@ -156,7 +151,7 @@ cursor: pointer;
   cursor: pointer;
 }
 .create_btn:hover{
-    background-color: #bd9e7d;
+    background-color: #c8b093;
 }
 .errors{
     color:rgb(228, 97, 97);
@@ -198,3 +193,19 @@ cursor: pointer;
     color:rgba(255, 255, 255, 0.625);
     cursor: pointer;
 }
+
+.delete_btn{
+    background-color: #d3582b;
+    color:rgb(246, 244, 244);
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 2px;
+    caret-color: transparent;
+    font-size: small;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 13px;
+  }
+  .delete_btn:hover{
+    background-color: rgb(225, 100, 33)
+  }

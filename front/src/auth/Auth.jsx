@@ -7,19 +7,25 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userOnline } from "../Redux/actions/users/index";
 import { loadCart } from "../Redux/actions/shopCart/index.js";
+import Loading from "../components/Loading";
 
 function Auth() {
+  const currentUser= useSelector(state=>state.usersReducer.currentUser)
   const [user, setUser] = React.useState(null);
-  const [authState, setAuthState] = React.useState(null);
+  const [authState, setAuthState] = React.useState("login");
   const dispatch = useDispatch();
-  const online = useSelector((state) => state.usersReducer.online);
 
-  if (authState === null) return <div>loading...</div>;
-  if (authState === "login")
-    return <Login setAuthState={setAuthState} setUser={setUser} />;
-  if (authState === "register")
-    return <Register setAuthState={setAuthState} setUser={setUser} />;
-  if (user) return <Dashboard user={user} authState={authState} />;
+
+  
+  if (currentUser !== null)  return <Loading/>;
+ else{
+   if (authState === "login")
+     return <Login setAuthState={setAuthState} setUser={setUser} />;
+     if (authState === "register")
+       return <Register setAuthState={setAuthState} setUser={setUser} />;
+
+ }
+ 
 }
 
 export default Auth;

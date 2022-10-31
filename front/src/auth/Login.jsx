@@ -3,11 +3,12 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import s from "../styles/login.module.css";
-import diferent from "../images/diferent.jpg";
+import { useNavigate } from  "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
+import s from "../styles/login.module.css"
+import diferent from "../images/diferent.webp"
+
 
 export default function Login({ setAuthState, setUser }) {
   const [email, setEmail] = useState("");

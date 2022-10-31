@@ -9,6 +9,7 @@ import { FaDog } from "react-icons/fa";
 import s from "../styles/details.module.css";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 
@@ -127,6 +128,11 @@ const PlantsDetails = () => {
           <button>
             <AiFillHeart className={s.hearth} />
           </button>
+        <div className={s.edit_btn}>
+          <h4>Edit</h4>
+      <button onClick={handleEdit}><FaRegEdit/></button>
+
+        </div>
         </div>
 
         <button
@@ -137,7 +143,6 @@ const PlantsDetails = () => {
           Add to Cart
         </button>
       </div>
-      <button onClick={handleEdit}>EDIT</button>
     </div>
   ) : (
     <Loading />

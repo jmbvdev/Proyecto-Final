@@ -129,3 +129,20 @@
   color: rgb(9, 102, 74);
   cursor: pointer;
 }
+
+.edit_btn{
+   margin-left: 20px;
+   display: flex;
+
+   justify-content: center;
+   align-items: center;
+   align-content:center ;
+}
+.edit_btn button{
+    position: relative;
+    right: 30px;
+    cursor: pointer;
+    color:rgba(8, 57, 42, 0.713) ;
+    font-size: 30px;
+}
+

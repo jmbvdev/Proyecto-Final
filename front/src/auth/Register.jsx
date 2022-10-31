@@ -1,11 +1,14 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createUser, userOnline } from "../Redux/actions/users/index";
-import { auth } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
-import { signOut, sendEmailVerification } from "firebase/auth";
-import s from "../styles/register.module.css";
-import plans from "../images/plans.jpg";
+
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser, userOnline } from '../Redux/actions/users/index';
+import { auth } from '../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
+import { signOut, sendEmailVerification } from 'firebase/auth';
+import s from "../styles/register.module.css"
+import plans from "../images/plans.webp";
+
+
 
 export default function Register() {
   const initialState = {

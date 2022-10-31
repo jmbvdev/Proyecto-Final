@@ -4,9 +4,10 @@
     justify-content: center;
     align-items: center;
     text-align: left;
-    margin: 10px;
+    margin-top: 10px;
     width: 100%;
     margin-bottom: 10rem;
+    
 }
 .details{
    display: flex;
@@ -21,7 +22,7 @@
     font-family: "Lora", sans-serif;
     border-bottom: 1px solid rgba(1, 47, 33, 0.561);
     font-size: 25px;
-    width: 400px;
+    width: 100%;
    
 }
 .details h4{
@@ -29,13 +30,18 @@
     margin-bottom: 2px;
 }
 .details p{
-
+ 
     font-family: "Poppins";
+    display: block;
     font-size: smaller;
     line-height: 1.3rem;
-    width: 90%;
+    width: 100%;
     caret-color: transparent;
+    word-wrap: break-word;
+
+   
 }
+
 .categories{
     display: flex;
     gap: 2rem;
@@ -76,3 +82,17 @@ font-weight:bold ;
 }
 
 
+.specs{
+    display: flex;
+    flex-direction: column;
+}
+.types{
+    display: flex;
+    margin-top: 20px;
+    gap: 1rem;
+}
+.details_p{
+    width: 320px;
+    overflow-y:scroll;
+    max-height: 150px;
+}
