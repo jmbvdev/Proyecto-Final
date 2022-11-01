@@ -21,6 +21,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
+import Favorites from "./pages/Favorites";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -56,6 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch} />} />
         <Route exact path="/create" element={<CreatePlant />} />
+        <Route path="/favorites" element={<Favorites/>} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />

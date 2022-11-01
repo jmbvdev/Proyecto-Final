@@ -8,6 +8,7 @@ import { validate } from "../Util/validate";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
+import Swal from "sweetalert2"
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -74,12 +75,11 @@ const CreatePlant = () => {
         [e.target.name]: e.target.value,
       })
     );
-    console.log(input);
+
   };
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    console.log(input);
     if (
       !input.categories.length ||
       !input.details ||

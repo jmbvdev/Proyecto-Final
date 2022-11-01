@@ -96,7 +96,7 @@ const Nav = ({ setIsSearch }) => {
             </button>
           )}
 
-          <FiHeart className="favorite-icon" />
+          <FiHeart className="favorite-icon" onClick={() => navigate("/favorites")} />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
             <HiOutlineShoppingBag className="bag-icon" />
