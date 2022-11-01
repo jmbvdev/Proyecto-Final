@@ -1,15 +1,15 @@
-
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { signOut, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signOut,
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import s from "../styles/register.module.css";
 import { editUser, setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
-
-
-
 
 export default function Register() {
 
@@ -45,9 +45,8 @@ export default function Register() {
               }
               )
             });
-          
         }
-        );
+      );
       setInput(initialState);
       alert("User succesfully created!");
       navigate("/");

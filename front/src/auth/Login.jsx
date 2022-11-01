@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import s from "../styles/login.module.css";
 import diferent from "../images/diferent.webp";
@@ -18,9 +18,12 @@ export default function Login() {
   const handleLogin = () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          console.log(auth)
-          dispatch(setCurrentUser(auth.currentUser))
+        .then((user) => {
+          if (!user.user.emailVerified) {
+            //ventana pop up para que muestre que tiene q verificar el emial.
+            return signOut(auth);
+          }
+          dispatch(setCurrentUser(auth.currentUser));
 
           history("/");
         })
@@ -91,7 +94,8 @@ export default function Login() {
               </div>
               <div className={s.register}>
                 <p>Don't have an account?</p>
-                <button><Link to='/register'>SIGN UP</Link>                 
+                <button>
+                  <Link to="/register">SIGN UP</Link>
                 </button>
               </div>
             </div>
