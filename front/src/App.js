@@ -48,7 +48,7 @@ function App() {
       <Nav setIsSearch={handleSearch} />
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isSearch={isSearch} />} />
         <Route exact path="/create" element={<CreatePlant />} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
