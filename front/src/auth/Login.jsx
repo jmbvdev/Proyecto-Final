@@ -5,7 +5,7 @@ import { auth } from "../firebase/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import s from "../styles/login.module.css";
-import diferent from "../images/diferent.jpg";
+import diferent from "../images/diferent.webp";
 import { useDispatch } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
 import { setCurrentUser } from "../Redux/actions/users";

@@ -21,3 +21,13 @@ export async function getPictureUrl(uid) {
         console.log(error)
     }
 }
+
+export async function setUserImage(uid, file) {
+    try {
+        const imageRef = ref(storage, `users/${uid}`)
+        const resUpload = await uploadBytes(imageRef, file)
+        return resUpload
+    } catch (error) {
+        console.log(error)
+    }
+}
