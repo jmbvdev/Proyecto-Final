@@ -1,6 +1,6 @@
 const { db, admin } = require("../config/firebase.js");
 
-module.exports = async function postOrder(orderid, cart, state) {
+module.exports = async function postOrder(orderid, cart, state, extras) {
   const order = {
     state: state,
     date: admin.firestore.FieldValue.serverTimestamp(),
