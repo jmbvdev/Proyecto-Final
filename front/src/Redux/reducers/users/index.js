@@ -34,8 +34,13 @@ export default function usersReducer(state = initialState, action) {
       };
     case EDIT_USER:
       return {
-        ...state,
-        users: action.payload,
+        ...state,        
+        users: state.users.map((u) => {
+          if (u.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return u;
+          }})
       };
     case DELETE_USER:
       return {

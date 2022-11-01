@@ -31,3 +31,14 @@ export async function setUserImage(uid, file) {
         console.log(error)
     }
 }
+
+
+export async function getPictureUrlUser(uid) {
+    try {
+        const imageRef = ref(storage, `users/${uid}`)
+        const url = await getDownloadURL(imageRef)
+        return url
+    } catch (error) {
+        console.log(error)
+    }
+}

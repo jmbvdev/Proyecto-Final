@@ -4,7 +4,7 @@ import { editUser, setCurrentUser } from "../Redux/actions/users";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { getPictureUrl, setUserImage } from "../firebase/Controllers";
+import { getPictureUrl, getPictureUrlUser, setUserImage } from "../firebase/Controllers";
 import { useRef } from "react";
 
 
@@ -32,6 +32,10 @@ const UserEdit = () => {
         setInput((prev) => ({ ...prev, [input.name]: input.value }));
       }, [input.name, input.value]);
 
+      React.useEffect(() => {
+        dispatch(setCurrentUser(auth.currentUser))
+      }, [user])
+
       const handleFile = () => {
         if(fileRef.current){
             fileRef.current.click();
@@ -47,7 +51,7 @@ const UserEdit = () => {
             fileReader.onload = async () => {
                 const userImage = fileReader.result;
                 const res = await setUserImage(user.uid, userImage);
-                const url = await getPictureUrl(user.uid);
+                const url = await getPictureUrlUser(user.uid);
                 url ? setphotoURL(url) : setphotoURL(null);
             }
         }
@@ -64,7 +68,7 @@ const UserEdit = () => {
         
         const updates = {
             displayName: input.displayName !== "" ? input.displayName : user.displayName,
-            photoURL: photoURL.length ? photoURL : user.photoURL,
+            photoURL: photoURL,
             password: input.password !== "" ? input.password : user.password,
             phoneNumber: input.phoneNumber !== "" ? input.phoneNumber : user.phoneNumber,
         };
