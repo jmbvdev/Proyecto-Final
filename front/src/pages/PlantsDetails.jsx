@@ -41,10 +41,10 @@ const PlantsDetails = () => {
   function handleCart() {
     Swal.fire({
       title:"Success",
-      text:"Your product was successfully created",
+      text:"Your product was successfully added to the cart",
       icon:"success",
       showDenyButton:true,
-      denyButtonText:"Go to plants",
+      denyButtonText:"Go to cart",
       denyButtonColor:"rgba(11, 115, 147, 0.713)",
       confirmButtonText:"ok",
       confirmButtonColor:"rgb(9, 102, 74)"

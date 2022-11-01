@@ -2,8 +2,28 @@ import React from 'react';
 import s from "../styles/favorites.module.css"
 import image from "../images/hoya.webp"
 import {MdDelete}from "react-icons/md"
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const Favorites = () => {
+    const user= useSelector(state=>state.usersReducer.currentUser)
+    const data=useSelector(state=>state.productsReducer.productsBackUp)
+    const [favorites, setFavorites]= useState([])
+
+    useEffect(()=>{
+        axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/favourites/${user.uid}`)
+        .then((res)=>{
+            let favArray=[]
+            res.data.forEach((f)=>{
+                favArray=favArray.concat(data.filter(fav=>fav.id===f.id))     
+            })
+            setFavorites(favArray)
+        })
+    },[])
+    
+
     return (
         <div className={s.main}>
              <div className={s.title_container}>
@@ -17,14 +37,24 @@ const Favorites = () => {
                 <div className={s.right}>
                     <h2>Your favorite plants</h2>
                     <div className={s.favorite_list}>
-                        <div className={s.card}>
-                            <img src="https://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_Faux-Braided-Money-Tree_burbank_almond.jpg?v=1665085617" alt="" />
-                            <div className={s.specs}>
-                                <h4>Faux Braided Money Tree</h4>
-                                <p>$375</p>
-                                <button><MdDelete/></button>
-                            </div>
-                        </div>
+                        {
+                            favorites.map(fav=>{
+                                return(
+                                    <div className={s.card}>
+                                        <img src={fav.data?.image} alt="" />
+                                        <div className={s.specs}>
+                                          <h4>{fav.data?.name}</h4>
+                                           <p>${fav.data.price}</p>
+                                              <button><MdDelete/></button>
+
+                                        </div>
+
+                                    </div>
+                                )
+                            })
+                        }
+                   
+                   
                         
 
                     </div>

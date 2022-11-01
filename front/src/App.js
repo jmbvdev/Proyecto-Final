@@ -21,6 +21,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
 import Favorites from "./pages/Favorites";
+import UserEdit from "./auth/UserEdit";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
