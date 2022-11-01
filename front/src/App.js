@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import Plants from "./pages/Plants";
 import PlantsDetails from "./pages/PlantsDetails";
 import Cart from "./pages/Cart";
-import Auth from "./auth/Auth";
 import CreatePlant from "./pages/CreatePlant";
 import EditPlant from "./pages/EditPlant";
 import NotFound from "./components/NotFound";
@@ -64,6 +63,7 @@ function App() {
         <Route path="/sign-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/edit" element={<UserEdit />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
