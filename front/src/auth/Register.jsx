@@ -12,6 +12,7 @@ import { editUser, setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 
 export default function Register() {
+
   const initialState = {
     displayName: "",
     email: "",
@@ -19,17 +20,16 @@ export default function Register() {
   };
 
   const [input, setInput] = React.useState(initialState);
-
   const [password2, setPassword2] = React.useState("");
-  const online = useSelector((state) => state.usersReducer.online);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setInput((prev) => ({ ...prev, [input.name]: input.value }));
   }, [input.name, input.value]);
 
   const handleOnSubmit = (e) => {
+    e.preventDefault();
     if (
       input.displayName !== null &&
       input.email !== null &&
@@ -37,19 +37,19 @@ export default function Register() {
       password2 !== null &&
       input.password === password2
     ) {
-      e.preventDefault();
       createUserWithEmailAndPassword(auth, input.email, input.password).then(
-        () => {
-          sendEmailVerification(auth.currentUser).then(() => {
-            signOut(auth).then(() => {
-              dispatch(setCurrentUser(null));
+         () => {
+            sendEmailVerification(auth.currentUser).then( () => {
+               signOut(auth).then(() => {
+                dispatch(setCurrentUser(null))
+              }
+              )
             });
-          });
         }
       );
       setInput(initialState);
       alert("User succesfully created!");
-      history("/");
+      navigate("/");
     }
   };
 
