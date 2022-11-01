@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import empty from "../images/cart.webp"
-import Swal from "sweetalert2"
+import empty from "../images/cart.webp";
+import Swal from "sweetalert2";
 
 import {
   changeQuantity,
@@ -26,21 +26,20 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   function handleDeleteAll() {
-
     Swal.fire({
-      title:"Warning",
-      text:"Are you sure you want to remove all the products from the cart?",
-      icon:"error",
-      showDenyButton:true,
-      denyButtonText:"No",
-      denyButtonColor:"#72CE65",
-      confirmButtonText:"Yes",
-      confirmButtonColor:"#FF5733"
-    }).then(res=>{
+      title: "Warning",
+      text: "Are you sure you want to remove all the products from the cart?",
+      icon: "error",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    }).then((res) => {
       if (res.isConfirmed) {
-      dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
+        dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
       }
-    })
+    });
   }
 
   function handleQuantity(id, value) {
@@ -52,21 +51,20 @@ const Cart = () => {
   function handleOnPurchase(e) {
     e.preventDefault();
     if (!currentUser) navigate("/sign-in");
-    else setPago(true);
+    setPago(true);
   }
 
   function handleDeletePlant(id) {
-
     Swal.fire({
-      title:"Warning",
-      text:"Are you sure you want to remove this plant?",
-      icon:"error",
-      showDenyButton:true,
-      denyButtonText:"No",
-      denyButtonColor:"#72CE65",
-      confirmButtonText:"Yes",
-      confirmButtonColor:"#FF5733"
-    }).then(res=>{
+      title: "Warning",
+      text: "Are you sure you want to remove this plant?",
+      icon: "error",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    }).then((res) => {
       if (res.isConfirmed) {
         plants.filter((p) => p.id === id);
         dispatch(deleteProduct(id));
@@ -79,7 +77,8 @@ const Cart = () => {
           );
         }
       }
-    })}
+    });
+  }
 
   let sum = 0;
   for (let i = 0; i < plants.length; i++) {
@@ -88,68 +87,64 @@ const Cart = () => {
 
   return (
     <div className={s.cart_container}>
-      {
-       sum>1?
+      {sum > 1 ? (
         <div className={s.product}>
-        <h3 className={s.title}>Your cart</h3>
+          <h3 className={s.title}>Your cart</h3>
 
-        <button onClick={handleDeleteAll} className={s.clear}>Clear All</button>
-        {plants?.map((p) => {
-
-
-          return (
-            <>
-              <div className={s.list}>
-           
-                <div className={s.left}>
-                  <img src={p.image} alt="" />
-                  <div className={s.specs}>
-                    <strong>{p.name}</strong>
-                    <p className={s.price}>${p.price}</p>
-                    <div className={s.counter}>
-                      <button
-                        disabled={p.count === 1}
-                        onClick={() => handleQuantity(p.id, -1)}
-                      >
-                        -
+          <button onClick={handleDeleteAll} className={s.clear}>
+            Clear All
+          </button>
+          {plants?.map((p) => {
+            return (
+              <>
+                <div className={s.list}>
+                  <div className={s.left}>
+                    <img src={p.image} alt="" />
+                    <div className={s.specs}>
+                      <strong>{p.name}</strong>
+                      <p className={s.price}>${p.price}</p>
+                      <div className={s.counter}>
+                        <button
+                          disabled={p.count === 1}
+                          onClick={() => handleQuantity(p.id, -1)}
+                        >
+                          -
+                        </button>
+                        <p>{p.count}</p>
+                        <button
+                          disabled={p.count === p.stock}
+                          onClick={() => handleQuantity(p.id, 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={s.total}>
+                    <h3>${p.price * p.count}</h3>
+                    <div className={s.total_btn}>
+                      <button className={s.heart_icon}>
+                        <FaHeart />
                       </button>
-                      <p>{p.count}</p>
                       <button
-                        disabled={p.count === p.stock}
-                        onClick={() => handleQuantity(p.id, 1)}
+                        onClick={() => handleDeletePlant(p.id)}
+                        className={s.delete}
                       >
-                        +
+                        <MdDeleteForever />
                       </button>
                     </div>
                   </div>
                 </div>
-                <div className={s.total}>
-                  <h3>${p.price * p.count}</h3>
-                  <div className={s.total_btn}>
-                    <button className={s.heart_icon}>
-                      <FaHeart />
-                    </button>
-                    <button
-                      onClick={() => handleDeletePlant(p.id)}
-                      className={s.delete}
-                    >
-                      <MdDeleteForever />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div > :
-         <div className={s.empty}>
+              </>
+            );
+          })}
+        </div>
+      ) : (
+        <div className={s.empty}>
           <img src={empty} alt="empty" />
           <h4>Your cart is empty</h4>
-        
-
-
-         </div>
-      }
+        </div>
+      )}
       <div className={s.check}>
         <h3>ORDER SUMMARY</h3>
         <div className={s.summary}>
@@ -171,6 +166,6 @@ const Cart = () => {
       </div>
     </div>
   );
-    }
+};
 
-export default Cart
+export default Cart;

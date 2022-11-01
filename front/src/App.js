@@ -21,11 +21,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
+import PostMercadoPago from "./components/postMercadoPago";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
 
-  
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
@@ -48,7 +48,6 @@ function App() {
     return unSubscribeAuth;
   }, []);
 
-
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
@@ -63,6 +62,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
+        <Route path="/success" element={<PostMercadoPago />} />
+        <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
