@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import s from "../styles/register.module.css";
-import { editUser, setCurrentUser } from "../Redux/actions/users";
+import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 
 export default function Register() {

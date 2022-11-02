@@ -13,8 +13,10 @@ const Home = ({isSearch}) => {
 
     return (
         <div >     
-
-          <Carousel isSearch={isSearch}/>
+         
+         <Carousel isSearch={isSearch}/>
+         
+       
           <PopularPlants/>
           <HomeList/>            
           {/* <Comentarios/> */}

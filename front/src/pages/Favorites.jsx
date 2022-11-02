@@ -9,12 +9,14 @@ import { useState } from "react";
 import FavButton from "../components/FavButton";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 
+
 const Favorites = () => {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const data = useSelector((state) => state.productsReducer.productsBackUp);
   const [favorites, setFavorites] = useState([]);
   console.log(user, data);
   useEffect(() => {
+
     if (user) {
       axios
         .get(
@@ -28,7 +30,8 @@ const Favorites = () => {
           setFavorites(favArray);
         });
     }
-  }, [user, data]);
+  }, [user,data]);
+
 
   return (
     <div className={s.main}>
@@ -46,11 +49,11 @@ const Favorites = () => {
             <div className={s.favorite_list}>
               {favorites?.map((fav) => {
                 return (
-                  <div className={s.card}>
+                  <div className={s.card} key={fav.id}>
                     <img src={fav.data?.image} alt="" />
                     <div className={s.specs}>
                       <h4>{fav.data?.name}</h4>
-                      <p>${fav.data.price}</p>
+                      <p>${fav.data?.price}</p>
                       <div
                         onClick={() => {
                           setFavorites(
@@ -62,7 +65,9 @@ const Favorites = () => {
                           id={fav.id}
                           user={user?.uid}
                           iamInFavPage={true}
-                          icon={<MdDelete />}
+
+                          icon={<MdDelete className={s.delete} />}
+
                         />
                       </div>
                     </div>

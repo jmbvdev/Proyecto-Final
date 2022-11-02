@@ -23,19 +23,27 @@ import Dashboard from "./auth/Dashboard";
 import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
+import Verification from "./auth/Verification";
+import { GetAllProducts } from "./Redux/actions/products";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
 
+
+
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
+ 
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     dispatch(GetAllProducts());
   }, []);
 
+
   React.useEffect(() => {
+
     if (!auth.currentUser) dispatch(loadCart());
     const unSubscribeAuth = onAuthStateChanged(
       auth,
@@ -54,10 +62,10 @@ function App() {
 
   return (
     <div className="App">
-      <Nav setIsSearch={handleSearch} />
+      <Nav setIsSearch={handleSearch}  />
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
-        <Route path="/" element={<Home isSearch={isSearch} />} />
+        <Route path="/" element={<Home isSearch={isSearch}/>} />
         <Route exact path="/create" element={<CreatePlant />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/plants" element={<Plants />} />
@@ -68,6 +76,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/edit" element={<UserEdit />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
+        <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="*" element={<NotFound />} />

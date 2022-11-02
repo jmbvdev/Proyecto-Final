@@ -1,18 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiSearchLine } from "react-icons/ri";
+import { RiCloseLine, RiSearchLine } from "react-icons/ri";
 import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
 import "../styles/nav.css";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { userOnline, setCurrentUser } from "../Redux/actions/users/index";
+import { setCurrentUser } from "../Redux/actions/users/index";
+import Swal from "sweetalert2"
+import {  GiHamburgerMenu } from "react-icons/gi";
 
-const Nav = ({ setIsSearch }) => {
+
+
+
+const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,12 +24,28 @@ const Nav = ({ setIsSearch }) => {
   const user = useSelector((state) => state.usersReducer.currentUser);
 
   const signOutHandler = () => {
-    signOut(auth).then(() => {
-      console.log(auth)
-      dispatch(setCurrentUser(null))
-      navigate('/');
-    });
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to logout?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      denyButtonColor:"#FF5733",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"#72CE65"
+    }).then(res=>{
+      if (res.isConfirmed) {
+          signOut(auth).then(() => {
+          dispatch(setCurrentUser(null))
+          navigate('/');
+      });
+      }
+    })
   };
+  function handleMobile() {
+    setMobile(!Mobile)
+ 
+  }
 
   let total = 0;
   for (let i = 0; i < plants.length; i++) {
@@ -99,7 +119,7 @@ const Nav = ({ setIsSearch }) => {
               </Link>
             </button>
           )}
-
+          
           <FiHeart className="favorite-icon" onClick={() => navigate("/favorites")} />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
@@ -108,13 +128,13 @@ const Nav = ({ setIsSearch }) => {
               <p className="total">{total}</p>
             </div>
           </div>
+        </div>
           <button
             className="mobile-menu-icon"
-            onClick={() => setMobile(!Mobile)}
+            onClick={handleMobile}
           >
-            {Mobile ? "X" : "burger"}
+            {Mobile ? <RiCloseLine/> : <GiHamburgerMenu/>}
           </button>
-        </div>
       </nav>
     </>
   );
