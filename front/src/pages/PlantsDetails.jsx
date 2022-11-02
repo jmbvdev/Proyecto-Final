@@ -41,16 +41,15 @@ const PlantsDetails = () => {
 
   function handleCart() {
     Swal.fire({
-      title:"Success",
-      text:"Your product was successfully added to the cart",
-      icon:"success",
-      showDenyButton:true,
-      denyButtonText:"Go to cart",
-      denyButtonColor:"rgba(11, 115, 147, 0.713)",
-      confirmButtonText:"ok",
-      confirmButtonColor:"rgb(9, 102, 74)"
-    })
-    .then(res=>{
+      title: "Success",
+      text: "Your product was successfully added to the cart",
+      icon: "success",
+      showDenyButton: true,
+      denyButtonText: "Go to cart",
+      denyButtonColor: "rgba(11, 115, 147, 0.713)",
+      confirmButtonText: "ok",
+      confirmButtonColor: "rgb(9, 102, 74)",
+    }).then((res) => {
       if (res.isDenied) {
         navigate("/cart");
       }
@@ -143,9 +142,7 @@ const PlantsDetails = () => {
         </div>
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
-          <button>
-            <AiFillHeart className={s.hearth} />
-          </button>
+          <FavButton id={id} user={currentUser?.uid} />
           <div className={s.edit_btn}>
             <h4>Edit</h4>
             <button onClick={handleEdit}>
