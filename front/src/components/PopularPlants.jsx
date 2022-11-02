@@ -13,10 +13,7 @@ const PopularPlants = () => {
         (state) => state.productsReducer.productsBackUp
       );
       const plants = allPlants.slice(26, 29);
-      const dispatch = useDispatch();
-      useEffect(() => {
-        dispatch(GetAllProducts());
-      }, []);
+      
     
     return (
       <div className={s.popular}>
