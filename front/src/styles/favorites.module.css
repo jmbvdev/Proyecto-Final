@@ -108,9 +108,10 @@
     position: relative;
     top: 20px;
     background-color: #fff;
-    width: 350px;
+    width: 90%;
+ 
     border-radius: 10px;
-    height: 80px;
+    height: 110px;
 }
 .card img{
     width: 80px;
@@ -119,10 +120,30 @@
 }
 .specs{
     margin-right: 20px;
+  
 }
 .specs h4{
-    font-size: medium;
+width:fit-content;
+
 }
 .delete{
     cursor: pointer;
+}
+@media (max-width: 800px) {
+    .left{
+       display: none;  
+    }
+
+    .favorite_list{
+       margin-left: 20px;
+        width: 90%;
+        height: 75%;
+ 
+    }
+    .favorites{
+        width: 90vw;
+      
+        
+      
+    }
 }
