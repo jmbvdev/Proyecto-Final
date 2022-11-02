@@ -7,14 +7,16 @@ import PopularPlants from '../components/PopularPlants';
 
 
 
-const Home = ({isSearch}) => {
+const Home = ({isSearch, isVideoShow}) => {
 
   
 
     return (
         <div >     
-
-          <Carousel isSearch={isSearch}/>
+         {
+          !isVideoShow&&   <Carousel isSearch={isSearch}/>
+         }
+       
           <PopularPlants/>
           <HomeList/>            
           {/* <Comentarios/> */}

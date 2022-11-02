@@ -41,6 +41,7 @@
 .text_specs p{
     color: #ececec;
     font-size: medium;
+    caret-color: transparent;
 }
 .edit_btn{
     margin-top: 20px;
