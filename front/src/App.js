@@ -27,15 +27,13 @@ import { GetAllProducts } from "./Redux/actions/products";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
-  const[isVideoShow, setIsVideoShow]= useState(false)
+
 
 
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
-  function hideVideo() {
-    setIsVideoShow((isVideoShow) => !isVideoShow);
-  }
+ 
   const dispatch = useDispatch();
 React.useEffect(()=>{
   dispatch(GetAllProducts())
@@ -60,10 +58,10 @@ React.useEffect(()=>{
 
   return (
     <div className="App">
-      <Nav setIsSearch={handleSearch} setIsVideoShow={setIsVideoShow} isVideoShow={isVideoShow}  />
+      <Nav setIsSearch={handleSearch}  />
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
-        <Route path="/" element={<Home isSearch={isSearch} isVideoShow={isVideoShow} />} />
+        <Route path="/" element={<Home isSearch={isSearch}/>} />
         <Route exact path="/create" element={<CreatePlant />} />
         <Route path="/favorites" element={<Favorites/>} />
         <Route path="/plants" element={<Plants />} />
