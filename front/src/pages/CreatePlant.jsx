@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
@@ -8,7 +8,8 @@ import { validate } from "../Util/validate";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -19,11 +20,11 @@ const detailExample =
 
 const CreatePlant = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [uid, setUid] = useState("");
   const [error, setError] = useState({});
-
+  const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const [input, setInput] = useState({
     categories: [],
     details: "",
@@ -34,6 +35,26 @@ const CreatePlant = () => {
     type: "plant",
     logicalDeletion: false,
   });
+
+  useEffect(() => {
+    if (!currentUser) {
+      return navigate("/notfound");
+    }
+    if (currentUser.role !== "admin") {
+      Swal.fire({
+        title: "Warning",
+        text: "You are unauthorized to use this feature",
+        icon: "error",
+        showDenyButton: false,
+        denyButtonText: "No",
+        denyButtonColor: "#72CE65",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#FF5733",
+      }).then(() => {
+        return navigate("/");
+      });
+    }
+  }, [currentUser]);
 
   const fileRef = useRef(null);
 
@@ -75,7 +96,6 @@ const CreatePlant = () => {
         [e.target.name]: e.target.value,
       })
     );
-
   };
 
   function handleOnSubmit(e) {
@@ -207,7 +227,6 @@ const CreatePlant = () => {
     );
   };
 
-
   const handleShow = () =>
     setInput({
       ...input,
@@ -226,7 +245,6 @@ const CreatePlant = () => {
                   <BsImageFill />
                 </button>
                 <p>upload image</p>
-
               </div>
               <input
                 ref={fileRef}
@@ -361,7 +379,7 @@ const CreatePlant = () => {
               <div className={s.show_btn}>
                 <label>show: </label>
                 <button type="button" onClick={handleShow}>
-                  <BsEyeFill/>
+                  <BsEyeFill />
                 </button>
               </div>
             </div>

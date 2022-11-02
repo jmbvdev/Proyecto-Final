@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import { GetAllProducts } from "./Redux/actions/products";
 import Nav from "./components/Nav";
 import SearchBox from "./components/SearchBox";
 import Home from "./pages/Home";
@@ -36,9 +36,12 @@ function App() {
   }
  
   const dispatch = useDispatch();
-React.useEffect(()=>{
-  dispatch(GetAllProducts())
-})
+
+  React.useEffect(() => {
+    dispatch(GetAllProducts());
+  }, []);
+
+
   React.useEffect(() => {
 
     if (!auth.currentUser) dispatch(loadCart());
@@ -64,7 +67,7 @@ React.useEffect(()=>{
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch}/>} />
         <Route exact path="/create" element={<CreatePlant />} />
-        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
