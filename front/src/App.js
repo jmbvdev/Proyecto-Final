@@ -23,6 +23,7 @@ import Dashboard from "./auth/Dashboard";
 import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
+import { GetAllProducts } from "./Redux/actions/products";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -36,8 +37,11 @@ function App() {
     setIsVideoShow((isVideoShow) => !isVideoShow);
   }
   const dispatch = useDispatch();
-
+React.useEffect(()=>{
+  dispatch(GetAllProducts())
+})
   React.useEffect(() => {
+
     if (!auth.currentUser) dispatch(loadCart());
     const unSubscribeAuth = onAuthStateChanged(
       auth,
