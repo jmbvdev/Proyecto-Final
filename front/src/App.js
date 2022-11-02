@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import Plants from "./pages/Plants";
 import PlantsDetails from "./pages/PlantsDetails";
 import Cart from "./pages/Cart";
-import Auth from "./auth/Auth";
 import CreatePlant from "./pages/CreatePlant";
 import EditPlant from "./pages/EditPlant";
 import NotFound from "./components/NotFound";
@@ -22,6 +21,8 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
 import PostMercadoPago from "./components/postMercadoPago";
+import Favorites from "./pages/Favorites";
+import UserEdit from "./auth/UserEdit";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -53,14 +54,16 @@ function App() {
       <Nav setIsSearch={handleSearch} />
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isSearch={isSearch} />} />
         <Route exact path="/create" element={<CreatePlant />} />
+        <Route path="/favorites" element={<Favorites/>} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/edit" element={<UserEdit />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />

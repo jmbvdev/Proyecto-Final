@@ -6,6 +6,7 @@ import { GetAllProducts } from '../Redux/actions/products';
 import s from "../styles/popularPlants.module.css"
 
 
+
 const PopularPlants = () => {
     const navigate= useNavigate()
     const allPlants = useSelector(
@@ -24,7 +25,7 @@ const PopularPlants = () => {
         <div className={s.list}>
           {plants.map((plant) => {
             return (
-              <div className={s.container_card}>
+              <div className={s.container_card} key={plant.id}>
                 <div className={s.card}>
                   <div className={s.card_overlay}>
                     <button
