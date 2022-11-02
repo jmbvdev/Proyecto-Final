@@ -15,7 +15,7 @@ const navigate= useNavigate()
 React.useEffect(() => {
     dispatch(setCurrentUser(auth.currentUser));
 }, [])
-
+console.log(user?.photoURL)
 return (
     <div className={s.container}>
         <div className={s.profile}>

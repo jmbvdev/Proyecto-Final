@@ -12,7 +12,7 @@ import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userOnline, setCurrentUser } from "../Redux/actions/users/index";
 
-const Nav = ({ setIsSearch }) => {
+const Nav = ({ setIsSearch, setIsVideoShow, isVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,6 +26,10 @@ const Nav = ({ setIsSearch }) => {
       navigate('/');
     });
   };
+  function handleMobile() {
+    setMobile(!Mobile)
+    setIsVideoShow(!isVideoShow)
+  }
 
   let total = 0;
   for (let i = 0; i < plants.length; i++) {
@@ -110,7 +114,7 @@ const Nav = ({ setIsSearch }) => {
           </div>
           <button
             className="mobile-menu-icon"
-            onClick={() => setMobile(!Mobile)}
+            onClick={handleMobile}
           >
             {Mobile ? "X" : "burger"}
           </button>
