@@ -151,5 +151,9 @@
         justify-content: center;
         align-items: center;
     }
+    .title{
+        color: #fffbfb; 
+        right: 0;
+    }
    
 }

@@ -20,3 +20,9 @@
     position: relative;
     bottom: 15rem;
 }
+@media (max-width: 768px) {
+    .monstera{
+        width: 100%;
+   
+    }
+}
