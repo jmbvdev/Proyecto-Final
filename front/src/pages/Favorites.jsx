@@ -7,11 +7,14 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import FavButton from "../components/FavButton";
+import { AiOutlineConsoleSql } from "react-icons/ai";
+
 
 const Favorites = () => {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const data = useSelector((state) => state.productsReducer.productsBackUp);
   const [favorites, setFavorites] = useState([]);
+  console.log(user, data);
   useEffect(() => {
 
     if (user) {
@@ -28,6 +31,7 @@ const Favorites = () => {
         });
     }
   }, [user,data]);
+
 
   return (
     <div className={s.main}>
@@ -61,7 +65,9 @@ const Favorites = () => {
                           id={fav.id}
                           user={user?.uid}
                           iamInFavPage={true}
+
                           icon={<MdDelete className={s.delete} />}
+
                         />
                       </div>
                     </div>
