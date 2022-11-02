@@ -20,6 +20,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
+import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 
@@ -53,7 +54,6 @@ function App() {
     return unSubscribeAuth;
   }, []);
 
-
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} setIsVideoShow={setIsVideoShow} isVideoShow={isVideoShow}  />
@@ -70,6 +70,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/edit" element={<UserEdit />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
+        <Route path="/success" element={<PostMercadoPago />} />
+        <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
