@@ -79,8 +79,10 @@ const CreatePlant = () => {
   };
 
   function handleOnSubmit(e) {
+
     e.preventDefault();
     if (
+      
       !input.categories.length ||
       !input.details ||
       !image ||
@@ -89,7 +91,17 @@ const CreatePlant = () => {
       !input.size.length ||
       !input.stock
     ) {
-      return alert("Faltan datos");
+  
+      Promise.resolve(Swal.fire({
+
+        title: "Ups",
+        text: "You don't enter any data",
+        icon: "warning",
+        showDenyButton: true,
+        confirmButtonText: "ok",
+        confirmButtonColor: "rgb(9, 102, 74)",
+      }))
+      return ;
     }
 
     const product = {
