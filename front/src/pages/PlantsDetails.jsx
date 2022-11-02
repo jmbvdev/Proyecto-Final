@@ -150,6 +150,11 @@ const PlantsDetails = () => {
             </button>
           </div>
         </div>
+        {
+          cart.findIndex((e) => e.id === id) !== -1 &&(
+            <h5>Already in your cart</h5>
+          )
+        }
 
         <button
           disabled={cart.findIndex((e) => e.id === id) !== -1}
