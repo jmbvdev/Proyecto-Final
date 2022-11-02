@@ -5,7 +5,7 @@ import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { signOut, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import s from "../styles/register.module.css";
-import { editUser, setCurrentUser } from "../Redux/actions/users";
+import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 
 
