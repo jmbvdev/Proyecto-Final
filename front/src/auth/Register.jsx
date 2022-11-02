@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   signOut,
   sendEmailVerification,
@@ -12,7 +12,6 @@ import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 
 export default function Register() {
-
   const initialState = {
     displayName: "",
     email: "",
@@ -38,13 +37,12 @@ export default function Register() {
       input.password === password2
     ) {
       createUserWithEmailAndPassword(auth, input.email, input.password).then(
-         () => {
-            sendEmailVerification(auth.currentUser).then( () => {
-               signOut(auth).then(() => {
-                dispatch(setCurrentUser(null))
-              }
-              )
+        () => {
+          sendEmailVerification(auth.currentUser).then(() => {
+            signOut(auth).then(() => {
+              dispatch(setCurrentUser(null));
             });
+          });
         }
       );
       setInput(initialState);
@@ -119,6 +117,9 @@ export default function Register() {
               </button>
             </div>
           </form>
+          <button>
+            <Link to="/sign-in">SIGN IN</Link>
+          </button>
         </div>
       </div>
     </div>

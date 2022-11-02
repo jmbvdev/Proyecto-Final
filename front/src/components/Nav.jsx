@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiSearchLine } from "react-icons/ri";
+import { RiCloseLine, RiSearchLine } from "react-icons/ri";
 import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
@@ -11,8 +11,12 @@ import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users/index";
 import Swal from "sweetalert2"
+import {  GiHamburgerMenu } from "react-icons/gi";
 
-const Nav = ({ setIsSearch }) => {
+
+
+
+const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +42,10 @@ const Nav = ({ setIsSearch }) => {
       }
     })
   };
+  function handleMobile() {
+    setMobile(!Mobile)
+ 
+  }
 
   let total = 0;
   for (let i = 0; i < plants.length; i++) {
@@ -93,9 +101,13 @@ const Nav = ({ setIsSearch }) => {
 
         <div className="icons-container">
           {user !== null ? (
-            <div>
-            <Link to="/dashboard">{auth.currentUser.email}</Link>
-            <button className="sign-in-button" onClick={signOutHandler}>
+            <div className="user">
+              <div className="user_name">
+                <img src={auth.currentUser.photoURL} alt="" />
+            <Link to="/dashboard">{auth.currentUser.displayName.split(" ")[0]}</Link>
+
+              </div>
+            <button className="sign-out-button" onClick={signOutHandler}>
               <FiLogIn className="login-icon" /> Sign out{" "}
             </button>
             </div>
@@ -107,8 +119,8 @@ const Nav = ({ setIsSearch }) => {
               </Link>
             </button>
           )}
-
-          <FiHeart className="favorite-icon" />
+          
+          <FiHeart className="favorite-icon" onClick={() => navigate("/favorites")} />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
             <HiOutlineShoppingBag className="bag-icon" />
@@ -116,13 +128,13 @@ const Nav = ({ setIsSearch }) => {
               <p className="total">{total}</p>
             </div>
           </div>
+        </div>
           <button
             className="mobile-menu-icon"
-            onClick={() => setMobile(!Mobile)}
+            onClick={handleMobile}
           >
-            {Mobile ? "X" : "burger"}
+            {Mobile ? <RiCloseLine/> : <GiHamburgerMenu/>}
           </button>
-        </div>
       </nav>
     </>
   );

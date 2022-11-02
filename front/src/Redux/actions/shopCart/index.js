@@ -65,13 +65,12 @@ export const deleteAll = (orderid, currentuserID) => {
     };
 };
 
-export const purchase = (orderID, cart) => {
+export const purchase = (orderID, cart, status) => {
   //ESTE VA INTEGRADO CON LA API DE MP
   return async (dispatch) => {
-    //primero va la logica de mercado pago
     await axios.put(
       `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${orderID}`,
-      { cart: cart, state: "Purchase init" }
+      { cart: cart, state: `Order ${status}` }
     );
     return dispatch({ type: PURCHASE });
   };
@@ -94,9 +93,12 @@ export const loadCart = (userID) => {
         let local = [];
 
         for (let i = 0; i < localStorage.length; i++) {
-          let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
-          if (oneproduc.id && oneproduc.count && oneproduc.name) {
-            local.push(oneproduc);
+          let element = localStorage.key(i);
+          if (!element.includes("traffic")) {
+            let oneproduc = JSON.parse(localStorage.getItem(element));
+            if (oneproduc.id && oneproduc.count && oneproduc.name) {
+              local.push(oneproduc);
+            }
           }
         }
         if (local.length > 0) {
@@ -113,9 +115,12 @@ export const loadCart = (userID) => {
     let local = [];
 
     for (let i = 0; i < localStorage.length; i++) {
-      let oneproduc = JSON.parse(localStorage.getItem(localStorage.key(i)));
-      if (oneproduc.id && oneproduc.count && oneproduc.name) {
-        local.push(oneproduc);
+      let element = localStorage.key(i);
+      if (!element.includes("traffic")) {
+        let oneproduc = JSON.parse(localStorage.getItem(element));
+        if (oneproduc.id && oneproduc.count && oneproduc.name) {
+          local.push(oneproduc);
+        }
       }
     }
 

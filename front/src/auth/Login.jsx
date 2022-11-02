@@ -77,7 +77,7 @@ export default function Login() {
                     type="checkbox"
                     id="remember"
                   />
-                  <label className={s.check_label} for="remember">
+                  <label className={s.check_label} htmlFor="remember">
                     Remember for 30 days
                   </label>
                 </div>

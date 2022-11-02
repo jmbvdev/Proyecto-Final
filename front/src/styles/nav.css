@@ -172,14 +172,46 @@ position: absolute;
     width: 40px;
     cursor: pointer;
   }
+  .user_name{
+    display: flex;
+    margin-right: 8px;
+    font-size: medium;
+    font-weight: bold;
+
+  }
+  .user_name a{
+    text-decoration: none;
+    color: #1f2516;
+  }
+  .user_name img{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+  
+
+  }
+  .sign-out-button{
+    background-color: #475533;
+    color: aliceblue;
+    font-family: "Pippins", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 100px;
+    font-size: medium;
+    padding: 5px;
+    caret-color: transparent;
+  }
  
   @media (max-width: 768px) {
     .logo {
-      display: flex;
-      position: absolute;
-      top: 15px;
-      left: 35px;
-      caret-color: transparent;
+     display: none;
     }
     .nav-links {
       display: none;
@@ -191,10 +223,11 @@ position: absolute;
       list-style: none;
       box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
       left: 0;
-      top: 10%;
+      top: 12%;
       transition: all 0.5s ease-in-out;
       width: 100%;
       background-color: white;
+      z-index: 10;
     }
     ul li {
       padding: 32px;
@@ -210,5 +243,24 @@ position: absolute;
     }
     .hero h1 {
       font-size: 50px;
+    }
+    .user{
+      flex-direction: column;
+      gap: 5px;
+    }
+    .sign-out-button{
+      width: 80px;
+      font-size: smaller;
+    }
+    .icons-container{
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .navbar{
+      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+     
     }
   }
