@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser, setCurrentUser } from "../Redux/actions/users";
-import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { getPictureUrl, getPictureUrlUser, setUserImage } from "../firebase/Controllers";
 import { useRef } from "react";
-
+import s from "../styles/userEdit.module.css"
+import image from "../images/edit.webp"
+import { BiUser } from "react-icons/bi";
+import {RiLockPasswordFill, RiLockPasswordLine}from "react-icons/ri" 
+import { GiPhone } from "react-icons/gi";
 
 
 const UserEdit = () => {
@@ -79,60 +82,96 @@ const UserEdit = () => {
       };
 
     return(
-        <div>
-            <form onSubmit={(e) => handleOnSubmit(e)}>
-                <div>
-                    <label>User Name:</label>
-                    <input
-                        name="displayName"
-                        value={input.displayName}
-                        onChange={handleChange}
-                        placeholder="User name"/>
-                </div>
-                <div>
-                    <label>User password:</label>
-                    <input 
-                        name="password"
-                        value={input.password}
-                        onChange={handleChange}
-                        placheholder="Password"
-                        type="password"
-                        />
-                    <input 
-                        name="password2"
-                        value={password2}
-                        onChange={e => setPassword2(e.target.value)}
-                        placheholder="Repeat your password"
-                        type="password"
-                        />
-                </div>
-                <div>
-                    <label>User phone Number:</label>
-                    <input 
-                        name="phoneNumber"
-                        value={input.phoneNumber}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        />
-                </div>
-                <div>
-                    <label>User image:</label>
+        <div className={s.container}>
+            <div className={s.profile}>
+            <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
+            <div className={s.input_label}>
+                    <p className={s.name_input}>User image:</p>
+                <div className={s.input_container} >
                     <button type="button" onClick={handleFile}></button>
                     <input 
                         name="photoURL"
                         ref={fileRef}
                         type="file"
                         onChange={handleImage}
+                        className={s.file}
+                        />
+
+                </div>
+                </div>
+                    <div className={s.input_label}>
+
+                    <p className={s.name_input}>user name</p>
+                <div className={s.input_container}>
+                    <BiUser className={s.user_icon}/>
+                    <input
+                        name="displayName"
+                        value={input.displayName}
+                        onChange={handleChange}
+                        placeholder="User name"
+                        className={s.input_text}
+                        autoComplete="off"
+                    
+                        />
+                        
+                    </div>
+                    
+                </div>
+                <div className={s.input_label}>
+                <p className={s.name_input}>password</p>
+
+                <div className={s.input_container}>
+                    <RiLockPasswordFill  className={s.user_icon}/>
+                    <input 
+                        name="password"
+                        value={input.password}
+                        onChange={handleChange}
+                        placheholder="Password"
+                        type="password"
+                        className={s.input_text}
+                        autoComplete="off"
+                        />
+                 </div>
+                </div>
+                <div className={s.input_container}>
+                <RiLockPasswordLine  className={s.user_icon}/>
+                    <input 
+                        name="password2"
+                        value={password2}
+                        onChange={e => setPassword2(e.target.value)}
+                        placheholder="Repeat your password"
+                        type="password"
+                        className={s.input_text}
+                        autoComplete="off"
+                        />
+
+                </div>
+                <div className={s.input_label}>
+
+                    <p className={s.name_input}>phone</p>
+                <div className={s.input_container}>
+                    <GiPhone className={s.user_icon}/>
+                    <input 
+                        name="phoneNumber"
+                        value={input.phoneNumber}
+                        onChange={handleChange}
+                        placeholder="Phone Number"
+                        className={s.input_text}
                         />
                 </div>
-                <div>
+                </div>
+                
                     <button 
                         type="submit"
+                        className={s.update}
                         >
                             UPDATE
                     </button>
-                </div>
+             
             </form>
+            <img src={image} className={s.calatea} />
+
+            </div>
         </div>
     )
 };

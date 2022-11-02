@@ -45,7 +45,7 @@ const Favorites = () => {
                                         <div className={s.specs}>
                                           <h4>{fav.data?.name}</h4>
                                            <p>${fav.data.price}</p>
-                                              <button><MdDelete/></button>
+                                              <button><MdDelete className={s.delete}/></button>
 
                                         </div>
 

@@ -81,9 +81,13 @@ const Nav = ({ setIsSearch }) => {
 
         <div className="icons-container">
           {user !== null ? (
-            <div>
-            <Link to="/dashboard">{auth.currentUser.email}</Link>
-            <button className="sign-in-button" onClick={signOutHandler}>
+            <div className="user">
+              <div className="user_name">
+                <img src={auth.currentUser.photoURL} alt="" />
+            <Link to="/dashboard">{auth.currentUser.displayName.split(" ")[0]}</Link>
+
+              </div>
+            <button className="sign-out-button" onClick={signOutHandler}>
               <FiLogIn className="login-icon" /> Sign out{" "}
             </button>
             </div>
