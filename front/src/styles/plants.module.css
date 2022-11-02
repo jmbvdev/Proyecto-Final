@@ -66,3 +66,8 @@
     justify-content: left;
     align-items: center;
 }
+@media (max-width: 768px) {
+    .list{
+        width: 100%;
+    }
+}
