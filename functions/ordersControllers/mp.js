@@ -16,9 +16,9 @@ module.exports = async (req, res, next) => {
       transaction_amount: parseInt(totalAmount),
       items: items,
       back_urls: {
-        success: "prueba",
-        failure: "preba 2",
-        pending: "prueba 3",
+        success: "api-plants-b6153.web.app/sucess",
+        failure: "api-plants-b6153.web.app/failure",
+        pending: "api-plants-b6153.web.app/pending",
       },
     };
 
