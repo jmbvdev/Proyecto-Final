@@ -208,11 +208,7 @@ position: absolute;
     padding: 5px;
     caret-color: transparent;
   }
- 
-  @media (max-width: 768px) {
-    .logo {
-     display: none;
-    }
+  @media (max-width: 1120px) {
     .nav-links {
       display: none;
       caret-color: transparent;
@@ -229,6 +225,15 @@ position: absolute;
       background-color: white;
       z-index: 10;
     }
+    .mobile-menu-icon {
+      position: absolute;
+      display: block;
+      right: 20px;
+     
+    }
+    .icons-container{
+      width: 55%;
+    }
     ul li {
       padding: 32px;
       width: 100%;
@@ -236,11 +241,20 @@ position: absolute;
       text-align: center;
       caret-color: transparent;
     }
-    .mobile-menu-icon {
-      position: absolute;
-      display: block;
-      right: 20px;
+  }
+  @media (max-width: 768px) {
+    .logo {
+     display: none;
     }
+   
+    ul li {
+      padding: 32px;
+      width: 100%;
+      transition: all 0.5s ease-in-out;
+      text-align: center;
+      caret-color: transparent;
+    }
+   
     .hero h1 {
       font-size: 50px;
     }
@@ -263,4 +277,5 @@ position: absolute;
       justify-content: space-between;
      
     }
+   
   }
