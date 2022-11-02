@@ -198,3 +198,24 @@ cursor: pointer;
     color:rgba(255, 255, 255, 0.625);
     cursor: pointer;
 }
+@media (max-width: 768px) {
+    .wraper{
+        width: 90%;
+        min-width: 340px;
+        flex-direction: column;
+        height: auto; 
+    }
+    .create_btn{
+        margin-bottom: 20px;
+      }
+      .form h4{
+        color: #fff;
+        font-family: "Inter", sans-serif;
+        margin-top: 30px;
+    }
+    .form{
+        width: 90%;
+        padding: 20px;
+    }
+  
+  }
