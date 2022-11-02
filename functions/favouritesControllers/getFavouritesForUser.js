@@ -5,7 +5,7 @@ module.exports = async function getFavouritesForUser(req, res, next) {
     const { id } = req.params; //userID
     const favouritesSnapshot = await db
       .collection("favourites")
-      .where("userID", "==", id)
+      .where(id, "==", id)
       .get();
     const favs = [];
     favouritesSnapshot.forEach((f) => {
