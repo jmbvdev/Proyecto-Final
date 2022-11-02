@@ -12,7 +12,8 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
+import FavButton from "../components/FavButton";
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -51,9 +52,9 @@ const PlantsDetails = () => {
     })
     .then(res=>{
       if (res.isDenied) {
-        navigate("/cart")
+        navigate("/cart");
       }
-    })
+    });
     dispatch(
       addProduct(
         {
@@ -68,7 +69,6 @@ const PlantsDetails = () => {
     );
 
     if (currentUser) {
-      
       dispatch(
         saveCart(
           [
@@ -86,7 +86,6 @@ const PlantsDetails = () => {
         )
       );
     }
-
   }
 
   return plant?.name ? (
@@ -147,11 +146,12 @@ const PlantsDetails = () => {
           <button>
             <AiFillHeart className={s.hearth} />
           </button>
-        <div className={s.edit_btn}>
-          <h4>Edit</h4>
-      <button onClick={handleEdit}><FaRegEdit/></button>
-
-        </div>
+          <div className={s.edit_btn}>
+            <h4>Edit</h4>
+            <button onClick={handleEdit}>
+              <FaRegEdit />
+            </button>
+          </div>
         </div>
 
         <button
