@@ -8,7 +8,6 @@ import { TbPlant2 } from "react-icons/tb";
 import { FaDog } from "react-icons/fa";
 import s from "../styles/details.module.css";
 import { useState } from "react";
-import { AiFillHeart } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
@@ -150,6 +149,11 @@ const PlantsDetails = () => {
             </button>
           </div>
         </div>
+        {
+          cart.findIndex((e) => e.id === id) !== -1 &&(
+            <h5>Already in your cart</h5>
+          )
+        }
 
         <button
           disabled={cart.findIndex((e) => e.id === id) !== -1}

@@ -211,11 +211,7 @@ position: absolute;
  
   @media (max-width: 768px) {
     .logo {
-      display: flex;
-      position: absolute;
-      top: 15px;
-      left: 35px;
-      caret-color: transparent;
+     display: none;
     }
     .nav-links {
       display: none;
@@ -227,10 +223,11 @@ position: absolute;
       list-style: none;
       box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
       left: 0;
-      top: 10%;
+      top: 12%;
       transition: all 0.5s ease-in-out;
       width: 100%;
       background-color: white;
+      z-index: 10;
     }
     ul li {
       padding: 32px;
@@ -246,5 +243,24 @@ position: absolute;
     }
     .hero h1 {
       font-size: 50px;
+    }
+    .user{
+      flex-direction: column;
+      gap: 5px;
+    }
+    .sign-out-button{
+      width: 80px;
+      font-size: smaller;
+    }
+    .icons-container{
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .navbar{
+      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+     
     }
   }
