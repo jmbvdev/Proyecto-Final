@@ -6,7 +6,7 @@ import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import s from "../styles/login.module.css";
 import diferent from "../images/diferent.webp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
 import { setCurrentUser } from "../Redux/actions/users";
 
@@ -15,16 +15,15 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const history = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector(state => state.usersReducer.currentUser)
+
   const handleLogin = () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
-        .then((user) => {
-          if (!user.user.emailVerified) {
-            //ventana pop up para que muestre que tiene q verificar el emial.
-            return signOut(auth);
-          }
-          dispatch(setCurrentUser(auth.currentUser));
-
+        .then(() => {
+          dispatch(setCurrentUser(auth.currentUser))
+          auth.currentUser.emailVerified === false ? 
+          history("/verification") :
           history("/");
         })
         .catch((err) => alert(err));

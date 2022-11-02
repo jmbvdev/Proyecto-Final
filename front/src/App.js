@@ -23,6 +23,7 @@ import Dashboard from "./auth/Dashboard";
 import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
+import Verification from "./auth/Verification";
 import { GetAllProducts } from "./Redux/actions/products";
 
 function App() {
@@ -72,6 +73,7 @@ React.useEffect(()=>{
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/edit" element={<UserEdit />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
+        <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="*" element={<NotFound />} />

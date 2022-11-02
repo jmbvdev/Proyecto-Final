@@ -1,17 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiCloseLine, RiSearchLine } from "react-icons/ri";
 import { FiHeart, FiLogIn } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../images/logo-sinfondo.png";
 import "../styles/nav.css";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { userOnline, setCurrentUser } from "../Redux/actions/users/index";
+import { setCurrentUser } from "../Redux/actions/users/index";
+import Swal from "sweetalert2"
 import {  GiHamburgerMenu } from "react-icons/gi";
+
 
 
 
@@ -23,11 +24,23 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const user = useSelector((state) => state.usersReducer.currentUser);
 
   const signOutHandler = () => {
-    signOut(auth).then(() => {
-      console.log(auth)
-      dispatch(setCurrentUser(null))
-      navigate('/');
-    });
+    Swal.fire({
+      title:"Warning",
+      text:"Are you sure you want to logout?",
+      icon:"error",
+      showDenyButton:true,
+      denyButtonText:"No",
+      denyButtonColor:"#FF5733",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"#72CE65"
+    }).then(res=>{
+      if (res.isConfirmed) {
+          signOut(auth).then(() => {
+          dispatch(setCurrentUser(null))
+          navigate('/');
+      });
+      }
+    })
   };
   function handleMobile() {
     setMobile(!Mobile)
