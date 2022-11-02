@@ -33,24 +33,27 @@ const EditPlant = () => {
 
   const [image, setImage] = useState("");
   const id = useParams().id;
-
+  const navigate = useNavigate();
+  if (
+    !currentUser ||
+    (currentUser?.role[0] !== "admin" && currentUser?.role[0] !== "moderator")
+  ) {
+    navigate("/notfound");
+  }
   useEffect(() => {
-    if (!currentUser) {
-      return navigate("/notfound");
-    }
-    if (currentUser.role !== "admin") {
-      Swal.fire({
-        title: "Warning",
-        text: "You are unauthorized to use this feature",
-        icon: "error",
-        showDenyButton: false,
-        denyButtonText: "No",
-        denyButtonColor: "#72CE65",
-        confirmButtonText: "Ok",
-        confirmButtonColor: "#FF5733",
-      }).then(() => {
-        return navigate("/");
-      });
+    if (currentUser?.role[0] === "moderator") {
+      Promise.resolve(
+        Swal.fire({
+          title: "Warning",
+          text: "You are authorized to use this feature with some limitants",
+          icon: "error",
+          showDenyButton: false,
+          denyButtonText: "No",
+          denyButtonColor: "#72CE65",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#FF5733",
+        }).then(() => {})
+      );
     }
   }, [currentUser]);
 
@@ -75,7 +78,7 @@ const EditPlant = () => {
   });
 
   const fileRef = useRef(null);
-  const navigate = useNavigate();
+
   const handleOpenfilePicker = () => {
     if (fileRef.current) {
       fileRef.current.click();
@@ -136,6 +139,26 @@ const EditPlant = () => {
     dispatch(editProduct(id, product));
     navigate(-2);
   }
+
+  const handleOnSubmitForMod = (e) => {
+    e.preventDefault();
+    const product = {
+      categories: plant.categories,
+      details: plant.details,
+      image: plant.image,
+      // planter: input.planter,
+      name: plant.name,
+      price: plant.price,
+      size: plant.size,
+      stock: parseInt(input.stock) + parseInt(plant?.stock),
+      // type: input.type,
+      logicalDeletion:
+        input.logicalDeletion !== plant.logicalDeletion
+          ? input.logicalDeletion
+          : plant.logicalDeletion,
+    };
+    dispatch(editProduct(id, product));
+  };
 
   const handleCategories = (e) => {
     if (
@@ -218,65 +241,74 @@ const EditPlant = () => {
             <div className={s.wraper}>
               <div className={s.left}>
                 <form onSubmit={handleOnSubmit} className={s.form}>
-                  <h4>Edit plant</h4>
-                  <div className={s.image_input}>
-                    <div className={s.image_btn}>
-                      <button type="button" onClick={handleOpenfilePicker}>
-                        <BsImageFill />
-                      </button>
-                      <p>add image</p>
-                    </div>
-                    <input
-                      ref={fileRef}
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleChangefile}
-                    />
-                  </div>
+                  <h4>
+                    {currentUser?.role[0] === "moderator"
+                      ? "Update Stock"
+                      : "Edit plant"}
+                  </h4>
+                  {currentUser?.role[0] === "moderator" ? null : (
+                    <>
+                      <div className={s.image_input}>
+                        <div className={s.image_btn}>
+                          <button type="button" onClick={handleOpenfilePicker}>
+                            <BsImageFill />
+                          </button>
+                          <p>add image</p>
+                        </div>
+                        <input
+                          ref={fileRef}
+                          type="file"
+                          style={{ display: "none" }}
+                          onChange={handleChangefile}
+                        />
+                      </div>
 
-                  <div className={s.input_container}>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="name"
-                      autoComplete="off"
-                      onChange={handleOnChange}
-                      className={s.input_text}
-                    />
-                    {error.name && <p className={s.errors}>{error.name}</p>}
-                  </div>
+                      <div className={s.input_container}>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="name"
+                          autoComplete="off"
+                          onChange={handleOnChange}
+                          className={s.input_text}
+                        />
+                        {error.name && <p className={s.errors}>{error.name}</p>}
+                      </div>
 
-                  <div className={s.input_container}>
-                    <input
-                      type="text"
-                      name="details"
-                      placeholder="details"
-                      autoComplete="off"
-                      className={s.input_text}
-                      onChange={handleOnChange}
-                    />
-                    {error.details && (
-                      <p className={s.errors}>{error.details}</p>
-                    )}
-                  </div>
+                      <div className={s.input_container}>
+                        <input
+                          type="text"
+                          name="details"
+                          placeholder="details"
+                          autoComplete="off"
+                          className={s.input_text}
+                          onChange={handleOnChange}
+                        />
+                        {error.details && (
+                          <p className={s.errors}>{error.details}</p>
+                        )}
+                      </div>
 
-                  {/* <div className={s.input_container}>
+                      {/* <div className={s.input_container}>
                                     <input type="text" name="planter" placeholder="planter" onChange={handleOnChange} />
                                 </div> */}
 
-                  <div className={s.input_container}>
-                    <input
-                      type="number"
-                      name="price"
-                      placeholder="price"
-                      className={s.input_text}
-                      onChange={handlePrice}
-                      min="0"
-                      max="1000000"
-                    />
-                    {error.price && <p className={s.errors}>{error.price}</p>}
-                  </div>
-
+                      <div className={s.input_container}>
+                        <input
+                          type="number"
+                          name="price"
+                          placeholder="price"
+                          className={s.input_text}
+                          onChange={handlePrice}
+                          min="0"
+                          max="1000000"
+                        />
+                        {error.price && (
+                          <p className={s.errors}>{error.price}</p>
+                        )}
+                      </div>
+                    </>
+                  )}
                   <div className={s.input_container}>
                     <input
                       type="number"
@@ -289,52 +321,55 @@ const EditPlant = () => {
                     />
                     {error.stock && <p className={s.errors}>{error.stock}</p>}
                   </div>
-
-                  <div className={s.selects_container}>
-                    <select onChange={handleCategories}>
-                      <option value="select">CATEGORIES</option>
-                      {allCategories.map((el, i) => (
-                        <option key={i} value={el}>
-                          {el}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className={s.categories_option}>
-                    {input.categories.map((el) => (
-                      <div className={s.categories_option}>
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteCategories(el)}
-                        >
-                          x
-                        </button>
-                        <p>{el}</p>
+                  {currentUser?.role[0] === "admin" ? null : (
+                    <>
+                      <div className={s.selects_container}>
+                        <select onChange={handleCategories}>
+                          <option value="select">CATEGORIES</option>
+                          {allCategories.map((el, i) => (
+                            <option key={i} value={el}>
+                              {el}
+                            </option>
+                          ))}
+                        </select>
                       </div>
-                    ))}
-                  </div>
 
-                  <div className={s.selects_container}>
-                    <select onChange={handleSize}>
-                      <option value="select">SIZE</option>
-                      {allSize.map((el, i) => (
-                        <option key={i} value={el}>
-                          {el}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    {input.size.length ? (
                       <div className={s.categories_option}>
-                        <button type="button" onClick={handleDeleteSize}>
-                          x
-                        </button>
-                        <p>{input.size[0]}</p>
+                        {input.categories.map((el) => (
+                          <div className={s.categories_option}>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteCategories(el)}
+                            >
+                              x
+                            </button>
+                            <p>{el}</p>
+                          </div>
+                        ))}
                       </div>
-                    ) : null}
-                  </div>
+
+                      <div className={s.selects_container}>
+                        <select onChange={handleSize}>
+                          <option value="select">SIZE</option>
+                          {allSize.map((el, i) => (
+                            <option key={i} value={el}>
+                              {el}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        {input.size.length ? (
+                          <div className={s.categories_option}>
+                            <button type="button" onClick={handleDeleteSize}>
+                              x
+                            </button>
+                            <p>{input.size[0]}</p>
+                          </div>
+                        ) : null}
+                      </div>
+                    </>
+                  )}
 
                   <div className={s.show_btn}>
                     <label>Show: </label>
@@ -342,23 +377,32 @@ const EditPlant = () => {
                       <BsEyeFill />
                     </button>
                   </div>
+                  {currentUser?.role[0] === "moderator" ? null : (
+                    <>
+                      <div>
+                        <button
+                          type="submit"
+                          disabled={Object.keys(error).length ? true : false}
+                          className={s.create_btn}
+                        >
+                          UPDATE
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className={s.delete_btn}
+                      >
+                        DELETE
+                      </button>
+                    </>
+                  )}
 
-                  <div>
-                    <button
-                      type="submit"
-                      disabled={Object.keys(error).length ? true : false}
-                      className={s.create_btn}
-                    >
-                      UPDATE
+                  {currentUser?.role[0] === "moderator" ? (
+                    <button type="button" onClick={handleOnSubmitForMod}>
+                      Update Stock
                     </button>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleDelete}
-                    className={s.delete_btn}
-                  >
-                    DELETE
-                  </button>
+                  ) : null}
                 </form>
               </div>
 
