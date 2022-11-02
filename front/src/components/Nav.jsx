@@ -15,7 +15,7 @@ import {  GiHamburgerMenu } from "react-icons/gi";
 
 
 
-const Nav = ({ setIsSearch, setIsVideoShow, isVideoShow }) => {
+const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Nav = ({ setIsSearch, setIsVideoShow, isVideoShow }) => {
   };
   function handleMobile() {
     setMobile(!Mobile)
-    setIsVideoShow(!isVideoShow)
+ 
   }
 
   let total = 0;

@@ -7,15 +7,15 @@ import PopularPlants from '../components/PopularPlants';
 
 
 
-const Home = ({isSearch, isVideoShow}) => {
+const Home = ({isSearch}) => {
 
   
 
     return (
         <div >     
-         {
-          !isVideoShow&&   <Carousel isSearch={isSearch}/>
-         }
+         
+         <Carousel isSearch={isSearch}/>
+         
        
           <PopularPlants/>
           <HomeList/>            
