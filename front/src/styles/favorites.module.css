@@ -11,6 +11,7 @@
     justify-content: flex-start;
     align-items: center;
     align-content: left;
+
     
 }
 .title.container{
@@ -43,6 +44,7 @@
     background-color: #e3e4de;
     border-radius: 20px;
     display: flex;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     
   
 }
@@ -69,6 +71,7 @@
 }
 .favorite_list{
     background-color: #27262b;
+  
     margin-top: 20px;
     width: 90%;
     height: 75%;
@@ -118,4 +121,7 @@
 }
 .specs h4{
     font-size: medium;
+}
+.delete{
+    cursor: pointer;
 }

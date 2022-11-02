@@ -172,6 +172,42 @@ position: absolute;
     width: 40px;
     cursor: pointer;
   }
+  .user_name{
+    display: flex;
+    margin-right: 8px;
+    font-size: medium;
+    font-weight: bold;
+
+  }
+  .user_name a{
+    text-decoration: none;
+    color: #1f2516;
+  }
+  .user_name img{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+  
+
+  }
+  .sign-out-button{
+    background-color: #475533;
+    color: aliceblue;
+    font-family: "Pippins", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 100px;
+    font-size: medium;
+    padding: 5px;
+    caret-color: transparent;
+  }
  
   @media (max-width: 768px) {
     .logo {
