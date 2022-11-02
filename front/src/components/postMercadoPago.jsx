@@ -27,6 +27,11 @@ export default function PostMercadoPago() {
 
   return (
     <div>
+      <p>
+        Juanma inserta una imagen dependiendo de si el estado es aproved o
+        pending
+      </p>
+      <h1>Thank you so much for buying at Calathea.</h1>
       <h3>YOUR PURCHASE ARE {status}</h3>
       <p>
         The payment id is {payment_id}. The payment method was: {payment_type}

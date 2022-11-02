@@ -7,7 +7,7 @@ const favouritesRoute = Router();
 
 favouritesRoute
   .get("/:id", getFavouritesForUser)
-  .delete("/:id", deleteFavourite)
+  .delete("/:id/:user", deleteFavourite)
   .post("/:id", addFavourite);
 
 module.exports = favouritesRoute;

@@ -2,11 +2,11 @@ const { db, admin } = require("../config/firebase.js");
 
 module.exports = async function deleteFavourite(req, res, next) {
   try {
-    const { id } = req.params;
-    const { userID } = req.body;
+    const { id, user } = req.params;
+    console.log(id, user);
     let ref = db.collection("favourites").doc(id);
     await ref.update({
-      [userID]: admin.firestore.FieldValue.delete(),
+      [user]: admin.firestore.FieldValue.delete(),
     });
     res
       .status(200)
