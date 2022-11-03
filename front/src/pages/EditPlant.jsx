@@ -36,6 +36,7 @@ const EditPlant = () => {
   const navigate = useNavigate();
   if (
     !currentUser ||
+    !currentUser?.hasOwnProperty("role") ||
     (currentUser?.role[0] !== "admin" && currentUser?.role[0] !== "moderator")
   ) {
     navigate("/notfound");
