@@ -1,0 +1,63 @@
+.container{
+ background-color:  #5BB9B8;
+ background-image: linear-gradient(rgba(133, 172, 149, 0.581),rgba(206, 208, 206, 0.763)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+ padding: 20px;
+ line-height: 1.6;
+ color: #fff;
+
+ height: 100vh;
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+ text-align: left;
+ flex-direction: column;
+
+ font-family: 'Poppins', sans-serif;
+}
+
+.table{
+    border-radius: 12px;
+
+    text-align: left;
+    display: block;
+    width: 80vw;
+ background-color: #616d79;
+ height: 80vh;
+
+ font-weight: lighter;
+
+ overflow-y: scroll;
+ 
+}
+.table th{
+    background-color: #2C3845;
+    border-bottom: 3px solid #3b5a45;
+    padding: 20px;
+    width: 10%;
+ 
+ 
+   
+}
+
+.table::-webkit-scrollbar-track {
+    border: 1px solid rgb(0, 54, 19);
+    padding: 2px 0;
+    background-color: #889388;
+  }
+  
+  .table::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  .table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #3286567c;
+    border: 1px solid #000;
+  }
+  table tr{
+    font-weight: lighter;
+  }
+  .container h2{
+    font-family: "Inter";
+  }

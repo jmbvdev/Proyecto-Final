@@ -13,6 +13,18 @@ function Verification() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const handleVerify = (e) => {
+      e.preventDefault();
+
+          sendEmailVerification(auth.currentUser).then( () => {
+             signOut(auth).then(() => {
+              dispatch(setCurrentUser(null));
+              navigate("/login");
+            }
+            )
+          });
+
+}
 
     React.useEffect(() => {
         sendEmailVerification(auth.currentUser).then( () => {
@@ -39,8 +51,7 @@ function Verification() {
 
     return (
 
-        <div>
-
+     
       <div className={s.container}>
         <div className={s.wraper}>
           <img src={warning} alt="" />

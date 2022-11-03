@@ -122,9 +122,20 @@ z-index: 0;
   padding: 5%;
   border-radius: 20px;
 }
+
+@media (max-width: 400px) {
+  .search button {
+    font-size: 30px;
+    color: #042406;
+    position: relative;
+    width: auto;
+    right: 7%;
+    cursor: pointer;
+  }
 @media (max-width: 800px) {
   .close{
     display: none;
   }
 
+}
 }

@@ -4,8 +4,9 @@ import { setCurrentUser, getUsers, getUserDetail, deleteUser } from "../Redux/ac
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { useTable } from 'react-table';
+import s from "../styles/adminNav.module.css"
 
-const AdminNav = () => {
+const AdminNav = ( isAdmin, setIsAdmin) => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,21 +28,21 @@ const AdminNav = () => {
         } = useTable({columns, data})
 
         return (
-            <table {...getTableProps()}>
-              <thead>
+            <table {...getTableProps()} className={s.table}>
+              <thead className={s.thead_column}>
                 {headerGroups.map(headerGroup => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
+                  <tr className={s.tr_column} {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => (
                       <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                     ))}
                   </tr>
                 ))}
               </thead>
-              <tbody {...getTableBodyProps()}>
+              <tbody {...getTableBodyProps()} className={s.tbody}>
                 {rows.map((row, i) => {
                   prepareRow(row)
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} className={s.tr_cell}>
                       {row.cells.map(cell => {
                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })}
@@ -81,9 +82,9 @@ const AdminNav = () => {
         const data = allUsers;
 
     return(
-        <div>
+        <div className={s.container} >
             <h2>Welcome {admin.displayName}!</h2>
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={data}  />
         </div>
     )
 };

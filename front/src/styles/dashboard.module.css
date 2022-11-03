@@ -29,6 +29,7 @@
     justify-items: center;
     align-content: center;
     align-items: center;
+    text-align: left;
     width: 100%;
     gap: 20px;
     padding: 50px;
@@ -61,6 +62,41 @@
 .calatea{
     border-radius: 12px 0px 0px 12px;
 
+}
+.admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items:center ;
+    margin-top: 20px;
+   
+
+
+    
+}
+.admin_icon{
+    color: #d5dad1;
+    font-size: 25px;
+
+}
+.admin button{
+    cursor: pointer;
+    color: #d5dad1;
+    font-family: "Dosis";
+    font-weight: bold;
+    font-size: small;
+    display: flex;
+   flex-direction: column;
+}
+.container_btn{
+
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+    gap: 1rem;
 }
 
 @media (max-width: 1000px) {
