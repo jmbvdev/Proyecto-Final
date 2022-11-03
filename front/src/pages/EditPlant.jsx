@@ -321,7 +321,7 @@ const EditPlant = () => {
                     />
                     {error.stock && <p className={s.errors}>{error.stock}</p>}
                   </div>
-                  {currentUser?.role[0] === "admin" ? null : (
+                  {currentUser?.role[0] === "moderator" ? null : (
                     <>
                       <div className={s.selects_container}>
                         <select onChange={handleCategories}>
