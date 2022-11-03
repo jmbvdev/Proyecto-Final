@@ -213,6 +213,9 @@ position: absolute;
       display: none;
       caret-color: transparent;
     }
+    .close-nav{
+      font-size: 30px;
+    }
     .nav-links-mobile {
       position: absolute;
       display: block;
@@ -222,14 +225,20 @@ position: absolute;
       top: 12%;
       transition: all 0.5s ease-in-out;
       width: 100%;
-      background-color: white;
+      background-image: linear-gradient(rgba(100, 128, 112, 0.926),rgba(33, 45, 33, 0.72)), url("https://cdn.dribbble.com/users/1050706/screenshots/12668488/calathea.jpg"); 
       z-index: 10;
     }
     .mobile-menu-icon {
       position: absolute;
       display: block;
       right: 20px;
+      cursor: pointer;
+      font-size: larger;
      
+    }
+    .link::after{
+      color: #f2f5ed;
+      background-color:#f8faf5;
     }
     .icons-container{
       width: 55%;
@@ -241,6 +250,13 @@ position: absolute;
       text-align: center;
       caret-color: transparent;
     }
+    .link_mobile{
+      color: #e0dede;
+      font-family: "Dosis";
+      font-weight: bold;
+     }
+     
+    
   }
   @media (max-width: 768px) {
     .logo {
@@ -254,7 +270,7 @@ position: absolute;
       text-align: center;
       caret-color: transparent;
     }
-   
+  
     .hero h1 {
       font-size: 50px;
     }

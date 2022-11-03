@@ -10,6 +10,7 @@ import Loading from "../components/Loading";
 import FiltersComponents from "../components/FiltersComponents";
 import EmptyPlant from "../components/EmptyPlant";
 
+
 const Plants = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const Plants = () => {
                 </div>
               </div>
             </div>
+           
           </div>
         )
       ) : (
