@@ -13,7 +13,7 @@ export default function NotFound() {
   return (
     <div className={s.container}>
       <img src={image} alt="" />
-      <h2>Sorry, we dont found what you were looking for</h2>
+      <h2>Sorry we couldn't find what you were looking for</h2>
       <button onClick={handleOnClick}>GO BACK HOME</button>
     </div>
   );
