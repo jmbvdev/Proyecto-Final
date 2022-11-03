@@ -131,3 +131,52 @@
     cursor: pointer;
     caret-color: transparent;
   }
+  @media (max-width: 1000px) {
+    .container{
+        height: 150vh;
+    }
+    .profile{
+        flex-direction: column;
+
+        margin-top: 2rem;
+        width: 50%;
+         
+    }
+    .calatea{
+        border-radius: 0px 0px 12px 12px;
+    
+    }
+    .specs{
+      
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+}
+@media (max-width: 768px) {
+    .container{
+        height: 150vh;
+
+    }
+    .profile{
+        flex-direction: column;
+        margin-top: 2rem;
+        width: 90%;
+    
+         
+    }
+    .calatea{
+        border-radius: 0px 0px 12px 12px;
+    
+    }
+    .specs{
+      
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+}

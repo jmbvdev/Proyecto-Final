@@ -216,3 +216,60 @@ margin: 10px;
 .mercadopago{
     display: none;
 }
+@media (max-width: 1000px) {
+    .check{
+        width: 40%;
+        right: 10px;
+    }
+   
+}
+@media (max-width: 800px) {
+  .cart_container{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+
+  }
+  .product{
+    position: relative;
+    width: 90%;
+    height: 50vh;
+  }
+  .check{
+    width: 85%;
+    right: 0;
+   margin: 20px;
+    position: relative;
+    margin-bottom: 10rem;
+  }
+  .empty{
+    position: relative;
+    width: 80%;
+    
+  }
+}
+@media (max-width: 500px) {
+    .left{
+        flex-direction: column;
+        margin-top: 20px;
+    }
+   
+    .clear{
+      position: relative;
+      left: 20px;
+    }
+    .check{
+        font-size: medium;
+     
+    }
+    .summary{
+        font-size: medium;
+   
+    }
+    .total_summary{
+        font-size: medium;
+    }
+
+}

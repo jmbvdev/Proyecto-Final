@@ -5,7 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function FavButton({ id, user, iamInFavPage , icon}) {
+
+export default function FavButton({ id, user, iamInFavPage, icon }) {
+
   const navigate = useNavigate();
   function handleFav(e) {
     e.preventDefault();
@@ -25,9 +27,9 @@ export default function FavButton({ id, user, iamInFavPage , icon}) {
     }
     if (iamInFavPage) {
       return axios
-      .delete(
-        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/favourites/${id}/${user}`
-      )
+        .delete(
+          `https://us-central1-api-plants-b6153.cloudfunctions.net/app/favourites/${id}/${user}`
+        )
         .then((res) => {
           Swal.fire({
             title: "Success",
@@ -58,10 +60,9 @@ export default function FavButton({ id, user, iamInFavPage , icon}) {
 
   return (
     <button onClick={handleFav}>
-      {
-          icon ||
-      <AiFillHeart className={s.hearth} />
-      }
+
+      {icon || <AiFillHeart className={s.hearth} />}
+
     </button>
   );
 }

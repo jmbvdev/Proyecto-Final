@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import { GetAllProducts } from "./Redux/actions/products";
 import Nav from "./components/Nav";
 import SearchBox from "./components/SearchBox";
 import Home from "./pages/Home";
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
 import { onAuthStateChanged } from "firebase/auth";
+import ScrollToTop from "react-scroll-to-top";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
@@ -24,23 +25,21 @@ import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
-import { GetAllProducts } from "./Redux/actions/products";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
 
-
-
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
- 
-  const dispatch = useDispatch();
-React.useEffect(()=>{
-  dispatch(GetAllProducts())
-})
-  React.useEffect(() => {
 
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(GetAllProducts());
+  }, []);
+
+  React.useEffect(() => {
     if (!auth.currentUser) dispatch(loadCart());
     const unSubscribeAuth = onAuthStateChanged(
       auth,
@@ -59,12 +58,12 @@ React.useEffect(()=>{
 
   return (
     <div className="App">
-      <Nav setIsSearch={handleSearch}  />
+      <Nav setIsSearch={handleSearch} />
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
-        <Route path="/" element={<Home isSearch={isSearch}/>} />
+        <Route path="/" element={<Home isSearch={isSearch} />} />
         <Route exact path="/create" element={<CreatePlant />} />
-        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
@@ -78,6 +77,7 @@ React.useEffect(()=>{
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ScrollToTop smooth/>
       <Footer />
     </div>
   );

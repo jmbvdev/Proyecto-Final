@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { signOut, sendEmailVerification } from "firebase/auth";
 import { setCurrentUser } from "../Redux/actions/users";
 import Swal from "sweetalert2"
+import s from "../styles/verification.module.css"
+import warning from "../images/warning.webp"
+import send from "../images/send.webp"
 
 function Verification() {
 
@@ -35,9 +38,24 @@ function Verification() {
 
 
     return (
+
         <div>
+
+      <div className={s.container}>
+        <div className={s.wraper}>
+          <img src={warning} alt="" />
+          <div className={s.right}>
+            <h3>Your account is not verify!</h3>
+            <p>To proceed click the following button!</p>
+            <div onClick={handleVerify} className={s.send}>
+                <img src={send} alt="" />
+                <p>send verification link</p>
+            </div>
+          </div>
+
         </div>
-    )
+      </div>
+    );
 }
 
 export default Verification;
