@@ -31,6 +31,7 @@ function App() {
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
+  console.log("me renderizo en App");
 
   const dispatch = useDispatch();
 
