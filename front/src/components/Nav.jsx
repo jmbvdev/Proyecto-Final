@@ -27,7 +27,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
     Swal.fire({
       title:"Warning",
       text:"Are you sure you want to logout?",
-      icon:"error",
+      icon:"question",
       showDenyButton:true,
       denyButtonText:"No",
       denyButtonColor:"#FF5733",
