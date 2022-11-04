@@ -10,11 +10,9 @@ import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users/index";
-import Swal from "sweetalert2"
-import {  GiHamburgerMenu } from "react-icons/gi";
-
-
-
+import { cleanCartAfterLogOut } from "../Redux/actions/shopCart/index";
+import Swal from "sweetalert2";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
@@ -35,16 +33,16 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
       confirmButtonColor:"#72CE65"
     }).then(res=>{
       if (res.isConfirmed) {
-          signOut(auth).then(() => {
-          dispatch(setCurrentUser(null))
-          navigate('/');
-      });
+        signOut(auth).then(() => {
+          dispatch(setCurrentUser(null));
+          dispatch(cleanCartAfterLogOut());
+          navigate("/");
+        });
       }
-    })
+    });
   };
   function handleMobile() {
-    setMobile(!Mobile)
- 
+    setMobile(!Mobile);
   }
 
   let total = 0;
@@ -104,12 +102,13 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             <div className="user">
               <div className="user_name">
                 <img src={auth.currentUser.photoURL} alt="" />
-            <Link to="/dashboard">{auth.currentUser.displayName.split(" ")[0]}</Link>
-
+                <Link to="/dashboard">
+                  {auth.currentUser.displayName.split(" ")[0]}
+                </Link>
               </div>
-            <button className="sign-out-button" onClick={signOutHandler}>
-              <FiLogIn className="login-icon" /> Sign out{" "}
-            </button>
+              <button className="sign-out-button" onClick={signOutHandler}>
+                <FiLogIn className="login-icon" /> Sign out{" "}
+              </button>
             </div>
           ) : (
             <button className="sign-in-button">
@@ -119,8 +118,11 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
               </Link>
             </button>
           )}
-          
-          <FiHeart className="favorite-icon" onClick={() => navigate("/favorites")} />
+
+          <FiHeart
+            className="favorite-icon"
+            onClick={() => navigate("/favorites")}
+          />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
             <HiOutlineShoppingBag className="bag-icon" />
