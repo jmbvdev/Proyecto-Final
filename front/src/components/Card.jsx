@@ -17,7 +17,7 @@ const Card = ({plant,id}) => {
                         <img src={plant.image} alt="" />
                         <div className={s.specs}>
                             <p>{plant.name}</p>
-                            <b>{plant.price}</b>
+                            <b>$ {plant.price}</b>
                         </div>
                     </div>
                 </div>

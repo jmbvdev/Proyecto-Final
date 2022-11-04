@@ -14,12 +14,12 @@ export default function PostMercadoPago() {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (cart.length > 0 && user) {
-      dispatch(purchase(cart[0].orderID, cart, status, user.email));
-      console.log("entre dos veces");
-    }
-  }, [cart, dispatch, status, user]);
+  // useEffect(() => {
+  //   if (cart.length > 0 && user) {
+  //     dispatch(purchase(cart[0].orderID, cart, status, user.email));
+  //     console.log("entre dos veces");
+  //   }
+  // }, [cart, dispatch, status, user]);
 
   const goHome = (e) => {
     e.preventDefault();

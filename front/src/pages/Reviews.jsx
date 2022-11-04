@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import s from "../styles/create.module.css";
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { AiFillStar } from "react-icons/ai";
-import { validateComent } from "../Util/validateComent";
+// import { validateComent } from "../Util/validateComent";
 import axios from "axios"
 import { setCurrentUser } from "../Redux/actions/users";
 import { auth } from "../firebase/firebase";
@@ -49,12 +49,12 @@ const Reviews = () => {
                     ...coments,
                     comentspositive: [e.target.value],
                 });
-            setError(
-                validateComent({
-                    ...coments,
-                    comentspositive: [e.target.value],
-                })
-            );
+            // setError(
+            //     validateComent({
+            //         ...coments,
+            //         comentspositive: [e.target.value],
+            //     })
+            // );
         }
     }
 
