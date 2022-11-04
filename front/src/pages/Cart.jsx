@@ -164,7 +164,7 @@ const Cart = () => {
           <p>Estimated total</p>
           <div className={s.discount_container}>
 
-          <span>${sum ? sum -((sum*25)/100) : 0.0}</span>
+          <span>${sum ? sum:discount?sum -((sum*25)/100) : 0.0}</span>
           {discount ? <span className={s.discount}>{discount}% Off</span> : null}
           </div>
         </div>

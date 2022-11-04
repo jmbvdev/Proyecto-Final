@@ -66,6 +66,7 @@ function App() {
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
+      
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch} />} />
