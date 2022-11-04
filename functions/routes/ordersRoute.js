@@ -42,8 +42,8 @@ ordersRoute
     try {
       //este id no es del usuario sino de la orden
       const { id } = req.params;
-      const { cart, state, extras } = req.body;
-      const reference = await modifyOrder(id, cart, state, extras);
+      const { cart, state, extras, email } = req.body;
+      const reference = await modifyOrder(id, cart, state, extras, email);
       res.status(203).send(`The ${reference.id} has been modified`);
     } catch (err) {
       next(err);

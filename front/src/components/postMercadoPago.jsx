@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -11,13 +11,15 @@ export default function PostMercadoPago() {
   const payment_id = searchParams.get("payment_id");
   const payment_type = searchParams.get("payment_type");
   const cart = useSelector((state) => state.shopCartReducer.products);
+  const user = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    //sendEMAIL NOTIFICATION
-    if (cart.length > 0) {
-      dispatch(purchase(cart[0].orderID, cart, status));
+    if (cart.length > 0 && user) {
+      dispatch(purchase(cart[0].orderID, cart, status, user.email));
+      console.log("entre dos veces");
     }
-  }, [cart]);
+  }, [cart, dispatch, status, user]);
 
   const goHome = (e) => {
     e.preventDefault();

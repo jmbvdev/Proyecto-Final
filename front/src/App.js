@@ -28,6 +28,8 @@ import Verification from "./auth/Verification";
 import UsersDash from "./auth/AdminDash/UsersDash";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
+import Reviews from "./pages/Reviews"
+
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -35,6 +37,7 @@ function App() {
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
+  console.log("me renderizo en App");
 
   const dispatch = useDispatch();
 
@@ -81,6 +84,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route exact path="/reviews/:id" element={<Reviews/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth/>
