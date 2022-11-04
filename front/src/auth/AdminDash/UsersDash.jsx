@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
+import s from "../../styles/adminNav.module.css"
 
 const UsersDash = () => {
     
@@ -30,7 +31,7 @@ const UsersDash = () => {
         } = useTable({columns, data})
 
         return (
-            <table {...getTableProps()}>
+            <table {...getTableProps()} className={s.table}>
               <thead>
                 {headerGroups.map(headerGroup => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -84,7 +85,7 @@ const UsersDash = () => {
         const data = allUsers;
 
     return(
-        <div>
+        <div className={s.container}>
             <button onClick={handleBack}>BACK</button>
             <Table columns={columns} data={data} />
         </div>
