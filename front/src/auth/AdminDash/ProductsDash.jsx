@@ -7,11 +7,11 @@ import { useTable } from 'react-table';
 const ProductsDash = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allProducts = useSelector(state => state.productsReducer.allProducts);
+    const allProducts = useSelector(state => state.productsReducer.productsBackUp);
 
 
     React.useEffect(() => {
-        if(!allProducts[0])  dispatch(GetAllProducts());
+          dispatch(GetAllProducts());
 
     }, [allProducts, dispatch]);
 
@@ -60,10 +60,6 @@ const ProductsDash = () => {
                 Header: 'Product',
                 columns: [
                     {
-                        Header: 'image',
-                        accessor: 'image'
-                    },
-                    {
                         Header: 'Name',
                         accessor: 'name'
                     }
@@ -85,7 +81,7 @@ const ProductsDash = () => {
         ], [])
 
         const data = allProducts?.map(e => {
-           return allProducts[e][data]; 
+           return e.data; 
         });
         console.log(data)
 
