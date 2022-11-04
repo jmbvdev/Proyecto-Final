@@ -10,9 +10,9 @@ import { auth } from "../firebase/firebase";
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import Swal from "sweetalert2";
 
-
-const Reviews = ({commentModal, setCommentModal}) => {
+const Reviews = () => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
     const id = useParams().id;
@@ -89,8 +89,13 @@ const[value, setValue]=useState(0)
             comentspositive: coments.comentspositive, userName: coments.userName, userImg: coments.userImg
         })
             .then(() => {
-                //setState(res.data)
-                alert("Coments Created")
+                Swal.fire({
+                    title: "Success",
+                    text: "Your product was successfully added to the cart",
+                    icon: "success",
+                    confirmButtonText: "ok",
+                    confirmButtonColor: "rgb(9, 102, 74)",
+                  })
             })
             .then(() => { Navigate(`/plants/details/${id}`) })
     }

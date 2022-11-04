@@ -157,18 +157,21 @@ const Cart = () => {
           <span>${sum ? sum : 0.0}</span>
         </div>
         <div className={s.summary}>
-          <p>Estimated shipping</p>
-          <span>$0.00</span>
+          <p>Discount</p>
+          <span>${sum && discount ? (sum*25)/100 : 0.0}</span>
         </div>
         <div className={s.total_summary}>
           <p>Estimated total</p>
-          <span>${sum ? sum : 0.0}</span>
-          {discount ? <span>{discount}% Off</span> : null}
+          <div className={s.discount_container}>
+
+          <span>${sum ? sum -((sum*25)/100) : 0.0}</span>
+          {discount ? <span className={s.discount}>{discount}% Off</span> : null}
+          </div>
         </div>
+        <Coupon setDiscount={setDiscount} />
         <button onClick={handleOnPurchase} className={s.checkout}>
           CHECKOUT NOW
         </button>
-        <Coupon setDiscount={setDiscount} />
         {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
       </div>
     </div>

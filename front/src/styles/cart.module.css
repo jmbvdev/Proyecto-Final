@@ -216,6 +216,39 @@ margin: 10px;
 .mercadopago{
     display: none;
 }
+.coupon{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.coupon input{
+    padding: 9px;
+    width: 80%;
+}
+.coupon button{
+    background-color: #353c2c;
+    color: #fff;
+    font-size: small;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.coupon button:hover{
+    background-color: #515f3e;
+}
+.discount{
+    font-size: small;
+    font-weight: lighter;
+    position: relative;
+
+
+}
+.discount_container{
+    display: flex;
+    flex-direction: column;
+}
 @media (max-width: 1000px) {
     .check{
         width: 40%;
