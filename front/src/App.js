@@ -25,8 +25,8 @@ import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
-import AdminNav from "./auth/AdminNav";
-import Reviews from "./pages/Reviews"
+import UserDash from "./auth/UserDash";
+import Reviews from "./pages/Reviews";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -74,16 +74,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/edit" element={<UserEdit />} />
-        <Route path="/dashboard/admin" element={<AdminNav/>} />
+        <Route path="/dashboard/admin" element={<UserDash />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
-        <Route exact path="/reviews/:id" element={<Reviews/>} />
+        <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
-
       </Routes>
-      <ScrollToTop smooth/>
+      <ScrollToTop smooth />
       <Footer />
     </div>
   );

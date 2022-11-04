@@ -5,18 +5,27 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { useTable } from 'react-table';
 import s from "../styles/adminNav.module.css"
+import { useState } from "react";
 
-const AdminNav = ( isAdmin, setIsAdmin) => {
+const UserDash = ( isAdmin, setIsAdmin) => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allUsers = useSelector(state => state.usersReducer.users);
+    const [allUsers, setAllusers] = useState([])
     const admin = auth.currentUser;
 
     React.useEffect(() => {
-        dispatch(getUsers());
+      if (!allUsers.length) {
+        fetch(
+         "https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/all"
+       )
+         .then((r) => r.json())
+         .then((response) => {
+         setAllusers(response)
+         });
+      }
 
-    }, [])
+    }, [allUsers])
 
     const Table = ({ columns, data}) => {
         const {
@@ -84,9 +93,9 @@ const AdminNav = ( isAdmin, setIsAdmin) => {
     return(
         <div className={s.container} >
             <h2>Welcome {admin.displayName}!</h2>
-            <Table columns={columns} data={data}  />
+            <Table columns={columns} data={data && data}  />
         </div>
     )
 };
 
-export default AdminNav;
+export default UserDash;
