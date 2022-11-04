@@ -25,8 +25,12 @@ import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
-import UserDash from "./auth/UserDash";
-import Reviews from "./pages/Reviews";
+import UsersDash from "./auth/AdminDash/UsersDash";
+import ProductsDash from "./auth/AdminDash/ProductsDash";
+import OrdersDash from "./auth/AdminDash/OrdersDash";
+import Reviews from "./pages/Reviews"
+
+
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -74,7 +78,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/edit" element={<UserEdit />} />
-        <Route path="/dashboard/admin" element={<UserDash />} />
+        <Route path="/dashboard/users" element={<UsersDash />} />
+        <Route path="/dashboard/orders" element={<OrdersDash />} />
+        <Route path="/dashboard/products" element={<ProductsDash />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />

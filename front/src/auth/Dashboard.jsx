@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
-import AdminNav from "./UserDash";
-import s from "../styles/dashboard.module.css";
-import image from "../images/profile.webp";
-import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import s from "../styles/dashboard.module.css"
+import image from "../images/profile.webp"
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -62,7 +61,18 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
+                    {role === "admin" ? 
+                    <div>
+                        <button><Link to="/dashboard/users">USERS</Link></button>
+                        <button><Link to="/dashboard/products">PRODUCTS</Link></button>
+                        <button><Link to="/dashboard/orders">ORDERS</Link></button> 
+                    </div> 
+                    : role === "moderator" ? 
+                    <div>
+                        <button><Link to="/dashboard/products">PRODUCTS</Link></button>
+                        <button><Link to="/dashboard/orders">ORDERS</Link></button> 
+                    </div>
+                    : <></>}
     </div>
   );
 };
