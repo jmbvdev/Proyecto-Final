@@ -25,7 +25,7 @@ import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
-import UsersDash from "./auth/AdminDash/UsersDash";
+import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"

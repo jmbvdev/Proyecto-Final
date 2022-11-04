@@ -154,7 +154,29 @@ font-weight:bold ;
     color:rgba(8, 57, 42, 0.713) ;
     font-size: 30px;
 }
-
+.reviews_container{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: left;
+    justify-items: center;
+    align-content: center;
+  caret-color: transparent;
+}
+.reviews_container h4{
+    display: block;
+   
+}
+.star{
+    font-size: 2rem;
+    color:rgba(9, 102, 74, 0.713) ;
+    position: relative;
+    bottom: 7px;
+    cursor: pointer;
+}
+.star:hover{
+    color:rgba(9, 87, 64, 0.713) ;
+}
 @media (max-width: 768px) {
     .container{
         flex-direction: column;

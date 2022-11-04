@@ -7,16 +7,19 @@ import { AiFillStar } from "react-icons/ai";
 import axios from "axios"
 import { setCurrentUser } from "../Redux/actions/users";
 import { auth } from "../firebase/firebase";
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 
-const Reviews = () => {
+const Reviews = ({commentModal, setCommentModal}) => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
     const id = useParams().id;
     const user = useSelector((state) => state.usersReducer.currentUser);
     const [error, setError] = useState({});
 
-
+const[value, setValue]=useState(0)
     const [coments, setComents] = useState({
         userUID: user?.uid,
         userName: user?.displayName,
@@ -96,18 +99,12 @@ const Reviews = () => {
         <div className={s.container}>
             <form className={s.form}>
                 <h2>Leave Your Comment</h2>
-                <div className={s.image_input}>
-                </div>
-                <div>
-                    <img src={user?.photoURL} alt="do not pose image" />
-                </div>
-                <div>
+                    <img src={user?.photoURL} className={s.userPic} alt="do not pose image" />
                     <h3>{user?.displayName}</h3>
-                </div>
 
                 <div >
-                    <select onChange={handleSelectComent}>
-                        <option value="select">SELECT</option>
+                    <select onChange={handleSelectComent} className={s.recomendations_select}>
+                        <option value="select">Select a recomendation</option>
                         {positive.map((el, i) => (
                             <option key={i} value={el}>
                                 {el}
@@ -121,30 +118,32 @@ const Reviews = () => {
                             <button type="button" onClick={handleDeleteSComent}>
                                 x
                             </button>
-                            <p>{coments.comentspositive[0]}</p>
+                            <p className={s.positive_comments}>{coments.comentspositive[0]}</p>
                         </div>
                     ) : null}
                     {error.comentspositive && <span className={s.errors}>{error.comentspositive}</span>}
                 </div>
                 <div className={s.input_container}>
-                    <h5> <AiFillStar />
-                        <input id="radio1" type="radio" name="star" value="1" onClick={e => handleSelect(e)} />
-                    </h5>
-                    <h5><AiFillStar /><AiFillStar />
-                        <input id="radio2" type="radio" name="star" value="2" onClick={e => handleSelect(e)} />
-                    </h5>
-                    <h5><AiFillStar /><AiFillStar /><AiFillStar />
-                        <input id="radio3" type="radio" name="star" value="3" onClick={e => handleSelect(e)} />
-                    </h5>
-                    <h5><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar />
-                        <input id="radio4" type="radio" name="star" value="4" onClick={e => handleSelect(e)} />
-                    </h5>
-                    <h5><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar />
-                        <input id="radio5" type="radio" name="star" value="5" onClick={e => handleSelect(e)} />
-                    </h5>
+                   <Box
+                   sx={{
+        '& > legend': { mt: 2 },
+      }}
+    >
+      <Typography component="legend">Star rating</Typography>
+      <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(e, newValue) => {
+          setValue(newValue);
+          handleSelect(e)
+        }}
+        />
+                   </Box>
+                  
                 </div>
                 <div>
-                    <button type='button' onClick={handleOnClick} className={s.create_btn}>Send Coments</button>
+                    <button type='button' onClick={handleOnClick} className={s.create_btn}>Send comments</button>
+
                 </div>
             </form>
         </div>
