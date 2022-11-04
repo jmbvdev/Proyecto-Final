@@ -37,25 +37,25 @@ function Verification() {
     }, [])
 
 
-    return (
+    // return (
 
-        <div>
+    //     <div>
 
-      <div className={s.container}>
-        <div className={s.wraper}>
-          <img src={warning} alt="" />
-          <div className={s.right}>
-            <h3>Your account is not verify!</h3>
-            <p>To proceed click the following button!</p>
-            <div onClick={handleVerify} className={s.send}>
-                <img src={send} alt="" />
-                <p>send verification link</p>
-            </div>
-          </div>
+    //   <div className={s.container}>
+    //     <div className={s.wraper}>
+    //       <img src={warning} alt="" />
+    //       <div className={s.right}>
+    //         <h3>Your account is not verify!</h3>
+    //         <p>To proceed click the following button!</p>
+    //         <div onClick={handleVerify} className={s.send}>
+    //             <img src={send} alt="" />
+    //             <p>send verification link</p>
+    //         </div>
+    //       </div>
 
-        </div>
-      </div>
-    );
+    //     </div>
+    //   </div>
+    // );
 }
 
 export default Verification;
