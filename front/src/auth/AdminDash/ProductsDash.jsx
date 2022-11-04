@@ -1,21 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser, getUsers, getUserDetail, deleteUser } from "../Redux/actions/users";
+import { GetAllProducts } from "../../Redux/actions/products";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase";
 import { useTable } from 'react-table';
 
-const AdminNav = () => {
-    
+const ProductsDash = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allUsers = useSelector(state => state.usersReducer.users);
-    const admin = auth.currentUser;
+    const allProducts = useSelector(state => state.productsReducer.allProducts);
+
 
     React.useEffect(() => {
-        dispatch(getUsers());
+        if(!allProducts[0])  dispatch(GetAllProducts());
 
-    }, [])
+    }, [allProducts, dispatch]);
+
+    const handleBack = () => {
+      navigate(-1);
+    };
 
     const Table = ({ columns, data}) => {
         const {
@@ -52,18 +54,18 @@ const AdminNav = () => {
             </table>
           )
         };
-
+  
         const columns = React.useMemo(() => [
             {
-                Header: 'User',
+                Header: 'Product',
                 columns: [
                     {
-                        Header: 'Display Name',
-                        accessor: 'displayName'
+                        Header: 'image',
+                        accessor: 'image'
                     },
                     {
-                        Header: 'Email',
-                        accessor: 'email'
+                        Header: 'Name',
+                        accessor: 'name'
                     }
                 ]
             },
@@ -71,21 +73,28 @@ const AdminNav = () => {
                 Header: 'Info',
                 columns: [
                             {
-                                Header: 'Phone Number',
-                                accessor: 'phoneNumber'
+                                Header: 'Price',
+                                accessor: 'price'
+                            },
+                            {
+                                Header: 'Stock',
+                                accessor: 'stock'
                             }
                         ]
             }
         ], [])
 
-        const data = allUsers;
+        const data = allProducts?.map(e => {
+           return allProducts[e][data]; 
+        });
+        console.log(data)
 
     return(
         <div>
-            <h2>Welcome {admin.displayName}!</h2>
+            <button onClick={handleBack}>BACK</button>
             <Table columns={columns} data={data} />
         </div>
     )
 };
 
-export default AdminNav;
+export default ProductsDash;
