@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
@@ -50,14 +50,14 @@ const Dashboard = () => {
               >
                 CLICK TO EDIT
               </button>
-              {role === "admin" && (
+              {/* {role === "admin" && (
                 <div className={s.admin}>
                   <FaUserCircle className={s.admin_icon} />
                   <button onClick={() => navigate("/dashboard/admin")}>
                     ADMIN
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -74,7 +74,9 @@ const Dashboard = () => {
                     </div>
                     : <></>}
     </div>
-  );
-};
+    </div>
+)
+            }
+
 
 export default Dashboard;

@@ -13,6 +13,11 @@ import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 import FavButton from "../components/FavButton";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Reviews from "./Reviews";
+import { AiFillStar } from "react-icons/ai";
+
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -24,8 +29,20 @@ const PlantsDetails = () => {
 
   const navigate = useNavigate();
   const id = useParams().id;
-
+  const[comment, setComment]=useState(false)
+  const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'transparent',
+    border: 'none',
+    p: 4,
+  };
+  
   useEffect(() => {
     dispatch(GetProductDetails(id));
     return function () {
@@ -94,6 +111,8 @@ const PlantsDetails = () => {
     }
   }
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return plant?.name ? (
     <div className={s.container}>
       <img src={plant?.image} alt="" />
@@ -157,6 +176,13 @@ const PlantsDetails = () => {
             </button>
           </div>
         </div>
+          <div className={s.reviews_container}>
+          <h4>Add a review</h4>
+          <AiFillStar className={s.star} onClick={handleOpen}/>
+        
+
+
+          </div>
 
         {
           cart.findIndex((e) => e.id === id) !== -1 &&(
@@ -174,7 +200,20 @@ const PlantsDetails = () => {
         <div className={s.edit_btn}>
          <div>
          {currentUser?(
-      <button onClick={handleComents}>Add Coments</button>):
+       <div>
+   
+    
+       <Modal
+         open={open}
+         onClose={handleClose}
+         aria-labelledby="modal-modal-title"
+         aria-describedby="modal-modal-description"
+       >
+         <Box sx={style}>
+          <Reviews/>
+         </Box>
+       </Modal>
+     </div>):
       (<button onClick={handleRedirect}>Sign in to leave a comment</button>)}
           </div> 
         </div>

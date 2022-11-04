@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import s from "../styles/cart.module.css"
+import { FaTicketAlt } from "react-icons/fa";
 
 function Coupon({ setDiscount }) {
   const [coup, setCoup] = useState("");
@@ -24,10 +26,10 @@ function Coupon({ setDiscount }) {
   }
 
   return (
-    <div>
+    <div className={s.coupon}>
       <input
         type="text"
-        placeholder="Do you have a discount code?"
+        placeholder="DISCOUNT CODE"
         autoComplete="off"
         value={coup}
         onChange={handleOnChange}
