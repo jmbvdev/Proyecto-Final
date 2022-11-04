@@ -23,15 +23,15 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
 
   const signOutHandler = () => {
     Swal.fire({
-      title: "Warning",
-      text: "Are you sure you want to logout?",
-      icon: "error",
-      showDenyButton: true,
-      denyButtonText: "No",
-      denyButtonColor: "#FF5733",
-      confirmButtonText: "Yes",
-      confirmButtonColor: "#72CE65",
-    }).then((res) => {
+      title:"Warning",
+      text:"Are you sure you want to logout?",
+      icon:"question",
+      showDenyButton:true,
+      denyButtonText:"No",
+      denyButtonColor:"#FF5733",
+      confirmButtonText:"Yes",
+      confirmButtonColor:"#72CE65"
+    }).then(res=>{
       if (res.isConfirmed) {
         signOut(auth).then(() => {
           dispatch(setCurrentUser(null));
@@ -64,32 +64,32 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             className={Mobile ? "nav-links-mobile" : "nav-links"}
             onClick={() => setMobile(false)}
           >
-            <Link to="/">
+            <Link to="/" className="link_mobile">
               <li>
                 <p className="link">Home</p>
               </li>
             </Link>
-            <Link to="/plants">
+            <Link to="/plants" className="link_mobile">
               <li>
                 <p className="link">Plants</p>
               </li>
             </Link>
-            <Link to="/about">
+            <Link to="/about" className="link_mobile">
               <li>
                 <p className="link">About</p>
               </li>
             </Link>
-            <Link to="/contact">
+            <Link to="/contact" className="link_mobile">
               <li>
                 <p className="link">Contact Us</p>
               </li>
             </Link>
-            <Link to="/faq">
+            <Link to="/faq" className="link_mobile">
               <li>
                 <p className="link">FAQ</p>
               </li>
             </Link>
-            <Link to="/delivery">
+            <Link to="/delivery" className="link_mobile">
               <li>
                 <p className="link">Delivery</p>
               </li>
@@ -131,9 +131,12 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             </div>
           </div>
         </div>
-        <button className="mobile-menu-icon" onClick={handleMobile}>
-          {Mobile ? <RiCloseLine /> : <GiHamburgerMenu />}
-        </button>
+          <button
+            className="mobile-menu-icon"
+            onClick={handleMobile}
+          >
+            {Mobile ? <RiCloseLine className="close-nav"/> : <GiHamburgerMenu/>}
+          </button>
       </nav>
     </>
   );

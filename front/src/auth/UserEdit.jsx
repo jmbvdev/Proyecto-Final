@@ -70,7 +70,7 @@ const UserEdit = () => {
         e.preventDefault();
         
         const updates = {
-            displayName: input.displayName !== "" ? input.displayName : user.displayName,
+            displayName: input.displayName !== "" ? input.displayName.charAt(0).toUpperCase() + input.displayName.slice(1) : user.displayName,
             photoURL: photoURL,
             password: input.password !== "" ? input.password : user.password,
             phoneNumber: input.phoneNumber !== "" ? input.phoneNumber : user.phoneNumber,

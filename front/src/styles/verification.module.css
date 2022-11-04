@@ -1,0 +1,64 @@
+.container{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-items: center;
+    background-color: #e8e8e8;
+
+}
+.wraper{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.wraper img{
+    width: 50%;
+}
+.right{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.right h3{
+    font-family: "Dosis";
+    font-size: 3em;
+
+
+
+
+
+}
+.send{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    caret-color: transparent;
+}
+.send img{
+    width: 25px;
+}
+.send p{
+    font-weight: "Inter";
+    margin-left: 5px;
+    font-weight: bold;
+}
+@media (max-width: 900px) {
+.wraper{
+   width: 80%;
+}
+.right h3{
+    font-size: 2em;
+}
+}
+@media (max-width: 900px) {
+    .wraper{
+        flex-direction: column;
+    }
+}

@@ -34,19 +34,17 @@ return (
         <div className={s.profile}>
             <img src={image} alt="" className={s.calatea} />
             <div className={s.specs}>
-        <img src={user?.photoURL} alt={user?.displayName} className={s.profile_pic}/>
-        <h2>{user?.displayName}</h2>
-        <div className={s.text_specs}>
-        <p><strong>Email: </strong>{user?.email}</p>
-        <button onClick={()=>navigate("/dashboard/edit")} className={s.edit_btn}>CLICK TO EDIT</button>
-        {role === "admin" ? <AdminNav /> : <p>USER #{user?.uid}</p>}
-   
-
-        </div>
+                <img src={user?.photoURL} alt={user?.displayName} className={s.profile_pic}/>
+                <h2>{user?.displayName}</h2>
+                <div className={s.text_specs}>
+                    <p><strong>Email: </strong>{user?.email}</p>
+                    <button onClick={()=>navigate("/dashboard/edit")} className={s.edit_btn}>CLICK TO EDIT</button>
+                </div>
 
             </div>
 
         </div>
+                    {role === "admin" ? <AdminNav /> : <p>USER #{user?.uid}</p>}
 
 
     </div>

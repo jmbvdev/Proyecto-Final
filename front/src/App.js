@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
 import { onAuthStateChanged } from "firebase/auth";
+import ScrollToTop from "react-scroll-to-top";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
@@ -24,6 +25,7 @@ import PostMercadoPago from "./components/postMercadoPago";
 import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
+import Reviews from "./pages/Reviews"
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -75,8 +77,10 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route exact path="/reviews/:id" element={<Reviews/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ScrollToTop smooth/>
       <Footer />
     </div>
   );

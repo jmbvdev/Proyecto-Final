@@ -37,6 +37,14 @@ const PlantsDetails = () => {
     e.preventDefault();
     navigate(`/plants/edit/${id}`);
   }
+  function handleComents(e) {
+    e.preventDefault();
+    navigate(`/reviews/${id}`);
+  }
+  function handleRedirect(e) {
+    e.preventDefault();
+    navigate(`/sign-in`);
+  }
 
   function handleCart() {
     Swal.fire({
@@ -163,6 +171,13 @@ const PlantsDetails = () => {
         >
           Add to Cart
         </button>
+        <div className={s.edit_btn}>
+         <div>
+         {currentUser?(
+      <button onClick={handleComents}>Add Coments</button>):
+      (<button onClick={handleRedirect}>Sign in to leave a comment</button>)}
+          </div> 
+        </div>
       </div>
     </div>
   ) : (
