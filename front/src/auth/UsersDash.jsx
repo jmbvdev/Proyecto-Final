@@ -7,7 +7,7 @@ import { useTable } from 'react-table';
 import s from "../styles/adminNav.module.css"
 import { useState } from "react";
 
-const UserDash = ( isAdmin, setIsAdmin) => {
+const UsersDash = ( isAdmin, setIsAdmin) => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,10 +37,12 @@ const UserDash = ( isAdmin, setIsAdmin) => {
         } = useTable({columns, data})
 
         return (
+       
+
             <table {...getTableProps()} className={s.table}>
-              <thead className={s.thead_column}>
+              <thead >
                 {headerGroups.map(headerGroup => (
-                  <tr className={s.tr_column} {...headerGroup.getHeaderGroupProps()}>
+                  <tr  {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => (
                       <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                     ))}
@@ -51,7 +53,7 @@ const UserDash = ( isAdmin, setIsAdmin) => {
                 {rows.map((row, i) => {
                   prepareRow(row)
                   return (
-                    <tr {...row.getRowProps()} className={s.tr_cell}>
+                    <tr {...row.getRowProps()}>
                       {row.cells.map(cell => {
                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })}
@@ -60,6 +62,7 @@ const UserDash = ( isAdmin, setIsAdmin) => {
                 })}
               </tbody>
             </table>
+  
           )
         };
 
@@ -88,14 +91,14 @@ const UserDash = ( isAdmin, setIsAdmin) => {
             }
         ], [])
 
-        const data = allUsers;
+      
 
     return(
         <div className={s.container} >
             <h2>Welcome {admin.displayName}!</h2>
-            <Table columns={columns} data={data && data}  />
+            <Table columns={columns} data={allUsers}  />
         </div>
     )
 };
 
-export default UserDash;
+export default UsersDash;

@@ -86,6 +86,7 @@ const Cart = () => {
   }
 
   let sum = 0;
+  let total=0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price * (1 - discount / 100);
   }
@@ -154,21 +155,24 @@ const Cart = () => {
         <h3>ORDER SUMMARY</h3>
         <div className={s.summary}>
           <p>Subtotal</p>
-          <span>${sum ? sum : 0.0}</span>
+          <span>${total  ? total : 0.0}</span>
         </div>
         <div className={s.summary}>
-          <p>Estimated shipping</p>
-          <span>$0.00</span>
+          <p>Discount</p>
+          <span>${sum && discount ? (sum*25)/100 : 0.0}</span>
         </div>
         <div className={s.total_summary}>
           <p>Estimated total</p>
-          <span>${sum ? sum : 0.0}</span>
-          {discount ? <span>{discount}% Off</span> : null}
+          <div className={s.discount_container}>
+
+          <span>${sum ? sum:discount?(sum -(sum*25/100)) : 0.0}</span>
+          {discount ? <span className={s.discount}>{discount}% Off</span> : null}
+          </div>
         </div>
+        <Coupon setDiscount={setDiscount} />
         <button onClick={handleOnPurchase} className={s.checkout}>
           CHECKOUT NOW
         </button>
-        <Coupon setDiscount={setDiscount} />
         {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
       </div>
     </div>
