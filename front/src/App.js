@@ -26,6 +26,7 @@ import Favorites from "./pages/Favorites";
 import UserEdit from "./auth/UserEdit";
 import Verification from "./auth/Verification";
 import AdminNav from "./auth/AdminNav";
+import Reviews from "./pages/Reviews"
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -33,6 +34,7 @@ function App() {
   function handleSearch() {
     setIsSearch((isSearch) => !isSearch);
   }
+  console.log("me renderizo en App");
 
   const dispatch = useDispatch();
 
@@ -77,6 +79,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route exact path="/reviews/:id" element={<Reviews/>} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>

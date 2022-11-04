@@ -6,6 +6,7 @@ import {
   DELETE_ALL,
   PURCHASE,
   LOAD_CART,
+  CLEAR_CART,
 } from "../../actions/shopCart/actiontypes.js";
 import axios from "axios";
 
@@ -65,12 +66,12 @@ export const deleteAll = (orderid, currentuserID) => {
     };
 };
 
-export const purchase = (orderID, cart, status) => {
+export const purchase = (orderID, cart, status, email) => {
   //ESTE VA INTEGRADO CON LA API DE MP
   return async (dispatch) => {
     await axios.put(
       `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${orderID}`,
-      { cart: cart, state: `Order ${status}` }
+      { cart: cart, state: `Order ${status}`, email: email }
     );
     return dispatch({ type: PURCHASE });
   };
@@ -126,4 +127,9 @@ export const loadCart = (userID) => {
 
     return { type: LOAD_CART, payload: local };
   }
+};
+
+export const cleanCartAfterLogOut = () => {
+  localStorage.clear();
+  return { type: CLEAR_CART };
 };
