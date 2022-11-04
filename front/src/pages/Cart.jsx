@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp";
 import Swal from "sweetalert2";
+import Coupon from "../components/Coupon";
 
 import {
   changeQuantity,
@@ -25,6 +26,10 @@ const Cart = () => {
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [discount, setDisc] = useState(0);
+  const setDiscount = (discount) => {
+    setDisc(discount);
+  };
   function handleDeleteAll() {
     Swal.fire({
       title: "Warning",
@@ -82,7 +87,7 @@ const Cart = () => {
 
   let sum = 0;
   for (let i = 0; i < plants.length; i++) {
-    sum += plants[i].count * plants[i].price;
+    sum += plants[i].count * plants[i].price * (1 - discount / 100);
   }
 
   return (
@@ -158,10 +163,12 @@ const Cart = () => {
         <div className={s.total_summary}>
           <p>Estimated total</p>
           <span>${sum ? sum : 0.0}</span>
+          {discount ? <span>{discount}% Off</span> : null}
         </div>
         <button onClick={handleOnPurchase} className={s.checkout}>
           CHECKOUT NOW
         </button>
+        <Coupon setDiscount={setDiscount} />
         {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
       </div>
     </div>

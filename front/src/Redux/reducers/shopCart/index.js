@@ -6,6 +6,7 @@ import {
   DELETE_ALL,
   PURCHASE,
   LOAD_CART,
+  CLEAR_CART,
 } from "../../actions/shopCart/actiontypes.js";
 
 /* 
@@ -66,6 +67,9 @@ export default function shopCartReducer(state = initialState, action) {
   }
   if (action.type === SAVE_CART) {
     return state;
+  }
+  if (action.type === CLEAR_CART) {
+    return initialState;
   }
   return state;
 }
