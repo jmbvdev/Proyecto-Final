@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp";
 import Swal from "sweetalert2";
 import Coupon from "../components/Coupon";
+import FormPostCheckout from "../components/formPostCheckout";
 
 import {
   changeQuantity,
@@ -15,7 +16,6 @@ import {
   purchase,
 } from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
-import MercadoPago from "../mercadopago/mercadopago";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -169,7 +169,17 @@ const Cart = () => {
           CHECKOUT NOW
         </button>
         <Coupon setDiscount={setDiscount} />
-        {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
+        {pago ? (
+          <FormPostCheckout
+            setPago={setPago}
+            items={plants}
+            totalAmount={sum}
+            adress={currentUser.adress}
+            name={currentUser.displayName}
+            DNI={currentUser.DNI}
+            city={currentUser.City}
+          />
+        ) : null}
       </div>
     </div>
   );
