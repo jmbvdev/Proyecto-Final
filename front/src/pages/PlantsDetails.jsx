@@ -13,11 +13,10 @@ import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 import FavButton from "../components/FavButton";
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import Reviews from "./Reviews";
 import { AiFillStar } from "react-icons/ai";
-
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -29,20 +28,20 @@ const PlantsDetails = () => {
 
   const navigate = useNavigate();
   const id = useParams().id;
-  const[comment, setComment]=useState(false)
+  const [comment, setComment] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'transparent',
-    border: 'none',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "transparent",
+    border: "none",
     p: 4,
   };
-  
+
   useEffect(() => {
     dispatch(GetProductDetails(id));
     return function () {
@@ -152,14 +151,20 @@ const PlantsDetails = () => {
           </div>
           <div className={s.quantity}>
             <button
-              disabled={quantity === 1}
+              disabled={
+                quantity === 1 || plant?.stock === 0 || plant?.logicalDeletion
+              }
               onClick={() => setQuantity(quantity - 1)}
             >
               -
             </button>
-            <p>{quantity}</p>
+            <p>{plant?.stock === 0 ? plant?.stock : quantity}</p>
             <button
-              disabled={quantity === plant?.stock}
+              disabled={
+                quantity === plant?.stock ||
+                plant?.stock === 0 ||
+                plant?.logicalDeletion
+              }
               onClick={() => setQuantity(quantity + 1)}
             >
               +
@@ -169,53 +174,61 @@ const PlantsDetails = () => {
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
           <FavButton id={id} user={currentUser?.uid} />
-          <div className={s.edit_btn}>
-            <h4>Edit</h4>
-            <button onClick={handleEdit}>
-              <FaRegEdit />
-            </button>
-          </div>
+          {!currentUser || currentUser?.role === "user" ? null : (
+            <div className={s.edit_btn}>
+              <h4>Edit</h4>
+              <button onClick={handleEdit}>
+                <FaRegEdit />
+              </button>
+            </div>
+          )}
         </div>
-          <div className={s.reviews_container}>
-          <h4>Add a review</h4>
-          <AiFillStar className={s.star} onClick={handleOpen}/>
-        
 
-
-          </div>
-
-        {
-          cart.findIndex((e) => e.id === id) !== -1 &&(
-            <h5>Already in your cart</h5>
-          )
-        }
+        {cart.findIndex((e) => e.id === id) !== -1 && (
+          <h5>Already in your cart</h5>
+        )}
 
         <button
-          disabled={cart.findIndex((e) => e.id === id) !== -1}
+          disabled={
+            cart.findIndex((e) => e.id === id) !== -1 ||
+            plant?.stock === 0 ||
+            plant?.logicalDeletion
+          }
           onClick={handleCart}
           className={s.cart}
         >
           Add to Cart
         </button>
         <div className={s.edit_btn}>
-         <div>
-         {currentUser?(
-       <div>
-   
-    
-       <Modal
-         open={open}
-         onClose={handleClose}
-         aria-labelledby="modal-modal-title"
-         aria-describedby="modal-modal-description"
-       >
-         <Box sx={style}>
-          <Reviews/>
-         </Box>
-       </Modal>
-     </div>):
-      (<button onClick={handleRedirect}>Sign in to leave a comment</button>)}
-          </div> 
+          <div>
+            {currentUser ? (
+              <button onClick={handleComents}>Add Coments</button>
+            ) : (
+              <button onClick={handleRedirect}>
+                Sign in to leave a comment
+              </button>
+            )}
+          </div>
+          <div>
+            {currentUser ? (
+              <div>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Reviews />
+                  </Box>
+                </Modal>
+              </div>
+            ) : (
+              <button onClick={handleRedirect}>
+                Sign in to leave a comment
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

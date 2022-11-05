@@ -1,25 +1,34 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../Redux/actions/users";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
 import s from "../../styles/adminNav.module.css"
+import { useState } from "react";
 
 const UsersDash = () => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allUsers = useSelector(state => state.usersReducer.users);
+    const [allUsers, setAllusers] = useState([]);
+    
 
 
     React.useEffect(() => {
-        dispatch(getUsers());
+      if (!allUsers.length) {
+        fetch(
+         "https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/all"
+       )
+         .then((r) => r.json())
+         .then((response) => {
+         setAllusers(response)
+         });
+      }
 
-    }, []);
+    }, [allUsers]);
 
-    const handleBack = () => {
-      navigate(-1);
-    };
+  const handleBack = () => {
+    navigate(-1);
+  };
 
     const Table = ({ columns, data}) => {
         const {
@@ -28,30 +37,30 @@ const UsersDash = () => {
             headerGroups,
             rows,
             prepareRow
-        } = useTable({columns, data})
+        } = useTable({columns, data}, tableHooks)
 
-        return (
-            <table {...getTableProps()} className={s.table}>
-              <thead>
-                {headerGroups.map(headerGroup => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                      <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
-                  prepareRow(row)
+    return (
+      <table {...getTableProps()} className={s.table}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
                   return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                      })}
-                    </tr>
-                  )
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
                 })}
+                </tr>)})}
               </tbody>
             </table>
           )
@@ -77,12 +86,29 @@ const UsersDash = () => {
                             {
                                 Header: 'Phone Number',
                                 accessor: 'phoneNumber'
+                            },
+                            {
+                              Header: 'Id',
+                              accessor: 'uid'
                             }
                         ]
             }
         ], [])
 
-        const data = allUsers;
+  const data = allUsers;
+
+         const tableHooks = hooks => {
+           hooks.visibleColumns.push((columns) => [
+             ...columns,
+             {
+               id: 'Detail',
+               Header: 'Detail',
+               Cell: ({row}) => (
+                 <Link to={`/users/detail/${row.values.uid}`}>DETAIL</Link>
+               )
+             }
+           ])
+         }
 
     return(
         <div className={s.container}>

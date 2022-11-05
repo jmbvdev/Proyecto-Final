@@ -38,7 +38,13 @@ export const deleteProduct = (id) => {
   };
 };
 
-export const changeQuantity = (id, n) => {
+export const changeQuantity = (id, n, user) => {
+  if (user) {
+    return {
+      type: CHANGE_QUANTITY,
+      payload: [id, n],
+    };
+  }
   let produc = JSON.parse(localStorage.getItem(id));
   produc.count = produc.count + n;
   localStorage.setItem(id, JSON.stringify(produc));
