@@ -26,7 +26,9 @@ const SearchBox = ({ setIsSearch }) => {
 
   const findResults = plants
     .filter((p) => {
-      return p.data.name.toLowerCase().includes(search.toLowerCase());
+      if (!p.data.logicalDeletion) {
+        return p.data.name.toLowerCase().includes(search.toLowerCase());
+      } else return false;
     })
     .slice(0, 5);
 
@@ -44,7 +46,6 @@ const SearchBox = ({ setIsSearch }) => {
             onChange={handelOnChange}
             placeholder="search a plant"
             name="q"
-         
           />
 
           <button type="submit">

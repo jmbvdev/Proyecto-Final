@@ -79,3 +79,6 @@ export default function PostMercadoPago() {
 }
 }
 
+
+/* https://api-plants-b6153.web.app/failure?collection_id=1310577355&collection_status=rejected&payment_id=1310577355&status=rejected&external_reference=null&payment_type=credit_card&merchant_order_id=6383678273&preference_id=209498569-0017a0dc-1fde-4270-8186-0cee769052d6&site_id=MLA&processing_mode=aggregator&merchant_account_id=null */
+

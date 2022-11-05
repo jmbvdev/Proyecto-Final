@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/adminNav.module.css"
+import { Link } from "react-router-dom";
+
 
 const ProductsDash = () => {
     const dispatch = useDispatch();
@@ -12,23 +14,19 @@ const ProductsDash = () => {
     const allProducts = useSelector(state => state.productsReducer.productsBackUp);
 
 
-    React.useEffect(() => {
-          dispatch(GetAllProducts());
-
-    }, [allProducts, dispatch]);
 
     const handleBack = () => {
       navigate(-1);
     };
 
-    const Table = ({ columns, data}) => {
+    const Table = ({ columns, data, id}) => {
         const {
             getTableProps,
             getTableBodyProps,
             headerGroups,
             rows,
             prepareRow
-        } = useTable({columns, data})
+        } = useTable({columns, data}, tableHooks)
 
         return (
             <table {...getTableProps()} className={s.table}>
@@ -77,15 +75,39 @@ const ProductsDash = () => {
                             {
                                 Header: 'Stock',
                                 accessor: 'stock'
+                            },
+                            {
+                              Header: 'id',
+                              accessor: 'id'
                             }
                         ]
             }
         ], [])
 
+        const tableHooks = hooks => {
+          hooks.visibleColumns.push((columns) => [
+            ...columns,
+            {
+              id: 'Detail',
+              Header: 'Detail',
+              Cell: ({row}) => (
+                <Link to={`/plants/details/${row.values.id}`}>DETAIL</Link>
+              )
+            },
+            {
+              id: 'Edit',
+              Header: 'Edit',
+              Cell: ({row}) => (
+                <Link to={`/plants/edit/${row.values.id}`}>EDIT</Link>
+              )
+            }
+          ])
+        }
+
         const data = allProducts?.map(e => {
-           return e.data; 
+           return  {...e.data, id: e.id}; 
         });
-        console.log(data)
+       
 
     return(
         <div className={s.container}>

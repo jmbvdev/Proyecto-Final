@@ -19,14 +19,11 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     if (user) {
-      dispatch(setCurrentUser(auth.currentUser));
-      (async () => {
-        const userRole = await auth.currentUser.getIdTokenResult();
-        console.log(userRole.claims.role);
-        setRole(userRole.claims.role[0]);
-      })();
+        setRole(user.role[0]);
+        if(user.role === 'admin') setIsAdmin(true);
+
     }
-  }, [role, user]);
+  }, [user]);
 
   const navigate = useNavigate();
 

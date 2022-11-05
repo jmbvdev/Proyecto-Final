@@ -29,6 +29,9 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"
+import OrdersUser from "./pages/OrdersUser";
+import UserDetail from "./auth/UsersDash";
+
 
 
 
@@ -54,7 +57,10 @@ function App() {
         if (authenticatedUser) {
           const role = await authenticatedUser.getIdTokenResult();
           dispatch(
-            setCurrentUser({ ...authenticatedUser, role: role.claims.role })
+            setCurrentUser({
+              ...authenticatedUser,
+              role: role.claims.role || "user",
+            })
           );
           dispatch(loadCart(authenticatedUser.uid));
         }
@@ -66,7 +72,6 @@ function App() {
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
-      
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch} />} />
@@ -82,11 +87,14 @@ function App() {
         <Route path="/dashboard/users" element={<UsersDash />} />
         <Route path="/dashboard/orders" element={<OrdersDash />} />
         <Route path="/dashboard/products" element={<ProductsDash />} />
+        <Route exact path="/users/detail/:id" element={<UserDetail />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
+        <Route path="/orders/:id" element={<OrdersUser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth />
