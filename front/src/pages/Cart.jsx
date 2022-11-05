@@ -50,7 +50,14 @@ const Cart = () => {
   function handleQuantity(id, value) {
     setQuantity((q) => q + value);
 
-    dispatch(changeQuantity(id, value));
+    dispatch(changeQuantity(id, value, currentUser.uid));
+
+    const cart = plants.map((p) => {
+      if (p.id === id) {
+        return { ...p, count: p.count + value };
+      } else return p;
+    });
+    dispatch(saveCart(cart, currentUser.uid));
   }
 
   function handleOnPurchase(e) {
