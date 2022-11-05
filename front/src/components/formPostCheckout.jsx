@@ -12,6 +12,19 @@ function FormPostCheckout({
   city,
   setPago,
 }) {
+  const [checked1, setChecked1] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(false);
+
+  const handleCheckbox1 = (e) => {
+    setChecked1(true);
+    setChecked2(false);
+  };
+
+  const handleCheckbox2 = (e) => {
+    setChecked1(false);
+    setChecked2(true);
+  };
+
   const closeModal = (e) => {
     if (e.currentTarget != e.target) return;
     setPago(false);
@@ -27,17 +40,38 @@ function FormPostCheckout({
       <div className={s.modalContainer}>
         <div className={s.optionsContainer}>
           <form className={s.modalForm}>
-            <input type="text" placeholder="City Name" value={city} />
-            <input type="text" placeholder="Adress" value={adress} />
-            <input type="text" placeholder="How is receiving" value={name} />
-            <input type="text" placeholder="DNI" value={DNI} />
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="City Name"
+              value={city}
+            />
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="Adress"
+              value={adress}
+            />
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="How is receiving"
+              value={name}
+            />
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="DNI"
+              value={DNI}
+            />
           </form>
           <label>
             <input
               className={s.check}
               type="radio"
               name="envio"
-              value="Retiro por local"
+              checked={checked1}
+              onChange={handleCheckbox1}
             />
             Retiro por local
           </label>
@@ -46,7 +80,8 @@ function FormPostCheckout({
               className={s.check}
               type="radio"
               name="envio"
-              value="Envio con Andreani"
+              checked={checked2}
+              onChange={handleCheckbox2}
             />
             Envio con Andreani
           </label>
@@ -72,7 +107,7 @@ function FormPostCheckout({
         </div>
 
         <div className={s.maps}>
-          <GoogleMaps />
+          <GoogleMaps retiro={checked1} andreani={checked2} />
         </div>
       </div>
     </div>
