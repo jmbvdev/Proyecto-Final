@@ -1,26 +1,43 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../Redux/actions/users";
-import { useNavigate } from "react-router-dom";
-import { useTable } from "react-table";
-import s from "../../styles/adminNav.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useTable } from 'react-table';
+import s from "../../styles/adminNav.module.css"
+import { useState } from "react";
 
 const UsersDash = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const allUsers = useSelector((state) => state.usersReducer.users);
+    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [allUsers, setAllusers] = useState([]);
+    
 
-  React.useEffect(() => {
-    dispatch(getUsers());
-  }, []);
+
+    React.useEffect(() => {
+      if (!allUsers.length) {
+        fetch(
+         "https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/all"
+       )
+         .then((r) => r.json())
+         .then((response) => {
+         setAllusers(response)
+         });
+      }
+
+    }, [allUsers]);
 
   const handleBack = () => {
     navigate(-1);
   };
 
-  const Table = ({ columns, data }) => {
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-      useTable({ columns, data });
+    const Table = ({ columns, data}) => {
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow
+        } = useTable({columns, data}, tableHooks)
 
     return (
       <table {...getTableProps()} className={s.table}>
@@ -43,50 +60,62 @@ const UsersDash = () => {
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  };
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "User",
-        columns: [
-          {
-            Header: "Display Name",
-            accessor: "displayName",
-          },
-          {
-            Header: "Email",
-            accessor: "email",
-          },
-        ],
-      },
-      {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Phone Number",
-            accessor: "phoneNumber",
-          },
-        ],
-      },
-    ],
-    []
-  );
+                </tr>)})}
+              </tbody>
+            </table>
+          )
+        };
+  
+        const columns = React.useMemo(() => [
+            {
+                Header: 'User',
+                columns: [
+                    {
+                        Header: 'Display Name',
+                        accessor: 'displayName'
+                    },
+                    {
+                        Header: 'Email',
+                        accessor: 'email'
+                    }
+                ]
+            },
+            {
+                Header: 'Info',
+                columns: [
+                            {
+                                Header: 'Phone Number',
+                                accessor: 'phoneNumber'
+                            },
+                            {
+                              Header: 'Id',
+                              accessor: 'uid'
+                            }
+                        ]
+            }
+        ], [])
 
   const data = allUsers;
 
-  return (
-    <div className={s.container}>
-      <button onClick={handleBack}>BACK</button>
-      <Table columns={columns} data={data} />
-    </div>
-  );
+         const tableHooks = hooks => {
+           hooks.visibleColumns.push((columns) => [
+             ...columns,
+             {
+               id: 'Detail',
+               Header: 'Detail',
+               Cell: ({row}) => (
+                 <Link to={`/users/detail/${row.values.uid}`}>DETAIL</Link>
+               )
+             }
+           ])
+         }
+
+    return(
+        <div className={s.container}>
+            <button onClick={handleBack}>BACK</button>
+            <Table columns={columns} data={data} />
+        </div>
+    )
 };
 
 export default UsersDash;
