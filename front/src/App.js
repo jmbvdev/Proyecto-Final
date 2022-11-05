@@ -80,6 +80,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
