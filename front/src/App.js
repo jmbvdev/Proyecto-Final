@@ -29,6 +29,7 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"
+import OrdersUser from "./pages/OrdersUser";
 
 
 
@@ -66,7 +67,7 @@ function App() {
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
-      
+
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch} />} />
@@ -87,6 +88,7 @@ function App() {
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
+        <Route path="/orders/:id" element={<OrdersUser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth />
