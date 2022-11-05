@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp";
 import Swal from "sweetalert2";
 import Coupon from "../components/Coupon";
+import FormPostCheckout from "../components/formPostCheckout";
 
 import {
   changeQuantity,
@@ -15,7 +16,6 @@ import {
   purchase,
 } from "../Redux/actions/shopCart";
 import s from "../styles/cart.module.css";
-import MercadoPago from "../mercadopago/mercadopago";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -50,7 +50,14 @@ const Cart = () => {
   function handleQuantity(id, value) {
     setQuantity((q) => q + value);
 
-    dispatch(changeQuantity(id, value));
+    dispatch(changeQuantity(id, value, currentUser.uid));
+
+    const cart = plants.map((p) => {
+      if (p.id === id) {
+        return { ...p, count: p.count + value };
+      } else return p;
+    });
+    dispatch(saveCart(cart, currentUser.uid));
   }
 
   function handleOnPurchase(e) {
@@ -86,7 +93,7 @@ const Cart = () => {
   }
 
   let sum = 0;
-  let total=0;
+  let total = 0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price * (1 - discount / 100);
   }
@@ -155,25 +162,37 @@ const Cart = () => {
         <h3>ORDER SUMMARY</h3>
         <div className={s.summary}>
           <p>Subtotal</p>
-          <span>${total  ? total : 0.0}</span>
+          <span>${total ? total : 0.0}</span>
         </div>
         <div className={s.summary}>
           <p>Discount</p>
-          <span>${sum && discount ? (sum*25)/100 : 0.0}</span>
+          <span>${sum && discount ? (sum * 25) / 100 : 0.0}</span>
         </div>
         <div className={s.total_summary}>
           <p>Estimated total</p>
           <div className={s.discount_container}>
-
-          <span>${sum ? sum:discount?(sum -(sum*25/100)) : 0.0}</span>
-          {discount ? <span className={s.discount}>{discount}% Off</span> : null}
+            <span>${sum ? sum : discount ? sum - (sum * 25) / 100 : 0.0}</span>
+            {discount ? (
+              <span className={s.discount}>{discount}% Off</span>
+            ) : null}
           </div>
         </div>
         <Coupon setDiscount={setDiscount} />
         <button onClick={handleOnPurchase} className={s.checkout}>
           CHECKOUT NOW
         </button>
-        {pago ? <MercadoPago items={plants} totalAmount={sum} /> : null}
+        <Coupon setDiscount={setDiscount} />
+        {pago ? (
+          <FormPostCheckout
+            setPago={setPago}
+            items={plants}
+            totalAmount={sum}
+            adress={currentUser.adress}
+            name={currentUser.displayName}
+            DNI={currentUser.DNI}
+            city={currentUser.City}
+          />
+        ) : null}
       </div>
     </div>
   );

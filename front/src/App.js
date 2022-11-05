@@ -55,7 +55,10 @@ function App() {
         if (authenticatedUser) {
           const role = await authenticatedUser.getIdTokenResult();
           dispatch(
-            setCurrentUser({ ...authenticatedUser, role: role.claims.role })
+            setCurrentUser({
+              ...authenticatedUser,
+              role: role.claims.role || "user",
+            })
           );
           dispatch(loadCart(authenticatedUser.uid));
         }
@@ -67,7 +70,6 @@ function App() {
   return (
     <div className="App">
       <Nav setIsSearch={handleSearch} />
-      
       {isSearch && <SearchBox setIsSearch={handleSearch} />}
       <Routes>
         <Route path="/" element={<Home isSearch={isSearch} />} />
@@ -88,6 +90,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
+        <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

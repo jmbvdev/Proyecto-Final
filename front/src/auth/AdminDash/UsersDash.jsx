@@ -26,9 +26,9 @@ const UsersDash = () => {
 
     }, [allUsers]);
 
-    const handleBack = () => {
-      navigate(-1);
-    };
+  const handleBack = () => {
+    navigate(-1);
+  };
 
     const Table = ({ columns, data}) => {
         const {
@@ -39,27 +39,26 @@ const UsersDash = () => {
             prepareRow
         } = useTable({columns, data}, tableHooks)
 
-        return (
-            <table {...getTableProps()} className={s.table}>
-              <thead>
-                {headerGroups.map(headerGroup => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                      <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
-                  prepareRow(row)
+    return (
+      <table {...getTableProps()} className={s.table}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
                   return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                      })}
-                    </tr>
-                  )
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
                 })}
               </tbody>
             </table>
@@ -95,7 +94,7 @@ const UsersDash = () => {
             }
         ], [])
 
-        const data = allUsers;
+  const data = allUsers;
 
          const tableHooks = hooks => {
            hooks.visibleColumns.push((columns) => [
