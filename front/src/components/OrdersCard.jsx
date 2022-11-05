@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const OrdersCard = (props) => {
-    console.log(props.date);
+ 
     const navigate = useNavigate()
 
     return (
