@@ -17,19 +17,22 @@ export default function PostMercadoPago() {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (cart.length > 0 && user) {
-  //     dispatch(purchase(cart[0].orderID, cart, status, user.email));
-  //     console.log("entre dos veces");
-  //   }
-  // }, [cart, dispatch, status, user]);
+  useEffect(() => {
+    if (
+      cart.length > 0 &&
+      user &&
+      (status === "approved" || status === "in_process")
+    ) {
+      dispatch(purchase(cart[0].orderID, cart, status, user.email));
+    }
+  }, [cart, dispatch, status, user]);
 
   const goHome = (e) => {
     e.preventDefault();
 
     navigate("/");
   };
-
+  if (status === "approved" || status === "in_process") {
   return (
     <div className={s.container}>
       <div className={s.wraper}>
@@ -60,4 +63,19 @@ export default function PostMercadoPago() {
       </div>
     </div>
   );
+}  else {
+  return (
+    <div>
+      <p>FAILURE</p>
+      <h1>Thank you so much for buying at Calathea.</h1>
+      <h3>YOUR PURCHASE WAS {status}</h3>
+      <p>
+        We are sorry but it has failed for some reason. Meanwhile, we save
+        your cart so you can try to purchase it in another ocasion.
+      </p>
+      <button onClick={goHome}>GO BACK TO HOME</button>
+    </div>
+  );
 }
+}
+
