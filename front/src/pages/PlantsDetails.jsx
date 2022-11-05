@@ -156,12 +156,14 @@ const PlantsDetails = () => {
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
           <FavButton id={id} user={currentUser?.uid} />
-          <div className={s.edit_btn}>
-            <h4>Edit</h4>
-            <button onClick={handleEdit}>
-              <FaRegEdit />
-            </button>
-          </div>
+          {!currentUser || currentUser?.role === "user" ? null : (
+            <div className={s.edit_btn}>
+              <h4>Edit</h4>
+              <button onClick={handleEdit}>
+                <FaRegEdit />
+              </button>
+            </div>
+          )}
         </div>
 
         {cart.findIndex((e) => e.id === id) !== -1 && (
