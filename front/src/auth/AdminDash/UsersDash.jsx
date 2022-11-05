@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
+import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/adminNav.module.css"
 
 const UsersDash = () => {
@@ -45,9 +46,9 @@ const UsersDash = () => {
                 {rows.map((row, i) => {
                   prepareRow(row)
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} >
                       {row.cells.map(cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        return <td  {...cell.getCellProps()}>{cell.render('Cell')}</td>
                       })}
                     </tr>
                   )
@@ -86,7 +87,12 @@ const UsersDash = () => {
 
     return(
         <div className={s.container}>
-            <button onClick={handleBack}>BACK</button>
+          <div className={s.button_container}>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
             <Table columns={columns} data={data} />
         </div>
     )

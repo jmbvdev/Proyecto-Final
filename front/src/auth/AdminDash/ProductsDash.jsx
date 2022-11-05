@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetAllProducts } from "../../Redux/actions/products";
 import { useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
+import {IoIosArrowBack}from "react-icons/io"
+import s from "../../styles/adminNav.module.css"
 
 const ProductsDash = () => {
     const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const ProductsDash = () => {
         } = useTable({columns, data})
 
         return (
-            <table {...getTableProps()}>
+            <table {...getTableProps()} className={s.table}>
               <thead>
                 {headerGroups.map(headerGroup => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -86,8 +88,13 @@ const ProductsDash = () => {
         console.log(data)
 
     return(
-        <div>
-            <button onClick={handleBack}>BACK</button>
+        <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
             <Table columns={columns} data={data} />
         </div>
     )

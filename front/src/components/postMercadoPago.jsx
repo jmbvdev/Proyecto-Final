@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { purchase } from "../Redux/actions/shopCart";
+import success from "../images/success.webp"
+import pending from "../images/pending.webp"
+import s from "../styles/postMercado.module.css"
 
 export default function PostMercadoPago() {
   const [searchParams] = useSearchParams();
@@ -28,18 +31,33 @@ export default function PostMercadoPago() {
   };
 
   return (
-    <div>
-      <p>
-        Juanma inserta una imagen dependiendo de si el estado es aproved o
-        pending
-      </p>
-      <h1>Thank you so much for buying at Calathea.</h1>
-      <h3>YOUR PURCHASE ARE {status}</h3>
-      <p>
-        The payment id is {payment_id}. The payment method was: {payment_type}
-      </p>
-      <p>Total Amount: todavia nada pero ya voy a ver como se lo mando</p>
-      <button onClick={goHome}>GO BACK TO HOME</button>
+    <div className={s.container}>
+      <div className={s.wraper}>
+       
+          {status === "aproved" ? (
+             <div className={s.image}>
+            <img src={success} alt="" />
+            </div>
+          ) : (
+            <div className={s.image}>
+            <img src={pending} alt="" />
+            </div>
+          )}
+   
+        <div className={s.specs}>
+          <h4 >YOUR PURCHASE ARE {status}.</h4>
+          <p>
+            The payment id is {payment_id}.
+          </p>
+          <p> The payment method was:
+            {payment_type}</p>
+          <p>Total Amount: </p>
+          <div className={s.back}>
+
+          <button onClick={goHome} >GO BACK TO HOME</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
