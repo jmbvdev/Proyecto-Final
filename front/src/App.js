@@ -29,7 +29,9 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"
+import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
+
 
 
 
@@ -92,6 +94,7 @@ function App() {
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
+        <Route path="/orders/:id" element={<OrdersUser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth />
