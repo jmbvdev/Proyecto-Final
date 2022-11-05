@@ -29,7 +29,7 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"
-import UserDetail from "./auth/UserDetail";
+import UserDetail from "./auth/UsersDash";
 
 
 
