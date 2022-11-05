@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetAllProducts } from "../../Redux/actions/products";
 import { useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
+import { Link } from "react-router-dom";
 
 const ProductsDash = () => {
     const dispatch = useDispatch();
@@ -13,20 +14,20 @@ const ProductsDash = () => {
     React.useEffect(() => {
           dispatch(GetAllProducts());
 
-    }, [allProducts, dispatch]);
+    }, []);
 
     const handleBack = () => {
       navigate(-1);
     };
 
-    const Table = ({ columns, data}) => {
+    const Table = ({ columns, data, id}) => {
         const {
             getTableProps,
             getTableBodyProps,
             headerGroups,
             rows,
             prepareRow
-        } = useTable({columns, data})
+        } = useTable({columns, data}, tableHooks)
 
         return (
             <table {...getTableProps()}>
@@ -75,20 +76,40 @@ const ProductsDash = () => {
                             {
                                 Header: 'Stock',
                                 accessor: 'stock'
+                            },
+                            {
+                              Header: 'id',
+                              accessor: 'id'
                             }
                         ]
             }
         ], [])
 
-        const data = allProducts?.map(e => {
-           return e.data; 
-        });
-        console.log(data)
+        const tableHooks = hooks => {
+          hooks.visibleColumns.push((columns) => [
+            ...columns,
+            {
+              id: 'Detail',
+              Header: 'Detail',
+              Cell: ({row}) => (
+                <Link to={`/plants/detail/${row.values.id}`}>DETAIL</Link>
+              )
+            }
+          ])
+        }
 
+        const data = allProducts?.map(e => {
+           return  e.data; 
+        });
+       
+        const id = allProducts?.map(e => {
+          return e.id;
+        })
+        console.log(id)
     return(
         <div>
             <button onClick={handleBack}>BACK</button>
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={data} id={id} />
         </div>
     )
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../Redux/actions/users";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
 import s from "../../styles/adminNav.module.css"
 
@@ -77,12 +77,29 @@ const UsersDash = () => {
                             {
                                 Header: 'Phone Number',
                                 accessor: 'phoneNumber'
+                            },
+                            {
+                              Header: 'Id',
+                              accessor: 'uid'
                             }
                         ]
             }
         ], [])
 
         const data = allUsers;
+
+         const tableHooks = hooks => {
+           hooks.visibleColumns.push((columns) => [
+             ...columns,
+             {
+               id: 'Detail',
+               Header: 'Detail',
+               Cell: ({row}) => (
+                 <Link to={`/users/detail/${row.values.uid}`}>DETAIL</Link>
+               )
+             }
+           ])
+         }
 
     return(
         <div className={s.container}>
