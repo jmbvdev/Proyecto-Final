@@ -60,6 +60,7 @@ const UsersDash = () => {
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
+                </tr>)})}
               </tbody>
             </table>
           )
