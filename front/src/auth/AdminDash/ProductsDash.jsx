@@ -11,10 +11,6 @@ const ProductsDash = () => {
     const allProducts = useSelector(state => state.productsReducer.productsBackUp);
 
 
-    React.useEffect(() => {
-          dispatch(GetAllProducts());
-
-    }, []);
 
     const handleBack = () => {
       navigate(-1);
@@ -92,24 +88,28 @@ const ProductsDash = () => {
               id: 'Detail',
               Header: 'Detail',
               Cell: ({row}) => (
-                <Link to={`/plants/detail/${row.values.id}`}>DETAIL</Link>
+                <Link to={`/plants/details/${row.values.id}`}>DETAIL</Link>
+              )
+            },
+            {
+              id: 'Edit',
+              Header: 'Edit',
+              Cell: ({row}) => (
+                <Link to={`/plants/edit/${row.values.id}`}>EDIT</Link>
               )
             }
           ])
         }
 
         const data = allProducts?.map(e => {
-           return  e.data; 
+           return  {...e.data, id: e.id}; 
         });
        
-        const id = allProducts?.map(e => {
-          return e.id;
-        })
-        console.log(id)
+
     return(
         <div>
             <button onClick={handleBack}>BACK</button>
-            <Table columns={columns} data={data} id={id} />
+            <Table columns={columns} data={data} />
         </div>
     )
 };

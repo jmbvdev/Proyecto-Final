@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../Redux/actions/users";
 import { Link, useNavigate } from "react-router-dom";
 import { useTable } from 'react-table';
 import s from "../../styles/adminNav.module.css"
+import { useState } from "react";
 
 const UsersDash = () => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allUsers = useSelector(state => state.usersReducer.users);
+    const [allUsers, setAllusers] = useState([]);
+    
 
 
     React.useEffect(() => {
