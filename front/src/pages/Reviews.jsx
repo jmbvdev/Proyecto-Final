@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import s from "../styles/create.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { AiFillStar } from "react-icons/ai";
 // import { validateComent } from "../Util/validateComent";
 import axios from "axios"
@@ -13,11 +13,11 @@ import Typography from '@mui/material/Typography';
 import Swal from "sweetalert2";
 
 const Reviews = () => {
-  const dispatch = useDispatch();
-  const Navigate = useNavigate();
-  const id = useParams().id;
-  const user = useSelector((state) => state.usersReducer.currentUser);
-  const [error, setError] = useState({});
+    const dispatch = useDispatch();
+    const Navigate = useNavigate();
+    const id = useParams().id;
+    const user = useSelector((state) => state.usersReducer.currentUser);
+    const [error, setError] = useState({});
 
 const[value, setValue]=useState(0)
     const [coments, setComents] = useState({
@@ -31,23 +31,19 @@ const[value, setValue]=useState(0)
     console.log(coments.userImg)
     //const [state, setState] = useState([])
 
-  const positive = [
-    "Very Good Plant",
-    "Highly Recommended",
-    "Withstand Any Temperature",
-    "Withstand Any Abuse",
-  ];
+    const positive = ["Very Good Plant", "Highly Recommended", "Withstand Any Temperature", "Withstand Any Abuse"]
 
-  /*  useEffect(() => {
-    dispatch(setCurrentUser(auth.currentUser));
-  }, []); */
+    useEffect(() => {
+        dispatch(setCurrentUser(auth.currentUser));
 
-  function handleSelect(e) {
-    setComents({
-      ...coments,
-      star: e.target.value,
-    });
-  }
+    }, [])
+
+    function handleSelect(e) {
+        setComents({
+            ...coments,
+            star: e.target.value
+        })
+    }
 
     const handleSelectComent = (e) => {
         if (e.target.value !== "select") {
@@ -64,36 +60,29 @@ const[value, setValue]=useState(0)
             // );
         }
     }
-  };
 
-  const handleDeleteSComent = () => {
-    setComents({
-      ...coments,
-      comentspositive: [],
-    });
-  };
 
-  const handleOnClick = (e) => {
-    e.preventDefault();
-    // let response = await axios.post(
-    //     "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
-    //     // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
-    //     coments
-    // );
-    // alert("Comments created")
-    if (!coments.comentspositive.length || !coments.star) {
-      return alert("Missing Data");
+    const handleDeleteSComent = () => {
+        setComents({
+            ...coments,
+            comentspositive: [],
+        });
     }
-    axios
-      .post(
-        "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
-        {
-          star: coments.star,
-          plantsUID: coments.plantsUID,
-          userUID: coments.userUID,
-          comentspositive: coments.comentspositive,
-          userName: coments.userName,
-          userImg: coments.userImg,
+
+    const handleOnClick = (e) => {
+        e.preventDefault();
+        // let response = await axios.post(
+        //     "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
+        //     // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
+        //     coments
+        // );
+        // alert("Comments created")
+        if (
+
+            !coments.comentspositive.length ||
+            !coments.star
+        ) {
+            return alert("Missing Data");
         }
         axios.post("http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment", {
             star: coments.star, plantsUID: coments.plantsUID, userUID: coments.userUID,
@@ -163,9 +152,11 @@ const[value, setValue]=useState(0)
                 </div>
             </form>
         </div>
-      </form>
-    </div>
-  );
-};
 
-export default Reviews;
+    )
+}
+
+
+
+
+export default Reviews
