@@ -13,9 +13,17 @@ const UsersDash = () => {
 
 
     React.useEffect(() => {
-        dispatch(getUsers());
+      if (!allUsers.length) {
+        fetch(
+         "https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/all"
+       )
+         .then((r) => r.json())
+         .then((response) => {
+         setAllusers(response)
+         });
+      }
 
-    }, []);
+    }, [allUsers]);
 
     const handleBack = () => {
       navigate(-1);
@@ -28,7 +36,7 @@ const UsersDash = () => {
             headerGroups,
             rows,
             prepareRow
-        } = useTable({columns, data})
+        } = useTable({columns, data}, tableHooks)
 
         return (
             <table {...getTableProps()} className={s.table}>
