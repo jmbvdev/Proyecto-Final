@@ -133,14 +133,20 @@ const PlantsDetails = () => {
           </div>
           <div className={s.quantity}>
             <button
-              disabled={quantity === 1}
+              disabled={
+                quantity === 1 || plant?.stock === 0 || plant?.logicalDeletion
+              }
               onClick={() => setQuantity(quantity - 1)}
             >
               -
             </button>
-            <p>{quantity}</p>
+            <p>{plant?.stock === 0 ? plant?.stock : quantity}</p>
             <button
-              disabled={quantity === plant?.stock}
+              disabled={
+                quantity === plant?.stock ||
+                plant?.stock === 0 ||
+                plant?.logicalDeletion
+              }
               onClick={() => setQuantity(quantity + 1)}
             >
               +
@@ -158,25 +164,31 @@ const PlantsDetails = () => {
           </div>
         </div>
 
-        {
-          cart.findIndex((e) => e.id === id) !== -1 &&(
-            <h5>Already in your cart</h5>
-          )
-        }
+        {cart.findIndex((e) => e.id === id) !== -1 && (
+          <h5>Already in your cart</h5>
+        )}
 
         <button
-          disabled={cart.findIndex((e) => e.id === id) !== -1}
+          disabled={
+            cart.findIndex((e) => e.id === id) !== -1 ||
+            plant?.stock === 0 ||
+            plant?.logicalDeletion
+          }
           onClick={handleCart}
           className={s.cart}
         >
           Add to Cart
         </button>
         <div className={s.edit_btn}>
-         <div>
-         {currentUser?(
-      <button onClick={handleComents}>Add Coments</button>):
-      (<button onClick={handleRedirect}>Sign in to leave a comment</button>)}
-          </div> 
+          <div>
+            {currentUser ? (
+              <button onClick={handleComents}>Add Coments</button>
+            ) : (
+              <button onClick={handleRedirect}>
+                Sign in to leave a comment
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
