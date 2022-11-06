@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { purchase } from "../Redux/actions/shopCart";
 import success from "../images/success.webp"
 import pending from "../images/pending.webp"
+import failure from "../images/failure.webp"
 import s from "../styles/postMercado.module.css"
 
 export default function PostMercadoPago() {
@@ -65,15 +66,26 @@ export default function PostMercadoPago() {
   );
 }  else {
   return (
-    <div>
-      <p>FAILURE</p>
-      <h1>Thank you so much for buying at Calathea.</h1>
-      <h3>YOUR PURCHASE WAS {status}</h3>
+    <div className={s.container}>
+      <div className={s.wraper}>
+       <div className={s.image}>
+            <img src={failure} alt="" />
+            </div>
+        <div className={s.specs}>
+
+
+      <h4>YOUR PURCHASE WAS {status}</h4>
       <p>
         We are sorry but it has failed for some reason. Meanwhile, we save
         your cart so you can try to purchase it in another ocasion.
       </p>
-      <button onClick={goHome}>GO BACK TO HOME</button>
+      <div className={s.back}>
+
+          <button onClick={goHome} >GO BACK TO HOME</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }
