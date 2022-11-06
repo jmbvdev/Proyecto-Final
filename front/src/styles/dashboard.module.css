@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+
     background-image: linear-gradient(#b4b2b2a7,rgba(206, 208, 206, 0.919)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
     
 }
@@ -96,9 +97,13 @@
     align-items: center;
     justify-content: space-between;
     justify-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
-
+.btn_container{
+    display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+}
 @media (max-width: 1000px) {
     .container{
         height: 150vh;

@@ -5,12 +5,14 @@
  line-height: 1.6;
  color: #fff;
 
- height: 100vh;
+ height: auto;
  display: flex;
  justify-content: flex-start;
  align-items: center;
  text-align: left;
  flex-direction: column;
+ caret-color: transparent;
+
 
  font-family: 'Poppins', sans-serif;
 }
@@ -18,23 +20,26 @@
 .table{
     border-radius: 12px;
 
-    text-align: left;
-    display: block;
+    
+    display: inline-block;
     width: 80vw;
- background-color: #616d79;
+ background-color: #4d5359;
  height: 80vh;
-
+ border-spacing: 0.4rem;
  font-weight: lighter;
 
  overflow-y: scroll;
+ margin-bottom: 3rem;
  
 }
+
 .table th{
-    background-color: #2C3845;
+    background-color: #294743;
     border-bottom: 3px solid #3b5a45;
-    padding: 20px;
-    width: 10%;
- 
+    padding: 10px;
+width: 100%;
+
+
  
    
 }
@@ -55,9 +60,31 @@
     background-color: #3286567c;
     border: 1px solid #000;
   }
-  table tr{
+  .table tr{
     font-weight: lighter;
+  
+    width: 100%;
+    background-color: #8da8997c;
+ 
+
+    
+
   }
   .container h2{
     font-family: "Inter";
+  }
+  .button_container{
+    width: 100%;
+    display: flex;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }

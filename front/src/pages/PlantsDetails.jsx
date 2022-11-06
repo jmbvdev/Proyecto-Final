@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
 import { GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
-import { FaDog } from "react-icons/fa";
+import { FaComment, FaCommentDots, FaDog } from "react-icons/fa";
 import s from "../styles/details.module.css";
 import { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
@@ -13,10 +13,13 @@ import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 import FavButton from "../components/FavButton";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import Reviews from "./Reviews";
+import View_Reviews from "../components/View_Reviews"
 import { AiFillStar } from "react-icons/ai";
+import axios from "axios";
+
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -28,25 +31,51 @@ const PlantsDetails = () => {
 
   const navigate = useNavigate();
   const id = useParams().id;
-  const [comment, setComment] = useState(false);
+  const[comment, setComment]=useState(false)
   const [open, setOpen] = React.useState(false);
+  const [openReview, setOpenReview] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [view, setView] = useState([]);
 
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "transparent",
-    border: "none",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'transparent',
+    border: 'none',
     p: 4,
   };
-
+  const styleReview = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'transparent',
+    border: 'none',
+    p: 4,
+  };
+  
   useEffect(() => {
     dispatch(GetProductDetails(id));
     return function () {
       dispatch(clearDetails());
     };
+  }, []);
+  
+  useEffect(() => {
+    if (!view.length) {
+      //axios.get("http://localhost:5000/api-plants-b6153/us-central1/app/coments/1ZNEmmNnAp6r4QXLVCAS")
+      axios
+        .get(
+          `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`
+        )
+        //  axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`)
+        .then((res) => {
+          console.log(res.data)
+          setView(res.data);
+        });
+    }
   }, []);
 
   function handleEdit(e) {
@@ -110,8 +139,30 @@ const PlantsDetails = () => {
     }
   }
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    const user=view.find(e=>e.data.userUID===currentUser.uid)
+    if (user) {
+
+      Promise.resolve( Swal.fire({
+        title: "Ups",
+        text: "you already added a review to this plant",
+        icon: "warning",
+        showDenyButton: false,
+        confirmButtonText: "ok",
+        confirmButtonColor: "rgb(9, 102, 74)",
+      }))
+      return
+    }
+
+    
+
+    setOpen(true)
+  };
+  const handleOpenReview = () => {
+    setOpenReview(true)
+  };
   const handleClose = () => setOpen(false);
+  const handleCloseReview = () => setOpenReview(false);
   return plant?.name ? (
     <div className={s.container}>
       <img src={plant?.image} alt="" />
@@ -151,20 +202,14 @@ const PlantsDetails = () => {
           </div>
           <div className={s.quantity}>
             <button
-              disabled={
-                quantity === 1 || plant?.stock === 0 || plant?.logicalDeletion
-              }
+              disabled={quantity === 1}
               onClick={() => setQuantity(quantity - 1)}
             >
               -
             </button>
-            <p>{plant?.stock === 0 ? plant?.stock : quantity}</p>
+            <p>{quantity}</p>
             <button
-              disabled={
-                quantity === plant?.stock ||
-                plant?.stock === 0 ||
-                plant?.logicalDeletion
-              }
+              disabled={quantity === plant?.stock}
               onClick={() => setQuantity(quantity + 1)}
             >
               +
@@ -174,14 +219,30 @@ const PlantsDetails = () => {
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
           <FavButton id={id} user={currentUser?.uid} />
-          {!currentUser || currentUser?.role === "user" ? null : (
-            <div className={s.edit_btn}>
-              <h4>Edit</h4>
-              <button onClick={handleEdit}>
-                <FaRegEdit />
+          <div className={s.edit_btn}>
+            <h4>Edit</h4>
+            <button onClick={handleEdit}>
+              <FaRegEdit />
+            </button>
+          </div>
+        </div>
+        <div className={s.reviews_container}>
+          <h4>Add a review</h4>
+
+          <AiFillStar className={s.star} onClick={handleOpen} />
+        </div>
+        <div>
+            {currentUser ? (
+              <div className={s.favorites}>
+                <h4 >Watch reviews</h4>
+                <FaCommentDots className={s.hearth} onClick={handleOpenReview}/>
+              </div>
+             
+            ) : (
+              <button onClick={handleRedirect}>
+                Sign in to leave a review
               </button>
-            </div>
-          )}
+            )}
         </div>
 
         {cart.findIndex((e) => e.id === id) !== -1 && (
@@ -189,29 +250,14 @@ const PlantsDetails = () => {
         )}
 
         <button
-          disabled={
-            cart.findIndex((e) => e.id === id) !== -1 ||
-            plant?.stock === 0 ||
-            plant?.logicalDeletion
-          }
+          disabled={cart.findIndex((e) => e.id === id) !== -1}
           onClick={handleCart}
           className={s.cart}
         >
           Add to Cart
         </button>
-        <div className={s.edit_btn}>
-          <div>
-            {currentUser ? (
-              <button onClick={handleComents}>Add Coments</button>
-            ) : (
-              <button onClick={handleRedirect}>
-                Sign in to leave a comment
-              </button>
-            )}
-          </div>
-          <div>
-            {currentUser ? (
-              <div>
+       
+        <div>
                 <Modal
                   open={open}
                   onClose={handleClose}
@@ -223,14 +269,20 @@ const PlantsDetails = () => {
                   </Box>
                 </Modal>
               </div>
-            ) : (
-              <button onClick={handleRedirect}>
-                Sign in to leave a comment
-              </button>
-            )}
-          </div>
-        </div>
+              <div>
+                <Modal
+                  open={openReview}
+                  onClose={handleCloseReview}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={styleReview}>
+                    <View_Reviews view={view}/>
+                  </Box>
+                </Modal>
+              </div>
       </div>
+    
     </div>
   ) : (
     <Loading />
@@ -238,3 +290,4 @@ const PlantsDetails = () => {
 };
 
 export default PlantsDetails;
+
