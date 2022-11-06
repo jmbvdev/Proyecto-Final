@@ -38,10 +38,6 @@ const Reviews = () => {
     "Withstand Any Abuse",
   ];
 
-  useEffect(() => {
-    dispatch(setCurrentUser(auth.currentUser));
-  }, []);
-
   function handleSelect(e) {
     setComents({
       ...coments,
