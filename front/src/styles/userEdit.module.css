@@ -131,6 +131,7 @@
     cursor: pointer;
     caret-color: transparent;
   }
+  
   @media (max-width: 1000px) {
     .container{
         height: 150vh;

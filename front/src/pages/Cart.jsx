@@ -181,7 +181,6 @@ const Cart = () => {
         <button onClick={handleOnPurchase} className={s.checkout}>
           CHECKOUT NOW
         </button>
-        <Coupon setDiscount={setDiscount} />
         {pago ? (
           <FormPostCheckout
             setPago={setPago}

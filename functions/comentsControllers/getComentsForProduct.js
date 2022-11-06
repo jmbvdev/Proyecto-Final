@@ -5,7 +5,7 @@ module.exports = async function getComentsForProduct(req, res, next) {
     const { id } = req.params;
     const coments = await db
       .collection("coments")
-      .where("productID", "==", `${id}`)
+      .where("plantsUID", "==", `${id}`)
       .get();
     let arrayofcoments = [];
     coments.forEach((c) => {

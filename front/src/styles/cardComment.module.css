@@ -1,0 +1,45 @@
+.container{
+    display: flex;
+    width: 90%;
+    height: 200px;
+    margin: 20px ;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    caret-color: transparent;
+    background-image: url("https://img.freepik.com/free-photo/paper-textured-background_53876-30486.jpg?w=360");
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    border-radius: 12px;
+    padding: 30px;
+}
+.container img{
+    width: 90px;
+    border-radius: 50%;
+}
+
+.specs{
+    width: 80%;
+  height: auto;
+}
+
+.review{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+.star{
+ font-size: 40px;
+ color:  #328656;
+}
+.review span{
+    font-size: 2rem;
+    color:  #328656;
+}
+.quote{
+    padding: 10px;
+    font-family: "Lore",sans-serif;
+    font-style: italic;
+    color: #596e62;
+    font-size: 1rem;
+}
