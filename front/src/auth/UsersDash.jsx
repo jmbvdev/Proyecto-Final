@@ -35,11 +35,10 @@ const UserDetail = () => {
     axios
       .put(
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
-        { disabled: true }
+        { role: user.customClaims?.role || ["user"], disabled: true }
       )
       .then((res) => {
-        console.log(res.data[0]);
-        setUser(res.data[0]);
+        setUser(res.data);
       });
   };
 
@@ -47,11 +46,10 @@ const UserDetail = () => {
     axios
       .put(
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
-        { disabled: false }
+        { role: user.customClaims?.role || ["user"], disabled: false }
       )
       .then((res) => {
-        console.log(res.data[0]);
-        setUser(res.data[0]);
+        setUser(res.data);
       });
   };
 
@@ -62,8 +60,7 @@ const UserDetail = () => {
         { role: ["admin"] }
       )
       .then((res) => {
-        console.log(res.data[0]);
-        setUser(res.data[0]);
+        setUser(res.data);
       });
   };
   const handleSetModerator = () => {
@@ -72,7 +69,7 @@ const UserDetail = () => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
         { role: ["moderator"] }
       )
-      .then((res) => setUser(res.data[0]));
+      .then((res) => setUser(res.data));
   };
   const handleSetModeratorOff = () => {
     axios
@@ -80,17 +77,16 @@ const UserDetail = () => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
         { role: ["user"] }
       )
-      .then((res) => setUser(res.data[0]));
+      .then((res) => setUser(res.data));
   };
 
   if (user)
     return (
       <div className={s.profile}>
-        {console.log(user.customClaims?.role[0])}
         <button onClick={useGoBack}>Go back</button>
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
-          <p>{user.customClaims?.role[0] || "User"}</p>
+          <p>{user.customClaims?.role?.[0] || "User"}</p>
           <img
             src={user.photoURL}
             alt={user.displayName}
@@ -114,8 +110,8 @@ const UserDetail = () => {
               </div>
             ) : null}
             {admin?.role[0] === "admin" &&
-            user.customClaims?.role[0] !== "admin" ? (
-              user.customClaims?.role[0] === "moderator" ? (
+            user.customClaims?.role?.[0] !== "admin" ? (
+              user.customClaims?.role?.[0] === "moderator" ? (
                 <div>
                   <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
                   <button onClick={handleSetModeratorOff}>

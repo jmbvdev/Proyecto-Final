@@ -17,7 +17,7 @@ export default function PostMercadoPago() {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
 
-  /*  useEffect(() => {
+  useEffect(() => {
     if (
       cart.length > 0 &&
       user &&
@@ -25,7 +25,7 @@ export default function PostMercadoPago() {
     ) {
       dispatch(purchase(cart[0].orderID, cart, status, user.email));
     }
-  }, [cart, dispatch, status, user]); */
+  }, [cart, dispatch, status, user]);
 
   const goHome = (e) => {
     e.preventDefault();
