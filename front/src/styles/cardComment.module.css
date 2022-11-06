@@ -10,13 +10,14 @@
     background-image: url("https://img.freepik.com/free-photo/paper-textured-background_53876-30486.jpg?w=360");
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     border-radius: 12px;
+    padding: 30px;
 }
 .container img{
-    width: 100px;
+    width: 90px;
     border-radius: 50%;
 }
 
 .specs{
     width: 50%;
-    height: 100px;
+  height: auto;
 }

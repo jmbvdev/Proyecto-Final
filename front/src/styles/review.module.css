@@ -1,6 +1,6 @@
 .reviews{
     width: 100%;
-    height: 100%;
+    height:90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,12 +14,14 @@
 
 .reviews_list{
     width: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 4rem;
+   padding: 0px 50px;
     overflow-y: scroll;
+    margin-bottom: 20px;
     
     
 }
