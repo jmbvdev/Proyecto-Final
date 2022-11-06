@@ -159,6 +159,19 @@ const PlantsDetails = () => {
     setOpen(true)
   };
   const handleOpenReview = () => {
+    const user=view.find(e=>e.data.userUID===currentUser.uid)
+    if (!user) {
+
+      Promise.resolve( Swal.fire({
+        title: "Eh",
+        text: "This plant still does not have any reviews",
+        icon: "info",
+        showDenyButton: false,
+        confirmButtonText: "ok",
+        confirmButtonColor: "rgb(9, 102, 74)",
+      }))
+      return
+    }
     setOpenReview(true)
   };
   const handleClose = () => setOpen(false);
