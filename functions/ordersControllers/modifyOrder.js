@@ -38,9 +38,18 @@ module.exports = async function postOrder(orderid, cart, state, extras, email) {
       from: "Calathea Markets <tom_cremoso@hotmail.com>",
       to: email,
       subject: "Thank you so much",
-      html: `<p style="font-size: 16px;">Your order at Calathea Market was aprobed</p>
+      html: `<p style="font-size: 25px;">Your order at Calathea Market was ${state}</p>
                 <br />
-                <img src=${cart[0].image} />
+                <img style="weight: 400px; height: 300px;" src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/newscms/2021_08/1679356/indoor-plant-jc-210224.jpg" alt="" />
+                <p style="font-size: 20px;">Your order id is ${orderid}.</p>
+                <p style="font-size: 16px;">We are preparing your package, in the next 24 hours it would be ok to send or retire.</p>
+                <br />
+                <br />
+                <p style="font-size: 16px;">Please, feel free to let a feedback about the products you get, so other people can know more about us.</p>
+                <br />
+                <br />
+                <p style="font-size: 16px;">Lots of love, Calathea Team.</p>
+                
             `,
     };
 
