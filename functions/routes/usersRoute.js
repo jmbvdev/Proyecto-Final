@@ -57,8 +57,15 @@ usersRoute
   })
   .put("/:id", async (req, res, next) => {
     try {
-      const { displayName, password, email, phoneNumber, photoURL, role } =
-        req.body;
+      const {
+        displayName,
+        password,
+        email,
+        phoneNumber,
+        photoURL,
+        role,
+        disabled,
+      } = req.body;
       const { id } = req.params;
       const user = await updateUser(
         id,
@@ -67,9 +74,11 @@ usersRoute
         email,
         phoneNumber,
         photoURL,
-        role
+        role,
+        disabled
       );
-      res.status(200).send([user.toJSON(), user.customClaims]);
+      const searched = await getUserById(id);
+      res.status(200).send(searched);
     } catch (err) {
       next(err);
     }

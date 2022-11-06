@@ -258,6 +258,8 @@ const PlantsDetails = () => {
             plant?.stock === 0 ||
             plant?.logicalDeletion
           }
+          onClick={handleCart}
+          className={s.cart}
         >
           Add to Cart
         </button>

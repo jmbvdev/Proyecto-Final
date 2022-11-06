@@ -4,10 +4,10 @@ import { setCurrentUser } from "../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
-import { RiPlantFill} from "react-icons/ri";
+import { RiPlantFill } from "react-icons/ri";
 
-import s from "../styles/dashboard.module.css"
-import image from "../images/profile.webp"
+import s from "../styles/dashboard.module.css";
+import image from "../images/profile.webp";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -16,12 +16,10 @@ const Dashboard = () => {
   const [role, setRole] = React.useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
-
   React.useEffect(() => {
     if (user) {
-        setRole(user.role[0]);
-        if(user.role === 'admin') setIsAdmin(true);
-
+      setRole(user.role[0]);
+      if (user.role[0] === "admin") setIsAdmin(true);
     }
   }, [user]);
 
@@ -58,38 +56,46 @@ const Dashboard = () => {
                   </button>
                 </div>
               )} */}
-              
             </div>
-            {role === "admin" ? 
-                    <div className={s.btn_container}>
-                      <div className={s.admin}>
-                      <FaUserCircle className={s.admin_icon} />
-                        <button onClick={()=>navigate("/dashboard/users")}>USERS</button>
-                      </div>
-                      <div className={s.admin}>
-                      <RiPlantFill className={s.admin_icon} />
-                        <button onClick={()=>navigate("/dashboard/products")}>PRODUCTS</button>
-                      </div>
-                      <div className={s.admin}>
-                        <FaShoppingBag className={s.admin_icon}/>
+            {role === "admin" ? (
+              <div className={s.btn_container}>
+                <div className={s.admin}>
+                  <FaUserCircle className={s.admin_icon} />
+                  <button onClick={() => navigate("/dashboard/users")}>
+                    USERS
+                  </button>
+                </div>
+                <div className={s.admin}>
+                  <RiPlantFill className={s.admin_icon} />
+                  <button onClick={() => navigate("/dashboard/products")}>
+                    PRODUCTS
+                  </button>
+                </div>
+                <div className={s.admin}>
+                  <FaShoppingBag className={s.admin_icon} />
 
-
-                        <button onClick={()=>navigate("/dashboard/orders")}>ORDERS</button> 
-                      </div>
-                    </div> 
-                    : role === "moderator" ? 
-                    <div className={s.admin}>
-                      <button onClick={()=>navigate("/dashboard/products")}>PRODUCTS</button>
-                        <button onClick={()=>navigate("/dashboard/orders")}>ORDERS</button> 
-                    </div>
-                    : <></>}
+                  <button onClick={() => navigate("/dashboard/orders")}>
+                    ORDERS
+                  </button>
+                </div>
+              </div>
+            ) : role === "moderator" ? (
+              <div className={s.admin}>
+                <button onClick={() => navigate("/dashboard/products")}>
+                  PRODUCTS
+                </button>
+                <button onClick={() => navigate("/dashboard/orders")}>
+                  ORDERS
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
+      </div>
     </div>
-                   
-    </div>
-)
-            }
-
+  );
+};
 
 export default Dashboard;
