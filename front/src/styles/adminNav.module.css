@@ -19,12 +19,9 @@
 
 .table{
     border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    text-align: center;
-    display: inline-table;
+    
+    display: inline-block;
     width: 80vw;
  background-color: #4d5359;
  height: 80vh;
@@ -35,14 +32,12 @@
  margin-bottom: 3rem;
  
 }
-.table th tr{
-  padding: 20px;
-}
+
 .table th{
     background-color: #294743;
     border-bottom: 3px solid #3b5a45;
     padding: 10px;
-width: 10%;
+width: 100%;
 
 
  
@@ -67,8 +62,10 @@ width: 10%;
   }
   .table tr{
     font-weight: lighter;
-    display: table-row;
+  
+    width: 100%;
     background-color: #8da8997c;
+ 
 
     
 

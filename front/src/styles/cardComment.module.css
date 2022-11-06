@@ -1,6 +1,6 @@
 .container{
     display: flex;
-    width: 80%;
+    width: 90%;
     height: 200px;
     margin: 20px ;
     justify-content: center;
@@ -18,6 +18,28 @@
 }
 
 .specs{
-    width: 50%;
+    width: 80%;
   height: auto;
+}
+
+.review{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+.star{
+ font-size: 40px;
+ color:  #328656;
+}
+.review span{
+    font-size: 2rem;
+    color:  #328656;
+}
+.quote{
+    padding: 10px;
+    font-family: "Lore",sans-serif;
+    font-style: italic;
+    color: #596e62;
+    font-size: 1rem;
 }

@@ -21,6 +21,7 @@
     align-items: center;
    padding: 0px 50px;
     overflow-y: scroll;
+    overflow-x: hidden;
     margin-bottom: 20px;
     
     
