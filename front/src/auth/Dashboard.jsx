@@ -84,13 +84,15 @@ const Dashboard = () => {
                 <button onClick={() => navigate("/dashboard/products")}>
                   PRODUCTS
                 </button>
-                <button onClick={() => navigate("/dashboard/manage-order")}>
+                <button onClick={() => navigate("/manage-order")}>
                   ORDERS
                 </button>
               </div>
-            ) : (
-              <></>
-            )}
+            ) : role === "user" ? (
+              <button onClick={() => navigate(`/orders/${user.uid}`)}>
+                ORDERS
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

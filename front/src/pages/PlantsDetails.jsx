@@ -67,7 +67,7 @@ const PlantsDetails = () => {
       //axios.get("http://localhost:5000/api-plants-b6153/us-central1/app/coments/1ZNEmmNnAp6r4QXLVCAS")
       axios
         .get(
-          `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`
+          `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`
         )
         //  axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`)
         .then((res) => {
@@ -139,6 +139,7 @@ const PlantsDetails = () => {
   }
 
   const handleOpen = () => {
+    if (!currentUser) return;
     const user = view.find((e) => e.data.userUID === currentUser.uid);
     if (user) {
       Promise.resolve(
@@ -157,22 +158,22 @@ const PlantsDetails = () => {
     setOpen(true);
   };
   const handleOpenReview = () => {
-
-    const user=view.find(e=>e.data.userUID===currentUser.uid)
+    if (!currentUser) return;
+    const user = view.find((e) => e.data.userUID === currentUser.uid);
     if (!user) {
-
-      Promise.resolve( Swal.fire({
-        title: "Eh",
-        text: "This plant still does not have any reviews",
-        icon: "info",
-        showDenyButton: false,
-        confirmButtonText: "ok",
-        confirmButtonColor: "rgb(9, 102, 74)",
-      }))
-      return
+      Promise.resolve(
+        Swal.fire({
+          title: "Eh",
+          text: "This plant still does not have any reviews",
+          icon: "info",
+          showDenyButton: false,
+          confirmButtonText: "ok",
+          confirmButtonColor: "rgb(9, 102, 74)",
+        })
+      );
+      return;
     }
-    setOpenReview(true)
-
+    setOpenReview(true);
   };
   const handleClose = () => setOpen(false);
   const handleCloseReview = () => setOpenReview(false);
@@ -238,7 +239,7 @@ const PlantsDetails = () => {
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
           <FavButton id={id} user={currentUser?.uid} />
-          {!currentUser || currentUser?.role === "user" ? null : (
+          {!currentUser || currentUser?.role?.[0] === "user" ? null : (
             <div className={s.edit_btn}>
               <h4>Edit</h4>
               <button onClick={handleEdit}>
@@ -286,7 +287,7 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Reviews />
+              <Reviews setView={setView} />
             </Box>
           </Modal>
         </div>

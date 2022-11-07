@@ -28,12 +28,10 @@ import Verification from "./auth/Verification";
 import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
-import Reviews from "./pages/Reviews"
+import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx"
-
-
 
 
 function App() {
