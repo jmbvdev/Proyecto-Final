@@ -115,10 +115,10 @@ export default function ManageOrders() {
     return (
 
         <div className={s.container}>
-            {data.length ?
+            {data.length  ?
                 <>
                     <TableGlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-                    <table {...getTableProps()} className={s.table}>
+                    <table {...getTableProps()} >
                         <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>

@@ -97,3 +97,20 @@
     .register_btn:hover{
         background-color: #efd678;
     }
+    @media (max-width: 800px) {
+        .container{
+          height: 100vh;
+        }
+        .image{
+         display: none;
+        }
+        .wraper{
+     
+         flex-direction: column-reverse;
+         justify-content: center;
+         align-items: center;
+        }
+        .register{
+          width:80%;;
+        }
+      }
