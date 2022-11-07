@@ -5,6 +5,7 @@ const modifyOrder = require("../ordersControllers/modifyOrder.js");
 const postOrder = require("../ordersControllers/postOrder.js");
 const deleteOrder = require("../ordersControllers/deleteOrder.js");
 const pagarProducto = require("../ordersControllers/mp.js");
+const getOrdersAll = require("../ordersControllers/getOrdersAll.js");
 const ordersRoute = Router();
 
 ordersRoute
