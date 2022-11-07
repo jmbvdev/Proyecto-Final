@@ -15,16 +15,23 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const history = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.usersReducer.currentUser)
+  const user = useSelector((state) => state.usersReducer.currentUser);
 
   const handleLogin = () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          dispatch(setCurrentUser(auth.currentUser))
-          auth.currentUser.emailVerified === false ? 
-          history("/verification") :
-          history("/");
+          auth.currentUser.getIdTokenResult().then((user) => {
+            dispatch(
+              setCurrentUser({
+                ...auth.currentUser,
+                role: user.claims.role || "user",
+              })
+            );
+            auth.currentUser.emailVerified === false
+              ? history("/verification")
+              : history("/");
+          });
         })
         .catch((err) => alert(err));
     }
