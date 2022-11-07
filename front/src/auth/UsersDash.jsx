@@ -5,6 +5,7 @@ import s from "../styles/dashboard.module.css";
 import image from "../images/profile.webp";
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
+import { IoIosArrowBack } from "react-icons/io";
 
 const UserDetail = () => {
   const [user, setUser] = React.useState(null);
@@ -82,11 +83,18 @@ const UserDetail = () => {
 
   if (user)
     return (
+      <div className={s.container}>
+     
+        <button onClick={useGoBack} className={s.back}>
+              <IoIosArrowBack  />
+            </button>
+
+      <div className={s.wraper}>
+
       <div className={s.profile}>
-        <button onClick={useGoBack}>Go back</button>
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
-          <p>{user.customClaims?.role?.[0] || "User"}</p>
+        <p>{user.customClaims?.role?.[0] || "User"}</p>
           <img
             src={user.photoURL}
             alt={user.displayName}
@@ -128,6 +136,8 @@ const UserDetail = () => {
             ) : null}
           </div>
         </div>
+      </div>
+      </div>
       </div>
     );
   else return <Loading />;
