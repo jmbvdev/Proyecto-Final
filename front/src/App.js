@@ -95,6 +95,7 @@ function App() {
         <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="/orders/:id" element={<OrdersUser />} />
+        <Route exact path="/manage-order" element={<ManageOrders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth />
