@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import { TableGlobalFilter } from '../components/TableGlobalFilter'
+import s from "../styles/adminNav.module.css"
+import Loading from '../components/Loading';
 
 
 export const COLUMNS = [
@@ -112,11 +114,11 @@ export default function ManageOrders() {
 
     return (
 
-        <div>
+        <div className={s.container}>
             {data.length ?
                 <>
                     <TableGlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-                    <table {...getTableProps()}>
+                    <table {...getTableProps()} className={s.table}>
                         <thead>
                             {headerGroups.map(headerGroup => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>
@@ -152,7 +154,7 @@ export default function ManageOrders() {
 
                     </table>
                 </>
-                : <h3>Loading...</h3>}
+                : <Loading/>}
 
         </div>
     )

@@ -31,6 +31,7 @@ import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews"
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
+import ManageOrders from "./pages/ManageOrders.jsx"
 
 
 

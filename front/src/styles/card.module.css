@@ -27,6 +27,26 @@
     background-color: #d6d6d661;
     cursor: pointer;
 }
+.card_overstock{
+    position: absolute;
+    margin-top: 10px;
+    width: 90%;
+    height: 350px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: .5s ease;
+    background-color: #6a666667;
+    cursor: pointer;
+}
+.card_overstock p{
+    color: #868a85;
+    font-size: larger;
+    font-family: "Roboto";
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.653);
+}
 .card_overlay button{
     background-color:#617b3e;
     color: #fff;

@@ -74,7 +74,7 @@ const Dashboard = () => {
                 <div className={s.admin}>
                   <FaShoppingBag className={s.admin_icon} />
 
-                  <button onClick={() => navigate("/dashboard/orders")}>
+                  <button onClick={() => navigate("/manage-order")}>
                     ORDERS
                   </button>
                 </div>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 <button onClick={() => navigate("/dashboard/products")}>
                   PRODUCTS
                 </button>
-                <button onClick={() => navigate("/dashboard/orders")}>
+                <button onClick={() => navigate("/dashboard/manage-order")}>
                   ORDERS
                 </button>
               </div>
