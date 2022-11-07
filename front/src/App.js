@@ -31,7 +31,8 @@ import OrdersDash from "./auth/AdminDash/OrdersDash";
 import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
-import ManageOrders from "./pages/ManageOrders";
+import ManageOrders from "./pages/ManageOrders.jsx"
+
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);

@@ -104,6 +104,20 @@
 gap: 1rem;
 flex-wrap: wrap;
 }
+.back{
+    background-color: #000;
+    position: absolute;
+    left: 30px;
+   margin-top: 20px;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 @media (max-width: 1000px) {
     .container{
         height: 150vh;

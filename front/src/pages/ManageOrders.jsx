@@ -1,8 +1,11 @@
 import React, { useMemo } from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useTable, useSortBy, useGlobalFilter, useFilters } from "react-table";
-import { TableGlobalFilter } from "../components/TableGlobalFilter";
+import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
+import { TableGlobalFilter } from '../components/TableGlobalFilter'
+import s from "../styles/adminNav.module.css"
+import Loading from '../components/Loading';
+
 
 export const COLUMNS = [
   {
@@ -95,64 +98,57 @@ export default function ManageOrders() {
       columns,
       data,
     },
-    tableHooks,
-    useGlobalFilter,
-    useSortBy
-  );
 
-  const { globalFilter } = state;
+        tableHooks,
+        useGlobalFilter,
+        useSortBy,
+    )
 
-  return (
-    <div>
-      {data.length ? (
-        <>
-          <TableGlobalFilter
-            filter={globalFilter}
-            setFilter={setGlobalFilter}
-          />
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {column.render("Header")}
+    const { globalFilter } = state
 
-                      {
-                        <span>
-                          {column.isSorted
-                            ? column.isSortedDesc
-                              ? " ▼"
-                              : " ▲"
-                            : ""}
-                        </span>
-                      }
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        <h3>Loading...</h3>
-      )}
-    </div>
-  );
-}
+    return (
+
+        <div className={s.container}>
+            {data.length  ?
+                <>
+                    <TableGlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+                    <table {...getTableProps()} >
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render('Header')}
+
+                                            {
+                                                <span>
+                                                    {column.isSorted ? (column.isSortedDesc ? " ▼" : " ▲") : ""}
+                                                </span>
+                                            }
+
+
+                                        </th>
+
+                                    ))}
+                                </tr>
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {rows.map(row => {
+                                prepareRow(row)
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+
+                    </table>
+                </>
+                : <Loading/>}
+
+        </div>
+    )

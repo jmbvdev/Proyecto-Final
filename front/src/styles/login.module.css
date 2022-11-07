@@ -212,3 +212,20 @@ right: 20px;
     cursor: pointer;
     caret-color: transparent;
   }
+  @media (max-width: 800px) {
+    .container{
+      height: 100vh;
+    }
+    .image{
+     display: none;
+    }
+    .wraper{
+ 
+     flex-direction: column-reverse;
+     justify-content: center;
+     align-items: center;
+    }
+    .login{
+      width:70%;;
+    }
+  }
