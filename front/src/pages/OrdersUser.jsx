@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from "react-redux";
 import OrdersCard from '../components/OrdersCard';
+import s from "../styles/ordersUser.module.css"
+import image from "../images/designplant.webp"
 
 import axios from 'axios';
+import { BiReset } from 'react-icons/bi';
+import { RiSearchLine } from 'react-icons/ri';
 
 const OrdersUser = () => {
     const currentUser = useSelector((state) => state.usersReducer.currentUser);
@@ -27,11 +31,11 @@ const OrdersUser = () => {
             let a = await axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUser.uid}`)
             let result = a.data.map((item) => {
                 return {
-                    state: item.data.state,
-                    userID: item.data.userID,
-                    orderid: item.orderid,
-                    date: item.data.date,
-                    data: item.data.cart
+                    state: item.data?.state,
+                    userID: item.data?.userID,
+                    orderid: item?.orderid,
+                    date: item.data?.date,
+                    data: item.data?.cart
                 }
             })
             setState(result)
@@ -86,34 +90,46 @@ const OrdersUser = () => {
     
     return (
 
-        <div>
-            <div>
+        <div className={s.main}>
+            
+            <div className={s.favorites}>
+            <div className={s.left} style={{ backgroundImage: `url(${image})` }}></div>  
+            <div className={s.right}>
+            <div className={s.input_container}>
+
+            <div className={s.search}>
                 <input type="text" value={name} placeholder="Enter name..." onChange={e => handleUserInput(e)} />
-                <button type="submit" onClick={e => handleSearchName(e)}>Search</button>
+                <button type="submit" onClick={e => handleSearchName(e)}> <RiSearchLine /></button>
             </div>
 
-            <div>
+            <div className={s.order}>
                 <select onChange={e => handleOrderByDate(e)}>
                     <option value="">Order date</option>
                     <option value="asc">asc</option>
                     <option value="des">des</option>
                 </select>
-                <div>
-                    <button onClick={() => setState([...original])}>Reset</button>
-                </div>
             </div>
+               <BiReset onClick={() => setState([...original])} className={s.reset} />
+                 
+              
+            </div>
+             <div className={s.favorite_list}>
 
             {
                 state.map(ord => (
-                    <OrdersCard
-                        orderid={ord.orderid}
-                        state={ord.state}
-                        userID={ord.userID}
-                        date={ord.date}
-                        data={ord.data}
+                    <OrdersCard 
+                        orderid={ord?.orderid}
+                        state={ord?.state}
+                        userID={ord?.userID}
+                        date={ord?.date}
+                        data={ord?.data}
                     />
                 ))
             }
+             </div>
+            </div>
+
+            </div>
         </div >
     )
 }
