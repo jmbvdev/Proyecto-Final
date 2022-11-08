@@ -78,6 +78,13 @@ const Dashboard = () => {
                     ORDERS
                   </button>
                 </div>
+                <div className={s.admin}>
+                  <FaShoppingBag className={s.admin_icon} />
+
+                  <button onClick={() => navigate("/dashboard/coupons")}>
+                    COUPONS
+                  </button>
+                </div>
               </div>
             ) : role === "moderator" ? (
               <div className={s.admin}>

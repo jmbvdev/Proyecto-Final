@@ -28,6 +28,7 @@ import Verification from "./auth/Verification";
 import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
+import CouponDash from "./auth/AdminDash/CouponDash";
 import Reviews from "./pages/Reviews"
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
@@ -87,6 +88,7 @@ function App() {
         <Route path="/dashboard/users" element={<UsersDash />} />
         <Route path="/dashboard/orders" element={<OrdersDash />} />
         <Route path="/dashboard/products" element={<ProductsDash />} />
+        <Route path="/dashboard/coupons" element={<CouponDash />} />
         <Route exact path="/users/detail/:id" element={<UserDetail />} />
         <Route exact path="/plants/edit/:id" element={<EditPlant />} />
         <Route path="/verification" element={<Verification />} />

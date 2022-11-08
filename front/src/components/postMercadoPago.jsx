@@ -62,7 +62,6 @@ export default function PostMercadoPago() {
           </div>
         </div>
       </div>
-    </div>
   );
 }  else {
   return (
