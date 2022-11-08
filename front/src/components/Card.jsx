@@ -10,7 +10,7 @@ const Card = ({ plant, id }) => {
   if (!plant.logicalDeletion) {
     return (
       <div className={s.container_card}>
-        {plant.stock === 0 ? <div>Out of stock</div> : null}
+        {plant.stock === 0 ? <div className={s.card_overstock}><p>Out of stock</p></div> : null}
         <div className={s.card}>
           <div className={s.card_overlay}>
             <button onClick={handleClick}>more details</button>

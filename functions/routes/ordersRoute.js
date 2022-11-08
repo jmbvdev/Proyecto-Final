@@ -5,10 +5,19 @@ const modifyOrder = require("../ordersControllers/modifyOrder.js");
 const postOrder = require("../ordersControllers/postOrder.js");
 const deleteOrder = require("../ordersControllers/deleteOrder.js");
 const pagarProducto = require("../ordersControllers/mp.js");
+const getOrdersAll = require("../ordersControllers/getOrdersAll.js");
 const ordersRoute = Router();
 
 ordersRoute
   .post("/purchase", pagarProducto)
+  .get("/all", async (req, res, next) => {
+    try {
+      let orders = await getOrdersAll();
+      return res.status(200).send(orders);
+    } catch (err) {
+      return next(err);
+    }
+  })
   .get("/cart/:id", async (req, res, next) => {
     try {
       const { id } = req.params;

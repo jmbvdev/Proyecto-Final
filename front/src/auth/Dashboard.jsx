@@ -73,10 +73,13 @@ const Dashboard = () => {
                 </div>
                 <div className={s.admin}>
                   <FaShoppingBag className={s.admin_icon} />
-
-                  <button onClick={() => navigate("/dashboard/orders")}>
+                  <button onClick={() => navigate("/manage-order")}>
                     ORDERS
                   </button>
+                </div>
+                <div className={s.admin}>
+                  <RiPlantFill className={s.admin_icon} />
+                  <button onClick={() => navigate("/create")}>CREATE</button>
                 </div>
               </div>
             ) : role === "moderator" ? (
@@ -84,13 +87,15 @@ const Dashboard = () => {
                 <button onClick={() => navigate("/dashboard/products")}>
                   PRODUCTS
                 </button>
-                <button onClick={() => navigate("/dashboard/orders")}>
+                <button onClick={() => navigate("/manage-order")}>
                   ORDERS
                 </button>
               </div>
-            ) : (
-              <></>
-            )}
+            ) : role === "user" ? (
+              <button onClick={() => navigate(`/orders/${user.uid}`)}>
+                ORDERS
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

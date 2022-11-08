@@ -3,11 +3,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { purchase } from "../Redux/actions/shopCart";
-import success from "../images/success.webp"
-import pending from "../images/pending.webp"
-import failure from "../images/failure.webp"
-import s from "../styles/postMercado.module.css"
-
+import success from "../images/success.webp";
+import pending from "../images/pending.webp";
+import failure from "../images/failure.webp";
+import s from "../styles/postMercado.module.css";
 
 export default function PostMercadoPago() {
   const [searchParams] = useSearchParams();
@@ -73,16 +72,13 @@ export default function PostMercadoPago() {
             <img src={failure} alt="" />
           </div>
           <div className={s.specs}>
-
-
             <h4>YOUR PURCHASE WAS {status}</h4>
             <p>
               We are sorry but it has failed for some reason. Meanwhile, we save
               your cart so you can try to purchase it in another ocasion.
             </p>
             <div className={s.back}>
-
-              <button onClick={goHome} >GO BACK TO HOME</button>
+              <button onClick={goHome}>GO BACK TO HOME</button>
             </div>
           </div>
 
@@ -90,7 +86,6 @@ export default function PostMercadoPago() {
       </div>
     );
   }
-
 }
 
 /* https://api-plants-b6153.web.app/failure?collection_id=1310577355&collection_status=rejected&payment_id=1310577355&status=rejected&external_reference=null&payment_type=credit_card&merchant_order_id=6383678273&preference_id=209498569-0017a0dc-1fde-4270-8186-0cee769052d6&site_id=MLA&processing_mode=aggregator&merchant_account_id=null */
