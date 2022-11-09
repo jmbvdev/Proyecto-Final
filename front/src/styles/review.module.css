@@ -47,5 +47,16 @@
     font-family: "Roboto", sans-serif;
     margin-top: 30px;
     color: #5d745d;
-   
+       
+}
+
+.delete{
+  color: rgba(164, 5, 5, 0.681);
+  font-size: 1.8rem;
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+}
+.delete:hover{
+  color: rgba(200, 2, 2, 0.794);
 }
