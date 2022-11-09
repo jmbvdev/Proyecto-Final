@@ -18,36 +18,46 @@ const OrdersUser = () => {
   const [orden, setOrden] = useState("");
 
   useEffect(() => {
-    if (currentUser) {
-      dataState();
-    }
+    // if (currentUser) {
+    //   dataState();
+    // }
+    const dataState = async () => {
+      try {
+        if (!currentUser) {
+          throw "no existe usuario"
+        }
+        let a = await axios.get(
+          `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUser.uid}`
+        );
+        // console.log("a", a.data)
+        let result = a.data.map((item) => {
+          return {
+            state: item.data?.state,
+            userID: item.data?.userID,
+            orderid: item?.orderid,
+            date: item.data?.date,
+            data: item.data?.cart,
+          };
+        });
+        setState(result);
+        setAux(result);
+        setOriginal([...result]);
+      } catch (error) {
+        console.error(error)
+      }
+      
+    };
+    dataState()
   }, [currentUser]);
+
+
+
 
   const handleUserInput = (e) => {
     e.preventDefault();
     setName(e.target.value);
   };
 
-  const dataState = async () => {
-    if (currentUser) {
-      let a = await axios.get(
-        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUser.uid}`
-      );
-      let result = a.data.map((item) => {
-        return {
-          state: item.data?.state,
-          userID: item.data?.userID,
-          orderid: item?.orderid,
-          date: item.data?.date,
-          data: item.data?.cart,
-        };
-      });
-      setState(result);
-      setAux(result);
-      setOriginal([...result]);
-    }
-    return dataState;
-  };
 
   const handleSearchName = async (e) => {
     if (name === "") {
@@ -73,27 +83,28 @@ const OrdersUser = () => {
     let orderDate =
       e.target.value === "des"
         ? state.sort((a, b) => {
-            if (a.date._seconds > b.date._seconds) {
-              return 1;
-            }
-            if (a.date._seconds < b.date._seconds) {
-              return -1;
-            }
-            return 0;
-          })
+          if (a.date._seconds > b.date._seconds) {
+            return 1;
+          }
+          if (a.date._seconds < b.date._seconds) {
+            return -1;
+          }
+          return 0;
+        })
         : state.sort((a, b) => {
-            if (a.date._seconds > b.date._seconds) {
-              return -1;
-            }
-            if (a.date._seconds < b.date._seconds) {
-              return 1;
-            }
-            return 0;
-          });
+          if (a.date._seconds > b.date._seconds) {
+            return -1;
+          }
+          if (a.date._seconds < b.date._seconds) {
+            return 1;
+          }
+          return 0;
+        });
     setState(orderDate);
     setOrden(`${e.target.value}`);
   };
 
+  console.log(state)
   return (
     <div className={s.main}>
       <div className={s.favorites}>
@@ -128,17 +139,19 @@ const OrdersUser = () => {
               className={s.reset}
             />
           </div>
-          <div className={s.favorite_list}>
-            {state.map((ord) => (
+          <div className={s.favorite_list} >
+            {state.map((ord, i) => (
               <OrdersCard
                 orderid={ord?.orderid}
                 state={ord?.state}
                 userID={ord?.userID}
                 date={ord?.date}
                 data={ord?.data}
+                key={i}
               />
             ))}
           </div>
+
         </div>
       </div>
     </div>
