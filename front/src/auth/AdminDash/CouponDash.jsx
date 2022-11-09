@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import s from "../../styles/coupon.module.css";
 import plans from "../../images/plans.webp";
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 
 const CuponDash = () => {
 
@@ -16,11 +16,12 @@ const CuponDash = () => {
   const [coupons, setCoupons] = React.useState([]);
 
   React.useEffect(() => {
-    if(!coupons){
-    axios.get(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/all`)
-    .then(res => setCoupons(res.data));
-    }
-  }, [coupons]);
+    if(!coupons.length){
+    fetch(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/all`)
+    .then(res => res.json())
+    .then(r => setCoupons(r));
+  }
+}, [coupons]);
 
   React.useEffect(() => {
     setInput((prev) => ({ ...prev, [input.name]: input.value }));
@@ -49,7 +50,7 @@ const CuponDash = () => {
         headerGroups,
         rows,
         prepareRow
-    } = useTable({columns, data}, tableHooks);
+    } = useTable({columns, data}, tableHooks, useSortBy);
 
     return (
       <table {...getTableProps()} className="">
@@ -57,7 +58,8 @@ const CuponDash = () => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}
+                {column.isSorted ? (column.isSortedDesc ? "▼" :  "▲") : ""}</th>
               ))}
             </tr>
           ))}
@@ -79,9 +81,9 @@ const CuponDash = () => {
   };
 
   const handleDelete = name => {
-    //axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
-    //.then(res => console.log(res.data))
-    alert("deleted")
+    axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
+    .then(res => console.log(res.data))
+    alert(`${name} deleted`)
   };
 
   const columns = React.useMemo(() => [
@@ -116,13 +118,17 @@ const tableHooks = hooks => {
       id: 'Delete',
       Header: 'Delete',
       Cell: ({row}) => (
-        <button onClick={handleDelete(row.values.name)}>DELETE</button>
+        <button onClick={e => handleDelete(row.values.name)}>DELETE</button>
       )
     }
   ])
 };
 
-const data = coupons;
+const data = coupons?.map(c => {
+  return c.data;
+});
+
+console.log(data)
 
     return (
       <div>

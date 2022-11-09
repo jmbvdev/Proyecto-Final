@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/adminNav.module.css"
 import { useState } from "react";
@@ -38,7 +38,7 @@ const UsersDash = () => {
             headerGroups,
             rows,
             prepareRow
-        } = useTable({columns, data}, tableHooks)
+        } = useTable({columns, data}, tableHooks, useSortBy)
 
     return (
       <table {...getTableProps()} className={s.table}>
@@ -46,7 +46,8 @@ const UsersDash = () => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}
+                {column.isSorted ? (column.isSortedDesc ? "▼" :  "▲") : ""}</th>
               ))}
             </tr>
           ))}

@@ -4,7 +4,7 @@ module.exports = async function getCoupon(req, res, next) {
   try {
     const { name } = req.params;
     const coupon = await db.collection("coupons").doc(name).get();
-    res.status(200).send(coupon.data());
+    res.status(200).send(coupon);
   } catch (err) {
     next(err);
   }
