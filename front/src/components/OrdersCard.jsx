@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { redirect, useNavigate } from 'react-router-dom'
-import OrdersUser from '../pages/OrdersUser'
+import { useNavigate } from 'react-router-dom'
 import { saveCart } from '../Redux/actions/shopCart'
 import s from "../styles/ordersUser.module.css"
 
@@ -14,11 +12,7 @@ const OrdersCard = (props) => {
     const currentUser = useSelector((state) => state.usersReducer.currentUser);
     const cart = useSelector((state) => state.shopCartReducer.products);
 
-    useEffect(() => {
-        console.log("cart", cart)
-    }, [cart, dispatch])
-
-    const handleCreateSimilarOrder = async () => {
+    const handleCreateSimilarOrder = () => {
         try {
             props.data.forEach((product) => {
                 dispatch(saveCart(
@@ -35,10 +29,9 @@ const OrdersCard = (props) => {
                     ],
                     currentUser.uid))
             })
-            // return redirect(`/orders/${currentUser.uid}`)
-            setInterval("location.reload()",10);
+            setInterval("location.reload()", 10);
         } catch (error) {
-
+            console.error(error)
         }
 
     }
