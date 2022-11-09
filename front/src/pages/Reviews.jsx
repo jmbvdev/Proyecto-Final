@@ -12,7 +12,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 
-const Reviews = () => {
+const Reviews = ({ setView }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const id = useParams().id;
@@ -28,7 +28,7 @@ const Reviews = () => {
     plantsUID: id,
     comentspositive: [],
   });
-  console.log(coments.userImg);
+
   //const [state, setState] = useState([])
 
   const positive = [
@@ -81,7 +81,7 @@ const Reviews = () => {
     }
     axios
       .post(
-        "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
+        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
         {
           star: coments.star,
           plantsUID: coments.plantsUID,
@@ -91,14 +91,15 @@ const Reviews = () => {
           userImg: coments.userImg,
         }
       )
-      .then(() => {
+      .then((res) => {
         Swal.fire({
           title: "Success",
-          text: "Your product was successfully added to the cart",
+          text: "Your comment was successfully added",
           icon: "success",
           confirmButtonText: "ok",
           confirmButtonColor: "rgb(9, 102, 74)",
         });
+        setView((prevstate) => [...prevstate, res.data]);
       })
       .then(() => {
         Navigate(`/plants/details/${id}`);
@@ -109,11 +110,7 @@ const Reviews = () => {
     <div className={s.container}>
       <form className={s.form}>
         <h2>Leave Your Comment</h2>
-        <img
-          src={user?.photoURL}
-          className={s.userPic}
-          alt="do not pose image"
-        />
+        <img src={user?.photoURL} className={s.userPic} alt="do not pose" />
         <h3>{user?.displayName}</h3>
 
         <div>

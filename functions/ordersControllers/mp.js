@@ -16,9 +16,9 @@ module.exports = async (req, res, next) => {
       transaction_amount: parseInt(totalAmount),
       items: items,
       back_urls: {
-        success: "http://localhost:3000/success", //dsps cambiar por la que va
-        failure: "http://localhost:3000/failure",
-        pending: "http://localhost:3000/pending",
+        success: "https://api-plants-b6153.web.app/success",
+        failure: "https://api-plants-b6153.web.app/failure",
+        pending: "https://api-plants-b6153.web.app/pending",
       },
     };
 

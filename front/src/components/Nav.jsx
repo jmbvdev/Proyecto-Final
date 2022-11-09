@@ -23,15 +23,15 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
 
   const signOutHandler = () => {
     Swal.fire({
-      title:"Warning",
-      text:"Are you sure you want to logout?",
-      icon:"question",
-      showDenyButton:true,
-      denyButtonText:"No",
-      denyButtonColor:"#FF5733",
-      confirmButtonText:"Yes",
-      confirmButtonColor:"#72CE65"
-    }).then(res=>{
+      title: "Warning",
+      text: "Are you sure you want to logout?",
+      icon: "question",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#FF5733",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#72CE65",
+    }).then((res) => {
       if (res.isConfirmed) {
         signOut(auth).then(() => {
           dispatch(setCurrentUser(null));
@@ -103,7 +103,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
               <div className="user_name">
                 <img src={auth.currentUser.photoURL} alt="" />
                 <Link to="/dashboard">
-                  {auth.currentUser.displayName.split(" ")[0]}
+                  {auth.currentUser.displayName?.split(" ")[0] || "Set Name"}
                 </Link>
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
@@ -131,12 +131,9 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             </div>
           </div>
         </div>
-          <button
-            className="mobile-menu-icon"
-            onClick={handleMobile}
-          >
-            {Mobile ? <RiCloseLine className="close-nav"/> : <GiHamburgerMenu/>}
-          </button>
+        <button className="mobile-menu-icon" onClick={handleMobile}>
+          {Mobile ? <RiCloseLine className="close-nav" /> : <GiHamburgerMenu />}
+        </button>
       </nav>
     </>
   );

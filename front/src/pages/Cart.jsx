@@ -63,6 +63,21 @@ const Cart = () => {
   function handleOnPurchase(e) {
     e.preventDefault();
     if (!currentUser) navigate("/sign-in");
+    if (plants.length === 0) {
+      Promise.resolve(
+        Swal.fire({
+          title: "Warning",
+          text: "You don't have any plant in your cart to init the payment proccess",
+          icon: "error",
+          showDenyButton: false,
+          denyButtonText: "No",
+          denyButtonColor: "#72CE65",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#FF5733",
+        })
+      );
+      return;
+    }
     setPago(true);
   }
 
