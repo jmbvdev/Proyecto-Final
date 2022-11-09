@@ -121,14 +121,24 @@ font-weight:bold ;
 .favorites{
     display: flex;
 
-
- 
- 
 }
 .favorites h4{
     display: block;
  
     width: 90px;
+}
+.noreview{
+    background-color:rgba(160, 168, 84, 0.713) ;
+    width: 40%;
+    color: #fff;
+    font-size: medium;
+    padding: 10px;
+    caret-color: transparent;
+}
+
+.noreview:hover{
+    background-color:rgb(54, 142, 116) ;
+    cursor: pointer;
 }
 .hearth{
     font-size: 2rem;
