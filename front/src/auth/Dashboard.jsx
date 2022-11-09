@@ -78,6 +78,10 @@ const Dashboard = () => {
                   </button>
                 </div>
                 <div className={s.admin}>
+                  <FaShoppingBag className={s.admin_icon} />
+                  <button onClick={() => navigate("/dashboard/coupons")}>
+                    COUPONS
+                  </button>
                   <RiPlantFill className={s.admin_icon} />
                   <button onClick={() => navigate("/create")}>CREATE</button>
                 </div>

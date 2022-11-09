@@ -32,6 +32,7 @@ const Reviews = ({ setView }) => {
   //const [state, setState] = useState([])
 
   const positive = [
+    "That's Not What I Expected",
     "Very Good Plant",
     "Highly Recommended",
     "Withstand Any Temperature",
@@ -77,8 +78,17 @@ const Reviews = ({ setView }) => {
     // );
     // alert("Comments created")
     if (!coments.comentspositive.length || !coments.star) {
-      return alert("Missing Data");
+      // Swal.fire("Missing Data");
+      Swal.fire({
+        title: "Eh",
+        text: "You must enter some information",
+        icon: "info",
+        showDenyButton: false,
+        confirmButtonText: "ok",
+        confirmButtonColor: "rgb(9, 102, 74)",
+      })
     }
+    else{
     axios
       .post(
         "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
@@ -104,6 +114,7 @@ const Reviews = ({ setView }) => {
       .then(() => {
         Navigate(`/plants/details/${id}`);
       });
+    }
   };
 
   return (

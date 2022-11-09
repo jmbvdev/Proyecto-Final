@@ -260,7 +260,7 @@ const PlantsDetails = () => {
               <FaCommentDots className={s.hearth} onClick={handleOpenReview} />
             </div>
           ) : (
-            <button onClick={handleRedirect}>Sign in to leave a review</button>
+            <button className={s.noreview} onClick={handleRedirect} >Sign in to leave a review</button>
           )}
         </div>
 
@@ -299,7 +299,9 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={styleReview}>
-              <View_Reviews view={view} />
+              <View_Reviews view={view} 
+              user={currentUser?.uid} 
+              setView={setView}/>
             </Box>
           </Modal>
         </div>
