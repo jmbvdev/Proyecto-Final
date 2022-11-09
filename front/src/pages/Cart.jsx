@@ -67,7 +67,8 @@ const Cart = () => {
       Promise.resolve(
         Swal.fire({
           title: "Warning",
-          text: "You don't have any plant in your cart to init the payment proccess",
+          text:
+            "You don't have any plant in your cart to init the payment proccess",
           icon: "error",
           showDenyButton: false,
           denyButtonText: "No",
@@ -205,6 +206,7 @@ const Cart = () => {
             name={currentUser.displayName}
             DNI={currentUser.DNI}
             city={currentUser.City}
+            adressNumber={currentUser.adressNumber}
           />
         ) : null}
       </div>

@@ -1,18 +1,34 @@
-
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { signOut, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signOut,
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import s from "../styles/register.module.css";
 import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 
-
-
+/* import { getAuth, updateProfile } from "firebase/auth";
+const auth = getAuth();
+updateProfile(auth.currentUser, {
+  displayName: "Jane Q. User",
+  photoURL: "https://example.com/jane-q-user/profile.jpg",
+})
+  .then(() => {
+    // Profile updated!
+    // ...
+  })
+  .catch((error) => {
+    // An error occurred
+    // ...
+  });
+ */
 
 export default function Register() {
-
   const initialState = {
     displayName: "",
     email: "",
@@ -37,20 +53,28 @@ export default function Register() {
       password2 !== null &&
       input.password === password2
     ) {
-      createUserWithEmailAndPassword(auth, input.email, input.password).then(
-         () => {
-            sendEmailVerification(auth.currentUser).then( () => {
-               signOut(auth).then(() => {
-                dispatch(setCurrentUser(null))
-              }
-              )
+      createUserWithEmailAndPassword(auth, input.email, input.password)
+        .then(() => {
+          updateProfile(auth.currentUser, {
+            displayName: input.displayName,
+          })
+            .then(() => {
+              sendEmailVerification(auth.currentUser).then(() => {
+                signOut(auth).then(() => {
+                  dispatch(setCurrentUser(null));
+                  alert("User succesfully created!");
+                  navigate("/");
+                });
+              });
+            })
+            .catch((err) => {
+              window.alert(err.message);
             });
-          
-        }
-        );
+        })
+        .catch((err) => {
+          window.alert(err.message);
+        });
       setInput(initialState);
-      alert("User succesfully created!");
-      navigate("/");
     }
   };
 

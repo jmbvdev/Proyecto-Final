@@ -3,13 +3,14 @@ import MercadoPago from "../mercadopago/mercadopago";
 import s from "../styles/formPost.module.css";
 import Andreani from "./Andreani";
 import GoogleMaps from "./GoogleMaps";
+import { valLet, valN } from "../utils/validateformmp.js";
 
 function FormPostCheckout({
   items,
   totalAmount,
   adress,
   name,
-  DNI,
+  adressNumber,
   city,
   setPago,
 }) {
@@ -18,12 +19,27 @@ function FormPostCheckout({
   const [inputs, setInputs] = React.useState({
     adress,
     name,
-    DNI,
+    adressNumber,
     city,
   });
   const [valid, setValid] = React.useState(false);
   const [finish, setFinish] = React.useState(false);
 
+  const handleFinish = (e) => {
+    e.preventDefault();
+    if (!adressNumber || !adress || !city) {
+      window.alert("do you want to save your shipping data as default?");
+      //swet alert que si confirma le pegue al back y actualize sus datos de envio.
+      //si no confirma que siga nomas
+      //dentro del mismo .then del swet alert que haga el axios y dsps el set Finish
+    }
+    setFinish(true);
+  };
+
+  let totalprod = 0;
+  items.forEach((p) => {
+    totalprod = totalprod + p.count;
+  });
   const handleCheckbox1 = (e) => {
     setChecked1(true);
     setChecked2(false);
@@ -62,6 +78,8 @@ function FormPostCheckout({
                 value={inputs.city}
                 onChange={handleOnChange}
               />
+              {valLet(inputs.city) ? null : <span>Not valid</span>}
+
               <input
                 type="text"
                 name="adress"
@@ -70,6 +88,7 @@ function FormPostCheckout({
                 value={inputs.adress}
                 onChange={handleOnChange}
               />
+              {valLet(inputs.adress) ? null : <span>Not valid</span>}
               <input
                 type="text"
                 name="name"
@@ -78,18 +97,27 @@ function FormPostCheckout({
                 value={inputs.name}
                 onChange={handleOnChange}
               />
+              {valLet(inputs.name) ? null : <span>Not valid</span>}
               <input
-                name="DNI"
+                name="adressNumber"
                 type="text"
                 autoComplete="off"
-                placeholder="DNI"
-                value={inputs.DNI}
+                placeholder="N°"
+                value={inputs.adressNumber}
                 onChange={handleOnChange}
               />
+              {valN(inputs.adressNumber) ? null : <span>Not valid</span>}
               <button
                 type="button"
                 disabled={
-                  !inputs.name || !inputs.DNI || !inputs.city || !inputs.adress
+                  !inputs.name ||
+                  !inputs.adressNumber ||
+                  !inputs.city ||
+                  !inputs.adress ||
+                  !valLet(inputs.name) ||
+                  !valLet(inputs.city) ||
+                  !valLet(inputs.adress) ||
+                  !valN(inputs.adressNumber)
                 }
                 onClick={() => {
                   setValid(true);
@@ -103,6 +131,7 @@ function FormPostCheckout({
               <button
                 onClick={() => {
                   setValid(false);
+                  setFinish(false);
                 }}
               >
                 Back
@@ -127,10 +156,13 @@ function FormPostCheckout({
                 />
                 Envio con Andreani
               </label>
-              {checked2 ? <Andreani /> : null}
-              <button onClick={() => setFinish(true)}>
-                Proceed to payment
-              </button>
+              {checked2 ? (
+                <Andreani
+                  totalAmount={totalAmount}
+                  totalproducts={Math.pow(1.1, totalprod)}
+                />
+              ) : null}
+              <button onClick={handleFinish}>Proceed to payment</button>
             </div>
           )}
           {finish ? (

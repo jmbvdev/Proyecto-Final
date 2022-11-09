@@ -14,6 +14,11 @@ import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { GiPhone } from "react-icons/gi";
+import {
+  updatePassword,
+  updateProfile,
+  updateCurrentUser,
+} from "firebase/auth";
 
 const UserEdit = () => {
   const initialState = {
