@@ -1,6 +1,7 @@
 import React from "react";
 import MercadoPago from "../mercadopago/mercadopago";
 import s from "../styles/formPost.module.css";
+import Andreani from "./Andreani";
 import GoogleMaps from "./GoogleMaps";
 
 function FormPostCheckout({
@@ -14,6 +15,14 @@ function FormPostCheckout({
 }) {
   const [checked1, setChecked1] = React.useState(false);
   const [checked2, setChecked2] = React.useState(false);
+  const [inputs, setInputs] = React.useState({
+    adress,
+    name,
+    DNI,
+    city,
+  });
+  const [valid, setValid] = React.useState(false);
+  const [finish, setFinish] = React.useState(false);
 
   const handleCheckbox1 = (e) => {
     setChecked1(true);
@@ -25,11 +34,15 @@ function FormPostCheckout({
     setChecked2(true);
   };
 
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+
   const closeModal = (e) => {
     if (e.currentTarget != e.target) return;
     setPago(false);
   };
-  console.log(items, totalAmount);
   return (
     <div
       className={s.modalBackground}
@@ -39,55 +52,92 @@ function FormPostCheckout({
     >
       <div className={s.modalContainer}>
         <div className={s.optionsContainer}>
-          <form className={s.modalForm}>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="City Name"
-              value={city}
-            />
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="Adress"
-              value={adress}
-            />
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="How is receiving"
-              value={name}
-            />
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="DNI"
-              value={DNI}
-            />
-          </form>
-          <label>
-            <input
-              className={s.check}
-              type="radio"
-              name="envio"
-              checked={checked1}
-              onChange={handleCheckbox1}
-            />
-            Retiro por local
-          </label>
-          <label>
-            <input
-              className={s.check}
-              type="radio"
-              name="envio"
-              checked={checked2}
-              onChange={handleCheckbox2}
-            />
-            Envio con Andreani
-          </label>
-          <div className={s.buttonMP}>
-            <MercadoPago items={items} totalAmount={totalAmount} />
-          </div>
+          {!valid ? (
+            <form className={s.modalForm}>
+              <input
+                type="text"
+                autoComplete="off"
+                name="city"
+                placeholder="City Name"
+                value={inputs.city}
+                onChange={handleOnChange}
+              />
+              <input
+                type="text"
+                name="adress"
+                autoComplete="off"
+                placeholder="Adress"
+                value={inputs.adress}
+                onChange={handleOnChange}
+              />
+              <input
+                type="text"
+                name="name"
+                autoComplete="off"
+                placeholder="Who is receiving"
+                value={inputs.name}
+                onChange={handleOnChange}
+              />
+              <input
+                name="DNI"
+                type="text"
+                autoComplete="off"
+                placeholder="DNI"
+                value={inputs.DNI}
+                onChange={handleOnChange}
+              />
+              <button
+                type="button"
+                disabled={
+                  !inputs.name || !inputs.DNI || !inputs.city || !inputs.adress
+                }
+                onClick={() => {
+                  setValid(true);
+                }}
+              >
+                Ok
+              </button>
+            </form>
+          ) : (
+            <div>
+              <button
+                onClick={() => {
+                  setValid(false);
+                }}
+              >
+                Back
+              </button>
+              <label>
+                <input
+                  className={s.check}
+                  type="radio"
+                  name="envio"
+                  checked={checked1}
+                  onChange={handleCheckbox1}
+                />
+                Retiro por local
+              </label>
+              <label>
+                <input
+                  className={s.check}
+                  type="radio"
+                  name="envio"
+                  checked={checked2}
+                  onChange={handleCheckbox2}
+                />
+                Envio con Andreani
+              </label>
+              {checked2 ? <Andreani /> : null}
+              <button onClick={() => setFinish(true)}>
+                Proceed to payment
+              </button>
+            </div>
+          )}
+          {finish ? (
+            <div className={s.buttonMP}>
+              <MercadoPago items={items} totalAmount={totalAmount} />
+            </div>
+          ) : null}
         </div>
         <div className={s.resumeCart}>
           {items.map((plant) => {
