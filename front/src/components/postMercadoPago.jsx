@@ -35,28 +35,30 @@ export default function PostMercadoPago() {
   };
   if (status === "approved" || status === "in_process") {
     return (
-      <div className={s.container}>
-        <div className={s.wraper}>
-          {status === "approved" ? (
-            <div className={s.image}>
-              <img src={success} alt="" />
-            </div>
-          ) : (
-            <div className={s.image}>
-              <img src={pending} alt="" />
-            </div>
-          )}
+      <div>
+        <div className={s.container}>
+          <div className={s.wraper}>
+            {status === "approved" ? (
+              <div className={s.image}>
+                <img src={success} alt="" />
+              </div>
+            ) : (
+              <div className={s.image}>
+                <img src={pending} alt="" />
+              </div>
+            )}
 
-          <div className={s.specs}>
-            <h4>YOUR PURCHASE ARE {status}.</h4>
-            <p>The payment id is {payment_id}.</p>
-            <p>
-              {" "}
-              The payment method was:
-              {payment_type}
-            </p>
-            <div className={s.back}>
-              <button onClick={goHome}>GO BACK TO HOME</button>
+            <div className={s.specs}>
+              <h4>YOUR PURCHASE ARE {status}.</h4>
+              <p>The payment id is {payment_id}.</p>
+              <p>
+                {" "}
+                The payment method was:
+                {payment_type}
+              </p>
+              <div className={s.back}>
+                <button onClick={goHome}>GO BACK TO HOME</button>
+              </div>
             </div>
           </div>
         </div>
@@ -79,6 +81,7 @@ export default function PostMercadoPago() {
               <button onClick={goHome}>GO BACK TO HOME</button>
             </div>
           </div>
+
         </div>
       </div>
     );
