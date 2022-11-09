@@ -32,7 +32,7 @@ import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx"
-import PlantInfoBot from "./components/PlantInfoBot";
+
 
 
 function App() {
@@ -95,7 +95,6 @@ function App() {
         <Route path="/failure" element={<PostMercadoPago />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="/orders/:id" element={<OrdersUser />} />
-        <Route path="/info-bot" element={<PlantInfoBot/>} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
