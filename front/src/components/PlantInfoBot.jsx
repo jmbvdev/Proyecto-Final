@@ -25,7 +25,7 @@ const PlantInfoBot = () => {
   const plantDetail = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
-
+console.log(plantDetail?.details)
   return (
     <div className={s.container}>
       <form action="">
@@ -46,12 +46,12 @@ const PlantInfoBot = () => {
       {plantDetail?.image && (
         <img src={plantDetail?.image} alt="" className={s.image} />
       )}
+      <p>{search==="" && !plantDetail?.details &&  "Please type the name of a plant and click on the search icon to see the description" }</p>
       <p>
-        {search === "" && !plantDetail
-          ? "Please type the name of a plant and click on the search icon to see the description"
-          : plantDetail
-          ? plantDetail.details
-          : "This plant is not in our store"}
+        {
+           plantDetail?.hasOwnProperty("details")===true && plantDetail?.details
+          ? plantDetail?.details
+          : !plantDetail?.id && "This plant is not in our store"}
       </p>
     </div>
   );
