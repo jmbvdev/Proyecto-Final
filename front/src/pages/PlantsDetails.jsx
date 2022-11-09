@@ -251,7 +251,7 @@ const PlantsDetails = () => {
         <div className={s.reviews_container}>
           <h4>Add a review</h4>
 
-          <AiFillStar className={s.star} onClick={handleOpen} />
+          <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
         </div>
         <div>
           {currentUser ? (
