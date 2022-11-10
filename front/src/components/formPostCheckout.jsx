@@ -4,6 +4,10 @@ import s from "../styles/formPost.module.css";
 import Andreani from "./Andreani";
 import GoogleMaps from "./GoogleMaps";
 import { valLet, valN } from "../utils/validateformmp.js";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "../Redux/actions/users";
 
 function FormPostCheckout({
   items,
@@ -24,15 +28,52 @@ function FormPostCheckout({
   });
   const [valid, setValid] = React.useState(false);
   const [finish, setFinish] = React.useState(false);
+  const user = useSelector((state) => state.usersReducer.currentUser);
+  const dispatch = useDispatch();
+
+  const handleValid = (e) => {
+    e.preventDefault();
+    if (
+      adressNumber !== inputs.adressNumber ||
+      city !== inputs.city ||
+      adress !== inputs.adress
+    ) {
+      Swal.fire({
+        title: "Hey!",
+        text:
+          "This information is new, do you want to actualize your profile data?",
+        icon: "success",
+        showDenyButton: true,
+        denyButtonText: "No",
+        denyButtonColor: "#72CE65",
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#FF5733",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          axios
+            .put(
+              `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${user.uid}`,
+              {
+                role: user.role || ["user"],
+                adress: inputs.adress,
+                adressNumber: inputs.adressNumber,
+                city: inputs.city,
+              }
+            )
+            .then((res) => {
+              dispatch(
+                setCurrentUser({ ...res.data, ...res.data.customClaims })
+              );
+            });
+        }
+      });
+    }
+    setValid(true);
+  };
 
   const handleFinish = (e) => {
     e.preventDefault();
-    if (!adressNumber || !adress || !city) {
-      window.alert("do you want to save your shipping data as default?");
-      //swet alert que si confirma le pegue al back y actualize sus datos de envio.
-      //si no confirma que siga nomas
-      //dentro del mismo .then del swet alert que haga el axios y dsps el set Finish
-    }
+
     setFinish(true);
   };
 
@@ -119,9 +160,7 @@ function FormPostCheckout({
                   !valLet(inputs.adress) ||
                   !valN(inputs.adressNumber)
                 }
-                onClick={() => {
-                  setValid(true);
-                }}
+                onClick={handleValid}
               >
                 Ok
               </button>

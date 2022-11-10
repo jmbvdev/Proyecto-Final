@@ -74,7 +74,7 @@ const UserEdit = () => {
           ? input.displayName.charAt(0).toUpperCase() +
             input.displayName.slice(1)
           : user.displayName,
-      photoURL: photoURL,
+      photoURL: photoURL || user.photoURL,
       phoneNumber:
         input.phoneNumber !== "" ? input.phoneNumber : user.phoneNumber,
       role: user.role || ["user"],

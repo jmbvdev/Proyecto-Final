@@ -205,7 +205,7 @@ const Cart = () => {
             adress={currentUser.adress}
             name={currentUser.displayName}
             DNI={currentUser.DNI}
-            city={currentUser.City}
+            city={currentUser.city}
             adressNumber={currentUser.adressNumber}
           />
         ) : null}
