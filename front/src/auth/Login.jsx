@@ -9,7 +9,7 @@ import diferent from "../images/diferent.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
 import { setCurrentUser } from "../Redux/actions/users";
-import ForgotenPassword from "../components/forgotenPassword";
+import ForgotenPassword from "./forgotenPassword";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -33,6 +33,9 @@ export default function Login() {
               setCurrentUser({
                 ...auth.currentUser,
                 role: user.claims.role || "user",
+                adress: user.claims.adress || "",
+                adressNumber: user.claims.adressNumber || "",
+                city: user.claims.city || "",
               })
             );
             auth.currentUser.emailVerified === false
