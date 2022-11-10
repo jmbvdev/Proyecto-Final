@@ -82,13 +82,18 @@ const UserEdit = () => {
       adressNumber: input.adressNumber,
       city: input.city,
     };
-    axios.put(
-      `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${user.uid}`,
-      updates
-    );
-    setInput(initialState);
-    setphotoURL(null);
-    navigate("/dashboard");
+    axios
+      .put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${user.uid}`,
+        updates
+      )
+      .then((res) => {
+        dispatch(setCurrentUser({ ...res.data, ...res.data.customClaims }));
+        setInput(initialState);
+        setphotoURL(null);
+        window.alert("user modified");
+        navigate("/dashboard");
+      });
   };
 
   return (
