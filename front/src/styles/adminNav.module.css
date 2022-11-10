@@ -87,3 +87,7 @@ width: 100%;
     align-items: center;
     cursor: pointer;
   }
+
+.img {
+  max-width: 90px;
+}

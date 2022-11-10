@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllProducts } from "../../Redux/actions/products";
 import { useNavigate } from "react-router-dom";
-import { useSortBy, useTable } from 'react-table';
+import { useGlobalFilter, useSortBy, useTable, usePagination } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/adminNav.module.css"
 import { Link } from "react-router-dom";
+import GlobalFilter from "./GlobalFilter";
+import Loading from "../../components/Loading";
 
 
 const ProductsDash = () => {
@@ -25,10 +26,27 @@ const ProductsDash = () => {
             getTableBodyProps,
             headerGroups,
             rows,
-            prepareRow
-        } = useTable({columns, data}, tableHooks, useSortBy)
+            prepareRow,
+            preGlobalFilteredRows,
+            setGlobalFilter,
+            state,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage
+        } = useTable({columns, data}, useGlobalFilter, tableHooks, useSortBy, usePagination);
+
 
         return (
+          <>
+          {allProducts.length ? (
+            <>
+            <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
+            <div>
+              <button onClick={() => previousPage()} disabled={!canPreviousPage}>PREV</button>
+              <button onClick={() => nextPage()} disabled={!canNextPage}>NEXT</button>
+            </div>
             <table {...getTableProps()} className={s.table}>
               <thead>
                 {headerGroups.map(headerGroup => (
@@ -41,7 +59,7 @@ const ProductsDash = () => {
                 ))}
               </thead>
               <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
+                {page.map((row, i) => {
                   prepareRow(row)
                   return (
                     <tr {...row.getRowProps()}>
@@ -53,6 +71,12 @@ const ProductsDash = () => {
                 })}
               </tbody>
             </table>
+           
+            </>
+           ) :
+            <Loading />
+          }
+          </>
           )
         };
   
@@ -70,6 +94,10 @@ const ProductsDash = () => {
                 Header: 'Info',
                 columns: [
                             {
+                              Header: 'id',
+                              accessor: 'id'
+                            },
+                            {
                                 Header: 'Price',
                                 accessor: 'price'
                             },
@@ -78,8 +106,9 @@ const ProductsDash = () => {
                                 accessor: 'stock'
                             },
                             {
-                              Header: 'id',
-                              accessor: 'id'
+                              Header: 'Image',
+                              accessor: 'image',
+                              Cell: ({value}) => <img className={s.img} src={value}/>,
                             }
                         ]
             }
