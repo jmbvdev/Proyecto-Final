@@ -9,13 +9,20 @@ import diferent from "../images/diferent.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCart } from "../Redux/actions/shopCart";
 import { setCurrentUser } from "../Redux/actions/users";
+import ForgotenPassword from "./forgotenPassword";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
   const dispatch = useDispatch();
+  const [open, handleOpen] = useState(false);
   const user = useSelector((state) => state.usersReducer.currentUser);
+
+  const redirectToPasswordReset = (e) => {
+    e.preventDefault();
+    handleOpen(true);
+  };
 
   const handleLogin = () => {
     if (email !== null && password !== null) {
@@ -26,6 +33,9 @@ export default function Login() {
               setCurrentUser({
                 ...auth.currentUser,
                 role: user.claims.role || "user",
+                adress: user.claims.adress || "",
+                adressNumber: user.claims.adressNumber || "",
+                city: user.claims.city || "",
               })
             );
             auth.currentUser.emailVerified === false
@@ -88,7 +98,12 @@ export default function Login() {
                     Remember for 30 days
                   </label>
                 </div>
-                <button className={s.forgot_btn}>Forgot password</button>
+                <button
+                  onClick={redirectToPasswordReset}
+                  className={s.forgot_btn}
+                >
+                  Forgot password
+                </button>
               </div>
               <div className={s.sign_btn_container}>
                 <button onClick={handleLogin} className={s.sign_login}>
@@ -111,6 +126,7 @@ export default function Login() {
           <img src={diferent} alt="img" />
         </div>
       </div>
+      {open ? <ForgotenPassword close={handleOpen} /> : null}
     </div>
   );
 }

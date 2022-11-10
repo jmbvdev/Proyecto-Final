@@ -8,7 +8,10 @@ module.exports = async function updateUser(
   phoneNumber,
   photoURL,
   role,
-  disabled
+  disabled,
+  adress,
+  adressNumber,
+  city
 ) {
   const auth = admin.auth();
 
@@ -20,6 +23,8 @@ module.exports = async function updateUser(
     photoURL,
     disabled,
   });
-  await admin.auth().setCustomUserClaims(user.uid, { role });
-  return user;
+  await admin
+    .auth()
+    .setCustomUserClaims(user.uid, { role, adress, adressNumber, city });
+  return;
 };

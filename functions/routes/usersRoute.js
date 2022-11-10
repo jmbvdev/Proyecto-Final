@@ -65,9 +65,12 @@ usersRoute
         photoURL,
         role,
         disabled,
+        adress,
+        adressNumber,
+        city,
       } = req.body;
       const { id } = req.params;
-      const user = await updateUser(
+      await updateUser(
         id,
         displayName,
         password,
@@ -75,7 +78,10 @@ usersRoute
         phoneNumber,
         photoURL,
         role,
-        disabled
+        disabled,
+        adress,
+        adressNumber,
+        city
       );
       const searched = await getUserById(id);
       res.status(200).send(searched);

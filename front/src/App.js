@@ -29,11 +29,10 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import CouponDash from "./auth/AdminDash/CouponDash";
-import Reviews from "./pages/Reviews"
+import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
-
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -60,6 +59,9 @@ function App() {
             setCurrentUser({
               ...authenticatedUser,
               role: role.claims.role || "user",
+              adress: role.claims.adress || "",
+              adressNumber: role.claims.adressNumber || "",
+              city: role.claims.city || "",
             })
           );
           dispatch(loadCart(authenticatedUser.uid));

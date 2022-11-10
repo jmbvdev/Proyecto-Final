@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser, setCurrentUser } from "../Redux/actions/users";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,27 +13,31 @@ import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { GiPhone } from "react-icons/gi";
+import { setCurrentUser } from "../Redux/actions/users/index.js";
+import ForgotenPassword from "./forgotenPassword";
+import axios from "axios";
 
 const UserEdit = () => {
   const initialState = {
     displayName: "",
     email: "",
-    password: "",
     phoneNumber: "",
+    adress: "",
+    adressNumber: "",
+    city: "",
   };
 
   const [input, setInput] = React.useState(initialState);
-  const [password2, setPassword2] = React.useState("");
   const [photoURL, setphotoURL] = React.useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.usersReducer.currentUser);
   const fileRef = useRef(null);
-
-  React.useEffect(() => {
-    setInput((prev) => ({ ...prev, [input.name]: input.value }));
-  }, [input.name, input.value]);
-
+  const [open, setOpen] = React.useState(false);
+  const sendNewPass = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  };
   const handleFile = () => {
     if (fileRef.current) {
       fileRef.current.click();
@@ -71,15 +74,26 @@ const UserEdit = () => {
           ? input.displayName.charAt(0).toUpperCase() +
             input.displayName.slice(1)
           : user.displayName,
-      photoURL: photoURL,
-      password: input.password !== "" ? input.password : user.password,
+      photoURL: photoURL || user.photoURL,
       phoneNumber:
         input.phoneNumber !== "" ? input.phoneNumber : user.phoneNumber,
+      role: user.role || ["user"],
+      adress: input.adress,
+      adressNumber: input.adressNumber,
+      city: input.city,
     };
-    dispatch(editUser(user.uid, updates));
-    setInput(initialState);
-    setphotoURL(null);
-    navigate("/dashboard");
+    axios
+      .put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${user.uid}`,
+        updates
+      )
+      .then((res) => {
+        dispatch(setCurrentUser({ ...res.data, ...res.data.customClaims }));
+        setInput(initialState);
+        setphotoURL(null);
+        window.alert("user modified");
+        navigate("/dashboard");
+      });
   };
 
   return (
@@ -114,16 +128,30 @@ const UserEdit = () => {
             </div>
           </div>
           <div className={s.input_label}>
-            <p className={s.name_input}>password</p>
+            <p className={s.name_input}>City</p>
+            <div className={s.input_container}>
+              <BiUser className={s.user_icon} />
+              <input
+                name="city"
+                value={input.city}
+                onChange={handleChange}
+                placeholder="City"
+                className={s.input_text}
+                autoComplete="off"
+              />
+            </div>
+          </div>
+          <div className={s.input_label}>
+            <p className={s.name_input}>Adress</p>
 
             <div className={s.input_container}>
               <RiLockPasswordFill className={s.user_icon} />
               <input
-                name="password"
-                value={input.password}
+                name="adress"
+                value={input.adress}
                 onChange={handleChange}
-                placheholder="Password"
-                type="password"
+                placheholder="Adress"
+                type="text"
                 className={s.input_text}
                 autoComplete="off"
               />
@@ -132,11 +160,11 @@ const UserEdit = () => {
           <div className={s.input_container}>
             <RiLockPasswordLine className={s.user_icon} />
             <input
-              name="password2"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-              placheholder="Repeat your password"
-              type="password"
+              name="adressNumber"
+              value={input.adressNumber}
+              onChange={handleChange}
+              placheholder="N°"
+              type="text"
               className={s.input_text}
               autoComplete="off"
             />
@@ -159,6 +187,15 @@ const UserEdit = () => {
             UPDATE
           </button>
         </form>
+        {user.providerData?.[0].providerId.includes("google") ? null : (
+          <div>
+            <button type="button" onClick={sendNewPass} className={s.update}>
+              Set new Password
+            </button>
+            {open ? <ForgotenPassword close={setOpen} /> : null}
+          </div>
+        )}
+
         <img src={image} className={s.calatea} />
       </div>
     </div>
@@ -166,3 +203,28 @@ const UserEdit = () => {
 };
 
 export default UserEdit;
+
+/* 
+
+export const editUser = (id, payload) => {
+  return async function (dispatch) {
+    return await fetch(
+      `http://localhost:5000/api-plants-b6153/us-central1/app/users/${id}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(payload),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      }
+    ).then((response) => {
+      dispatch({
+        type: EDIT_USER,
+        payload: response,
+      });
+    });
+  };
+};
+
+
+
+*/
