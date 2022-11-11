@@ -297,7 +297,7 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Reviews setView={setView} />
+              <Reviews setView={setView} close={setOpen} />
             </Box>
           </Modal>
         </div>
