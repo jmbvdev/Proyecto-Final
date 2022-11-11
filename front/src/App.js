@@ -54,7 +54,7 @@ function App() {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
-          const role = await authenticatedUser.getIdTokenResult();
+          const role = await authenticatedUser.getIdTokenResult(true);
           dispatch(
             setCurrentUser({
               ...authenticatedUser,

@@ -16,6 +16,7 @@ import { GiPhone } from "react-icons/gi";
 import { setCurrentUser } from "../Redux/actions/users/index.js";
 import ForgotenPassword from "./forgotenPassword";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const UserEdit = () => {
   const initialState = {
@@ -78,9 +79,9 @@ const UserEdit = () => {
       phoneNumber:
         input.phoneNumber !== "" ? input.phoneNumber : user.phoneNumber,
       role: user.role || ["user"],
-      adress: input.adress,
-      adressNumber: input.adressNumber,
-      city: input.city,
+      adress: input.adress || user.adress,
+      adressNumber: input.adressNumber || user.adressNumber,
+      city: input.city || user.city,
     };
     axios
       .put(
@@ -91,8 +92,45 @@ const UserEdit = () => {
         dispatch(setCurrentUser({ ...res.data, ...res.data.customClaims }));
         setInput(initialState);
         setphotoURL(null);
-        window.alert("user modified");
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "success",
+            title: `User information modified!`,
+          })
+        );
+
         navigate("/dashboard");
+      })
+      .catch((err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "error",
+            title: `${err.response.data}`,
+          })
+        );
       });
   };
 
@@ -187,7 +225,7 @@ const UserEdit = () => {
             UPDATE
           </button>
         </form>
-        {user.providerData?.[0].providerId.includes("google") ? null : (
+        {user?.providerData?.[0].providerId.includes("google") ? null : (
           <div>
             <button type="button" onClick={sendNewPass} className={s.update}>
               Set new Password
