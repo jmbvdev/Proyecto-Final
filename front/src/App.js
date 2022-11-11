@@ -33,6 +33,7 @@ import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
+import Update_Coment from "./pages/Update_Coment"
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -100,6 +101,7 @@ function App() {
         <Route path="/orders/:id" element={<OrdersUser />} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
         <Route path="*" element={<NotFound />} />
+        <Route exact path="/update/:comentid/:plantsUID" element={<Update_Coment/>}/>
       </Routes>
       <ScrollToTop smooth />
       <Footer />

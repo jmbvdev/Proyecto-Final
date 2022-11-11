@@ -1,0 +1,105 @@
+
+.container{
+ 
+    align-items: center;
+    display:inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 300px;
+    background-image: linear-gradient(rgba(230, 235, 232, 0.729),rgba(253, 253, 253, 0.33)), url("https://img.freepik.com/foto-gratis/diseno-textura-marmol-verde_53876-94945.jpg?w=2000"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+ margin-left: 15px;
+ margin-top: 18px;
+ margin-bottom: 25px;
+}
+.form{
+    
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  width: 440px;
+  height: auto;
+background-color: rgba(255, 255, 255, 0.485);
+gap: 15px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-left: 5px;
+margin-top: 8px;
+margin-right: 5px;
+
+}
+.form h2{
+    font-family: "Inter",sans-serif;
+    color: rgba(7, 62, 35, 0.775);
+    font-weight: light;
+    caret-color: transparent;
+
+}
+.form h3{
+  color: rgba(17, 42, 30, 0.581);
+}
+
+
+.image_input button{
+    color: #fff;
+    cursor: pointer;
+}
+.image_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .form {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+ 
+ .create_btn{
+    background-color: rgba(16, 123, 43, 0.813);
+    color: #fff;
+    padding:  6px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: "Josefin Sans",sans-serif;
+    font-size: medium;
+    caret-color: transparent;
+ }
+ .create_btn:hover{
+    background-color:rgba(16, 123, 43, 0.704) ;
+ }
+ 
+
+.positive_comments{
+  color: rgba(11, 84, 29, 0.813);
+}
+.recomendations_select{
+  color: #fff;
+    cursor: pointer;
+    font-size: medium;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    line-height: 3;
+    border: none;
+    background: rgba(11, 84, 29, 0.813);
+    overflow: hidden;
+    border-radius: 4px;
+ 
+}
+.changeview{
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
