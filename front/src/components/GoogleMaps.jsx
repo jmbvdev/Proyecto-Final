@@ -1,6 +1,11 @@
 import React from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  Autocomplete,
+} from "@react-google-maps/api";
+
 import { useEffect } from "react";
 const containerStyle = {
   height: "25rem",
@@ -101,11 +106,20 @@ function GoogleMaps({ retiro, andreani }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyC7LOjNhZNLi81lGf5YgmwGDqLeTm7EjPU",
+    libraries: ["places"],
   });
   const [map, setMap] = React.useState(null);
   const [center, setCenter] = React.useState(initialCenter);
   const [zoom, setZoom] = React.useState(initialzoom);
+  const [jeje, setJeje] = React.useState("");
 
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setJeje(e.target.value);
+    console.log(e.target.value);
+  };
+
+  console.log(map);
   /*  const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
@@ -129,27 +143,43 @@ function GoogleMaps({ retiro, andreani }) {
   }, [andreani]);
 
   return isLoaded ? (
-    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={zoom}>
-      <Marker position={marker1} label={title} />
-      <Marker position={marker2} label={title} />
-      <Marker position={marker3} label={title} />
-      <Marker position={marker4} label={title} />
-      <Marker position={marker5} label={title} />
-      <Marker position={marker6} label={title} />
-      <Marker position={marker7} label={title} />
-      <Marker position={marker8} label={title} />
-      <Marker position={marker9} label={title} />
-      <Marker position={marker10} label={title} />
-      <Marker position={marker11} label={title} />
-      <Marker position={marker12} label={title} />
-      <Marker position={marker13} label={title} />
-      <Marker position={marker14} label={title} />
-      <Marker position={marker15} label={title} />
-      <Marker position={marker16} label={title} />
-      {andreani ? (
-        <Marker position={center} label={"You"} draggable={true} />
-      ) : null}
-    </GoogleMap>
+    <div>
+      <Autocomplete onPlaceChanged={(input) => console.log(input)}>
+        <input type="text" value={jeje} onChange={handleOnChange} />
+      </Autocomplete>
+
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={zoom}
+        options={{
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+        }}
+        onLoad={(map) => setMap(map)}
+      >
+        <Marker position={marker1} label={title} />
+        <Marker position={marker2} label={title} />
+        <Marker position={marker3} label={title} />
+        <Marker position={marker4} label={title} />
+        <Marker position={marker5} label={title} />
+        <Marker position={marker6} label={title} />
+        <Marker position={marker7} label={title} />
+        <Marker position={marker8} label={title} />
+        <Marker position={marker9} label={title} />
+        <Marker position={marker10} label={title} />
+        <Marker position={marker11} label={title} />
+        <Marker position={marker12} label={title} />
+        <Marker position={marker13} label={title} />
+        <Marker position={marker14} label={title} />
+        <Marker position={marker15} label={title} />
+        <Marker position={marker16} label={title} />
+        {andreani ? (
+          <Marker position={center} label={"You"} draggable={true} />
+        ) : null}
+      </GoogleMap>
+    </div>
   ) : (
     <></>
   );

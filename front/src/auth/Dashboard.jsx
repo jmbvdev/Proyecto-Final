@@ -85,6 +85,12 @@ const Dashboard = () => {
                   <RiPlantFill className={s.admin_icon} />
                   <button onClick={() => navigate("/create")}>CREATE</button>
                 </div>
+                <div className={s.admin}>
+                  <RiPlantFill className={s.admin_icon} />
+                  <button onClick={() => navigate("/stadistics")}>
+                    STATISTICS
+                  </button>
+                </div>
               </div>
             ) : role === "moderator" ? (
               <div className={s.admin}>

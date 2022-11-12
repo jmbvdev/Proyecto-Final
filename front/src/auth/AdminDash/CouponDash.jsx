@@ -1,8 +1,13 @@
 import React from "react";
 import axios from "axios";
+import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/coupon.module.css";
 import plans from "../../images/plans.webp";
-import { useSortBy, useTable } from 'react-table';
+import { useGlobalFilter, useSortBy, useTable } from 'react-table';
+import { useNavigate } from "react-router-dom";
+import GlobalFilter from "./GlobalFilter";
+import Loading from "../../components/Loading";
+import Swal from "sweetalert2";
 
 const CuponDash = () => {
 
@@ -14,6 +19,11 @@ const CuponDash = () => {
 
   const [input, setInput] = React.useState(initialState);
   const [coupons, setCoupons] = React.useState([]);
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   React.useEffect(() => {
     if(!coupons.length){
@@ -34,7 +44,16 @@ const CuponDash = () => {
     .then((res) => console.log(res.data));
     }
     setInput(initialState);
-    alert("Coupon succesfully created!");
+    Swal.fire({
+      title: "Confirm",
+      text: "Are yo sure you want to create this coupon?",
+      icon: "question",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    });
   };
 
 
@@ -49,10 +68,17 @@ const CuponDash = () => {
         getTableBodyProps,
         headerGroups,
         rows,
-        prepareRow
-    } = useTable({columns, data}, tableHooks, useSortBy);
+        prepareRow,
+        preGlobalFilteredRows,
+        setGlobalFilter,
+        state
+    } = useTable({columns, data}, useGlobalFilter, tableHooks, useSortBy);
 
     return (
+      <>
+      {coupons.length ? (
+            <>
+      <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
       <table {...getTableProps()} className="">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -77,6 +103,11 @@ const CuponDash = () => {
                 })}
               </tbody>
             </table>
+            </>
+           ) :
+            <Loading />
+          }
+            </>
           )
   };
 
@@ -133,6 +164,12 @@ console.log(data)
     return (
       <div>
         <div className={s.container}>
+        <div className={s.button_container}>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.wraper}>
         <div className={s.image}>
           <img src={plans} alt="" />

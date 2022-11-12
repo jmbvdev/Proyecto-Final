@@ -29,7 +29,10 @@ export default function MercadoPago({ items, totalAmount }) {
           },
           render: {
             container: `#${FORM_ID}`, // Indica el nombre de la clase donde se mostrará el botón de pago
-            label: "Confirm Payment", // Cambia el texto del botón de pago (opcional)
+            label: "Confirm Payment",
+            theme: {
+              elementsColor: "#8e44ad",
+            },
           },
         });
       }

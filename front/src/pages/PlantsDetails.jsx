@@ -19,6 +19,7 @@ import Reviews from "./Reviews";
 import View_Reviews from "../components/View_Reviews";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
+import MoreSizes from "../components/MoreSizes";
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const PlantsDetails = () => {
 
   useEffect(() => {
     dispatch(GetProductDetails(id));
-    return function () {
+    return function() {
       dispatch(clearDetails());
     };
   }, []);
@@ -209,6 +210,13 @@ const PlantsDetails = () => {
               );
             })}
         </div>
+        {plant?.small || plant?.medium || plant?.large ? (
+          <MoreSizes
+            idsmall={plant?.small}
+            idmedium={plant?.medium}
+            idlarge={plant?.large}
+          />
+        ) : null}
         <div className={s.price}>
           <div>
             <h4>Price</h4>
@@ -251,7 +259,7 @@ const PlantsDetails = () => {
         <div className={s.reviews_container}>
           <h4>Add a review</h4>
 
-          <AiFillStar className={s.star} onClick={handleOpen} />
+          <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
         </div>
         <div>
           {currentUser ? (
@@ -260,7 +268,9 @@ const PlantsDetails = () => {
               <FaCommentDots className={s.hearth} onClick={handleOpenReview} />
             </div>
           ) : (
-            <button className={s.noreview} onClick={handleRedirect} >Sign in to leave a review</button>
+            <button className={s.noreview} onClick={handleRedirect}>
+              Sign in to leave a review
+            </button>
           )}
         </div>
 
@@ -287,7 +297,7 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Reviews setView={setView} />
+              <Reviews setView={setView} close={setOpen} />
             </Box>
           </Modal>
         </div>
@@ -299,9 +309,11 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={styleReview}>
-              <View_Reviews view={view} 
-              user={currentUser?.uid} 
-              setView={setView}/>
+              <View_Reviews
+                view={view}
+                user={currentUser?.uid}
+                setView={setView}
+              />
             </Box>
           </Modal>
         </div>
