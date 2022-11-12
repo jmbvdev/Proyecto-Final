@@ -33,7 +33,10 @@ import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
-import Update_Coment from "./pages/Update_Coment"
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Update_Coment from "./pages/Update_Coment.jsx";
+
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -47,6 +50,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(GetAllProducts());
+    
   }, []);
 
   React.useEffect(() => {
@@ -83,6 +87,8 @@ function App() {
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
