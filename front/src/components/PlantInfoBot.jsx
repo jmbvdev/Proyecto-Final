@@ -20,12 +20,15 @@ const PlantInfoBot = () => {
   function onClick(e) {
     e.preventDefault();
     dispatch(GetProductDetails(searchedPlant?.id));
-    setSearch("");
+ 
   }
   const plantDetail = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
-console.log(plantDetail?.details)
+  const details=  useSelector(
+    (state) => state.productsReducer.productDetails
+  );
+console.log(    details?.hasOwnProperty("id"))
   return (
     <div className={s.container}>
       <form action="">
@@ -33,7 +36,7 @@ console.log(plantDetail?.details)
           <input
             type="text"
             onChange={handleSearch}
-            value={search}
+         
             placeholder="type a name"
           />
           <button type="submit" onClick={onClick}>
@@ -46,12 +49,15 @@ console.log(plantDetail?.details)
       {plantDetail?.image && (
         <img src={plantDetail?.image} alt="" className={s.image} />
       )}
-      <p>{search==="" && !plantDetail?.details &&  "Please type the name of a plant and click on the search icon to see the description" }</p>
+      <p>{search==="" && !details?.hasOwnProperty("id")&& !plantDetail?.details.length? "Please type the name of a plant and click on the search icon to see the description" :null}</p>
       <p>
         {
-           plantDetail?.hasOwnProperty("details")===true && plantDetail?.details
-          ? plantDetail?.details
-          : !plantDetail?.id && "This plant is not in our store"}
+          plantDetail?.hasOwnProperty("details") &&plantDetail?.details
+          }
+          {
+             !plantDetail?.details.length && details?.hasOwnProperty("id") ?"this plant is not in hour store":null
+          }
+     
       </p>
     </div>
   );

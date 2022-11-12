@@ -2,27 +2,38 @@ import React from 'react';
 import s from "../styles/contact.module.css"
 import image from "../images/girlPhone.webp"
 import logo from "../images/logo-sinfondo.png"
-import { GrMapLocation } from 'react-icons/gr';
+
 import { FiMail } from 'react-icons/fi';
 import { HiOutlinePhone } from 'react-icons/hi';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { FaGithubSquare } from 'react-icons/fa';
 import { TiSocialInstagram } from 'react-icons/ti';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 const Contact = () => {
     return (
         <div className={s.container}>
             <header className={s.banner}   >
+                <ScrollAnimation animateIn="fadeIn" className={s.contact} >
                 <div className={s.contact}>
-                    <img src={logo} alt="" />
+                <img src={logo} alt="girl" />
                     <h1>Contact Us</h1>
-
                 </div>
+          </ScrollAnimation>
+                   
+          <ScrollAnimation animateIn="fadeInRight" className={s.banner_img} >
+               
                 <img src={image} alt="girl on the phone"   />
+          </ScrollAnimation>
             </header>
             <section>
+                
             <div className={s.form}>
-                <div className={s.contactInfo}>
+               
+                <ScrollAnimation animateIn="fadeInLeft" className={s.contactInfo} >
+               
+              
+        
                     <h2>Contact Info</h2>
                     <ul>
                         <li>
@@ -61,8 +72,10 @@ const Contact = () => {
             </a>
     </li>
                 </ul>
-                </div>
-                <div className={s.contactForm}>
+                </ScrollAnimation >
+               <ScrollAnimation animateIn="fadeInRight" className={s.contactForm}>
+
+              
                     <h2>Send a Message</h2>
                     <div className={s.box}>
                         <div className={s.input_container}>
@@ -82,8 +95,8 @@ const Contact = () => {
                             <span>Mobile Number</span>
                         </div>
                         <div className={s.message}>
-                            <span>Write your message here...</span>
                             <textarea required></textarea>
+                            <span>Write your message here...</span>
 
                         </div>
                         <div className={s.send}>
@@ -93,7 +106,8 @@ const Contact = () => {
 
                     </div>
 
-                </div>
+                
+               </ScrollAnimation>
 
             </div>
 

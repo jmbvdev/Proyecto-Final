@@ -34,6 +34,8 @@ import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+
 
 
 function App() {
@@ -48,6 +50,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(GetAllProducts());
+    
   }, []);
 
   React.useEffect(() => {
@@ -82,6 +85,7 @@ function App() {
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
