@@ -12,7 +12,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 
-const Reviews = ({ setView, close }) => {
+const Reviews = ({ setView }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const id = useParams().id;
@@ -102,7 +102,6 @@ const Reviews = ({ setView, close }) => {
         }
       )
       .then((res) => {
-        close(false);
         Swal.fire({
           title: "Success",
           text: "Your comment was successfully added",
@@ -111,6 +110,9 @@ const Reviews = ({ setView, close }) => {
           confirmButtonColor: "rgb(9, 102, 74)",
         });
         setView((prevstate) => [...prevstate, res.data]);
+      })
+      .then(() => {
+        Navigate(`/plants/details/${id}`);
       });
     }
   };
