@@ -1,41 +1,145 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { saveCart } from '../Redux/actions/shopCart'
+import { saveCart, updateCart } from '../Redux/actions/shopCart'
+import Swal from "sweetalert2";
 import s from "../styles/ordersUser.module.css"
 
 const OrdersCard = (props) => {
-    // console.log(props.data);
-
+    // console.log("props.data", props.data);
+    const auxCart = [...props.data]
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUser = useSelector((state) => state.usersReducer.currentUser);
     const cart = useSelector((state) => state.shopCartReducer.products);
+    const allProducts = useSelector((state) => state.productsReducer.allProducts)
+    // console.log(allProducts);
+    // console.log("auxCart", auxCart);
+    // console.log("cart", cart);
 
     const handleCreateSimilarOrder = () => {
-        try {
-            props.data.forEach((product) => {
-                dispatch(saveCart(
-                    [
-                        ...cart,
-                        {
-                            id: product.id,
-                            image: product.image,
-                            price: product.price,
-                            name: product.name,
-                            stock: product.stock,
-                            count: product.count,
+
+        Swal.fire({
+            title: 'Agregar la orden al carrito?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Agregar',
+            denyButtonText: `No agregar`,
+            allowOutsideClick: false,
+            // allowEscapeKey: false
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                console.log("paso1")
+                // console.log("cart", cart)
+                // console.log("auxCart", auxCart)
+                let aux = []
+                // console.log("aux",aux)
+                cart.forEach((product) => {
+                    // console.log("product.id", product.id)
+                    auxCart.forEach(item => {
+                        // console.log("item.id", item.id)
+                        if (product.id === item.id) {
+                            aux.push({
+                                ...product,
+                                count: product.count + item.count
+                            })
                         }
-                    ],
-                    currentUser.uid))
-            })
-            setInterval("location.reload()", 10);
-        } catch (error) {
-            console.error(error)
-        }
+                    })
+                })
 
+                let auxId = []
+                aux.forEach((item) => {
+                    auxId.push(item.id)
+                })
+                cart.forEach(item => {
+                    if (!auxId.includes(item.id)) {
+                        aux.push(item)
+                    }
+                })
+
+                let aux2 = []
+                aux.forEach((item) => {
+                    aux2.push(item.id)
+                })
+                auxCart.forEach(item => {
+                    if (!aux2.includes(item.id)) {
+                        aux.push(item)
+                    }
+                })
+                console.log("paso2")
+                let a = []
+                let b = []
+
+                // console.log("aux", aux);
+                aux.forEach((item) => {
+                    // console.log("iteracion", item.id)
+                    allProducts.forEach((item2) => {
+                        // console.log("iteracion2", item2.id)
+                        if (item.id == item2.id) {
+                            // console.log("item", item.id);
+                            // console.log("item2", item2.id);
+                            if (item.count > item2.data.stock) {
+                                a.push({
+                                    ...item,
+                                    count: item2.data.stock
+                                })
+                                b.push({
+                                    name: item.name,
+                                    count: item2.data.stock
+                                })
+                            } else {
+                                a.push(item);
+                            }
+                        }
+                    });
+                });
+                console.log("paso3")
+                // console.log("a", a)
+                if (b.length > 0) {
+                    console.log("paso5")
+
+
+                    // const cartDef = [...a]
+                    // console.log("cartDef", cartDef)
+                    dispatch(saveCart(
+                        a,
+                        currentUser.uid))
+
+                    props.updateOriginal(a)
+
+                    Swal.fire({
+                        icon: 'info',
+                        text: `No contamos con las cantidades requeridas de las siguientes plantas, cargamos al carrito el stock en existencia: ${b.map(item => { return ` ${item.name}: ${item.count} ` })}`,
+                    })
+
+                } else {
+                    console.log("paso4")
+
+
+                    // const cartDef = [...a]
+                    // console.log("cartDef", cartDef)
+                    dispatch(saveCart(
+                        a,
+                        currentUser.uid))
+
+                    props.updateOriginal(a)
+
+                    Swal.fire({
+                        icon: 'info',
+                        text: `Orden agregada al carrito`,
+                    })
+                }
+
+                // console.log("a", a);
+                // console.log("b", b);
+
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+
+            }
+        })
     }
-
 
     return (
         <div >
@@ -51,7 +155,6 @@ const OrdersCard = (props) => {
                             }
                             {
                                 props.state === "Order approved" ? <button onClick={handleCreateSimilarOrder}> Crear orden similar</button> : null
-
                             }
                             <div className={s.date_container}>
                                 <p>Date</p>
@@ -73,7 +176,6 @@ const OrdersCard = (props) => {
                                     ))
 
                                 }
-
                             </div>
                         </div>
                     </div >

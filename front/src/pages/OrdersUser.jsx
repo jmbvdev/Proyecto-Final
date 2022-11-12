@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OrdersCard from "../components/OrdersCard";
 import s from "../styles/ordersUser.module.css";
 import image from "../images/designplant.webp";
@@ -8,6 +8,7 @@ import image from "../images/designplant.webp";
 import axios from "axios";
 import { BiReset } from "react-icons/bi";
 import { RiSearchLine } from "react-icons/ri";
+import { updateCart } from "../Redux/actions/shopCart";
 
 const OrdersUser = () => {
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
@@ -16,6 +17,7 @@ const OrdersUser = () => {
   const [original, setOriginal] = useState([]);
   const [name, setName] = useState("");
   const [orden, setOrden] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // if (currentUser) {
@@ -45,7 +47,7 @@ const OrdersUser = () => {
       } catch (error) {
         console.error(error)
       }
-      
+
     };
     dataState()
   }, [currentUser]);
@@ -104,7 +106,27 @@ const OrdersUser = () => {
     setOrden(`${e.target.value}`);
   };
 
-  console.log(state)
+  const updateOriginal = (newproducts) => {
+
+    const auxiliar = original.map(item => {
+      if (item.state === "Pending") {
+        return {
+          ...item,
+          data: newproducts
+        }
+      } else {
+        return item
+      }
+    })
+    dispatch(updateCart(newproducts))
+    setOriginal([...auxiliar])
+    setState([...auxiliar])
+    // console.log("original", original)
+    // setState(auxiliar)
+  }
+
+  // console.log(state)
+
   return (
     <div className={s.main}>
       <div className={s.favorites}>
@@ -147,6 +169,7 @@ const OrdersUser = () => {
                 userID={ord?.userID}
                 date={ord?.date}
                 data={ord?.data}
+                updateOriginal={updateOriginal}
                 key={i}
               />
             ))}
