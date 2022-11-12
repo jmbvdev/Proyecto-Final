@@ -35,7 +35,7 @@ import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-
+import Update_Coment from "./pages/Update_Coment.jsx";
 
 
 function App() {

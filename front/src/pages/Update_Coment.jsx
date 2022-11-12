@@ -131,6 +131,7 @@ const Update_Coment = ({ }) => {
   return (
 <div>
     <div className={s.container}>
+
       <form className={s.form}>
         <h2>Update Your Comment</h2>
         <div>
