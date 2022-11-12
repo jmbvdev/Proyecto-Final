@@ -20,9 +20,6 @@ const OrdersUser = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (currentUser) {
-    //   dataState();
-    // }
     const dataState = async () => {
       try {
         if (!currentUser) {
@@ -31,7 +28,6 @@ const OrdersUser = () => {
         let a = await axios.get(
           `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUser.uid}`
         );
-        // console.log("a", a.data)
         let result = a.data.map((item) => {
           return {
             state: item.data?.state,
@@ -51,9 +47,6 @@ const OrdersUser = () => {
     };
     dataState()
   }, [currentUser]);
-
-
-
 
   const handleUserInput = (e) => {
     e.preventDefault();
@@ -121,11 +114,9 @@ const OrdersUser = () => {
     dispatch(updateCart(newproducts))
     setOriginal([...auxiliar])
     setState([...auxiliar])
-    // console.log("original", original)
-    // setState(auxiliar)
   }
 
-  // console.log(state)
+
 
   return (
     <div className={s.main}>

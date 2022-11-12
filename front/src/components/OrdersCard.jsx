@@ -6,39 +6,28 @@ import Swal from "sweetalert2";
 import s from "../styles/ordersUser.module.css"
 
 const OrdersCard = (props) => {
-    // console.log("props.data", props.data);
+
     const auxCart = [...props.data]
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUser = useSelector((state) => state.usersReducer.currentUser);
     const cart = useSelector((state) => state.shopCartReducer.products);
     const allProducts = useSelector((state) => state.productsReducer.allProducts)
-    // console.log(allProducts);
-    // console.log("auxCart", auxCart);
-    // console.log("cart", cart);
 
     const handleCreateSimilarOrder = () => {
-
         Swal.fire({
-            title: 'Agregar la orden al carrito?',
+            title: 'Add order to cart?',
             showDenyButton: true,
             showCancelButton: true,
-            confirmButtonText: 'Agregar',
-            denyButtonText: `No agregar`,
+            confirmButtonText: 'Add',
+            denyButtonText: `Do not add`,
             allowOutsideClick: false,
-            // allowEscapeKey: false
         }).then((result) => {
 
             if (result.isConfirmed) {
-                console.log("paso1")
-                // console.log("cart", cart)
-                // console.log("auxCart", auxCart)
                 let aux = []
-                // console.log("aux",aux)
                 cart.forEach((product) => {
-                    // console.log("product.id", product.id)
                     auxCart.forEach(item => {
-                        // console.log("item.id", item.id)
                         if (product.id === item.id) {
                             aux.push({
                                 ...product,
@@ -67,18 +56,13 @@ const OrdersCard = (props) => {
                         aux.push(item)
                     }
                 })
-                console.log("paso2")
+
                 let a = []
                 let b = []
 
-                // console.log("aux", aux);
                 aux.forEach((item) => {
-                    // console.log("iteracion", item.id)
                     allProducts.forEach((item2) => {
-                        // console.log("iteracion2", item2.id)
                         if (item.id == item2.id) {
-                            // console.log("item", item.id);
-                            // console.log("item2", item2.id);
                             if (item.count > item2.data.stock) {
                                 a.push({
                                     ...item,
@@ -94,46 +78,29 @@ const OrdersCard = (props) => {
                         }
                     });
                 });
-                console.log("paso3")
-                // console.log("a", a)
                 if (b.length > 0) {
-                    console.log("paso5")
-
-
-                    // const cartDef = [...a]
-                    // console.log("cartDef", cartDef)
                     dispatch(saveCart(
                         a,
                         currentUser.uid))
-
                     props.updateOriginal(a)
 
                     Swal.fire({
                         icon: 'info',
-                        text: `No contamos con las cantidades requeridas de las siguientes plantas, cargamos al carrito el stock en existencia: ${b.map(item => { return ` ${item.name}: ${item.count} ` })}`,
+                        text: `We do not have the required quantities of the following plants. We load the stock in existence to the cart: ${b.map(item => { return ` ${item.name}: ${item.count} ` })}`,
                     })
 
                 } else {
-                    console.log("paso4")
 
-
-                    // const cartDef = [...a]
-                    // console.log("cartDef", cartDef)
                     dispatch(saveCart(
                         a,
                         currentUser.uid))
-
                     props.updateOriginal(a)
 
                     Swal.fire({
                         icon: 'info',
-                        text: `Orden agregada al carrito`,
+                        text: `Order added to cart`,
                     })
                 }
-
-                // console.log("a", a);
-                // console.log("b", b);
-
             } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info')
 
@@ -143,6 +110,7 @@ const OrdersCard = (props) => {
 
     return (
         <div >
+
             {
                 props.data.length === 0 ? null :
 
@@ -154,7 +122,7 @@ const OrdersCard = (props) => {
                                 props.state === "Pending" ? <button onClick={() => navigate(`/cart`)} className={s.edit}>Edit</button> : null
                             }
                             {
-                                props.state === "Order approved" ? <button onClick={handleCreateSimilarOrder}> Crear orden similar</button> : null
+                                props.state === "Order approved" ? <button onClick={handleCreateSimilarOrder}>Order repeat</button> : null
                             }
                             <div className={s.date_container}>
                                 <p>Date</p>
@@ -162,7 +130,6 @@ const OrdersCard = (props) => {
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleDateString()}</span>
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleTimeString()}</span>
                                 </div>
-
                                 {
                                     props.data.length > 0 && props.data.map(items => (
                                         <div className={s.card} key={items.id}>
@@ -180,6 +147,7 @@ const OrdersCard = (props) => {
                         </div>
                     </div >
             }
+            
         </div >
     )
 }
