@@ -33,7 +33,8 @@ import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
-import Update_Coment from "./pages/Update_Coment"
+import Update_Coment from "./pages/Update_Coment";
+import Stadistics from "./components/Stadistics";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -97,11 +98,16 @@ function App() {
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="/failure" element={<PostMercadoPago />} />
+        <Route path="/stadistics" element={<Stadistics />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="/orders/:id" element={<OrdersUser />} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
+        <Route
+          exact
+          path="/update/:comentid/:plantsUID"
+          element={<Update_Coment />}
+        />
         <Route path="*" element={<NotFound />} />
-        <Route exact path="/update/:comentid/:plantsUID" element={<Update_Coment/>}/>
       </Routes>
       <ScrollToTop smooth />
       <Footer />
