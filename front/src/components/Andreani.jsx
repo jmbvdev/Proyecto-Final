@@ -16,7 +16,12 @@ function Andreani({ totalproducts, totalAmount }) {
         `https://apis.andreani.com/v1/tarifas?cpDestino=${CP}&contrato=300006611&cliente=CL0003750&sucursalOrigen=BAR&bultos[0][valorDeclarado]=1200&bultos[0][volumen]=10&bultos[0][kilos]=0.3&bultos[0][altoCm]=10&bultos[0][largoCm]=10&bultos[0][anchoCm]=10`
       )
       .then((res) =>
-        setAmount((parseInt(res.data.tarifaConIva.total) / 100) * totalproducts)
+        setAmount(
+          (
+            (parseInt(res.data.tarifaConIva.total) / 100) *
+            totalproducts
+          ).toFixed(2)
+        )
       );
   };
 
@@ -24,7 +29,9 @@ function Andreani({ totalproducts, totalAmount }) {
     <div>
       <input type="text" placeholder="CP" value={CP} onChange={handleChange} />
       <button onClick={shipingAmount}>Ok!</button>
-      {amount && totalAmount < 1100 ? <h4>{amount}</h4> : null}
+      {amount && totalAmount < 1100 ? (
+        <h4>You pay in destiny: ${amount}</h4>
+      ) : null}
       {totalAmount >= 1100 ? <h4>Free Shiping!</h4> : null}
     </div>
   );
