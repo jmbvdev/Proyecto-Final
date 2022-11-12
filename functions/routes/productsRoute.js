@@ -5,6 +5,7 @@ const getProductById = require("../controllers/getProductById.js");
 const updateProduct = require("../controllers/updateProduct.js");
 const createNewProduct = require("../controllers/createProduct.js");
 const deleteProduct = require("../controllers/deleteProduct.js");
+const plants = require("./plants.js");
 
 const productsRoute = Router();
 
@@ -157,7 +158,8 @@ productsRoute
     }
   }) */
 
-/* .get("/chargefirsttime", async (req, res, next) => {
+/* 
+  .get("/chargefirsttime", async (req, res, next) => {
     try {
       let array = plants.map((d) => {
         return db.collection("products").add({ ...d, type: "plant" });
@@ -167,6 +169,8 @@ productsRoute
     } catch (err) {
       return res.send(err);
     }
-  }) */
+  })
+  
+  */
 
 module.exports = productsRoute;

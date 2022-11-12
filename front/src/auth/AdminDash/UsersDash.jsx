@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSortBy, useTable } from 'react-table';
+import { useGlobalFilter, useSortBy, useTable } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
 import s from "../../styles/adminNav.module.css"
 import { useState } from "react";
+import GlobalFilter from "./GlobalFilter";
+import Loading from "../../components/Loading";
 
 const UsersDash = () => {
     
@@ -37,10 +39,17 @@ const UsersDash = () => {
             getTableBodyProps,
             headerGroups,
             rows,
-            prepareRow
-        } = useTable({columns, data}, tableHooks, useSortBy)
+            prepareRow,
+            preGlobalFilteredRows,
+            setGlobalFilter,
+            state
+        } = useTable({columns, data}, useGlobalFilter, tableHooks, useSortBy)
 
     return (
+      <>
+      {allUsers.length ? (
+            <>
+       <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
       <table {...getTableProps()} className={s.table}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -65,6 +74,11 @@ const UsersDash = () => {
                 })}
               </tbody>
             </table>
+            </>
+           ) :
+            <Loading />
+          }
+            </>
           )
         };
   

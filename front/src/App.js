@@ -29,7 +29,7 @@ import UsersDash from "./auth/AdminDash/UsersDash.jsx";
 import ProductsDash from "./auth/AdminDash/ProductsDash";
 import OrdersDash from "./auth/AdminDash/OrdersDash";
 import CouponDash from "./auth/AdminDash/CouponDash";
-import Reviews from "./pages/Reviews"
+import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
@@ -59,11 +59,14 @@ function App() {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
-          const role = await authenticatedUser.getIdTokenResult();
+          const role = await authenticatedUser.getIdTokenResult(true);
           dispatch(
             setCurrentUser({
               ...authenticatedUser,
               role: role.claims.role || "user",
+              adress: role.claims.adress || "",
+              adressNumber: role.claims.adressNumber || "",
+              city: role.claims.city || "",
             })
           );
           dispatch(loadCart(authenticatedUser.uid));
@@ -104,6 +107,7 @@ function App() {
         <Route path="/orders/:id" element={<OrdersUser />} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
         <Route path="*" element={<NotFound />} />
+        <Route exact path="/update/:comentid/:plantsUID" element={<Update_Coment/>}/>
       </Routes>
       <ScrollToTop smooth />
       <Footer />
