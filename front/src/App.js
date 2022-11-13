@@ -36,6 +36,7 @@ import ManageOrders from "./pages/ManageOrders.jsx";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Update_Coment from "./pages/Update_Coment.jsx";
+import FAQ from "./pages/FAQ";
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/faq" element={<FAQ/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Login />} />

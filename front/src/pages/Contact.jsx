@@ -26,7 +26,7 @@ const Contact = () => {
                 <img src={image} alt="girl on the phone"   />
           </ScrollAnimation>
             </header>
-            <section>
+            <section className={s.section}>
                 
             <div className={s.form}>
                
