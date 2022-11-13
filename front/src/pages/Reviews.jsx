@@ -53,12 +53,7 @@ const Reviews = ({ setView }) => {
           ...coments,
           comentspositive: [e.target.value],
         });
-      // setError(
-      //     validateComent({
-      //         ...coments,
-      //         comentspositive: [e.target.value],
-      //     })
-      // );
+      
     }
   };
 
@@ -71,12 +66,7 @@ const Reviews = ({ setView }) => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    // let response = await axios.post(
-    //     "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
-    //     // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
-    //     coments
-    // );
-    // alert("Comments created")
+    
     if (!coments.comentspositive.length || !coments.star) {
       // Swal.fire("Missing Data");
       Swal.fire({

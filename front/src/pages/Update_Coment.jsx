@@ -73,57 +73,40 @@ const Update_Coment = ({ }) => {
 
 
   const handleOnClick = () => {
-    // e.preventDefault();
-    Swal.fire({
-      title: "Warning",
-      text: "Are you sure you want to update this comment?",
-      icon: "question",
-      showDenyButton: true,
-      denyButtonText: "Cancel",
-      denyButtonColor: "#72CE65",
-      confirmButtonText: "Update",
-      confirmButtonColor: "#FF5733",
+     
+    if (!update.comentspositive.length && !update.star) {
+      Swal.fire("Are you sure don't make the changes ?");
+    }
+    else {
 
-    })
-      .then((res) => {
-        // if (!update.comentspositive.length || !update.star) {
-        //   // Swal.fire("Missing Data");
-        //   Swal.fire({
-        //     title: "Eh",
-        //     text: "You must enter some information",
-        //     icon: "info",
-        //     showDenyButton: false,
-        //     confirmButtonText: "ok",
-        //     confirmButtonColor: "rgb(9, 102, 74)",
-        //   })
-        // }
-
-        axios
-          .put(
-            `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`,
-            // `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
-            {
-              star: update.star !== "" ? update.star : view[0].data.star,
-              //star: update.star,
-              comentspositive: update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive,
-            }
-          )
-
-          .then(() => {
-            Swal.fire({
-              title: "Success",
-              text: "Your coment was successfully update",
-              icon: "success",
-              confirmButtonText: "ok",
-              confirmButtonColor: "rgb(9, 102, 74)",
-            });
-          })
-
-          .then(() => {
-            Navigate(-1)
-          })
-
-      });
+      Swal.fire({
+        title: "Warning",
+        text: "Are you sure you want to update this comment?",
+        icon: "warning",
+        showDenyButton: true,
+        denyButtonText: "Cancel",
+        denyButtonColor: "#72CE65",
+        confirmButtonText: "yes, Update",
+        confirmButtonColor: "#FF5733",
+      })
+      .then ((result) => {
+        if (result.isConfirmed) {
+        //.then(() => {
+          axios
+            .put(
+              `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`,
+              // `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
+              {
+                star: update.star !== "" ? update.star : view[0].data.star,
+                comentspositive: update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive,
+              }
+            )
+               // Promise.resolve(() => {
+          Navigate(-1)
+        //})
+          }
+        })
+      }
   }
 
 
