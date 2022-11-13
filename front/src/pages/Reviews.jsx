@@ -12,7 +12,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 
-const Reviews = ({ setView }) => {
+const Reviews = ({ setView, close }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const id = useParams().id;
@@ -86,34 +86,34 @@ const Reviews = ({ setView }) => {
         showDenyButton: false,
         confirmButtonText: "ok",
         confirmButtonColor: "rgb(9, 102, 74)",
-      })
-    }
-    else{
-    axios
-      .post(
-        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
-        {
-          star: coments.star,
-          plantsUID: coments.plantsUID,
-          userUID: coments.userUID,
-          comentspositive: coments.comentspositive,
-          userName: coments.userName,
-          userImg: coments.userImg,
-        }
-      )
-      .then((res) => {
-        Swal.fire({
-          title: "Success",
-          text: "Your comment was successfully added",
-          icon: "success",
-          confirmButtonText: "ok",
-          confirmButtonColor: "rgb(9, 102, 74)",
-        });
-        setView((prevstate) => [...prevstate, res.data]);
-      })
-      .then(() => {
-        Navigate(`/plants/details/${id}`);
       });
+    } else {
+      axios
+        .post(
+          "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
+          {
+            star: coments.star,
+            plantsUID: coments.plantsUID,
+            userUID: coments.userUID,
+            comentspositive: coments.comentspositive,
+            userName: coments.userName,
+            userImg: coments.userImg,
+          }
+        )
+        .then((res) => {
+          close(false);
+          Swal.fire({
+            title: "Success",
+            text: "Your comment was successfully added",
+            icon: "success",
+            confirmButtonText: "ok",
+            confirmButtonColor: "rgb(9, 102, 74)",
+          });
+          setView((prevstate) => [...prevstate, res.data]);
+        })
+        .then(() => {
+          Navigate(`/plants/details/${id}`);
+        });
     }
   };
 

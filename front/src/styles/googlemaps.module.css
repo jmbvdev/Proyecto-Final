@@ -1,0 +1,13 @@
+.inputs {
+  width: 90%;
+  margin: 1rem;
+  font-family: "Inter";
+  border: 0;
+  border-bottom: 1px solid rgb(246, 243, 243);
+  outline: 0;
+  font-size: 13px;
+  color: #fff;
+  background: transparent;
+  transition: border-color 0.2s;
+  margin: 8px;
+}

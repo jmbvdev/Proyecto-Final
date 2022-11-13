@@ -3,10 +3,11 @@ import {
   GoogleMap,
   useJsApiLoader,
   Marker,
-  Autocomplete,
+  StandaloneSearchBox,
 } from "@react-google-maps/api";
 
 import { useEffect } from "react";
+import s from "../styles/googlemaps.module.css";
 const containerStyle = {
   height: "25rem",
   width: "25rem",
@@ -101,32 +102,18 @@ let marker16 = {
 let initialzoom = 16;
 
 const title = "Calathea Market";
-
-function GoogleMaps({ retiro, andreani }) {
+const libraries = ["places"];
+function GoogleMaps({ retiro, andreani, city }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyC7LOjNhZNLi81lGf5YgmwGDqLeTm7EjPU",
-    libraries: ["places"],
+    libraries: libraries,
   });
   const [map, setMap] = React.useState(null);
   const [center, setCenter] = React.useState(initialCenter);
   const [zoom, setZoom] = React.useState(initialzoom);
-  const [jeje, setJeje] = React.useState("");
+  const [searchbox, setSearchBox] = React.useState(null);
 
-  const handleOnChange = (e) => {
-    e.preventDefault();
-    setJeje(e.target.value);
-    console.log(e.target.value);
-  };
-
-  console.log(map);
-  /*  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-    setMap(map);
-  }, []); */
-
-  /* navigator.geolocation.getCurrentPosition((position)=> console.log(position.coords.latitude)) */
   useEffect(() => {
     if (andreani) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -140,14 +127,29 @@ function GoogleMaps({ retiro, andreani }) {
       setCenter(initialCenter);
       setZoom(initialzoom);
     }
-  }, [andreani]);
+  }, [andreani, retiro]);
 
   return isLoaded ? (
     <div>
-      <Autocomplete onPlaceChanged={(input) => console.log(input)}>
-        <input type="text" value={jeje} onChange={handleOnChange} />
-      </Autocomplete>
-
+      {retiro ? (
+        <StandaloneSearchBox
+          onLoad={(searchbox) => {
+            setSearchBox(searchbox);
+          }}
+          onPlacesChanged={() => {
+            setCenter({
+              lat: searchbox.getPlaces()[0].geometry.location.lat(),
+              lng: searchbox.getPlaces()[0].geometry.location.lng(),
+            });
+            setZoom(12);
+          }}
+        >
+          <div>
+            <h4>Search your city to find a Calathea Market!</h4>
+            <input className={s.inputs} type="text" defaultValue={city} />
+          </div>
+        </StandaloneSearchBox>
+      ) : null}
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
