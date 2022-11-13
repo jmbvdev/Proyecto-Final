@@ -54,7 +54,7 @@
     position: relative;
     bottom: 25px;
 }
-section{
+.section{
     display: flex;
     justify-content: center;
     align-items: center;
