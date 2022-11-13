@@ -2,38 +2,21 @@ import React from "react";
 import axios from "axios";
 import { LineChart, PieChart } from "react-chartkick";
 import "chartkick/chart.js";
+import { useNavigate } from "react-router-dom";
 
 function Stadistics() {
-  const [users, setUsers] = React.useState(null);
+  const navigate = useNavigate();
+
   const [sales, setSales] = React.useState(null);
   const [totalAmounts, setTotalAmounts] = React.useState(null);
 
   React.useEffect(() => {
-    if (!users) {
-      axios
-        .get(
-          "https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/all"
-        )
-        .then((res) => {
-          let data = {};
-          for (let i = 0; i < res.data.length; i++) {
-            let date = new Date(
-              res.data[i].metadata.creationTime
-            ).toDateString();
-            if (data.hasOwnProperty(date)) {
-              data[date] = data[date] + 1;
-            } else data[date] = 1;
-          }
-          setUsers(data);
-        });
-    }
     if (!sales) {
       axios
         .get(
           "https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/all"
         )
         .then((res) => {
-          let data = {};
           let amount = {};
           for (let i = 0; i < res.data.length; i++) {
             if (
@@ -42,9 +25,7 @@ function Stadistics() {
               res.data[i].date < "2022-11-08"
             ) {
               let date = new Date(res.data[i].date).toDateString();
-              if (data.hasOwnProperty(date)) {
-                data[date] = data[date] + 1;
-              } else data[date] = 1;
+
               let total = 0;
               res.data[i].cart.forEach((e) => {
                 total = total + e.count * e.price;
@@ -61,28 +42,16 @@ function Stadistics() {
             }
           }
           setTotalAmounts(amount);
-          setSales(data);
         });
     }
-  }, [users, sales]);
+  }, [sales]);
 
   return (
     <div>
-      <LineChart
-        xtitle="Days"
-        ytitle="New Users"
-        label="Value"
-        xmin="2022-11-01"
-        xmax="2022-12-01"
-        min={0}
-        max={20}
-        id="users-chart"
-        width="500px"
-        height="300px"
-        data={users}
-      />
-      <PieChart data={sales} />
-      <PieChart prefix="$" data={totalAmounts} />
+      <button onClick={() => navigate("newUsers")}>New Users</button>
+      <button onClick={() => navigate("salesCount")}>Sales Count</button>
+      <button onClick={() => navigate("salesAmount")}>Sales Amount</button>
+      <button onClick={() => navigate("bestProducts")}>Best products</button>
     </div>
   );
 }

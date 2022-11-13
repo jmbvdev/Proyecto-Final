@@ -35,6 +35,10 @@ import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
 import Update_Coment from "./pages/Update_Coment";
 import Stadistics from "./components/Stadistics";
+import NewUsers from "./components/NewUsers";
+import SalesCount from "./components/SalesCount";
+import SalesAmount from "./components/SalesAmount";
+import BestProducts from "./components/BestProducts";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -99,6 +103,10 @@ function App() {
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="/failure" element={<PostMercadoPago />} />
         <Route path="/stadistics" element={<Stadistics />} />
+        <Route path="/stadistics/newUsers" element={<NewUsers />} />
+        <Route path="/stadistics/salesCount" element={<SalesCount />} />
+        <Route path="/stadistics/salesAmount" element={<SalesAmount />} />
+        <Route path="/stadistics/bestProducts" element={<BestProducts />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="/orders/:id" element={<OrdersUser />} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
