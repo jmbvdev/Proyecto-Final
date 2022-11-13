@@ -14,14 +14,14 @@ const Contact = () => {
     return (
         <div className={s.container}>
             <header className={s.banner}   >
-                <ScrollAnimation animateIn="fadeIn" className={s.contact} >
+                <ScrollAnimation animateIn="fadeIn" animateOnce={true}  className={s.contact} >
                 <div className={s.contact}>
                 <img src={logo} alt="girl" />
                     <h1>Contact Us</h1>
                 </div>
           </ScrollAnimation>
                    
-          <ScrollAnimation animateIn="fadeInRight" className={s.banner_img} >
+          <ScrollAnimation animateIn="fadeInRight" animateOnce={true} className={s.banner_img} >
                
                 <img src={image} alt="girl on the phone"   />
           </ScrollAnimation>

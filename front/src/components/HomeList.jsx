@@ -20,14 +20,14 @@ const HomeList = () => {
 
   return (
     <>
-       <ScrollAnimation animateIn="fadeInDown" >
+       <ScrollAnimation animateIn="fadeInDown" animateOnce={true} >
  
       <h3 className={s.title}>All Plants</h3>
             </ScrollAnimation>
       <div className={s.container}>
         <div className={s.list}>
           {plants.map((plant) => (
-             <ScrollAnimation animateIn="fadeInUp" key={plant.id} >
+             <ScrollAnimation animateIn="fadeInUp" key={plant.id} animateOnce={true} >
  
           
                <CardHome  plant={plant} />
@@ -35,7 +35,7 @@ const HomeList = () => {
           ))}
         </div>
       </div>
-      <ScrollAnimation animateIn="fadeInDown" className={s.show}>
+      <ScrollAnimation animateIn="fadeInDown" animateOnce={true} className={s.show}>
         <Link className={s.show_a} to="/plants">
           show all <AiOutlineRight className={s.show_arrow} />
         </Link>

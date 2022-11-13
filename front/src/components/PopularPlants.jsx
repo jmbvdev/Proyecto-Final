@@ -14,10 +14,10 @@ const PopularPlants = () => {
 
   return (
     <div className={s.popular}>
-      <ScrollAnimation animateIn="fadeInLeft" className={s.image}>
+      <ScrollAnimation animateIn="fadeInLeft" animateOnce={true} className={s.image}>
       <img src={img} className={s.image}  alt="plant" />
             </ScrollAnimation>
-            <ScrollAnimation animateIn="fadeIn" >
+            <ScrollAnimation animateIn="fadeIn" animateOnce={true} >
      
       <h3 className={s.title} >Most Popular</h3>
             </ScrollAnimation>
@@ -25,7 +25,7 @@ const PopularPlants = () => {
         {plants.map((plant) => {
           return (
             <div className={s.container_card} key={plant.id}>
-                  <ScrollAnimation animateIn="fadeInRight" className={s.card}>
+                  <ScrollAnimation animateIn="fadeInRight" animateOnce={true} className={s.card}>
                   <div className={s.card_overlay}>
                   <button
                     onClick={() => navigate(`/plants/details/${plant.id}`)}
