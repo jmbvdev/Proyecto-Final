@@ -129,6 +129,7 @@ const Cart = () => {
   let total = 0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price * (1 - discount / 100);
+    total += plants[i].count * plants[i].price;
   }
 
   return (
@@ -200,12 +201,14 @@ const Cart = () => {
         </div>
         <div className={s.summary}>
           <p>Discount</p>
-          <span>${sum && discount ? (sum * 25) / 100 : 0.0}</span>
+          <span>${sum && discount ? (sum * discount) / 100 : 0.0}</span>
         </div>
         <div className={s.total_summary}>
           <p>Estimated total</p>
           <div className={s.discount_container}>
-            <span>${sum ? sum : discount ? sum - (sum * 25) / 100 : 0.0}</span>
+            <span>
+              ${sum ? sum : discount ? sum - (sum * discount) / 100 : 0.0}
+            </span>
             {discount ? (
               <span className={s.discount}>{discount}% Off</span>
             ) : null}
