@@ -11,22 +11,7 @@ import {
 import s from "../styles/register.module.css";
 import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
-
-/* import { getAuth, updateProfile } from "firebase/auth";
-const auth = getAuth();
-updateProfile(auth.currentUser, {
-  displayName: "Jane Q. User",
-  photoURL: "https://example.com/jane-q-user/profile.jpg",
-})
-  .then(() => {
-    // Profile updated!
-    // ...
-  })
-  .catch((error) => {
-    // An error occurred
-    // ...
-  });
- */
+import Swal from "sweetalert2";
 
 export default function Register() {
   const initialState = {
@@ -41,46 +26,108 @@ export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    setInput((prev) => ({ ...prev, [input.name]: input.value }));
-  }, [input.name, input.value]);
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (
-      input.displayName !== null &&
-      input.email !== null &&
-      input.password !== null &&
-      password2 !== null &&
-      input.password === password2
-    ) {
-      createUserWithEmailAndPassword(auth, input.email, input.password)
-        .then(() => {
-          updateProfile(auth.currentUser, {
-            displayName: input.displayName,
-          })
-            .then(() => {
-              sendEmailVerification(auth.currentUser).then(() => {
-                signOut(auth).then(() => {
-                  dispatch(setCurrentUser(null));
-                  alert("User succesfully created!");
-                  navigate("/");
-                });
-              });
-            })
-            .catch((err) => {
-              window.alert(err.message);
-            });
-        })
-        .catch((err) => {
-          window.alert(err.message);
+    if (input.displayName && input.email && input.password && password2) {
+      if (input.password !== password2) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
         });
-      setInput(initialState);
+        Promise.resolve(
+          Toast.fire({
+            icon: "error",
+            title: `The password doesn't match!`,
+          })
+        );
+        return;
+      }
+      (async () => {
+        try {
+          await createUserWithEmailAndPassword(
+            auth,
+            input.email,
+            input.password
+          );
+          await updateProfile(auth.currentUser, {
+            displayName: input.displayName,
+          });
+          await sendEmailVerification(auth.currentUser);
+          await signOut(auth);
+          dispatch(setCurrentUser(null));
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: false,
+          });
+          Promise.resolve(
+            Toast.fire({
+              icon: "success",
+              title: `User succesfully created. Please check your email to verify!`,
+            })
+          );
+          navigate("/");
+          setInput(initialState);
+          return;
+        } catch (err) {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: false,
+          });
+          Promise.resolve(
+            Toast.fire({
+              icon: "error",
+              title: `${err.message}. Try again!`,
+            })
+          );
+          return;
+        }
+      })();
+    } else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: false,
+      });
+      Promise.resolve(
+        Toast.fire({
+          icon: "error",
+          title: `Something is missing!`,
+        })
+      );
+      return;
     }
   };
 
   const handleChange = (e) => {
     e.preventDefault();
+
     setError(validate({...input, [e.target.name] : e.target.value}))
     setInput({ ...input, [e.target.name]: e.target.value });
   };

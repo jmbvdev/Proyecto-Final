@@ -232,7 +232,11 @@ function FormPostCheckout({
         </div>
 
         <div className={s.maps}>
-          <GoogleMaps retiro={checked1} andreani={checked2} />
+          <GoogleMaps
+            retiro={checked1}
+            andreani={checked2}
+            city={inputs.city}
+          />
         </div>
       </div>
     </div>

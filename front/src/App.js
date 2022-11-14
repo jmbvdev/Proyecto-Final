@@ -33,6 +33,15 @@ import Reviews from "./pages/Reviews";
 import OrdersUser from "./pages/OrdersUser";
 import UserDetail from "./auth/UsersDash";
 import ManageOrders from "./pages/ManageOrders.jsx";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Update_Coment from "./pages/Update_Coment.jsx";
+import FAQ from "./pages/FAQ";
+import Stadistics from "./components/Stadistics";
+import NewUsers from "./components/NewUsers";
+import SalesCount from "./components/SalesCount";
+import SalesAmount from "./components/SalesAmount";
+import BestProducts from "./components/BestProducts";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -54,7 +63,7 @@ function App() {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
-          const role = await authenticatedUser.getIdTokenResult();
+          const role = await authenticatedUser.getIdTokenResult(true);
           dispatch(
             setCurrentUser({
               ...authenticatedUser,
@@ -82,6 +91,9 @@ function App() {
         <Route path="/plants" element={<Plants />} />
         <Route path="/plants/details/:id" element={<PlantsDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -96,9 +108,19 @@ function App() {
         <Route path="/success" element={<PostMercadoPago />} />
         <Route path="/pending" element={<PostMercadoPago />} />
         <Route path="/failure" element={<PostMercadoPago />} />
+        <Route path="/stadistics" element={<Stadistics />} />
+        <Route path="/stadistics/newUsers" element={<NewUsers />} />
+        <Route path="/stadistics/salesCount" element={<SalesCount />} />
+        <Route path="/stadistics/salesAmount" element={<SalesAmount />} />
+        <Route path="/stadistics/bestProducts" element={<BestProducts />} />
         <Route exact path="/reviews/:id" element={<Reviews />} />
         <Route path="/orders/:id" element={<OrdersUser />} />
         <Route exact path="/manage-order" element={<ManageOrders />} />
+        <Route
+          exact
+          path="/update/:comentid/:plantsUID"
+          element={<Update_Coment />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollToTop smooth />

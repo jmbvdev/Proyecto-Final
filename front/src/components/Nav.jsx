@@ -89,11 +89,6 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
                 <p className="link">FAQ</p>
               </li>
             </Link>
-            <Link to="/delivery" className="link_mobile">
-              <li>
-                <p className="link">Delivery</p>
-              </li>
-            </Link>
           </ul>
         </div>
 

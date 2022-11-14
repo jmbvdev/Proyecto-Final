@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 
 
-function View_Reviews({view,setView, user,userUID}) {
+function View_Reviews({view,setView, user,userUID,comentid}) {
 
   const navigate=useNavigate()
 
@@ -21,11 +21,11 @@ function View_Reviews({view,setView, user,userUID}) {
       text: "Are you sure you want to delete this comment?",
       icon: "question",
       showDenyButton: true,
-      denyButtonText: "No",
-      denyButtonColor: "#FF5733",
-      confirmButtonText: "Yes",
-      confirmButtonColor: "#72CE65",
-      
+      denyButtonText: "Cancel",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Delete",
+      confirmButtonColor:  "#FF5733",
+     
     })
     .then((res)=>{
     if (userUID === user)
@@ -61,32 +61,14 @@ function View_Reviews({view,setView, user,userUID}) {
   })
   }
 
-  function handleUpdateButton(comentid) {
-   
-    if (!user) {
-      Swal.fire({
-        title: "Wait...",
-        text: "Your have to sign in to Update Coment",
-        icon: "failure",
-        showDenyButton: false,
-        denyButtonText: "",
-        denyButtonColor: "rgba(11, 115, 147, 0.713)",
-        confirmButtonText: "Sign In",
-        confirmButtonColor: "rgb(9, 102, 74)",
-      }).then((res) => {
-        navigate("/sign-in");
-      });
-    }
-    if (user) {
-      axios
-        .put(
-          `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${comentid}`
-        )
-        .then(()=>{
-      navigate("/update")})
+  
+  function handleUpdateButton(comentid,userUID,plantsUID) {
+
+    navigate(`/update/${comentid}/${plantsUID}`);
+      
     }
 
-  }
+  
   
 
   return (
@@ -100,7 +82,7 @@ function View_Reviews({view,setView, user,userUID}) {
           <CardComment key={i} image={e.data?.userImg} name={e.data?.userName} quote={e.data?.comentspositive} rate={e.data?.star}
 
             borrar={user===e.data?.userUID ?<button onClick={() => { handleDeleteButton(e.comentid, e.data.userUID) }} className={s.delete} ><MdDeleteForever /></button>:null}
-             edit={user===e.data?.userUID ?<button  onClick={(evento) => { handleUpdateButton(e.comentid,e.data.userUID) }}><FaRegEdit/></button>:null}
+            edit={user===e.data?.userUID?<button  onClick={()=>handleUpdateButton(e.comentid,e.data?.userUID,e.data?.plantsUID)}><FaRegEdit/></button>:null}
             // borrar={<button onClick={() => { handleDeleteButton(e.comentid, e.data.userUID) }} className={s.delete} ><MdDeleteForever /></button>}
           />
 

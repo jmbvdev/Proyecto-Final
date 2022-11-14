@@ -86,32 +86,34 @@ const Reviews = ({ setView, close }) => {
         showDenyButton: false,
         confirmButtonText: "ok",
         confirmButtonColor: "rgb(9, 102, 74)",
-      })
-    }
-    else{
-    axios
-      .post(
-        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
-        {
-          star: coments.star,
-          plantsUID: coments.plantsUID,
-          userUID: coments.userUID,
-          comentspositive: coments.comentspositive,
-          userName: coments.userName,
-          userImg: coments.userImg,
-        }
-      )
-      .then((res) => {
-        close(false);
-        Swal.fire({
-          title: "Success",
-          text: "Your comment was successfully added",
-          icon: "success",
-          confirmButtonText: "ok",
-          confirmButtonColor: "rgb(9, 102, 74)",
-        });
-        setView((prevstate) => [...prevstate, res.data]);
       });
+    } else {
+      axios
+        .post(
+          "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
+          {
+            star: coments.star,
+            plantsUID: coments.plantsUID,
+            userUID: coments.userUID,
+            comentspositive: coments.comentspositive,
+            userName: coments.userName,
+            userImg: coments.userImg,
+          }
+        )
+        .then((res) => {
+          close(false);
+          Swal.fire({
+            title: "Success",
+            text: "Your comment was successfully added",
+            icon: "success",
+            confirmButtonText: "ok",
+            confirmButtonColor: "rgb(9, 102, 74)",
+          });
+          setView((prevstate) => [...prevstate, res.data]);
+        })
+        .then(() => {
+          Navigate(`/plants/details/${id}`);
+        });
     }
   };
 

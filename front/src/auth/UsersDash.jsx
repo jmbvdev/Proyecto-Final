@@ -6,6 +6,7 @@ import image from "../images/profile.webp";
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import { IoIosArrowBack } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const UserDetail = () => {
   const [user, setUser] = React.useState(null);
@@ -40,6 +41,24 @@ const UserDetail = () => {
       )
       .then((res) => {
         setUser(res.data);
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "warning",
+            title: `User banned!`,
+          })
+        );
       });
   };
 
@@ -51,6 +70,23 @@ const UserDetail = () => {
       )
       .then((res) => {
         setUser(res.data);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `User available again!`,
+          })
+        );
       });
   };
 
@@ -62,6 +98,23 @@ const UserDetail = () => {
       )
       .then((res) => {
         setUser(res.data);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `This user is an admin now!`,
+          })
+        );
       });
   };
   const handleSetModerator = () => {
@@ -70,7 +123,26 @@ const UserDetail = () => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
         { role: ["moderator"] }
       )
-      .then((res) => setUser(res.data));
+      .then((res) => {
+        setUser(res.data);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `This user is a moderator now!`,
+          })
+        );
+      });
   };
   const handleSetModeratorOff = () => {
     axios
@@ -78,66 +150,83 @@ const UserDetail = () => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
         { role: ["user"] }
       )
-      .then((res) => setUser(res.data));
+      .then((res) => {
+        setUser(res.data);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `This user is a common user now!`,
+          })
+        );
+      });
   };
 
   if (user)
     return (
       <div className={s.container}>
-     
         <button onClick={useGoBack} className={s.back}>
-              <IoIosArrowBack  />
-            </button>
+          <IoIosArrowBack />
+        </button>
 
-      <div className={s.wraper}>
+        <div className={s.wraper}>
+          <div className={s.profile}>
+            <img src={image} alt="" className={s.calatea} />
+            <div className={s.specs}>
+              <p>{user.customClaims?.role?.[0] || "User"}</p>
+              <img
+                src={user.photoURL}
+                alt={user.displayName}
+                className={s.profile_pic}
+              />
+              <h2>{user.displayName}</h2>
+              <div className={s.text_specs}>
+                <p>
+                  <strong>Email: </strong>
+                  {user.email}
+                </p>
 
-      <div className={s.profile}>
-        <img src={image} alt="" className={s.calatea} />
-        <div className={s.specs}>
-        <p>{user.customClaims?.role?.[0] || "User"}</p>
-          <img
-            src={user.photoURL}
-            alt={user.displayName}
-            className={s.profile_pic}
-          />
-          <h2>{user.displayName}</h2>
-          <div className={s.text_specs}>
-            <p>
-              <strong>Email: </strong>
-              {user.email}
-            </p>
-
-            <p>
-              <strong>Last sing in: </strong>
-              {user.metadata.lastSignInTime}
-            </p>
-            {user.disabled ? (
-              <div>
-                <p>User banned</p>
-                <button onClick={handleUnbanUser}>Unban</button>
+                <p>
+                  <strong>Last sing in: </strong>
+                  {user.metadata.lastSignInTime}
+                </p>
+                {user.disabled ? (
+                  <div>
+                    <p>User banned</p>
+                    <button onClick={handleUnbanUser}>Unban</button>
+                  </div>
+                ) : null}
+                {admin?.role[0] === "admin" &&
+                user.customClaims?.role?.[0] !== "admin" ? (
+                  user.customClaims?.role?.[0] === "moderator" ? (
+                    <div>
+                      <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
+                      <button onClick={handleSetModeratorOff}>
+                        PUT OFF MOD ROLE
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button onClick={handleBanUser}>BAN USER</button>
+                      <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
+                      <button onClick={handleSetModerator}>SET MOD ROLE</button>
+                    </div>
+                  )
+                ) : null}
               </div>
-            ) : null}
-            {admin?.role[0] === "admin" &&
-            user.customClaims?.role?.[0] !== "admin" ? (
-              user.customClaims?.role?.[0] === "moderator" ? (
-                <div>
-                  <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
-                  <button onClick={handleSetModeratorOff}>
-                    PUT OFF MOD ROLE
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button onClick={handleBanUser}>BAN USER</button>
-                  <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
-                  <button onClick={handleSetModerator}>SET MOD ROLE</button>
-                </div>
-              )
-            ) : null}
+            </div>
           </div>
         </div>
-      </div>
-      </div>
       </div>
     );
   else return <Loading />;

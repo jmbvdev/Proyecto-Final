@@ -1,0 +1,68 @@
+.container{
+    width: 100%;
+    height: auto;
+    caret-color: transparent;
+ 
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(243, 238, 238, 0.399),rgba(156, 167, 155, 0.725)), url("https://www.lifeplanters.eu/wp-content/uploads/2022/07/Why-People-Love-Plants-in-Their-Garden.jpg"); 
+    background-repeat: no-repeat;
+    background-position: center;
+ 
+ 
+}
+.banner img{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-width: 350px;
+
+   
+}
+.banner_img{
+    width: 100%;
+    max-width: 450px;
+
+    min-width: 150px;
+    position: relative;
+    top: 6px;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+
+}
+.contact img{
+    width: 30%;
+    min-width: 150px;
+    filter: contrast(1.5);
+    position: relative;
+    bottom: 30px;
+ 
+ 
+}
+.contact h1{
+    font-family: "Poppins";
+    color: rgb(27, 38, 31);
+    font-size: 3vw;
+    position: relative;
+    bottom: 25px;
+}
+.faq{
+    width: 70%;
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+}
+.section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
