@@ -10,4 +10,10 @@ app.use("/", routes);
 
 app.use(errorMiddleware);
 
+app.use(express.json({
+    verify: (req, res, buf) => {
+        req.rawBody = buf
+    }
+}))
+
 exports.app = functions.https.onRequest(app);

@@ -97,3 +97,20 @@
     .register_btn:hover{
         background-color: #efd678;
     }
+
+    .back{
+        background-color: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+    .danger {
+        font-size: 0.8rem;
+        color: #fff;
+    }
