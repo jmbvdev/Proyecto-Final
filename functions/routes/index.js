@@ -5,6 +5,7 @@ const ordersRoute = require("./ordersRoute.js");
 const favouritesRoute = require("./favouritesRoute.js");
 const comentsRoute = require("./comentsRoute.js");
 const couponsRoute = require("./couponsRoute.js");
+const coinbaseRoute = require("./coinbaseRoute");
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use("/orders", ordersRoute);
 router.use("/favourites", favouritesRoute);
 router.use("/coments", comentsRoute);
 router.use("/coupons", couponsRoute);
+router.use("/coinbase", coinbaseRoute)
 
 module.exports = router;

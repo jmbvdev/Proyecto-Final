@@ -8,10 +8,12 @@ import { validate } from "../Util/validate";
 import { BsImageFill } from "react-icons/bs";
 import s from "../styles/create.module.css";
 
+
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
+  
 
   const [imageUrl, setImageUrl] = useState("");
   const [uid, setUid] = useState("");

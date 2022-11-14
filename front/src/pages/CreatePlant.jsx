@@ -10,6 +10,7 @@ import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import {IoIosArrowBack}from "react-icons/io";
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -55,6 +56,10 @@ const CreatePlant = () => {
       });
     }
   }, [currentUser]);
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const fileRef = useRef(null);
 
@@ -233,6 +238,11 @@ const CreatePlant = () => {
 
   return (
     <div className={s.container}>
+          <div className={s.button_container}>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+          </div>
       <div className={s.wraper}>
         <div className={s.left}>
           <form onSubmit={handleOnSubmit} className={s.form}>
