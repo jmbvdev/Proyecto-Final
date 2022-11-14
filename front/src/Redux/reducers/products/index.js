@@ -25,12 +25,23 @@ export default function productsReducer(state = initialState, action) {
     };
   }
   if (action.type === CREATE_PRODUCT) {
-    return { ...state, allProducts: [...state.allProducts, action.payload] };
+    return {
+      ...state,
+      allProducts: [...state.allProducts, action.payload],
+      productsBackUp: [...state.allProducts, action.payload],
+    };
   }
   if (action.type === EDIT_PRODUCT) {
     return {
       ...state,
       allProducts: state.allProducts.map((p) => {
+        if (p.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return p;
+        }
+      }),
+      productsBackUp: state.allProducts.map((p) => {
         if (p.id === action.payload.id) {
           return action.payload;
         } else {

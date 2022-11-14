@@ -81,7 +81,6 @@ export default function PostMercadoPago() {
               <button onClick={goHome}>GO BACK TO HOME</button>
             </div>
           </div>
-
         </div>
       </div>
     );

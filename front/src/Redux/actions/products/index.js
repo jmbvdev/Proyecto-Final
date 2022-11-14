@@ -29,6 +29,23 @@ export const createProduct = (data) => {
       "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",
       data
     );
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+    });
+    Promise.resolve(
+      Toast.fire({
+        icon: "info",
+        title: `The product has been created`,
+      })
+    );
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };

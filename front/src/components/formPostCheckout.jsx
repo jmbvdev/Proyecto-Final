@@ -92,7 +92,22 @@ function FormPostCheckout({
           title: `You have to choose one option!`,
         })
       );
-    } else setFinish(true);
+    } else {
+      setFinish(true);
+      axios.put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/extrasorders/${items[0].orderID}`,
+        {
+          extras: {
+            adress: inputs.adress,
+            adressNumber: inputs.adressNumber,
+            city: inputs.city,
+            sendOption:
+              (checked1 && "Local retirement") ||
+              (checked2 && "Andreani shipping"),
+          },
+        }
+      );
+    }
   };
 
   let totalprod = 0;

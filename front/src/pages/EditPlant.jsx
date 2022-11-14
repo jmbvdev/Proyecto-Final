@@ -2,7 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DeleteProduct, GetProductDetails } from "../Redux/actions/products";
+import {
+  clearDetails,
+  DeleteProduct,
+  GetProductDetails,
+} from "../Redux/actions/products";
 import { GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
 import { FaDog } from "react-icons/fa";
@@ -138,6 +142,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    dispatch(clearDetails());
     navigate("/plants");
   }
 
@@ -159,6 +164,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    dispatch(clearDetails());
     navigate("/plants");
   };
 
@@ -241,6 +247,7 @@ const EditPlant = () => {
     }).then((res) => {
       if (res.isConfirmed) {
         dispatch(DeleteProduct(id));
+        dispatch(clearDetails());
         navigate("/plants");
       }
     });
