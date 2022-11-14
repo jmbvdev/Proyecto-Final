@@ -20,16 +20,16 @@ function BestProducts() {
             if (res.data[i].state !== "Pending") {
               res.data[i].cart.forEach((e) => {
                 if (amount.hasOwnProperty(e.name)) {
-                  amount[e.name] = amount[e.name] + 1;
+                  amount[e.name] = amount[e.name] + e.count;
                 } else {
-                  amount[e.name] = 1;
+                  amount[e.name] = e.count;
                 }
               });
             }
           }
           let final = {};
           for (let prod in amount) {
-            if (amount[prod] > 1) {
+            if (amount[prod] > 2) {
               final[prod] = amount[prod];
             }
           }
@@ -48,7 +48,7 @@ function BestProducts() {
         ytitle="Sales count"
         label="Value"
         min={0}
-        max={10}
+        max={25}
         id="users-chart"
         width="700px"
         height="500px"
