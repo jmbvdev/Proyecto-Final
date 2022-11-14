@@ -13,12 +13,13 @@ import axios from "axios";
 
 export const saveCart = (cart, currentUserID) => {
   return async (dispatch) => {
-    await axios.post(
+    let response = await axios.post(
       `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUserID}`,
       { cart: cart }
     );
     localStorage.clear();
-    return dispatch({ type: SAVE_CART });
+
+    return dispatch({ type: SAVE_CART, payload: response.data });
   };
 };
 

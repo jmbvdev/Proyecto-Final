@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { db } = require("../config/firebase.js");
 
 const extrasOrdersRoute = Router();
 
@@ -12,8 +13,7 @@ extrasOrdersRoute.put("/:id", async (req, res, next) => {
 
     const reference = db.collection("orders").doc(id);
     await reference.update(order);
-    const ord = reference.get();
-    return res.status(200).send(ord);
+    return res.status(203).send("Order extras added");
   } catch (err) {
     next(err);
   }

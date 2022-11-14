@@ -95,7 +95,7 @@ function FormPostCheckout({
     } else {
       setFinish(true);
       axios.put(
-        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/extrasorders/${items[0].orderID}`,
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/extrasorder/${items[0].orderID}`,
         {
           extras: {
             adress: inputs.adress,
@@ -104,6 +104,7 @@ function FormPostCheckout({
             sendOption:
               (checked1 && "Local retirement") ||
               (checked2 && "Andreani shipping"),
+            totalAmount: totalAmount,
           },
         }
       );
