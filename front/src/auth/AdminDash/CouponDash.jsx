@@ -17,6 +17,7 @@ const CuponDash = () => {
   };
 
   const [input, setInput] = React.useState(initialState);
+  const [error, setError] = React.useState({});
   const [coupons, setCoupons] = React.useState([]);
   const navigate = useNavigate();
 
@@ -55,14 +56,16 @@ const CuponDash = () => {
       icon: "question",
       showDenyButton: true,
       denyButtonText: "No",
-      denyButtonColor: "#72CE65",
+      denyButtonColor: "#FF5733",
       confirmButtonText: "Yes",
-      confirmButtonColor: "#FF5733",
+      confirmButtonColor: "#72CE65",
     });
   };
 
+
   const handleChange = (e) => {
     e.preventDefault();
+    setError(validate({...input, [e.target.name] : e.target.value}))
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -183,9 +186,7 @@ const CuponDash = () => {
     ]);
   };
 
-  const data = coupons?.map((c) => {
-    return c.data;
-  });
+
 
   console.log(data);
 
@@ -197,58 +198,60 @@ const CuponDash = () => {
             <IoIosArrowBack />
           </button>
         </div>
-        <div className={s.wraper}>
-          <div className={s.image}>
-            <img src={plans} alt="" />
-          </div>
-          <div className={s.register}>
-            <h1 className={s.title}>Coupon Generator</h1>
-            <p className={s.welcome}>Create a Discount Coupon.</p>
-            <form onSubmit={(e) => handleOnSubmit(e)}>
-              <div className={s.input_container}>
-                <input
-                  className={s.input_text}
-                  name="name"
-                  value={input.name}
-                  onChange={handleChange}
-                  placeholder="Coupon's name"
-                />
-              </div>
-              <div className={s.input_container}>
-                <input
-                  className={s.input_text}
-                  name="count"
-                  value={input.count}
-                  onChange={handleChange}
-                  placeholder="Quantity"
-                  type={"number"}
-                  min="1"
-                  max="100"
-                />
-              </div>
-              <div className={s.input_container}>
-                <input
-                  className={s.input_text}
-                  name="discount"
-                  value={input.discount}
-                  onChange={handleChange}
-                  placeholder="Discount"
-                  type={"number"}
-                  min="1"
-                  max="100"
-                />
-              </div>
-              <div>
-                <button
-                  disabled={!input.name || !input.count || !input.discount}
-                  className={s.register_btn}
-                  type="submit"
-                >
-                  GENERATE
-                </button>
-              </div>
-            </form>
-          </div>
+
+        <div className={s.register}>
+          <h1 className={s.title}>Coupon Generator</h1>
+          <p className={s.welcome}>Create a Discount Coupon.</p>
+          <form onSubmit={(e) => handleOnSubmit(e)}>
+            <div className={s.input_container}>
+              <input
+                className={s.input_text}
+                name="name"
+                value={input.name.toUpperCase()}
+                onChange={handleChange}
+                placeholder="Coupon's name"
+              />
+              { error.name && (<p className={s.danger}>{error.name}</p>)}
+            </div>
+            <div className={s.input_container}>
+              <input
+                className={s.input_text}
+                name="count"
+                value={input.count}
+                onChange={handleChange}
+                placeholder="Quantity"
+                type={"number"}
+                min="1"
+                max="100"
+              />
+            </div>
+            <div className={s.input_container}>
+              <input
+                className={s.input_text}
+                name="discount"
+                value={input.discount}
+                onChange={handleChange}
+                placeholder="Discount"
+                type={"number"}
+                min="1"
+                max="100"
+              />
+            </div>
+            <div>
+              <button
+                disabled={
+                  !input.name ||
+                  !input.count ||
+                  !input.discount ||
+                  error.length>0
+                }
+                className={s.register_btn}
+                type="submit"
+              >
+                GENERATE
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <Table columns={columns} data={data} />
@@ -256,4 +259,12 @@ const CuponDash = () => {
   );
 };
 
+
+const validate = input => {
+  let error = {};
+  if(!/^[a-zA-Z ]*$/.test(input.name))  error.name = "Coupon's name invalid! (Ex : GIFT)";
+  return error
+}
+
 export default CuponDash;
+

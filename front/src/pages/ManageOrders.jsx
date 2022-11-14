@@ -5,6 +5,8 @@ import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from 
 import { TableGlobalFilter } from "../componentsTable/TableGlobalFilter";
 import s from "../styles/adminNav.module.css";
 import Loading from "../components/Loading";
+import {IoIosArrowBack}from "react-icons/io"
+import { useNavigate } from "react-router-dom";
 import DropdownFilter from '../componentsTable/DropdownFilter'
 import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
@@ -72,6 +74,12 @@ export default function ManageOrders() {
   useEffect(() => {
     getAll();
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const getAll = () => {
 
@@ -235,6 +243,9 @@ export default function ManageOrders() {
       {data.length ? (
         <div>
           <>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
             <TableGlobalFilter
               filter={globalFilter}
               setFilter={setGlobalFilter}
