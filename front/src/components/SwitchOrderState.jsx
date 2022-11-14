@@ -36,34 +36,35 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
 
                 if (result.isConfirmed) {
                     Swal.fire('Wait a moment it is processing', '', 'success')
-                    axios.put(                                                         //id order
-                        `http://localhost:5000/api-plants-b6153/us-central1/app/orders/${order}`,
+                    axios
+                      .put(
+                        //id order
+                        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${order}`,
                         {
-                            cart: current_order.cart,
-                            state: optionState,
-                            extras: '',
-                            email: current_order.user.email,
+                          cart: current_order.cart,
+                          state: optionState,
+                          extras: "",
+                          email: current_order.user.email,
                         }
-                    )
-                        .then((res) => {
-                            let aux = []
-                            auxOrders.forEach((order) => {
-                                if (order.orderId == current_order.orderId) {
-                                    aux.push({
-                                        ...order,
-                                        state: optionState,
-                                    })
-                                } else {
-                                    aux.push(order)
-                                }
-                            })
-                            console.log(aux)
-                            setAuxOrders(aux)
-                            setOptionState("")
-                            Swal.fire(`${res.data}`, '', 'success')
-                            // setOrder('')
-
-                        })
+                      )
+                      .then((res) => {
+                        let aux = [];
+                        auxOrders.forEach((order) => {
+                          if (order.orderId == current_order.orderId) {
+                            aux.push({
+                              ...order,
+                              state: optionState,
+                            });
+                          } else {
+                            aux.push(order);
+                          }
+                        });
+                        console.log(aux);
+                        setAuxOrders(aux);
+                        setOptionState("");
+                        Swal.fire(`${res.data}`, "", "success");
+                        // setOrder('')
+                      });
 
                 } else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
