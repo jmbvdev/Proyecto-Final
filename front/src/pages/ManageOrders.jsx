@@ -79,9 +79,6 @@ export default function ManageOrders() {
 
 
 
-  const handleBack = () => {
-    navigate(-1);
-  };
 
   const getAll = () => {
 
@@ -251,9 +248,6 @@ export default function ManageOrders() {
       {data.length ? (
         <div>
           <>
-            <button onClick={handleBack} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
             <TableGlobalFilter
               filter={globalFilter}
               setFilter={setGlobalFilter}
