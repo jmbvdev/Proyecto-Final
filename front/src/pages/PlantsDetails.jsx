@@ -21,6 +21,7 @@ import View_Reviews from "../components/View_Reviews";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import MoreSizes from "../components/MoreSizes";
+import { IoIosArrowBack } from "react-icons/io";
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -184,6 +185,11 @@ const PlantsDetails = () => {
   const handleCloseReview = () => setOpenReview(false);
   return plant?.name ? (
     <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+          </div>
       <img src={plant?.image} alt="" />
       <div className={s.details}>
         <h1>{plant?.name} </h1>

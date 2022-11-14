@@ -65,6 +65,7 @@ font-weight:bold ;
 }
 .table{
     font-size: 2.5rem;
+    color: rgb(9, 102, 74);
 }
 .price h3{
     font-weight: 600;
@@ -200,6 +201,7 @@ font-weight:bold ;
 }
 .place_icon{
     font-size: 30px;
+    color: rgb(9, 102, 74);
 }
 .size_btn{
     display: flex;
@@ -224,6 +226,26 @@ font-weight:bold ;
     background-color: rgba(9, 102, 74, 0.713);
     color: #fff;
 }
+.button_container{
+    width: min-content;
+    position: absolute;
+    left: 25px;
+  top: 7rem;
+  }
+  .back{
+    background-color: rgba(9, 102, 74, 0.713);
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .back:hover{
+    background-color: rgba(6, 78, 56, 0.713);
+  }
 @media (max-width: 768px) {
     .container{
         flex-direction: column;

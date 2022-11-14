@@ -122,7 +122,7 @@ const OrdersCard = (props) => {
                                 props.state === "Pending" ? <button onClick={() => navigate(`/cart`)} className={s.edit}>Edit</button> : null
                             }
                             {
-                                props.state === "Order approved" ? <button onClick={handleCreateSimilarOrder}>Order repeat</button> : null
+                                props.state === "Order approved" ? <button onClick={handleCreateSimilarOrder} className={s.edit}>Order repeat</button> : null
                             }
                             <div className={s.date_container}>
                                 <p>Date</p>
@@ -130,7 +130,11 @@ const OrdersCard = (props) => {
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleDateString()}</span>
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleTimeString()}</span>
                                 </div>
-                                {
+                               
+                            </div>
+                            <div className={s.card_list}>
+
+                            {
                                     props.data.length > 0 && props.data.map(items => (
                                         <div className={s.card} key={items.id}>
                                             <img src={items.image} alt="" className={s.order_image} />
