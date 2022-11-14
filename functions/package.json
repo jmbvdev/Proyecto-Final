@@ -13,7 +13,9 @@
   },
   "main": "index.js",
   "dependencies": {
+    "coinbase-commerce-node": "^1.0.4",
     "cors": "2.8.5",
+    "dotenv": "^16.0.3",
     "express": "4.18.2",
     "firebase": "9.12.1",
     "firebase-admin": "10.0.2",
