@@ -97,7 +97,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             <div className="user">
               <div className="user_name">
                 <img
-                  src={auth.currentUser?.photoURL}
+                  src={user?.photoURL}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
                     currentTarget.src =
@@ -106,7 +106,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
                   alt="Not found"
                 />
                 <Link to="/dashboard">
-                  {auth.currentUser?.displayName?.split(" ")[0] || "Set Name"}
+                  {user?.displayName?.split(" ")[0] || "Set Name"}
                 </Link>
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
