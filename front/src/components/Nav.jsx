@@ -93,12 +93,12 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
         </div>
 
         <div className="icons-container">
-          {user !== null ? (
+          {user ? (
             <div className="user">
               <div className="user_name">
-                <img src={auth.currentUser.photoURL} alt="" />
+                <img src={auth.currentUser?.photoURL} alt="Not found" />
                 <Link to="/dashboard">
-                  {auth.currentUser.displayName?.split(" ")[0] || "Set Name"}
+                  {auth.currentUser?.displayName?.split(" ")[0] || "Set Name"}
                 </Link>
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
