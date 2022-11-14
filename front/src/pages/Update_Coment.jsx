@@ -12,6 +12,7 @@ import CardComent from "../components/CardComment"
 
 
 
+
 const Update_Coment = ({ }) => {
 
   const Navigate = useNavigate();
@@ -73,7 +74,7 @@ const Update_Coment = ({ }) => {
 
 
   const handleOnClick = () => {
-     
+
     if (!update.comentspositive.length && !update.star) {
       Swal.fire("Are you sure don't make the changes ?");
     }
@@ -85,93 +86,91 @@ const Update_Coment = ({ }) => {
         icon: "warning",
         showDenyButton: true,
         denyButtonText: "Cancel",
-        denyButtonColor: "#72CE65",
+        denyButtonColor: "#FF5733",
         confirmButtonText: "yes, Update",
-        confirmButtonColor: "#FF5733",
+        confirmButtonColor: "#8acfa9",
+
       })
-      .then ((result) => {
-        if (result.isConfirmed) {
-        //.then(() => {
-          axios
-            .put(
-              `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`,
-              // `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
-              {
-                star: update.star !== "" ? update.star : view[0].data.star,
-                comentspositive: update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive,
-              }
-            )
-               // Promise.resolve(() => {
-          Navigate(-1)
-        //})
+        .then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .put(
+                `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`,
+                // `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
+                {
+                  star: update.star !== "" ? update.star : view[0].data.star,
+                  comentspositive: update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive,
+                }
+              )
+            Navigate(-1)
           }
         })
-      }
+    }
   }
 
 
 
   return (
-<div>
-    <div className={s.container}>
-      <form className={s.form}>
-        <h2>Update Your Comment</h2>
-        <div>
-          <select
-            onChange={handleSelectComent}
-            className={s.recomendations_select}
-          >
-            <option value="select">Select a recomendation</option>
-            {positive.map((el, i) => (
-              <option key={i} value={el}>
-                {el}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          {update.comentspositive.length ? (
-            <div className={s.categories_option}>
-              <button type="button" onClick={handleDeleteSComent}>
-                x
-              </button>
-              <p className={s.positive_comments}>
-                {update.comentspositive[0]}
-              </p>
-            </div>
-          ) : null}
+    <div>
+      <div className={s.container}>
+        <form className={s.form}>
+          <h2>Update Your Comment</h2>
+          <div>
+            <select
+              onChange={handleSelectComent}
+              className={s.recomendations_select}
+            >
+              <option value="select">Select a recomendation</option>
+              {positive.map((el, i) => (
+                <option key={i} value={el}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            {update.comentspositive.length ? (
+              <div className={s.categories_option}>
+                <button type="button" onClick={handleDeleteSComent}>
+                  x
+                </button>
+                <p className={s.positive_comments}>
+                  {update.comentspositive[0]}
+                </p>
+              </div>
+            ) : null}
 
-        </div>
-        <div className={s.input_container}>
-          <Box
-            sx={{
-              "& > legend": { mt: 2 },
-            }}
-          >
-            <Typography component="legend">Star rating</Typography>
-            <Rating
-              name="simple-controlled"
-              value={value}
-              onChange={(e, newValue) => {
-                setValue(newValue);
-                handleSelect(e);
+          </div>
+          <div className={s.input_container}>
+            <Box
+              sx={{
+                "& > legend": { mt: 2 },
               }}
-            />
-          </Box>
-        </div>
-        <div>
+            >
+              <Typography component="legend">Star rating</Typography>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(e, newValue) => {
+                  setValue(newValue);
+                  handleSelect(e);
+                }}
+              />
+            </Box>
+          </div>
+          <div>
 
-        </div>
-        <div>
-          <button
-            type="button"
-            onClick={handleOnClick}
-            className={s.create_btn}
-          >
-            Update comments
-          </button>
-        </div>
-      </form>
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleOnClick}
+              className={s.create_btn}
+            >
+              Update comments
+            </button>
+          </div>
+        </form>
       </div>
       <div className={s.changeview}>
         {
@@ -185,7 +184,7 @@ const Update_Coment = ({ }) => {
             : (null)}
 
       </div>
-    
+
     </div>
   );
 };

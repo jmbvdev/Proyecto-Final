@@ -6,6 +6,7 @@ import { FaRegEdit } from "react-icons/fa"
 import axios from "axios";
 import s from "../styles/review.module.css"
 import Swal from "sweetalert2";
+import avatar from "../images/avatar 1.gif"
 
 
 
@@ -57,7 +58,7 @@ function View_Reviews({ view, setView, user, userUID, comentid }) {
       <div className={s.reviews_list}>
 
         {view?.map((e, i) => (
-          <CardComment key={i} image={e.data?.userImg} name={e.data?.userName} quote={e.data?.comentspositive} rate={e.data?.star}
+          <CardComment key={i} image={e.data?.userImg || avatar } name={e.data?.userName} quote={e.data?.comentspositive} rate={e.data?.star}
 
             borrar={user === e.data?.userUID ? <button onClick={() => { handleDeleteButton(e.comentid, e.data.userUID) }} className={s.delete} ><MdDeleteForever /></button> : null}
             edit={user === e.data?.userUID ? <button onClick={() => handleUpdateButton(e.comentid, e.data?.userUID, e.data?.plantsUID)}><FaRegEdit /></button> : null}

@@ -36,9 +36,9 @@ const Cart = () => {
       text: "Are you sure you want to remove all the products from the cart?",
       icon: "error",
       showDenyButton: true,
-      denyButtonText: "No",
+      denyButtonText: "keep in Cart",
       denyButtonColor: "#72CE65",
-      confirmButtonText: "Yes",
+      confirmButtonText: "Remove",
       confirmButtonColor: "#FF5733",
     }).then((res) => {
       if (res.isConfirmed) {
@@ -88,9 +88,9 @@ const Cart = () => {
       text: "Are you sure you want to remove this plant?",
       icon: "error",
       showDenyButton: true,
-      denyButtonText: "No",
+      denyButtonText: "keep in cart",
       denyButtonColor: "#72CE65",
-      confirmButtonText: "Yes",
+      confirmButtonText: "Remove",
       confirmButtonColor: "#FF5733",
     }).then((res) => {
       if (res.isConfirmed) {
