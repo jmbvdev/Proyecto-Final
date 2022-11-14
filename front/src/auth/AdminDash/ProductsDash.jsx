@@ -106,6 +106,11 @@ const ProductsDash = () => {
                                 accessor: 'stock'
                             },
                             {
+                              Header: 'Visible',
+                              accessor: 'logicalDeletion',
+                              Cell: ({value}) => value === true ? <span>VISIBLE</span> : <span>NOT VISIBLE</span>
+                            },
+                            {
                               Header: 'Image',
                               accessor: 'image',
                               Cell: ({value}) => <img className={s.img} src={value}/>,

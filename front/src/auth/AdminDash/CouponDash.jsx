@@ -18,6 +18,7 @@ const CuponDash = () => {
   };
 
   const [input, setInput] = React.useState(initialState);
+  const [error, setError] = React.useState({});
   const [coupons, setCoupons] = React.useState([]);
   const navigate = useNavigate();
 
@@ -50,15 +51,18 @@ const CuponDash = () => {
       icon: "question",
       showDenyButton: true,
       denyButtonText: "No",
-      denyButtonColor: "#72CE65",
+      denyButtonColor: "#FF5733",
       confirmButtonText: "Yes",
-      confirmButtonColor: "#FF5733",
+      confirmButtonColor: "#72CE65",
     });
   };
 
+  
+  
 
   const handleChange = (e) => {
     e.preventDefault();
+    setError(validate({...input, [e.target.name] : e.target.value}))
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -159,7 +163,6 @@ const data = coupons?.map(c => {
   return c.data;
 });
 
-console.log(data)
 
     return (
       <div>
@@ -182,10 +185,11 @@ console.log(data)
               <input
                 className={s.input_text}
                 name="name"
-                value={input.name}
+                value={input.name.toUpperCase()}
                 onChange={handleChange}
                 placeholder="Coupon's name"
               />
+              { error.name && (<p className={s.danger}>{error.name}</p>)}
             </div>
             <div className={s.input_container}>
               <input
@@ -216,7 +220,8 @@ console.log(data)
                 disabled={
                   !input.name ||
                   !input.count ||
-                  !input.discount
+                  !input.discount ||
+                  error.length>0
                 }
                 className={s.register_btn}
                 type="submit"
@@ -232,5 +237,11 @@ console.log(data)
     </div>
     )
 };
+
+const validate = input => {
+  let error = {};
+  if(!/^[a-zA-Z ]*$/.test(input.name))  error.name = "Coupon's name invalid! (Ex : GIFT)";
+  return error
+}
 
 export default CuponDash;

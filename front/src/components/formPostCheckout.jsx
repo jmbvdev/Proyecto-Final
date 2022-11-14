@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
+import Coinbase from "./Coinbase/Coinbase";
 
 function FormPostCheckout({
   items,
@@ -205,9 +206,12 @@ function FormPostCheckout({
             </div>
           )}
           {finish ? (
+            <>
             <div className={s.buttonMP}>
               <MercadoPago items={items} totalAmount={totalAmount} />
+              <Coinbase totalAmount={totalAmount} />
             </div>
+            </>
           ) : null}
         </div>
         <div className={s.resumeCart}>

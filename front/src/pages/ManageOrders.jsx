@@ -5,6 +5,8 @@ import { useTable, useSortBy, useGlobalFilter, useFilters } from "react-table";
 import { TableGlobalFilter } from "../components/TableGlobalFilter";
 import s from "../styles/adminNav.module.css";
 import Loading from "../components/Loading";
+import {IoIosArrowBack}from "react-icons/io"
+import { useNavigate } from "react-router-dom";
 
 export const COLUMNS = [
   {
@@ -47,6 +49,12 @@ export default function ManageOrders() {
   useEffect(() => {
     getAll();
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const getAll = () => {
     axios
@@ -109,6 +117,9 @@ export default function ManageOrders() {
     <div className={s.container}>
       {data.length ? (
         <>
+            <button onClick={handleBack} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
           <TableGlobalFilter
             filter={globalFilter}
             setFilter={setGlobalFilter}
