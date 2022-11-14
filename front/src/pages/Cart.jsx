@@ -50,7 +50,7 @@ const Cart = () => {
   function handleQuantity(id, value) {
     setQuantity((q) => q + value);
 
-    dispatch(changeQuantity(id, value, currentUser.uid));
+    dispatch(changeQuantity(id, value, currentUser?.uid));
 
     const cart = plants.map((p) => {
       if (p.id === id) {
@@ -62,7 +62,23 @@ const Cart = () => {
 
   function handleOnPurchase(e) {
     e.preventDefault();
-    if (!currentUser) navigate("/sign-in");
+    if (!currentUser) {
+      Swal.fire({
+        title: "Warning",
+        text: "You are not registered! Do you want to sign in?",
+        icon: "error",
+        showDenyButton: true,
+        denyButtonText: "No",
+        denyButtonColor: "#FF5733",
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#72CE65",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+      return;
+    }
     if (plants.length === 0) {
       Promise.resolve(
         Swal.fire({

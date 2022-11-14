@@ -9,6 +9,7 @@ import {
   CLEAR_DETAILS,
 } from "./actiontypes";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //faltan los .catch para manejar errores del lado del front
 
@@ -40,10 +41,24 @@ export const editProduct = (id, data) => {
         data
       )
       .then((res) => {
-        window.alert(
-          `The product with ID: ${res.data.id} has been ${res.data.message}`
-        );
         dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `The product has been updated`,
+          })
+        );
       });
   };
 };
@@ -55,8 +70,24 @@ export const DeleteProduct = (id) => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/delete`
       )
       .then((res) => {
-        window.alert(res.data.message);
         dispatch({ type: DELETE_PRODUCT, payload: id });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `The product has been deleted`,
+          })
+        );
       });
   };
 };

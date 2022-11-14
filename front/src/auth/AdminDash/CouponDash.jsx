@@ -62,10 +62,9 @@ const CuponDash = () => {
     });
   };
 
-
   const handleChange = (e) => {
     e.preventDefault();
-    setError(validate({...input, [e.target.name] : e.target.value}))
+    setError(validate({ ...input, [e.target.name]: e.target.value }));
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -172,7 +171,9 @@ const CuponDash = () => {
     ],
     []
   );
-
+  const data = coupons?.map((c) => {
+    return c.data;
+  });
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
       ...columns,
@@ -185,10 +186,6 @@ const CuponDash = () => {
       },
     ]);
   };
-
-
-
-  console.log(data);
 
   return (
     <div>
@@ -211,7 +208,7 @@ const CuponDash = () => {
                 onChange={handleChange}
                 placeholder="Coupon's name"
               />
-              { error.name && (<p className={s.danger}>{error.name}</p>)}
+              {error.name && <p className={s.danger}>{error.name}</p>}
             </div>
             <div className={s.input_container}>
               <input
@@ -243,7 +240,7 @@ const CuponDash = () => {
                   !input.name ||
                   !input.count ||
                   !input.discount ||
-                  error.length>0
+                  error.length > 0
                 }
                 className={s.register_btn}
                 type="submit"
@@ -259,12 +256,11 @@ const CuponDash = () => {
   );
 };
 
-
-const validate = input => {
+const validate = (input) => {
   let error = {};
-  if(!/^[a-zA-Z ]*$/.test(input.name))  error.name = "Coupon's name invalid! (Ex : GIFT)";
-  return error
-}
+  if (!/^[a-zA-Z ]*$/.test(input.name))
+    error.name = "Coupon's name invalid! (Ex : GIFT)";
+  return error;
+};
 
 export default CuponDash;
-

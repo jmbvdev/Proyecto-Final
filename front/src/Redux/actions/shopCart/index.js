@@ -7,7 +7,7 @@ import {
   PURCHASE,
   LOAD_CART,
   CLEAR_CART,
-  UPDATE_CART
+  UPDATE_CART,
 } from "../../actions/shopCart/actiontypes.js";
 import axios from "axios";
 
@@ -146,4 +146,4 @@ export const updateCart = (cart) => {
     type: UPDATE_CART,
     payload: cart,
   };
-}
+};

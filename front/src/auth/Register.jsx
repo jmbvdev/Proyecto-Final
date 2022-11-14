@@ -185,11 +185,8 @@ export default function Register() {
             <div>
               <button
                 disabled={
-                  !input.displayName ||
                   !input.email ||
-                  !input.password ||
-                  input.password !== password2 ||
-                  error.length>0
+                  !input.password
                 }
                 className={s.register_btn}
                 type="submit"

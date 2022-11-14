@@ -74,8 +74,25 @@ function FormPostCheckout({
 
   const handleFinish = (e) => {
     e.preventDefault();
-
-    setFinish(true);
+    if (!checked1 && !checked2) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "center-left",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: false,
+      });
+      Promise.resolve(
+        Toast.fire({
+          icon: "error",
+          title: `You have to choose one option!`,
+        })
+      );
+    } else setFinish(true);
   };
 
   let totalprod = 0;
@@ -132,15 +149,6 @@ function FormPostCheckout({
               />
               {valLet(inputs.adress) ? null : <span>Not valid</span>}
               <input
-                type="text"
-                name="name"
-                autoComplete="off"
-                placeholder="Who is receiving"
-                value={inputs.name}
-                onChange={handleOnChange}
-              />
-              {valLet(inputs.name) ? null : <span>Not valid</span>}
-              <input
                 name="adressNumber"
                 type="text"
                 autoComplete="off"
@@ -149,6 +157,16 @@ function FormPostCheckout({
                 onChange={handleOnChange}
               />
               {valN(inputs.adressNumber) ? null : <span>Not valid</span>}
+              <input
+                type="text"
+                name="name"
+                autoComplete="off"
+                placeholder="Who is receiving"
+                value={inputs.name}
+                onChange={handleOnChange}
+              />
+              {valLet(inputs.name) ? null : <span>Not valid</span>}
+
               <button
                 type="button"
                 disabled={
@@ -207,10 +225,10 @@ function FormPostCheckout({
           )}
           {finish ? (
             <>
-            <div className={s.buttonMP}>
-              <MercadoPago items={items} totalAmount={totalAmount} />
-              <Coinbase totalAmount={totalAmount} />
-            </div>
+              <div className={s.buttonMP}>
+                <MercadoPago items={items} totalAmount={totalAmount} />
+                <Coinbase totalAmount={totalAmount} />
+              </div>
             </>
           ) : null}
         </div>

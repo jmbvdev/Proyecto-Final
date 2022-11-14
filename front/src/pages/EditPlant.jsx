@@ -93,7 +93,7 @@ const EditPlant = () => {
     // console.log(id)
     if (fileReader && files && files.length > 0) {
       fileReader.readAsArrayBuffer(files[0]);
-      fileReader.onload = async function () {
+      fileReader.onload = async function() {
         const imageData = fileReader.result;
 
         const res = await setPlantImage(id, imageData);
@@ -138,7 +138,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
-    navigate(-2);
+    navigate("/plants");
   }
 
   const handleOnSubmitForMod = (e) => {
@@ -159,6 +159,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    navigate("/plants");
   };
 
   const handleCategories = (e) => {
@@ -228,8 +229,21 @@ const EditPlant = () => {
   };
 
   const handleDelete = () => {
-    dispatch(DeleteProduct(id));
-    navigate(-2);
+    Swal.fire({
+      title: "Warning",
+      text: "Are you sure you want to delete this plant?",
+      icon: "error",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        dispatch(DeleteProduct(id));
+        navigate("/plants");
+      }
+    });
   };
 
   return (
