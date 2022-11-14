@@ -3,14 +3,14 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-
+    caret-color: transparent;
     background-image: linear-gradient(#b4b2b2a7,rgba(206, 208, 206, 0.919)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
     
 }
 .profile{
     margin-top: 5rem;
-    width: 50%;
-    height: 450px;
+    width: 70%;
+    height: 500px;
     display: flex;
     border-radius: 12px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -23,6 +23,7 @@
     border: solid 5px #bdc5b8 ;
 }
 .specs{
+
     background-color: #3f4d1f;
     display: flex;
     flex-direction: column;
@@ -33,7 +34,7 @@
     text-align: left;
     width: 100%;
     gap: 20px;
-    padding: 50px;
+    padding: 10px;
     border-radius: 0px 12px 12px 0px;
 }
 .specs h2{
@@ -62,6 +63,7 @@
 }
 .calatea{
     border-radius: 12px 0px 0px 12px;
+  
 
 }
 .admin{
@@ -71,6 +73,8 @@
     align-items: center;
     justify-items:center ;
     margin-top: 20px;
+    cursor: pointer;
+
    
 
 
@@ -97,11 +101,14 @@
     align-items: center;
     justify-content: space-between;
     justify-items: center;
-    gap: 2rem;
+
 }
 .btn_container{
     display: flex;
-gap: 1rem;
+    justify-content: left;
+    align-items: center;
+
+gap: 20px;
 flex-wrap: wrap;
 }
 .back{
@@ -118,7 +125,7 @@ flex-wrap: wrap;
     align-items: center;
     cursor: pointer;
   }
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     .container{
         height: 150vh;
     }

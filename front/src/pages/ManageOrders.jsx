@@ -9,6 +9,8 @@ import DropdownFilter from '../componentsTable/DropdownFilter'
 import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
 import Swal from "sweetalert2";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export const COLUMNS = [
   {
@@ -66,6 +68,7 @@ export default function ManageOrders() {
   const [order, setOrder] = useState(''); // "order" es el id de la orden
   const [allUsers, setAllusers] = useState([]);
   const [auxOrders, setAuxOrders] = useState([]);
+  const navigate= useNavigate()
   //console.log("luego de declarar order", order)
 
 
@@ -232,6 +235,12 @@ export default function ManageOrders() {
 
   return (
     <div className={s.container}>
+           <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       {data.length ? (
         <div>
           <>

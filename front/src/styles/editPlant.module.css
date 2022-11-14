@@ -57,6 +57,9 @@ border-radius: 12px;
 .form{
     width: 60%;
 }
+.form h4{
+    caret-color: transparent;
+}
 .input_text{
     font-family: "Inter";
     width: 100%;
@@ -208,6 +211,23 @@ cursor: pointer;
   }
   .delete_btn:hover{
     background-color: rgb(225, 100, 33)
+  }
+  .button_container{
+    width: min-content;
+    position: absolute;
+    left: 15px;
+  top: 8rem;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
   @media (max-width: 768px) {
     .wraper{

@@ -7,7 +7,7 @@ import image from "../images/planterGirl.webp"
 
 const FAQ = () => {
     const data = {
-        title: "Frequently asked question",
+        title: "Frequently Asked Question",
         rows: [
             {
                 title: "I don't get much light, what plant do you recommend?",

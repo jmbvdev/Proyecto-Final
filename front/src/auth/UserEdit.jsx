@@ -13,10 +13,13 @@ import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { GiPhone } from "react-icons/gi";
+import {MdLocationSearching}from "react-icons/md"
+import {MdLocationCity, MdLocationOn}from "react-icons/md"
 import { setCurrentUser } from "../Redux/actions/users/index.js";
 import ForgotenPassword from "./forgotenPassword";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { IoIosArrowBack } from "react-icons/io";
 
 const UserEdit = () => {
   const initialState = {
@@ -136,6 +139,12 @@ const UserEdit = () => {
 
   return (
     <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.profile}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
           <div className={s.input_label}>
@@ -168,7 +177,7 @@ const UserEdit = () => {
           <div className={s.input_label}>
             <p className={s.name_input}>City</p>
             <div className={s.input_container}>
-              <BiUser className={s.user_icon} />
+              <MdLocationSearching className={s.user_icon} />
               <input
                 name="city"
                 value={input.city}
@@ -183,7 +192,7 @@ const UserEdit = () => {
             <p className={s.name_input}>Adress</p>
 
             <div className={s.input_container}>
-              <RiLockPasswordFill className={s.user_icon} />
+              <MdLocationOn className={s.user_icon} />
               <input
                 name="adress"
                 value={input.adress}
@@ -196,7 +205,7 @@ const UserEdit = () => {
             </div>
           </div>
           <div className={s.input_container}>
-            <RiLockPasswordLine className={s.user_icon} />
+            <MdLocationCity className={s.user_icon} />
             <input
               name="adressNumber"
               value={input.adressNumber}
