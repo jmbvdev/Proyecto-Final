@@ -11,8 +11,7 @@ import DropdownFilter from '../componentsTable/DropdownFilter'
 import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
 import Swal from "sweetalert2";
-import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+
 
 export const COLUMNS = [
   {
@@ -78,7 +77,7 @@ export default function ManageOrders() {
     getAll();
   }, []);
 
-  const navigate = useNavigate();
+
 
   const handleBack = () => {
     navigate(-1);

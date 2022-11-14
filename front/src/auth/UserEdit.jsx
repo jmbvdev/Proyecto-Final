@@ -11,7 +11,6 @@ import { useRef } from "react";
 import s from "../styles/userEdit.module.css";
 import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
-import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { GiPhone } from "react-icons/gi";
 import {MdLocationSearching}from "react-icons/md"
 import {MdLocationCity, MdLocationOn}from "react-icons/md"
@@ -20,7 +19,7 @@ import ForgotenPassword from "./forgotenPassword";
 import axios from "axios";
 import {IoIosArrowBack}from "react-icons/io"
 import Swal from "sweetalert2";
-import { IoIosArrowBack } from "react-icons/io";
+
 
 
 const UserEdit = () => {
