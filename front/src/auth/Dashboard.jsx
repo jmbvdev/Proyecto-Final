@@ -31,6 +31,11 @@ const Dashboard = () => {
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
           <img
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src =
+                "https://www.rdssistemas.com.ar/wp-content/uploads/2020/11/user4-400x400.png";
+            }}
             src={user?.photoURL}
             alt={user?.displayName}
             className={s.profile_pic}

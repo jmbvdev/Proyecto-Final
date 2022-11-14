@@ -96,7 +96,15 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
           {user ? (
             <div className="user">
               <div className="user_name">
-                <img src={auth.currentUser?.photoURL} alt="Not found" />
+                <img
+                  src={auth.currentUser?.photoURL}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src =
+                      "https://www.rdssistemas.com.ar/wp-content/uploads/2020/11/user4-400x400.png";
+                  }}
+                  alt="Not found"
+                />
                 <Link to="/dashboard">
                   {auth.currentUser?.displayName?.split(" ")[0] || "Set Name"}
                 </Link>

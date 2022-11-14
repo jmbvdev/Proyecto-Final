@@ -77,7 +77,7 @@ function FormPostCheckout({
     if (!checked1 && !checked2) {
       const Toast = Swal.mixin({
         toast: true,
-        position: "center-left",
+        position: "center-center",
         iconColor: "white",
         customClass: {
           popup: "colored-toast",
