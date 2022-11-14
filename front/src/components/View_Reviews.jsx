@@ -7,12 +7,12 @@ import axios from "axios";
 import s from "../styles/review.module.css";
 import Swal from "sweetalert2";
 
-function View_Reviews({ view, setView, user, userUID, comentid }) {
+function View_Reviews({ view, setView, user, userUID, comentid,  setOpenReview }) {
   const navigate = useNavigate();
 
   function handleDeleteButton(comentid, userUID) {
     Swal.fire({
-      title: "Warning",
+      title: "Eh",
       text: "Are you sure you want to delete this comment?",
       icon: "question",
       showDenyButton: true,
@@ -20,22 +20,29 @@ function View_Reviews({ view, setView, user, userUID, comentid }) {
       denyButtonColor: "#72CE65",
       confirmButtonText: "Delete",
       confirmButtonColor: "#FF5733",
+
     }).then((res) => {
-      if (userUID === user)
-        axios
-          .delete(
-            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${comentid}`
-          )
-          .then((res) => {
-            Swal.fire({
-              title: "Success",
-              text: "Your comment has been deleted",
-              icon: "success",
-              confirmButtonText: "ok",
-              confirmButtonColor: "rgb(9, 102, 74)",
+      if (res.isConfirmed) {
+
+        if (userUID === user)
+          axios
+            .delete(
+              `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${comentid}`
+            )
+            .then((res) => {
+              Swal.fire({
+                title: "Success",
+                text: "Your comment has been deleted",
+                icon: "success",
+                confirmButtonText: "ok",
+                confirmButtonColor: "rgb(9, 102, 74)"
+              }).then( setOpenReview(false))
             });
-          });
-      setView(view.filter((e) => e.data.userUID !== user));
+            setView(view.filter((e) => e.data.userUID !== user));
+      }
+      else if(res.isDenied){
+        setOpenReview(false)
+      }
 
       if (userUID !== user) {
         Swal.fire({

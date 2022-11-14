@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
-import { GiTable } from "react-icons/gi";
+import { GiLindenLeaf, GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
 import { FaComment, FaCommentDots, FaDog } from "react-icons/fa";
+import {SiThymeleaf}from "react-icons/si"
 import s from "../styles/details.module.css";
 import { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
+import {RiEdit2Fill } from "react-icons/ri";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
@@ -20,6 +21,7 @@ import View_Reviews from "../components/View_Reviews";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import MoreSizes from "../components/MoreSizes";
+import { IoIosArrowBack } from "react-icons/io";
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ const PlantsDetails = () => {
     bgcolor: "transparent",
     border: "none",
     p: 4,
+ 
   };
 
   useEffect(() => {
@@ -101,6 +104,8 @@ const PlantsDetails = () => {
       denyButtonColor: "rgba(11, 115, 147, 0.713)",
       confirmButtonText: "ok",
       confirmButtonColor: "rgb(9, 102, 74)",
+     
+
     }).then((res) => {
       if (res.isDenied) {
         navigate("/cart");
@@ -180,6 +185,11 @@ const PlantsDetails = () => {
   const handleCloseReview = () => setOpenReview(false);
   return plant?.name ? (
     <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+          </div>
       <img src={plant?.image} alt="" />
       <div className={s.details}>
         <h1>{plant?.name} </h1>
@@ -209,6 +219,15 @@ const PlantsDetails = () => {
                 </div>
               );
             })}
+            <div className={s.place}>
+              {
+                plant?.place && plant?.place ==="indoor"?
+                <SiThymeleaf className={s.place_icon}/>:
+                <GiLindenLeaf className={s.place_icon}/>
+              }
+              <span>{plant?.place.toUpperCase()}</span>
+
+            </div>
         </div>
         {plant?.small || plant?.medium || plant?.large ? (
           <MoreSizes
@@ -221,6 +240,10 @@ const PlantsDetails = () => {
           <div>
             <h4>Price</h4>
             <h3>$ {plant?.price}</h3>
+          </div>
+          <div>
+            <h4>Stock</h4>
+            <span>{plant?.stock}</span>
           </div>
           <div className={s.quantity}>
             <button
@@ -251,7 +274,7 @@ const PlantsDetails = () => {
             <div className={s.edit_btn}>
               <h4>Edit</h4>
               <button onClick={handleEdit}>
-                <FaRegEdit />
+                <RiEdit2Fill />
               </button>
             </div>
           )}
@@ -260,7 +283,6 @@ const PlantsDetails = () => {
           <h4>Add a review</h4>
 
           <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
-        </div>
         <div>
           {currentUser ? (
             <div className={s.favorites}>
@@ -272,6 +294,7 @@ const PlantsDetails = () => {
               Sign in to leave a review
             </button>
           )}
+        </div>
         </div>
 
         {cart.findIndex((e) => e.id === id) !== -1 && (
@@ -310,6 +333,7 @@ const PlantsDetails = () => {
           >
             <Box sx={styleReview}>
               <View_Reviews
+              setOpenReview={setOpenReview}
                 view={view}
                 user={currentUser?.uid}
                 setView={setView}
