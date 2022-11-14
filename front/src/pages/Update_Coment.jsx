@@ -88,7 +88,7 @@ const Update_Coment = ({ }) => {
         denyButtonText: "Cancel",
         denyButtonColor: "#FF5733",
         confirmButtonText: "yes, Update",
-        confirmButtonColor: "#8acfa9",
+        confirmButtonColor: "rgba(11, 115, 147, 0.713)",
 
       })
         .then((result) => {

@@ -62,7 +62,13 @@ const Cart = () => {
 
   function handleOnPurchase(e) {
     e.preventDefault();
-    if (!currentUser) navigate("/sign-in");
+    if (!currentUser) {
+     return Swal.fire("You must log in")
+    
+     .then(()=>{navigate("/sign-in")});
+    }
+      
+
     if (plants.length === 0) {
       Promise.resolve(
         Swal.fire({
