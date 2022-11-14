@@ -12,6 +12,7 @@ import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
 import Swal from "sweetalert2";
 
+
 export const COLUMNS = [
   {
     Header: "Date",
@@ -68,6 +69,7 @@ export default function ManageOrders() {
   const [order, setOrder] = useState(''); // "order" es el id de la orden
   const [allUsers, setAllusers] = useState([]);
   const [auxOrders, setAuxOrders] = useState([]);
+  const navigate= useNavigate()
   //console.log("luego de declarar order", order)
 
 
@@ -75,11 +77,8 @@ export default function ManageOrders() {
     getAll();
   }, []);
 
-  const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1);
-  };
+
 
   const getAll = () => {
 
@@ -240,12 +239,15 @@ export default function ManageOrders() {
 
   return (
     <div className={s.container}>
+           <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       {data.length ? (
         <div>
           <>
-            <button onClick={handleBack} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
             <TableGlobalFilter
               filter={globalFilter}
               setFilter={setGlobalFilter}

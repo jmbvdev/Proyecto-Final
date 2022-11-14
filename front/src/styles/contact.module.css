@@ -62,7 +62,7 @@
   
     width: 100%;
     background:#fff;
-    background-image: linear-gradient(270deg, rgba(211, 238, 237, 0.717) 31%, rgba(215, 202, 161, 0.7) 69%), url("https://sublimelistings.com/wp-content/uploads/2016/11/background-contact-form-02.jpg");
+    background-image: linear-gradient(90deg, rgba(252, 255, 255, 0.717) 31%, rgba(239, 239, 239, 0.846) 69%), url("https://sublimelistings.com/wp-content/uploads/2016/11/background-contact-form-02.jpg");
 }
 
 .form{
