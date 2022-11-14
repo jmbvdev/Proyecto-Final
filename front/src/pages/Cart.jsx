@@ -7,6 +7,7 @@ import empty from "../images/cart.webp";
 import Swal from "sweetalert2";
 import Coupon from "../components/Coupon";
 import FormPostCheckout from "../components/formPostCheckout";
+import FavButton from "../components/FavButton";
 
 import {
   changeQuantity,
@@ -168,6 +169,7 @@ const Cart = () => {
                   <div className={s.total}>
                     <h3>${p.price * p.count}</h3>
                     <div className={s.total_btn}>
+                      <FavButton id={p.id} user={currentUser?.uid} />
                       <button className={s.heart_icon}>
                         <FaHeart />
                       </button>

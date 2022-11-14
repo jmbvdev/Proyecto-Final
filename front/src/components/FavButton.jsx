@@ -5,9 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 export default function FavButton({ id, user, iamInFavPage, icon }) {
-
   const navigate = useNavigate();
   function handleFav(e) {
     e.preventDefault();
@@ -22,7 +20,9 @@ export default function FavButton({ id, user, iamInFavPage, icon }) {
         confirmButtonText: "Sign In",
         confirmButtonColor: "rgb(9, 102, 74)",
       }).then((res) => {
-        navigate("/sign-in");
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
       });
     }
     if (iamInFavPage) {
@@ -37,8 +37,7 @@ export default function FavButton({ id, user, iamInFavPage, icon }) {
             icon: "success",
             confirmButtonText: "ok",
             confirmButtonColor: "rgb(9, 102, 74)",
-          })
-         
+          });
         });
     }
     axios
@@ -53,16 +52,13 @@ export default function FavButton({ id, user, iamInFavPage, icon }) {
           icon: "success",
           confirmButtonText: "ok",
           confirmButtonColor: "rgb(9, 102, 74)",
-        })
-     
+        });
       });
   }
 
   return (
     <button onClick={handleFav}>
-
       {icon || <AiFillHeart className={s.hearth} />}
-
     </button>
   );
 }

@@ -21,6 +21,33 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const plants = useSelector((state) => state.shopCartReducer.products);
   const user = useSelector((state) => state.usersReducer.currentUser);
 
+  const handleFavs = (e) => {
+    e.preventDefault();
+    if (user) {
+      navigate("/favorites");
+    } else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: true,
+        timer: 5000,
+        timerProgressBar: true,
+      });
+      Toast.fire({
+        icon: "error",
+        title: `You are not loged. Do you want to sign in?`,
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+    }
+  };
+
   const signOutHandler = () => {
     Swal.fire({
       title: "Warning",
@@ -105,9 +132,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
                   }}
                   alt="Not found"
                 />
-                <Link to="/dashboard">
-                  {user?.displayName?.split(" ")[0] || "Set Name"}
-                </Link>
+                <Link to="/dashboard">{user?.displayName?.split(" ")[0]}</Link>
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
                 <FiLogIn className="login-icon" /> Sign out{" "}
@@ -122,10 +147,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             </button>
           )}
 
-          <FiHeart
-            className="favorite-icon"
-            onClick={() => navigate("/favorites")}
-          />
+          <FiHeart className="favorite-icon" onClick={handleFavs} />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
             <HiOutlineShoppingBag className="bag-icon" />
