@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 import axios from "axios";
 import CardComent from "../components/CardComment";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Update_Coment = ({}) => {
   const Navigate = useNavigate();
@@ -16,6 +17,7 @@ const Update_Coment = ({}) => {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const [view, setView] = useState([]);
   const [value, setValue] = useState(0);
+  const navigate= useNavigate()
   const [update, setUpdate] = useState({
     star: "",
     comentspositive: [],
@@ -121,6 +123,14 @@ const Update_Coment = ({}) => {
   return (
     <div>
       <div className={s.container}>
+      <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
+          <div className={s.wraper}>
+
         <form className={s.form}>
           <h2>Update Your Comment</h2>
           <div>
@@ -191,6 +201,8 @@ const Update_Coment = ({}) => {
           />
         ) : null}
       </div>
+          </div>
+
     </div>
   );
 };
