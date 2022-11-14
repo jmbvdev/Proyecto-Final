@@ -9,7 +9,8 @@
 }
 .container img{
     width: 400px;
-    min-width: 340px;
+    min-width: 335px;
+    max-height: 550px;
     caret-color: transparent;
 
 }
@@ -20,7 +21,7 @@
    flex-direction: column;
    justify-content: left;
    text-align: left;
-   gap: 1.5rem;
+   gap: 1rem;
    caret-color: transparent;
 }
 .details h1{
@@ -31,7 +32,7 @@
 }
 .details h4{
     font-family: "Lora", sans-serif;
-    margin-bottom: 10px;
+
 }
 .details p{
 
@@ -161,31 +162,67 @@ font-weight:bold ;
     position: relative;
     right: 30px;
     cursor: pointer;
-    color:rgba(8, 57, 42, 0.713) ;
+    color:rgba(9, 102, 74, 0.713) ;
     font-size: 30px;
 }
 .reviews_container{
     display: flex;
-    gap: 10px;
-    justify-content: flex-start;
-    align-items: left;
-    justify-items: center;
-    align-content: center;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 270px;
   caret-color: transparent;
 }
 .reviews_container h4{
     display: block;
+    width: 90px;
    
 }
 .star{
-    font-size: 2rem;
+    font-size: 50px;
     color:rgba(9, 102, 74, 0.713) ;
-    position: relative;
-    bottom: 7px;
     cursor: pointer;
 }
 .star:hover{
     color:rgba(9, 87, 64, 0.713) ;
+}
+.place{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.place span{
+    font-size: 12px;
+font-weight:bold ;
+    font-family: "Dosis";
+
+}
+.place_icon{
+    font-size: 30px;
+}
+.size_btn{
+    display: flex;
+    gap: 1rem;
+    justify-content: left;
+    align-items: center;
+}
+.size_button{
+    border: 2px solid rgba(9, 102, 74, 0.713);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight:bold ;
+        font-family: "Dosis";
+        cursor: pointer;
+        color: rgba(9, 102, 74, 0.713);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.size_button:hover{
+    background-color: rgba(9, 102, 74, 0.713);
+    color: #fff;
 }
 @media (max-width: 768px) {
     .container{
