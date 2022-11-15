@@ -13,6 +13,7 @@ import { setCurrentUser } from "../Redux/actions/users/index";
 import { cleanCartAfterLogOut } from "../Redux/actions/shopCart/index";
 import Swal from "sweetalert2";
 import { GiHamburgerMenu } from "react-icons/gi";
+import avatar from "../images/avatar 1.gif"
 
 const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
@@ -123,16 +124,17 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
           {user ? (
             <div className="user">
               <div className="user_name">
-                <img
-                  src={user?.photoURL}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src =
-                      "https://www.rdssistemas.com.ar/wp-content/uploads/2020/11/user4-400x400.png";
-                  }}
-                  alt="Not found"
-                />
-                <Link to="/dashboard">{user?.displayName?.split(" ")[0]}</Link>
+
+                <img src={user?.photoURL || avatar} 
+                onError ={({currentTarget})=> {
+                  currentTarget.onerror=null;
+                  currentTarget.src= "https://i.stack.imgur.com/4powQ.gif"
+                }}
+                 alt ="Not Found" />
+                <Link to="/dashboard">
+                  {user?.displayName?.split(" ")[0] }
+                </Link>
+
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
                 <FiLogIn className="login-icon" /> Sign out{" "}

@@ -17,6 +17,7 @@ function Coupon({ setDiscount }) {
       .then((res) => {
         if (res.data?.discount) {
           setDiscount(res.data.discount);
+
         } else {
           const Toast = Swal.mixin({
             toast: true,
@@ -36,6 +37,7 @@ function Coupon({ setDiscount }) {
             })
           );
         }
+
       });
   }
 

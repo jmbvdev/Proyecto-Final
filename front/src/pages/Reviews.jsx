@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import s from "../styles/create.module.css";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-// import { validateComent } from "../Util/validateComent";
 import axios from "axios";
 import { setCurrentUser } from "../Redux/actions/users";
 import { auth } from "../firebase/firebase";
@@ -11,6 +10,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
+import avatar from "../images/avatar 1.gif"
 
 const Reviews = ({ setView, close }) => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Reviews = ({ setView, close }) => {
   const [coments, setComents] = useState({
     userUID: user?.uid,
     userName: user?.displayName,
-    userImg: user?.photoURL,
+    userImg: user?.photoURL, 
     star: "",
     plantsUID: id,
     comentspositive: [],
@@ -53,12 +53,7 @@ const Reviews = ({ setView, close }) => {
           ...coments,
           comentspositive: [e.target.value],
         });
-      // setError(
-      //     validateComent({
-      //         ...coments,
-      //         comentspositive: [e.target.value],
-      //     })
-      // );
+
     }
   };
 
@@ -71,12 +66,7 @@ const Reviews = ({ setView, close }) => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    // let response = await axios.post(
-    //     "http://localhost:5000/api-plants-b6153/us-central1/app/coments/coment",
-    //     // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
-    //     coments
-    // );
-    // alert("Comments created")
+
     if (!coments.comentspositive.length || !coments.star) {
       // Swal.fire("Missing Data");
       Swal.fire({
@@ -121,7 +111,12 @@ const Reviews = ({ setView, close }) => {
     <div className={s.container}>
       <form className={s.form}>
         <h2>Leave Your Comment</h2>
-        <img src={user?.photoURL} className={s.userPic} alt="do not pose" />
+        <img src={user?.photoURL ||avatar}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = "https://i.stack.imgur.com/4powQ.gif"
+          }}
+          className={s.userPic} alt="do not pose" />
         <h3>{user?.displayName}</h3>
 
         <div>

@@ -198,6 +198,24 @@ cursor: pointer;
     color:rgba(255, 255, 255, 0.625);
     cursor: pointer;
 }
+.button_container{
+    width: min-content;
+    position: absolute;
+    left: 15px;
+  top: 8rem;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
 @media (max-width: 768px) {
     .wraper{
         width: 90%;
