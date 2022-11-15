@@ -65,12 +65,10 @@ const OrdersCard = (props) => {
                         price: result[0].price,
                         stock: result[0].stock,
                     }
-
-
                 } else {
+                    let result = []
                     let aux = []
                     cart.forEach((product) => {
-
                         auxCart.forEach(item => {
                             if (product.id === item.id) {
                                 aux.push({
@@ -105,7 +103,7 @@ const OrdersCard = (props) => {
                         allProducts.forEach((product) => {
                             if (item.id === product.id) {
                                 if (item.count > product.data.stock) {
-                                    a.push({
+                                    result.push({
                                         ...item,
                                         count: product.data.stock,
                                         stock: product.data.stock,
@@ -115,7 +113,7 @@ const OrdersCard = (props) => {
                                         count: product.data.stock
                                     })
                                 } else {
-                                    a.push({
+                                    result.push({
                                         ...item,
                                         stock: product.data.stock,
                                     });
@@ -123,6 +121,15 @@ const OrdersCard = (props) => {
                             }
                         })
                     })
+                    a = [...result]
+                    a[0] = {
+                        count: result[0].count,
+                        id: result[0].id,
+                        image: result[0].image,
+                        name: result[0].name,
+                        price: result[0].price,
+                        stock: result[0].stock,
+                    }
                 }
 
                 console.log("a", a)
