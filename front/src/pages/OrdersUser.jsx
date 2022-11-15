@@ -32,7 +32,7 @@ const OrdersUser = () => {
           return {
             state: item.data?.state,
             userID: item.data?.userID,
-            // orderid: item?.orderid,
+            orderid: item?.orderid,
             date: item.data?.date,
             data: item.data?.cart,
           };
@@ -155,7 +155,7 @@ const OrdersUser = () => {
           <div className={s.favorite_list} >
             {state.map((ord, i) => (
               <OrdersCard
-                // orderid={ord?.orderid}
+                orderid={ord?.orderid}
                 state={ord?.state}
                 userID={ord?.userID}
                 date={ord?.date}
