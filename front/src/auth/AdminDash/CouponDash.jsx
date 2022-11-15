@@ -168,7 +168,7 @@ const CuponDash = () => {
     }).then(res => {
       if(res.isConfirmed){
         axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
-        .then(res => {
+        
           const Toast = Swal.mixin({
             toast: true,
             position: "top-right",
@@ -186,9 +186,9 @@ const CuponDash = () => {
             title: `Coupon succesfully deleted!`,
          })
         );
-        return
-        });
         setCoupons(coupons.filter(c => c.data.name !== name))      
+        return
+        
       }
       else {
         const Toast = Swal.mixin({
