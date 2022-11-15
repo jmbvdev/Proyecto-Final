@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct } from "../Redux/actions/products/index";
+import { clearDetails, createProduct } from "../Redux/actions/products/index";
 import { validate } from "../Util/validate";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import {IoIosArrowBack}from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -77,9 +77,10 @@ const CreatePlant = () => {
     console.log(id);
     if (fileReader && files && files.length > 0) {
       fileReader.readAsArrayBuffer(files[0]);
-      fileReader.onload = async function () {
+      fileReader.onload = async function() {
         const imageData = fileReader.result;
         // setImage(imageData)
+        Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
         const res = await setPlantImage(id, imageData);
         console.log(res);
         const url = await getPictureUrl(id);
@@ -142,7 +143,19 @@ const CreatePlant = () => {
       logicalDeletion: input.logicalDeletion,
     };
     dispatch(createProduct(product));
-    alert("Create");
+    setInput({
+      categories: [],
+      details: "",
+      name: "",
+      price: 0,
+      size: [],
+      stock: 0,
+      type: "plant",
+      logicalDeletion: false,
+    })
+    setImage("")
+    Swal.fire('Product created', '', 'info')
+    dispatch(clearDetails());
   }
 
   const handleCategories = (e) => {
@@ -238,11 +251,11 @@ const CreatePlant = () => {
 
   return (
     <div className={s.container}>
-          <div className={s.button_container}>
-            <button onClick={handleBack} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
-          </div>
+      <div className={s.button_container}>
+        <button onClick={handleBack} className={s.back}>
+          <IoIosArrowBack />
+        </button>
+      </div>
       <div className={s.wraper}>
         <div className={s.left}>
           <form onSubmit={handleOnSubmit} className={s.form}>
@@ -266,6 +279,7 @@ const CreatePlant = () => {
               <input
                 type="text"
                 name="name"
+                value={input.name}
                 placeholder="name"
                 autoComplete="off"
                 className={s.input_text}
@@ -278,6 +292,7 @@ const CreatePlant = () => {
               <input
                 type="text"
                 name="details"
+                value={input.details}
                 autoComplete="off"
                 placeholder="details"
                 className={s.input_text}
@@ -300,6 +315,7 @@ const CreatePlant = () => {
               <input
                 type="number"
                 name="price"
+                value={input.price}
                 placeholder="price"
                 className={s.input_text}
                 onChange={handlePrice}
@@ -313,6 +329,7 @@ const CreatePlant = () => {
               <input
                 type="number"
                 name="stock"
+                value={input.stock}
                 placeholder="stock"
                 className={s.input_text}
                 onChange={handleStock}

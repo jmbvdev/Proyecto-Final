@@ -1,24 +1,25 @@
 import {
   SAVE_CART,
   ADD_PRODUCT,
-  DELETE_PRODUCT,
+  DELETE_PRODUCT_SHOP,
   CHANGE_QUANTITY,
   DELETE_ALL,
   PURCHASE,
   LOAD_CART,
   CLEAR_CART,
-  UPDATE_CART
+  UPDATE_CART,
 } from "../../actions/shopCart/actiontypes.js";
 import axios from "axios";
 
 export const saveCart = (cart, currentUserID) => {
   return async (dispatch) => {
-    await axios.post(
+    let response = await axios.post(
       `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUserID}`,
       { cart: cart }
     );
     localStorage.clear();
-    return dispatch({ type: SAVE_CART });
+
+    return dispatch({ type: SAVE_CART, payload: response.data });
   };
 };
 
@@ -31,10 +32,10 @@ export const addProduct = (product, n) => {
   };
 };
 
-export const deleteProduct = (id) => {
+export const deleteProductShop = (id) => {
   localStorage.removeItem(id);
   return {
-    type: DELETE_PRODUCT,
+    type: DELETE_PRODUCT_SHOP,
     payload: id,
   };
 };
@@ -146,4 +147,4 @@ export const updateCart = (cart) => {
     type: UPDATE_CART,
     payload: cart,
   };
-}
+};

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { BiReset } from 'react-icons/bi'
 import { RiSearchLine } from 'react-icons/ri'
 import { useAsyncDebounce } from 'react-table'
-import s from "../styles/tableGlobal.module.css"
+import s from "../styles/adminNav.module.css"
 
 export const TableGlobalFilter = ({ filter, setFilter }) => {
   const [value, setValue] = useState(filter)
@@ -13,6 +14,7 @@ export const TableGlobalFilter = ({ filter, setFilter }) => {
     setFilter(undefined)
   }
   return (
+    <div className={s.input_container}>
     <div className={s.search}>
       <input
         value={value || ''}
@@ -22,7 +24,16 @@ export const TableGlobalFilter = ({ filter, setFilter }) => {
         }}
       />
       <button><RiSearchLine /></button>
-      <button onClick={handleReset}>RESET</button>
+    </div>
+    <div className={s.reset_container}>
+
+    <BiReset
+              onClick={handleReset}
+              className={s.reset}
+            />
+            <span>RESET</span>
+    </div>
+     
     </div>
 
   )

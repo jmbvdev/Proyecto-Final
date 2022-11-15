@@ -2,7 +2,7 @@ import React from 'react';
 import s from "../styles/contact.module.css"
 import image from "../images/girlPhone.webp"
 import logo from "../images/logo-sinfondo.png"
-
+import indoor from "../images/indoor.webp"
 import { FiMail } from 'react-icons/fi';
 import { HiOutlinePhone } from 'react-icons/hi';
 import { MdOutlineLocationOn } from 'react-icons/md';
@@ -13,7 +13,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 const Contact = () => {
     return (
         <div className={s.container}>
-            <header className={s.banner}   >
+            <header className={s.banner} >
                 <ScrollAnimation animateIn="fadeIn" animateOnce={true}  className={s.contact} >
                 <div className={s.contact}>
                 <img src={logo} alt="girl" />

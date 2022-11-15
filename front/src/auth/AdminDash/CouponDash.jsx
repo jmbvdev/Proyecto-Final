@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import GlobalFilter from "./GlobalFilter";
 import Loading from "../../components/Loading";
 import Swal from "sweetalert2";
-
 const CuponDash = () => {
 
   const initialState = {
@@ -99,12 +98,10 @@ const CuponDash = () => {
 
   };
 
-  
-  
 
   const handleChange = (e) => {
     e.preventDefault();
-    setError(validate({...input, [e.target.name] : e.target.value}))
+    setError(validate({ ...input, [e.target.name]: e.target.value }));
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -229,6 +226,7 @@ const CuponDash = () => {
     {
         Header: 'Info',
         columns: [
+
                     {
                       Header: 'Disount',
                       accessor: 'discount'
@@ -258,6 +256,7 @@ const data = coupons?.map(c => {
     return (
       <div>
         <div className={s.container}>
+
         <div className={s.button_container}>
             <button onClick={handleBack} className={s.back}>
               <IoIosArrowBack/>
@@ -280,7 +279,7 @@ const data = coupons?.map(c => {
                 onChange={handleChange}
                 placeholder="Coupon's name"
               />
-              { error.name && (<p className={s.danger}>{error.name}</p>)}
+              {error.name && <p className={s.danger}>{error.name}</p>}
             </div>
             {/* <div className={s.input_container}>
               <input
@@ -311,7 +310,7 @@ const data = coupons?.map(c => {
                 disabled={
                   !input.name ||
                   !input.discount ||
-                  error.length>0
+                  error.length > 0
                 }
                 className={s.register_btn}
                 type="submit"
@@ -328,10 +327,15 @@ const data = coupons?.map(c => {
     )
 };
 
+
 const validate = input => {
+
   let error = {};
-  if(!/^[a-zA-Z ]*$/.test(input.name))  error.name = "Coupon's name invalid! (Ex : GIFT)";
-  return error
-}
+  if (!/^[a-zA-Z ]*$/.test(input.name))
+    error.name = "Coupon's name invalid! (Ex : GIFT)";
+  return error;
+};
+
 
 export default CuponDash;
+

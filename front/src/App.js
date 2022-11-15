@@ -67,7 +67,7 @@ function App() {
           dispatch(
             setCurrentUser({
               ...authenticatedUser,
-              role: role.claims.role || "user",
+              role: role.claims.role || ["user"],
               adress: role.claims.adress || "",
               adressNumber: role.claims.adressNumber || "",
               city: role.claims.city || "",

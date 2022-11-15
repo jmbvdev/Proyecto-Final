@@ -11,6 +11,7 @@ import DropdownFilter from '../componentsTable/DropdownFilter'
 import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
 import Swal from "sweetalert2";
+import {GrFormNext, GrFormPrevious, GrNext, GrPrevious} from "react-icons/gr"
 
 export const COLUMNS = [
   {
@@ -68,6 +69,7 @@ export default function ManageOrders() {
   const [order, setOrder] = useState(''); // "order" es el id de la orden
   const [allUsers, setAllusers] = useState([]);
   const [auxOrders, setAuxOrders] = useState([]);
+  const navigate= useNavigate()
   //console.log("luego de declarar order", order)
 
 
@@ -75,17 +77,15 @@ export default function ManageOrders() {
     getAll();
   }, []);
 
-  const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1);
-  };
+
 
   const getAll = () => {
 
     axios
       .get(
-        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/all"
+        // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/all"
+        "http://localhost:5000/api-plants-b6153/us-central1/app/orders/all"
       )
       .then((res) => {
         setAuxOrders(res.data);
@@ -98,7 +98,6 @@ export default function ManageOrders() {
       .then((response) => {
         setAllusers(response.data)
       });
-
 
   };
 
@@ -240,17 +239,20 @@ export default function ManageOrders() {
 
   return (
     <div className={s.container}>
+           <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       {data.length ? (
         <div>
           <>
-            <button onClick={handleBack} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
             <TableGlobalFilter
               filter={globalFilter}
               setFilter={setGlobalFilter}
             />
-            <div>
+            <div className={s.order}>
               <select
                 value={pageSize}
                 onChange={e => setPageSize(Number(e.target.value))}>
@@ -260,14 +262,14 @@ export default function ManageOrders() {
                   </option>
                 ))}
               </select>
-              <span>
-                Page{' '}
+              <div className={s.pages}>
+              <button onClick={() => previousPage()} disabled={!canPreviousPage} className={s.pages_icon}> <GrFormPrevious className={s.arrow}/></button>
                 <strong>
                   {pageIndex + 1} of {pageOptions.length}
                 </strong>{' '}
-              </span>
-              <button onClick={() => previousPage()} disabled={!canPreviousPage}>PREV</button>
-              <button onClick={() => nextPage()} disabled={!canNextPage}>NEXT</button>
+              <button onClick={() => nextPage()} disabled={!canNextPage} className={s.pages_icon}><GrFormNext className={s.arrow} /></button>
+
+              </div>
             </div>
             <table {...getTableProps()}>
               <thead>

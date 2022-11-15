@@ -1,13 +1,13 @@
 import {
   SAVE_CART,
   ADD_PRODUCT,
-  DELETE_PRODUCT,
+  DELETE_PRODUCT_SHOP,
   CHANGE_QUANTITY,
   DELETE_ALL,
   PURCHASE,
   LOAD_CART,
   CLEAR_CART,
-  UPDATE_CART
+  UPDATE_CART,
 } from "../../actions/shopCart/actiontypes.js";
 
 /* 
@@ -39,7 +39,7 @@ export default function shopCartReducer(state = initialState, action) {
       ],
     };
   }
-  if (action.type === DELETE_PRODUCT) {
+  if (action.type === DELETE_PRODUCT_SHOP) {
     return {
       products: state.products.filter((p) => {
         return p.id !== action.payload;
@@ -67,7 +67,11 @@ export default function shopCartReducer(state = initialState, action) {
     else return state;
   }
   if (action.type === SAVE_CART) {
-    return state;
+    if (!state.products[0].orderID) {
+      let array = Array.from(state.products);
+      array[0].orderID = action.payload.orderid;
+      return { products: array };
+    } else return state;
   }
   if (action.type === CLEAR_CART) {
     return initialState;
@@ -75,8 +79,8 @@ export default function shopCartReducer(state = initialState, action) {
   if (action.type === UPDATE_CART) {
     return {
       ...state,
-      products: action.payload
-    }
+      products: action.payload,
+    };
   }
   return state;
 }

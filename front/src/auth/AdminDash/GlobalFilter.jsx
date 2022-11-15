@@ -1,6 +1,8 @@
 import React from "react";
+import { BiReset } from "react-icons/bi";
+import { RiSearchLine } from "react-icons/ri";
 import { useAsyncDebounce } from "react-table";
-
+import s from "../../styles/adminNav.module.css"
 const GlobalFilter = ({preGlobalFilteredRows, globalFilter, setGlobalFilter}) => {
     const count = preGlobalFilteredRows.length;
     const [value, setValue] = React.useState(globalFilter);
@@ -14,13 +16,29 @@ const GlobalFilter = ({preGlobalFilteredRows, globalFilter, setGlobalFilter}) =>
     }
 
     return (
-        <div>
-            <label>Search:</label>
+        <div className={s.container_search}>
+        <div className={s.input_container} >
+            <div className={s.search}>
             <input value={value || ""} onChange={(e) => {
                 setValue(e.target.value);
                 onChange(e.target.value)
             }} placeholder={`${count} results...`} />
-            <button onClick={handleReset}>RESET</button>
+              <button type="submit">
+                <RiSearchLine />
+              </button>
+
+            </div>
+        </div>
+        <div className={s.reset_container}>
+
+        <BiReset
+             onClick={handleReset}
+              className={s.reset}
+            />
+            <span>RESET</span>
+        </div>
+        
+
         </div>
     )
 };

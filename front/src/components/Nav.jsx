@@ -13,6 +13,7 @@ import { setCurrentUser } from "../Redux/actions/users/index";
 import { cleanCartAfterLogOut } from "../Redux/actions/shopCart/index";
 import Swal from "sweetalert2";
 import { GiHamburgerMenu } from "react-icons/gi";
+import avatar from "../images/avatar 1.gif"
 
 const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const [Mobile, setMobile] = useState(false);
@@ -20,6 +21,33 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
   const dispatch = useDispatch();
   const plants = useSelector((state) => state.shopCartReducer.products);
   const user = useSelector((state) => state.usersReducer.currentUser);
+
+  const handleFavs = (e) => {
+    e.preventDefault();
+    if (user) {
+      navigate("/favorites");
+    } else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: true,
+        timer: 5000,
+        timerProgressBar: true,
+      });
+      Toast.fire({
+        icon: "error",
+        title: `You are not loged. Do you want to sign in?`,
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+    }
+  };
 
   const signOutHandler = () => {
     Swal.fire({
@@ -93,13 +121,20 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
         </div>
 
         <div className="icons-container">
-          {user !== null ? (
+          {user ? (
             <div className="user">
               <div className="user_name">
-                <img src={auth.currentUser.photoURL} alt="" />
+
+                <img src={user?.photoURL || avatar} 
+                onError ={({currentTarget})=> {
+                  currentTarget.onerror=null;
+                  currentTarget.src= "https://i.stack.imgur.com/4powQ.gif"
+                }}
+                 alt ="Not Found" />
                 <Link to="/dashboard">
-                  {auth.currentUser.displayName?.split(" ")[0] || "Set Name"}
+                  {user?.displayName?.split(" ")[0] }
                 </Link>
+
               </div>
               <button className="sign-out-button" onClick={signOutHandler}>
                 <FiLogIn className="login-icon" /> Sign out{" "}
@@ -114,10 +149,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
             </button>
           )}
 
-          <FiHeart
-            className="favorite-icon"
-            onClick={() => navigate("/favorites")}
-          />
+          <FiHeart className="favorite-icon" onClick={handleFavs} />
           <RiSearchLine className="search-icon" onClick={setIsSearch} />
           <div className="bag" onClick={() => navigate("/cart")}>
             <HiOutlineShoppingBag className="bag-icon" />
