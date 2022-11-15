@@ -4,6 +4,8 @@ import { PieChart } from "react-chartkick";
 import "chartkick/chart.js";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.jsx";
+import s from "../styles/stadisticstables.module.css";
+import { IoIosArrowBack } from "react-icons/io";
 
 function SalesAmount() {
   const navigate = useNavigate();
@@ -70,8 +72,12 @@ function SalesAmount() {
 
   if (!sales) return <Loading />;
   return (
-    <div>
-      <button onClick={() => navigate("/stadistics")}>Back</button>
+    <div className={s.Container}>
+      <div className={s.button_container}>
+        <button className={s.back} onClick={() => navigate("/stadistics")}>
+          <IoIosArrowBack />
+        </button>
+      </div>
       <button onClick={() => navigate("/stadistics/salesCount")}>
         Go to Sales Count
       </button>

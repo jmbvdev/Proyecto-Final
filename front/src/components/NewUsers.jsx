@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { LineChart } from "react-chartkick";
 import "chartkick/chart.js";
 import Loading from "./Loading.jsx";
+import s from "../styles/stadisticstables.module.css";
+import { IoIosArrowBack } from "react-icons/io";
 
 function NewUsers() {
   const navigate = useNavigate();
@@ -40,8 +42,12 @@ function NewUsers() {
 
   if (!users) return <Loading />;
   return (
-    <div>
-      <button onClick={() => navigate(-1)}>Back</button>
+    <div className={s.Container}>
+      <div className={s.button_container}>
+        <button className={s.back} onClick={() => navigate(-1)}>
+          <IoIosArrowBack />
+        </button>
+      </div>
       <h3>NEW USERS</h3>
       <h4>{`Total users now: ${total}`}</h4>
       <select onChange={handleOnPeriod}>
