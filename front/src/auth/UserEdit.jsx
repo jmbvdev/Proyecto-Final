@@ -194,6 +194,7 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
+              { error.city && (<p className={s.danger}>{error.city}</p>)}
             </div>
           </div>
           <div className={s.input_label}>
@@ -235,6 +236,7 @@ const UserEdit = () => {
                 placeholder="Phone Number"
                 className={s.input_text}
               />
+              { error.phoneNumber && (<p className={s.danger}>{error.phoneNumber}</p>)}
             </div>
           </div>
 
@@ -260,8 +262,8 @@ const UserEdit = () => {
 const validate = input => {
   let error = {};
   if(!/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(input.displayName))  error.displayName = "Name invalid! (Ex : Juan Lopez)";
-  //if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(input.email))  error.email = "Email invalid! (Ex : juanlopez12@mail.com)";
-  //if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(input.password)) error.password = "Password invalid! (8-15 char., Cap. letter, at least 1 digit, No blanks, 1 special char)";
+  if(!/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))  error.city = "City invalid! (Ex : Boston, New Jersey, Santa Monica)";
+  if(!/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/.test(input.phoneNumber)) error.phoneNumber = "Number invalid! 8 digits a least 12 at most";
   return error
 }
 
