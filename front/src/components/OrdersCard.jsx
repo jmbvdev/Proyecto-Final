@@ -38,17 +38,17 @@ const OrdersCard = (props) => {
                         allProducts.forEach((product) => {
                             if (item.id === product.id) {
                                 if (item.count > product.data.stock) {
-                                    a.push({
+                                    result.push({
                                         ...item,
-                                        count: product.data.stock,
                                         stock: product.data.stock,
+                                        count: product.data.stock,
                                     })
                                     b.push({
                                         name: item.name,
                                         count: product.data.stock
                                     })
                                 } else {
-                                    a.push({
+                                    result.push({
                                         ...item,
                                         stock: product.data.stock,
                                     });
@@ -56,11 +56,19 @@ const OrdersCard = (props) => {
                             }
                         })
                     })
-
+                    a = [...result]
+                    a[0] = {
+                        count: result[0].count,
+                        id: result[0].id,
+                        image: result[0].image,
+                        name: result[0].name,
+                        price: result[0].price,
+                        stock: result[0].stock,
+                    }
                 } else {
+                    let result = []
                     let aux = []
                     cart.forEach((product) => {
-
                         auxCart.forEach(item => {
                             if (product.id === item.id) {
                                 aux.push({
@@ -95,7 +103,7 @@ const OrdersCard = (props) => {
                         allProducts.forEach((product) => {
                             if (item.id === product.id) {
                                 if (item.count > product.data.stock) {
-                                    a.push({
+                                    result.push({
                                         ...item,
                                         count: product.data.stock,
                                         stock: product.data.stock,
@@ -105,7 +113,7 @@ const OrdersCard = (props) => {
                                         count: product.data.stock
                                     })
                                 } else {
-                                    a.push({
+                                    result.push({
                                         ...item,
                                         stock: product.data.stock,
                                     });
@@ -113,6 +121,15 @@ const OrdersCard = (props) => {
                             }
                         })
                     })
+                    a = [...result]
+                    a[0] = {
+                        count: result[0].count,
+                        id: result[0].id,
+                        image: result[0].image,
+                        name: result[0].name,
+                        price: result[0].price,
+                        stock: result[0].stock,
+                    }
                 }
 
                 console.log("a", a)
@@ -167,11 +184,11 @@ const OrdersCard = (props) => {
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleDateString()}</span>
                                     <span>{(new Date(props.date?._seconds * 1000 + props.date._nanoseconds / 1000000)).toLocaleTimeString()}</span>
                                 </div>
-                               
+
                             </div>
                             <div className={s.card_list}>
 
-                            {
+                                {
                                     props.data.length > 0 && props.data.map(items => (
                                         <div className={s.card} key={items.id}>
                                             <img src={items.image} alt="" className={s.order_image} />

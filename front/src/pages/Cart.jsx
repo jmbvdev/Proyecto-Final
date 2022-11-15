@@ -23,7 +23,7 @@ const Cart = () => {
   const [pago, setPago] = useState(false);
 
   const plants = useSelector((state) => state.shopCartReducer.products);
-  console.log("plants",plants);
+  console.log("plants", plants);
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
