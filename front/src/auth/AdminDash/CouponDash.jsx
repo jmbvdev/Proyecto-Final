@@ -158,6 +158,7 @@ const CuponDash = () => {
   };
 
   const handleDelete = name => {
+    if(name){
     Swal.fire({
       title: "Confirm",
       text: "Are yo sure you want to delete this coupon?",
@@ -212,6 +213,7 @@ const CuponDash = () => {
         );
       }
     })
+  }
   };
 
   const columns = React.useMemo(() => [
