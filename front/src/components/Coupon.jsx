@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import s from "../styles/cart.module.css"
+import s from "../styles/cart.module.css";
 import { FaTicketAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 function Coupon({ setDiscount }) {
   const [coup, setCoup] = useState("");
@@ -16,7 +17,27 @@ function Coupon({ setDiscount }) {
       .then((res) => {
         if (res.data?.discount) {
           setDiscount(res.data.discount);
-        } else window.alert("The coupon is invalid");
+
+        } else {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+          });
+          Promise.resolve(
+            Toast.fire({
+              icon: "error",
+              title: `The coupon is invalid!`,
+            })
+          );
+        }
+
       });
   }
 

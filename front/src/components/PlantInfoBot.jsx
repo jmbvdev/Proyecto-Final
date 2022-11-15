@@ -28,7 +28,7 @@ const PlantInfoBot = () => {
   const details=  useSelector(
     (state) => state.productsReducer.productDetails
   );
-console.log(    details?.hasOwnProperty("id"))
+
   return (
     <div className={s.container}>
       <form action="">

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
+import s from "../styles/details.module.css"
 
 function MoreSizes({ idsmall, idmedium, idlarge }) {
   const dispatch = useDispatch();
@@ -12,9 +13,9 @@ function MoreSizes({ idsmall, idmedium, idlarge }) {
     dispatch(GetProductDetails(id));
   };
   return (
-    <div>
+    <div className={s.size_btn}>
       {idsmall ? (
-        <button
+        <button className={s.size_button}
           onClick={() => {
             handleRedirect(idsmall);
           }}
@@ -23,7 +24,7 @@ function MoreSizes({ idsmall, idmedium, idlarge }) {
         </button>
       ) : null}
       {idmedium ? (
-        <button
+        <button className={s.size_button}
           onClick={() => {
             handleRedirect(idmedium);
           }}
@@ -32,7 +33,7 @@ function MoreSizes({ idsmall, idmedium, idlarge }) {
         </button>
       ) : null}
       {idlarge ? (
-        <button
+        <button className={s.size_button}
           onClick={() => {
             handleRedirect(idlarge);
           }}

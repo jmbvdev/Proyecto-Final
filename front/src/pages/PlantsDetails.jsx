@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
-import { GiTable } from "react-icons/gi";
+import { GiLindenLeaf, GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
 import { FaComment, FaCommentDots, FaDog } from "react-icons/fa";
+import {SiThymeleaf}from "react-icons/si"
 import s from "../styles/details.module.css";
 import { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
+import {RiEdit2Fill } from "react-icons/ri";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
@@ -20,12 +21,14 @@ import View_Reviews from "../components/View_Reviews";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import MoreSizes from "../components/MoreSizes";
+import { IoIosArrowBack } from "react-icons/io";
 
 const PlantsDetails = () => {
   const dispatch = useDispatch();
   const plant = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
+
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const cart = useSelector((state) => state.shopCartReducer.products);
 
@@ -54,6 +57,7 @@ const PlantsDetails = () => {
     bgcolor: "transparent",
     border: "none",
     p: 4,
+ 
   };
 
   useEffect(() => {
@@ -92,6 +96,29 @@ const PlantsDetails = () => {
   }
 
   function handleCart() {
+    if (cart.findIndex((e) => e.id === id) !== -1 || plant?.stock === 0) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: false,
+      });
+      Promise.resolve(
+        Toast.fire({
+          icon: "info",
+          title:
+            plant?.stock === 0
+              ? `We don't have stock of this product!`
+              : `You already have this product in your cart!`,
+        })
+      );
+      return;
+    }
     Swal.fire({
       title: "Success",
       text: "Your product was successfully added to the cart",
@@ -101,6 +128,8 @@ const PlantsDetails = () => {
       denyButtonColor: "rgba(11, 115, 147, 0.713)",
       confirmButtonText: "ok",
       confirmButtonColor: "rgb(9, 102, 74)",
+     
+
     }).then((res) => {
       if (res.isDenied) {
         navigate("/cart");
@@ -140,8 +169,20 @@ const PlantsDetails = () => {
   }
 
   const handleOpen = () => {
-    if (!currentUser) return;
+    if (!currentUser) {return Swal.fire({
+      title: "Wait...",
+      text: "Your have to sign in to add a coment",
+      icon: "failure",
+      showDenyButton: false,
+      denyButtonText: "",
+      denyButtonColor: "rgba(11, 115, 147, 0.713)",
+      confirmButtonText: "Sign In",
+      confirmButtonColor: "rgb(9, 102, 74)",
+    }).then((res) => {
+      navigate("/sign-in");
+    });}
     const user = view.find((e) => e.data.userUID === currentUser.uid);
+    
     if (user) {
       Promise.resolve(
         Swal.fire({
@@ -159,28 +200,40 @@ const PlantsDetails = () => {
     setOpen(true);
   };
   const handleOpenReview = () => {
-    if (!currentUser) return;
-    const user = view.find((e) => e.data.userUID === currentUser.uid);
-    if (!user) {
-      Promise.resolve(
-        Swal.fire({
-          title: "Eh",
-          text: "This plant still does not have any reviews",
-          icon: "info",
-          showDenyButton: false,
-          confirmButtonText: "ok",
-          confirmButtonColor: "rgb(9, 102, 74)",
-        })
-      );
-      return;
-    }
+    //if (!currentUser) return;
+   // const user = view.find((e) => e.data.userUID === currentUser.uid);
+    // if (!currentUser) {
+    //   Promise.resolve(
+    //     Swal.fire({
+    //       title: "Eh",
+    //       text: "This plant still does not have any reviews",
+    //       icon: "info",
+    //       showDenyButton: false,
+    //       confirmButtonText: "ok",
+    //       confirmButtonColor: "rgb(9, 102, 74)",
+    //     })
+    // //   );
+    //   return;
+    //}
+    if(view.length===0)return Swal.fire("There are no comments, take the opportunity to leave one")
     setOpenReview(true);
   };
   const handleClose = () => setOpen(false);
   const handleCloseReview = () => setOpenReview(false);
+
   return plant?.name ? (
     <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+          </div>
+        <div>
+
       <img src={plant?.image} alt="" />
+      {plant?.stock === 0 ? <div className={s.card_overstock}><p>Out of stock</p></div> : null}
+      {plant?.logicalDeletion ? <div className={s.card_overstock}><p>Discontinued product</p></div> : null}
+        </div>
       <div className={s.details}>
         <h1>{plant?.name} </h1>
         <div>
@@ -209,6 +262,15 @@ const PlantsDetails = () => {
                 </div>
               );
             })}
+            <div className={s.place}>
+              {
+                plant?.place && plant?.place ==="indoor"?
+                <SiThymeleaf className={s.place_icon}/>:
+                <GiLindenLeaf className={s.place_icon}/>
+              }
+              <span>{plant?.place.toUpperCase()}</span>
+
+            </div>
         </div>
         {plant?.small || plant?.medium || plant?.large ? (
           <MoreSizes
@@ -222,6 +284,12 @@ const PlantsDetails = () => {
             <h4>Price</h4>
             <h3>$ {plant?.price}</h3>
           </div>
+          <div>
+            <h4>Stock</h4>
+            <span>{plant?.stock}</span>
+          </div>
+          {
+            plant?.stock > 0 ?
           <div className={s.quantity}>
             <button
               disabled={
@@ -242,7 +310,8 @@ const PlantsDetails = () => {
             >
               +
             </button>
-          </div>
+          </div> : null
+          }
         </div>
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
@@ -251,7 +320,7 @@ const PlantsDetails = () => {
             <div className={s.edit_btn}>
               <h4>Edit</h4>
               <button onClick={handleEdit}>
-                <FaRegEdit />
+                <RiEdit2Fill />
               </button>
             </div>
           )}
@@ -260,18 +329,20 @@ const PlantsDetails = () => {
           <h4>Add a review</h4>
 
           <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
-        </div>
         <div>
-          {currentUser ? (
+          {/* {currentUser ? ( */}
             <div className={s.favorites}>
-              <h4>Watch reviews</h4>
+              <h4>See reviews</h4>
               <FaCommentDots className={s.hearth} onClick={handleOpenReview} />
             </div>
-          ) : (
-            <button className={s.noreview} onClick={handleRedirect}>
-              Sign in to leave a review
-            </button>
-          )}
+          {/* ) : (
+            // <button className={s.noreview} onClick={handleRedirect}>
+            //   Sign in to leave a review
+            // </button>
+            null
+          )
+          } */}
+        </div>
         </div>
 
         {cart.findIndex((e) => e.id === id) !== -1 && (
@@ -279,11 +350,7 @@ const PlantsDetails = () => {
         )}
 
         <button
-          disabled={
-            cart.findIndex((e) => e.id === id) !== -1 ||
-            plant?.stock === 0 ||
-            plant?.logicalDeletion
-          }
+          disabled={plant?.logicalDeletion}
           onClick={handleCart}
           className={s.cart}
         >
@@ -310,6 +377,7 @@ const PlantsDetails = () => {
           >
             <Box sx={styleReview}>
               <View_Reviews
+              setOpenReview={setOpenReview}
                 view={view}
                 user={currentUser?.uid}
                 setView={setView}

@@ -2,7 +2,16 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DeleteProduct, GetProductDetails } from "../Redux/actions/products";
+
+import {
+  clearDetails,
+  DeleteProduct,
+  GetProductDetails,
+} from "../Redux/actions/products";
+import { GiTable } from "react-icons/gi";
+import { TbPlant2 } from "react-icons/tb";
+import { FaDog } from "react-icons/fa";
+
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
@@ -88,7 +97,7 @@ const EditPlant = () => {
     // console.log(id)
     if (fileReader && files && files.length > 0) {
       fileReader.readAsArrayBuffer(files[0]);
-      fileReader.onload = async function () {
+      fileReader.onload = async function() {
         const imageData = fileReader.result;
         Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
         const res = await setPlantImage(id, imageData);
@@ -133,7 +142,8 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
-    navigate(-2);
+    dispatch(clearDetails());
+    navigate("/plants");
   }
 
   const handleOnSubmitForMod = (e) => {
@@ -154,6 +164,8 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    dispatch(clearDetails());
+    navigate("/plants");
   };
 
   const handleCategories = (e) => {
@@ -223,8 +235,22 @@ const EditPlant = () => {
   };
 
   const handleDelete = () => {
-    dispatch(DeleteProduct(id));
-    navigate(-2);
+    Swal.fire({
+      title: "Warning",
+      text: "Are you sure you want to delete this plant?",
+      icon: "error",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        dispatch(DeleteProduct(id));
+        dispatch(clearDetails());
+        navigate("/plants");
+      }
+    });
   };
 
   return (

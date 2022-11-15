@@ -39,7 +39,7 @@ export default function Login() {
         },
         showConfirmButton: true,
         timer: 6000,
-        timerProgressBar: false,
+        timerProgressBar: true,
       });
       Toast.fire({
         icon: "info",
