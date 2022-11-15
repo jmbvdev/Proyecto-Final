@@ -7,6 +7,7 @@ import empty from "../images/cart.webp";
 import Swal from "sweetalert2";
 import Coupon from "../components/Coupon";
 import FormPostCheckout from "../components/formPostCheckout";
+import FavButton from "../components/FavButton";
 
 import {
   changeQuantity,
@@ -50,7 +51,7 @@ const Cart = () => {
   function handleQuantity(id, value) {
     setQuantity((q) => q + value);
 
-    dispatch(changeQuantity(id, value, currentUser.uid));
+    dispatch(changeQuantity(id, value, currentUser?.uid));
 
     const cart = plants.map((p) => {
       if (p.id === id) {
@@ -63,11 +64,23 @@ const Cart = () => {
   function handleOnPurchase(e) {
     e.preventDefault();
     if (!currentUser) {
-     return Swal.fire("You must log in")
-    
-     .then(()=>{navigate("/sign-in")});
+
+      Swal.fire({
+        title: "Warning",
+        text: "You are not registered! Do you want to sign in?",
+        icon: "error",
+        showDenyButton: true,
+        denyButtonText: "No",
+        denyButtonColor: "#FF5733",
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#72CE65",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+      return;
     }
-      
 
     if (plants.length === 0) {
       Promise.resolve(
@@ -118,6 +131,7 @@ const Cart = () => {
   let total = 0;
   for (let i = 0; i < plants.length; i++) {
     sum += plants[i].count * plants[i].price * (1 - discount / 100);
+    total += plants[i].count * plants[i].price;
   }
 
   return (
@@ -158,6 +172,7 @@ const Cart = () => {
                   <div className={s.total}>
                     <h3>${p.price * p.count}</h3>
                     <div className={s.total_btn}>
+                      <FavButton id={p.id} user={currentUser?.uid} />
                       <button className={s.heart_icon}>
                         <FaHeart />
                       </button>
@@ -188,12 +203,14 @@ const Cart = () => {
         </div>
         <div className={s.summary}>
           <p>Discount</p>
-          <span>${sum && discount ? (sum * 25) / 100 : 0.0}</span>
+          <span>${sum && discount ? (sum * discount) / 100 : 0.0}</span>
         </div>
         <div className={s.total_summary}>
           <p>Estimated total</p>
           <div className={s.discount_container}>
-            <span>${sum ? sum : discount ? sum - (sum * 25) / 100 : 0.0}</span>
+            <span>
+              ${sum ? sum : discount ? sum - (sum * discount) / 100 : 0.0}
+            </span>
             {discount ? (
               <span className={s.discount}>{discount}% Off</span>
             ) : null}

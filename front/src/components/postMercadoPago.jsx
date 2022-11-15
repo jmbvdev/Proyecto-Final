@@ -7,6 +7,7 @@ import success from "../images/success.webp";
 import pending from "../images/pending.webp";
 import failure from "../images/failure.webp";
 import s from "../styles/postMercado.module.css";
+import { GetAllProducts } from "../Redux/actions/products/index.js";
 
 export default function PostMercadoPago() {
   const [searchParams] = useSearchParams();
@@ -26,6 +27,9 @@ export default function PostMercadoPago() {
     ) {
       dispatch(purchase(cart[0].orderID, cart, status, user.email));
     }
+    return () => {
+      dispatch(GetAllProducts());
+    };
   }, [cart, dispatch, status, user]);
 
   const goHome = (e) => {
@@ -81,7 +85,6 @@ export default function PostMercadoPago() {
               <button onClick={goHome}>GO BACK TO HOME</button>
             </div>
           </div>
-
         </div>
       </div>
     );

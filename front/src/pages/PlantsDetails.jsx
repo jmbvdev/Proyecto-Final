@@ -95,6 +95,29 @@ const PlantsDetails = () => {
   }
 
   function handleCart() {
+    if (cart.findIndex((e) => e.id === id) !== -1 || plant?.stock === 0) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: false,
+      });
+      Promise.resolve(
+        Toast.fire({
+          icon: "info",
+          title:
+            plant?.stock === 0
+              ? `We don't have stock of this product!`
+              : `You already have this product in your cart!`,
+        })
+      );
+      return;
+    }
     Swal.fire({
       title: "Success",
       text: "Your product was successfully added to the cart",
@@ -317,11 +340,7 @@ const PlantsDetails = () => {
         )}
 
         <button
-          disabled={
-            cart.findIndex((e) => e.id === id) !== -1 ||
-            plant?.stock === 0 ||
-            plant?.logicalDeletion
-          }
+          disabled={plant?.logicalDeletion}
           onClick={handleCart}
           className={s.cart}
         >

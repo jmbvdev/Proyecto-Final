@@ -37,11 +37,13 @@ const Dashboard = () => {
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
           <img
+
             src={user?.photoURL || avatar}
             onError ={({currentTarget})=> {
               currentTarget.onerror=null;
               currentTarget.src= "https://i.stack.imgur.com/4powQ.gif"
             }}
+
             alt={user?.displayName}
             className={s.profile_pic}
           />
