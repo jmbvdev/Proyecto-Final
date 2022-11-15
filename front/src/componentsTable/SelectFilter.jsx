@@ -3,7 +3,7 @@ import s from "../styles/adminNav.module.css"
 
 
 // a dropdown list filter
-const DropdownFilter = ({
+const SelectFilter = ({
     column: { filterValue, setFilter, preFilteredRows, id }
 }) => {
     // Calculate the options for filtering
@@ -28,8 +28,8 @@ const DropdownFilter = ({
         >
             <option value="">All</option>
             {options.map((option, i) => (
-                <option className={s.order_option} key={i} value={option}>
-                    {option}
+                <option key={i} value={option}>
+                    {option === true ? 'hidden' : 'visible'}
                 </option>
             ))}
         </select>
@@ -37,4 +37,4 @@ const DropdownFilter = ({
     );
 }
 
-export default DropdownFilter
+export default SelectFilter;

@@ -20,6 +20,9 @@ const Plants = () => {
   useEffect(() => {
     if (!plants[0]) {
       dispatch(GetAllProducts());
+      window.scrollTo(0, {
+        behavior: 'smooth'
+      })
     }
   }, [plants, dispatch]);
 

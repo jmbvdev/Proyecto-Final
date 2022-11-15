@@ -1,12 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useGlobalFilter, useSortBy, useTable, usePagination } from 'react-table';
+import { useGlobalFilter, useSortBy, useTable, usePagination, useFilters } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
-import s from "../../styles/adminNav.module.css"
+import s from "../../styles/productsDash.module.css"
 import { Link } from "react-router-dom";
 import GlobalFilter from "./GlobalFilter";
 import Loading from "../../components/Loading";
+import {CiCircleCheck} from "react-icons/ci";
+import {CiCircleRemove} from "react-icons/ci";
+import {BiDetail} from "react-icons/bi";
+import {AiOutlineEdit} from "react-icons/ai";
+import SelectFilter from '../../componentsTable/SelectFilter';
+import { matchSorter } from "match-sorter";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 
 const ProductsDash = () => {
@@ -19,6 +26,23 @@ const ProductsDash = () => {
     const handleBack = () => {
       navigate(-1);
     };
+
+    function matchSorterFn(rows, id, filterValue) {
+      return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
+    }
+
+    const defaultColumn = React.useMemo(
+      () => ({
+        Filter: SelectFilter
+      }),
+      []
+    );
+    const filterTypes = React.useMemo(
+      () => ({
+        rankedMatchSorter: matchSorterFn
+      }),
+      []
+    );
 
     const Table = ({ columns, data, id}) => {
         const {
@@ -35,7 +59,7 @@ const ProductsDash = () => {
             previousPage,
             canNextPage,
             canPreviousPage
-        } = useTable({columns, data}, useGlobalFilter, tableHooks, useSortBy, usePagination);
+        } = useTable({columns, data, defaultColumn, filterTypes}, useGlobalFilter, tableHooks, useFilters, useSortBy, usePagination);
 
 
         return (
@@ -43,9 +67,9 @@ const ProductsDash = () => {
           {allProducts.length ? (
             <>
             <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
-            <div>
-              <button onClick={() => previousPage()} disabled={!canPreviousPage}>PREV</button>
-              <button onClick={() => nextPage()} disabled={!canNextPage}>NEXT</button>
+            <div className={s.pages}>
+              <button onClick={() => previousPage()} disabled={!canPreviousPage} className={s.pages_icon}><GrFormPrevious className={s.arrow}/></button>
+              <button onClick={() => nextPage()} disabled={!canNextPage} className={s.pages_icon}><GrFormNext className={s.arrow} /></button>
             </div>
             <table {...getTableProps()} className={s.table}>
               <thead>
@@ -53,7 +77,9 @@ const ProductsDash = () => {
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
-                      {column.isSorted ? (column.isSortedDesc ? "▼" :  "▲") : ""}</th>
+                      {<span>{column.isSorted ? (column.isSortedDesc ? "▼" :  "▲") : ""}</span>}
+                      <div>{column.canFilter ? column.render("Filter") : null}</div>
+                      </th>
                     ))}
                   </tr>
                 ))}
@@ -86,7 +112,8 @@ const ProductsDash = () => {
                 columns: [
                     {
                         Header: 'Name',
-                        accessor: 'name'
+                        accessor: 'name',
+                        disableFilters: true,
                     }
                 ]
             },
@@ -95,25 +122,31 @@ const ProductsDash = () => {
                 columns: [
                             {
                               Header: 'id',
-                              accessor: 'id'
+                              accessor: 'id',
+                              disableFilters: true,
                             },
                             {
                                 Header: 'Price',
-                                accessor: 'price'
+                                accessor: 'price',
+                                disableFilters: true,
                             },
                             {
                                 Header: 'Stock',
-                                accessor: 'stock'
+                                accessor: 'stock',
+                                disableFilters: true,
                             },
                             {
                               Header: 'Visible',
                               accessor: 'logicalDeletion',
-                              Cell: ({value}) => value === true ? <span>VISIBLE</span> : <span>NOT VISIBLE</span>
+                              disableSortBy: true,
+                              Cell: ({value}) => value === true ? <div className={s.details_icon_container}><CiCircleRemove className={s.details_icon} /></div> : <div className={s.details_icon_container}><CiCircleCheck  className={s.details_icon} /></div> 
                             },
                             {
                               Header: 'Image',
                               accessor: 'image',
-                              Cell: ({value}) => <img className={s.img} src={value}/>,
+                              disableSortBy: true,
+                              disableFilters: true,
+                              Cell: ({value}) => <div className={s.img}><img  src={value}/></div> ,
                             }
                         ]
             }
@@ -126,14 +159,21 @@ const ProductsDash = () => {
               id: 'Detail',
               Header: 'Detail',
               Cell: ({row}) => (
-                <Link to={`/plants/details/${row.values.id}`}>DETAIL</Link>
+                <div className={s.details_icon_container} onClick={()=>navigate(`/plants/details/${row.values.id}`)}>
+
+                <BiDetail className={s.details_icon}/>
+                </div>
               )
             },
             {
               id: 'Edit',
               Header: 'Edit',
               Cell: ({row}) => (
-                <Link to={`/plants/edit/${row.values.id}`}>EDIT</Link>
+                <div className={s.details_icon_container} onClick={()=>navigate(`/plants/edit/${row.values.id}`)}>
+
+                <AiOutlineEdit className={s.details_icon}/>
+                </div>
+              
               )
             }
           ])

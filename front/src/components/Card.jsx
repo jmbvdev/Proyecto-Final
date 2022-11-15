@@ -6,6 +6,9 @@ const Card = ({ plant, id }) => {
   const navigate = useNavigate();
   function handleClick() {
     navigate(`details/${id}`);
+    window.scrollTo(0, {
+      behavior: 'smooth'
+    })
   }
   if (!plant.logicalDeletion) {
     return (

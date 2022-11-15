@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from "react-table";
 import { TableGlobalFilter } from "../componentsTable/TableGlobalFilter";
-import s from "../styles/adminNav.module.css";
+import s from "../styles/manageOrder.module.css";
 import Loading from "../components/Loading";
 import {IoIosArrowBack}from "react-icons/io"
+import {TbEdit}from "react-icons/tb"
 import { useNavigate } from "react-router-dom";
 import DropdownFilter from '../componentsTable/DropdownFilter'
 import { matchSorter } from "match-sorter";
 import SwitchOrderState from '../components/SwitchOrderState'
 import Swal from "sweetalert2";
 import {GrFormNext, GrFormPrevious, GrNext, GrPrevious} from "react-icons/gr"
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 
 export const COLUMNS = [
   {
@@ -69,6 +72,7 @@ export default function ManageOrders() {
   const [order, setOrder] = useState(''); // "order" es el id de la orden
   const [allUsers, setAllusers] = useState([]);
   const [auxOrders, setAuxOrders] = useState([]);
+  const [open, setOpen] = useState(false);
   const navigate= useNavigate()
   //console.log("luego de declarar order", order)
 
@@ -77,9 +81,17 @@ export default function ManageOrders() {
     getAll();
   }, []);
 
-
-
-
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "transparent",
+    border: "none",
+    p: 4,
+  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const getAll = () => {
 
     axios
@@ -142,7 +154,7 @@ export default function ManageOrders() {
         id: "Edit",
         Header: "Edit",
         Cell: ({ row }) => (
-          <button onClick={() => {
+          <div className={s.details_icon_container} onClick={() => {
 
             if (row.values.state === 'Pending') {
               Swal.fire({
@@ -150,11 +162,13 @@ export default function ManageOrders() {
                 text: 'Order in process of purchase. Its status cannot be modified',
               })
             } else {
+              
               setOrder(row.values.orderId)
+              handleOpen()
             }
           }}>
-            Edit
-          </button>
+            <TbEdit className={s.details_icon}/>
+          </div>
         ),
       },
     ]);
@@ -271,7 +285,7 @@ export default function ManageOrders() {
 
               </div>
             </div>
-            <table {...getTableProps()}>
+            <table {...getTableProps()} className={s.table}>
               <thead>
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -313,12 +327,22 @@ export default function ManageOrders() {
             </table>
           </>
           <br></br>
-          <SwitchOrderState
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+            <SwitchOrderState
             orders={orders}
             order={order}
             auxOrders={auxOrders}
             setOrder={setOrder}
             setAuxOrders={setAuxOrders} />
+            </Box>
+          </Modal>
+          
         </div>
       ) : (
         <Loading />

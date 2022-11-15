@@ -12,6 +12,7 @@ const PopularPlants = () => {
   );
   const plants = allPlants.filter((p) => !p.data.logicalDeletion).slice(27, 30);
 
+
   return (
     <div className={s.popular}>
       <ScrollAnimation animateIn="fadeInLeft" animateOnce={true} className={s.image}>
@@ -28,7 +29,10 @@ const PopularPlants = () => {
                   <ScrollAnimation animateIn="fadeInRight" animateOnce={true} className={s.card}>
                   <div className={s.card_overlay}>
                   <button
-                    onClick={() => navigate(`/plants/details/${plant.id}`)}
+                    onClick={() => {
+                      navigate(`/plants/details/${plant.id}`)
+                      window.scrollTo(0, {behavior: 'smooth'})
+                    }}
                   >
                     more details
                   </button>
