@@ -8,7 +8,7 @@ import { FaWindowClose } from 'react-icons/fa';
 
 const stateAll = ["Order preparing", "Order shipped", "Order ready to pick up"]
 
-const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) => {
+const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders, close }) => {
     // "order" it is orderId
     const current_order = orders.find(item => item.orderId == order)
     const [optionState, setOptionState] = useState('')
@@ -19,7 +19,8 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
         }
     };
     const handleDeleteState = () => {
-        setOptionState("");
+      setOptionState("");
+      close(false)
     };
 
     const handleSwitchState = () => {
@@ -84,11 +85,14 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
 
     return (
       <div className={s.container}>
-         <div className={s.close} onClick={handleCancel}>
+         <div className={s.close} onClick={handleDeleteState}>
             <FaWindowClose className={s.close_icon}/>
           </div>
         {current_order ? (
           <div>
+            <div className={s.state_wraper}>
+            <div>
+
             <p>
               <strong>SwitchOrderState</strong>
             </p>
@@ -122,31 +126,8 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
               <strong>Address number:</strong>{" "}
               {current_order?.extras?.adressNumber}
             </p>
-
-            <hr></hr>
-            <div className={s.wrap}>
-
-            {current_order?.cart.map((order, i) => (
-              <div key={i} className={s.specs_container}>
-                <div className={s.image}>
-                  <img src={order?.image} alt="" height="50" />
-                </div>
-                <div className={s.specs}>
-                  <p>
-                    {" "}
-                    <strong>Name:</strong> {order?.name}
-                  </p>
-                  <p>
-                    <strong>productId:</strong> {order?.id}
-                  </p>
-                  <p>
-                    <strong>count:</strong> {order?.count}
-                  </p>
-                  <p>
-                    <strong>price:</strong> ${order?.price}
-                  </p>
-                </div>
-                <div className={s.state_container}>
+            </div>
+            <div className={s.state_container}>
                 <h3>{current_order?.state}</h3>
             <div className={s.order}>
               <select onChange={handleState}>
@@ -173,12 +154,40 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
              <span>STATE</span>
             </div>
            
+
+            </div>
                 </div>
+            
+
+            <hr></hr>
+            <div className={s.wrap}>
+
+            {current_order?.cart.map((order, i) => (
+              <div key={i} className={s.specs_container}>
+                <div className={s.image}>
+                  <img src={order?.image} alt="" height="50" />
+                </div>
+                <div className={s.specs}>
+                  <p>
+                    {" "}
+                    <strong>Name:</strong> {order?.name}
+                  </p>
+                  <p>
+                    <strong>productId:</strong> {order?.id}
+                  </p>
+                  <p>
+                    <strong>count:</strong> {order?.count}
+                  </p>
+                  <p>
+                    <strong>price:</strong> ${order?.price}
+                  </p>
+                </div>
+          
                 
               </div>
             ))}
             </div>
-            <h3>Total Amount: {current_order?.extras?.totalAmount}</h3>
+            <h3>Total Amount: ${current_order?.extras?.totalAmount}</h3>
             <hr></hr>
             <h3>sendOption: {current_order?.extras?.sendOption}</h3>
             <hr></hr>

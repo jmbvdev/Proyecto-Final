@@ -127,3 +127,8 @@
     background-color: #27262b;
     border: 1px solid #27262b;
   }
+  .state_wraper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
