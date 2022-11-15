@@ -32,13 +32,24 @@ const SearchBox = ({ setIsSearch }) => {
     })
     .slice(0, 5);
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (findResults[0].id && search) {
+      dispatch(clearDetails());
+      setIsSearch();
+      navigate(`plants/details/${findResults[0].id}`);
+      dispatch(GetProductDetails(findResults[0].id));
+      setSearch("");
+    }
+  };
+
   return (
     <div>
       <div className={s.container}>
         <button onClick={setIsSearch} className={s.close}>
           <GrClose className={s.close_icon} />
         </button>
-        <form action="" className={s.search}>
+        <form onSubmit={handleOnSubmit} action="" className={s.search}>
           <input
             autoComplete="off"
             type="text"
