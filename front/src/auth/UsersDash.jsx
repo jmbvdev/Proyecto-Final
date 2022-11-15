@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import s from "../styles/dashboard.module.css";
-import image from "../images/profile.webp";
+import s from "../styles/userDetails.module.css";
+import image from "../images/profileDetails.webp";
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import { IoIosArrowBack } from "react-icons/io";
@@ -206,29 +206,29 @@ const UserDetail = () => {
                   {user.metadata.lastSignInTime}
                 </p>
                 {user.disabled ? (
-                  <div>
+                  <div className={s.admin_container}>
                     <p>User banned</p>
-                    <button onClick={handleUnbanUser}>Unban</button>
+                    <button  className={s.admin_btn} onClick={handleUnbanUser}>Unban</button>
                   </div>
                 ) : null}
                 {admin?.role[0] === "admin" &&
                 user.customClaims?.role?.[0] !== "admin" ? (
                   user.customClaims?.role?.[0] === "moderator" ? (
-                    <div>
-                      <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
-                      <button onClick={handleSetModeratorOff}>
+                    <div className={s.admin_container}>
+                      <button className={s.admin_btn} onClick={handleSetAdmin}>SET ADMIN ROLE</button>
+                      <button className={s.admin_btn} onClick={handleSetModeratorOff}>
                         PUT OFF MOD ROLE
                       </button>
                     </div>
                   ) : (
                     <div>
                       {!user.disabled ? (
-                        <div>
-                          <button onClick={handleBanUser}>BAN USER</button>
-                          <button onClick={handleSetAdmin}>
+                        <div className={s.admin_container}>
+                          <button className={s.admin_btn} onClick={handleBanUser}>BAN USER</button>
+                          <button className={s.admin_btn} onClick={handleSetAdmin}>
                             SET ADMIN ROLE
                           </button>
-                          <button onClick={handleSetModerator}>
+                          <button className={s.admin_btn} onClick={handleSetModerator}>
                             SET MOD ROLE
                           </button>
                         </div>

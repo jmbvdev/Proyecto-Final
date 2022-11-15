@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, useSortBy, useTable, usePagination, useFilters } from 'react-table';
 import {IoIosArrowBack}from "react-icons/io"
-import s from "../../styles/adminNav.module.css"
+import s from "../../styles/productsDash.module.css"
 import { Link } from "react-router-dom";
 import GlobalFilter from "./GlobalFilter";
 import Loading from "../../components/Loading";
@@ -11,8 +11,9 @@ import {CiCircleCheck} from "react-icons/ci";
 import {CiCircleRemove} from "react-icons/ci";
 import {BiDetail} from "react-icons/bi";
 import {AiOutlineEdit} from "react-icons/ai";
-import DropdownFilter from '../../componentsTable/DropdownFilter';
+import SelectFilter from '../../componentsTable/SelectFilter';
 import { matchSorter } from "match-sorter";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 
 const ProductsDash = () => {
@@ -32,7 +33,7 @@ const ProductsDash = () => {
 
     const defaultColumn = React.useMemo(
       () => ({
-        Filter: DropdownFilter
+        Filter: SelectFilter
       }),
       []
     );
@@ -66,9 +67,9 @@ const ProductsDash = () => {
           {allProducts.length ? (
             <>
             <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
-            <div>
-              <button onClick={() => previousPage()} disabled={!canPreviousPage}>PREV</button>
-              <button onClick={() => nextPage()} disabled={!canNextPage}>NEXT</button>
+            <div className={s.pages}>
+              <button onClick={() => previousPage()} disabled={!canPreviousPage} className={s.pages_icon}><GrFormPrevious className={s.arrow}/></button>
+              <button onClick={() => nextPage()} disabled={!canNextPage} className={s.pages_icon}><GrFormNext className={s.arrow} /></button>
             </div>
             <table {...getTableProps()} className={s.table}>
               <thead>
@@ -138,14 +139,14 @@ const ProductsDash = () => {
                               Header: 'Visible',
                               accessor: 'logicalDeletion',
                               disableSortBy: true,
-                              Cell: ({value}) => value === true ? <CiCircleRemove /> : <CiCircleCheck /> 
+                              Cell: ({value}) => value === true ? <div className={s.details_icon_container}><CiCircleRemove className={s.details_icon} /></div> : <div className={s.details_icon_container}><CiCircleCheck  className={s.details_icon} /></div> 
                             },
                             {
                               Header: 'Image',
                               accessor: 'image',
                               disableSortBy: true,
                               disableFilters: true,
-                              Cell: ({value}) => <img className={s.img} src={value}/>,
+                              Cell: ({value}) => <div className={s.img}><img  src={value}/></div> ,
                             }
                         ]
             }
@@ -158,14 +159,21 @@ const ProductsDash = () => {
               id: 'Detail',
               Header: 'Detail',
               Cell: ({row}) => (
-                <Link to={`/plants/details/${row.values.id}`}><BiDetail /></Link>
+                <div className={s.details_icon_container} onClick={()=>navigate(`/plants/details/${row.values.id}`)}>
+
+                <BiDetail className={s.details_icon}/>
+                </div>
               )
             },
             {
               id: 'Edit',
               Header: 'Edit',
               Cell: ({row}) => (
-                <Link to={`/plants/edit/${row.values.id}`}><AiOutlineEdit /></Link>
+                <div className={s.details_icon_container} onClick={()=>navigate(`/plants/edit/${row.values.id}`)}>
+
+                <AiOutlineEdit className={s.details_icon}/>
+                </div>
+              
               )
             }
           ])

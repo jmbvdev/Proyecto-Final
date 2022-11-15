@@ -1,11 +1,12 @@
 const { Router } = require("express");
-const {COINBASE_API_KEY, COINBASE_WEBHOOK_SECRET, DOMAIN} = require('../config/coinbase.js');
+const {COINBASE_API_KEY, COINBASE_WEBHOOK_SECRET} = require('../config/coinbase.js');
 const {Client, resources, Webhook} = require('coinbase-commerce-node');
 
 
 const coinbaseRoute = Router();
 Client.init(COINBASE_API_KEY);
 const {Charge} = resources
+const randomPaymentId = Math.random()*1000;
 
 coinbaseRoute
   .get("/create-charge/:amount", async (req, res, next) => {
@@ -19,20 +20,14 @@ coinbaseRoute
                 currency: 'USD'
             },
             pricing_type: 'fixed_price',
-            redirect_url: `${DOMAIN}/success-payment`,
-            cancel_url: `${DOMAIN}/cancel-payment`
+            redirect_url: `https://api-plants-b6153.web.app/success?status=approved&payment_id=${randomPaymentId}&payment_type=coinbase`,
+            cancel_url: "https://api-plants-b6153.web.app/failure"
         }
         const charge = await Charge.create(chargeData);
         res.status(200).send(charge);
     }catch(err) {
         next(err)
     }
-})
-.get("/success-payment", (req, res) => {
-    res.send("payment successfull")
-})
-.get("/cancel-payment", (req, res) => {
-    res.send("payment canceled")
 })
  .post("/payment-handler", (req, res, next) => {
      const rawBody = req.rawBody;

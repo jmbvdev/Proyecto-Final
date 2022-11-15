@@ -38,7 +38,7 @@ ordersRoute
   })
   .post("/:id", async (req, res, next) => {
     //ruta a la que le pega cada vez que inicia secion por primera vez, o si no tiene nada guardado como cart y empieza a guardar cosas.
-    try {
+    try { // idUser
       const { id } = req.params;
       const { cart } = req.body;
       const order = await postOrder(id, cart);

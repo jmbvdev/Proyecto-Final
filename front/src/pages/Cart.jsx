@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../images/cart.webp";
@@ -24,7 +23,7 @@ const Cart = () => {
   const [pago, setPago] = useState(false);
 
   const plants = useSelector((state) => state.shopCartReducer.products);
-  console.log("plants",plants);
+  console.log("plants", plants);
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -174,16 +173,16 @@ const Cart = () => {
                   <div className={s.total}>
                     <h3>${p.price * p.count}</h3>
                     <div className={s.total_btn}>
-                      <FavButton id={p.id} user={currentUser?.uid} />
-                      <button className={s.heart_icon}>
-                        <FaHeart />
-                      </button>
+                      <div className={s.fav}>
+
+                      <FavButton id={p.id} user={currentUser?.uid} className={s.heart_icon}/>
                       <button
                         onClick={() => handleDeletePlant(p.id)}
                         className={s.delete}
                       >
                         <MdDeleteForever />
                       </button>
+                      </div>
                     </div>
                   </div>
                 </div>
