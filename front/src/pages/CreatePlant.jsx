@@ -3,13 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct } from "../Redux/actions/products/index";
+import { clearDetails, createProduct } from "../Redux/actions/products/index";
 import { validate } from "../Util/validate";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import ShowPlant from "../components/ShowPlant";
 import s from "../styles/createPlant.module.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -56,6 +57,10 @@ const CreatePlant = () => {
     }
   }, [currentUser]);
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   const fileRef = useRef(null);
 
   const handleOpenfilePicker = () => {
@@ -72,7 +77,7 @@ const CreatePlant = () => {
     console.log(id);
     if (fileReader && files && files.length > 0) {
       fileReader.readAsArrayBuffer(files[0]);
-      fileReader.onload = async function () {
+      fileReader.onload = async function() {
         const imageData = fileReader.result;
         // setImage(imageData)
         Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
@@ -150,6 +155,7 @@ const CreatePlant = () => {
     })
     setImage("")
     Swal.fire('Product created', '', 'info')
+    dispatch(clearDetails());
   }
 
   const handleCategories = (e) => {
@@ -245,6 +251,11 @@ const CreatePlant = () => {
 
   return (
     <div className={s.container}>
+      <div className={s.button_container}>
+        <button onClick={handleBack} className={s.back}>
+          <IoIosArrowBack />
+        </button>
+      </div>
       <div className={s.wraper}>
         <div className={s.left}>
           <form onSubmit={handleOnSubmit} className={s.form}>

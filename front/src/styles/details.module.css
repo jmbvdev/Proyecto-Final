@@ -9,7 +9,8 @@
 }
 .container img{
     width: 400px;
-    min-width: 340px;
+    min-width: 335px;
+    max-height: 550px;
     caret-color: transparent;
 
 }
@@ -20,7 +21,7 @@
    flex-direction: column;
    justify-content: left;
    text-align: left;
-   gap: 1.5rem;
+   gap: 1rem;
    caret-color: transparent;
 }
 .details h1{
@@ -31,7 +32,7 @@
 }
 .details h4{
     font-family: "Lora", sans-serif;
-    margin-bottom: 10px;
+
 }
 .details p{
 
@@ -64,6 +65,7 @@ font-weight:bold ;
 }
 .table{
     font-size: 2.5rem;
+    color: rgb(9, 102, 74);
 }
 .price h3{
     font-weight: 600;
@@ -161,32 +163,104 @@ font-weight:bold ;
     position: relative;
     right: 30px;
     cursor: pointer;
-    color:rgba(8, 57, 42, 0.713) ;
+    color:rgba(9, 102, 74, 0.713) ;
     font-size: 30px;
 }
 .reviews_container{
     display: flex;
-    gap: 10px;
-    justify-content: flex-start;
-    align-items: left;
-    justify-items: center;
-    align-content: center;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 270px;
   caret-color: transparent;
 }
 .reviews_container h4{
     display: block;
+    width: 90px;
    
 }
 .star{
-    font-size: 2rem;
+    font-size: 50px;
     color:rgba(9, 102, 74, 0.713) ;
-    position: relative;
-    bottom: 7px;
     cursor: pointer;
 }
 .star:hover{
     color:rgba(9, 87, 64, 0.713) ;
 }
+.place{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.place span{
+    font-size: 12px;
+font-weight:bold ;
+    font-family: "Dosis";
+
+}
+.place_icon{
+    font-size: 30px;
+    color: rgb(9, 102, 74);
+}
+.size_btn{
+    display: flex;
+    gap: 1rem;
+    justify-content: left;
+    align-items: center;
+}
+.size_button{
+    border: 2px solid rgba(9, 102, 74, 0.713);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight:bold ;
+        font-family: "Dosis";
+        cursor: pointer;
+        color: rgba(9, 102, 74, 0.713);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+.size_button:hover{
+    background-color: rgba(9, 102, 74, 0.713);
+    color: #fff;
+}
+.button_container{
+    width: min-content;
+    position: absolute;
+    left: 25px;
+  top: 7rem;
+  }
+  .back{
+    background-color: rgba(9, 102, 74, 0.713);
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .back:hover{
+    background-color: rgba(6, 78, 56, 0.713);
+  }
+  .card_overstock{
+    position: absolute;
+    width: 400px;
+    min-width: 335px;
+    height: 30px;
+    bottom: 0;
+    top: 18%;
+    transition: .5s ease;
+    background-color: #6a666667;
+    cursor: pointer;
+    color: rgb(240, 240, 240);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 @media (max-width: 768px) {
     .container{
         flex-direction: column;
@@ -197,7 +271,7 @@ font-weight:bold ;
     }
     .container img{
         width: 100%;
-        max-width: 340px;
+        max-width: 330px;
        
      
     
@@ -218,4 +292,10 @@ font-weight:bold ;
         width: 80%;
        
     }
+    .card_overstock{
+
+        width: 100%;
+        max-width: 330px;
+        height: 30px;
+      }
 }

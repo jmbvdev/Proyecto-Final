@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
+import Coinbase from "./Coinbase/Coinbase";
 
 function FormPostCheckout({
   items,
@@ -73,8 +74,41 @@ function FormPostCheckout({
 
   const handleFinish = (e) => {
     e.preventDefault();
-
-    setFinish(true);
+    if (!checked1 && !checked2) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "center-center",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: false,
+      });
+      Promise.resolve(
+        Toast.fire({
+          icon: "error",
+          title: `You have to choose one option!`,
+        })
+      );
+    } else {
+      setFinish(true);
+      axios.put(
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/extrasorder/${items[0].orderID}`,
+        {
+          extras: {
+            adress: inputs.adress,
+            adressNumber: inputs.adressNumber,
+            city: inputs.city,
+            sendOption:
+              (checked1 && "Local retirement") ||
+              (checked2 && "Andreani shipping"),
+            totalAmount: totalAmount,
+          },
+        }
+      );
+    }
   };
 
   let totalprod = 0;
@@ -131,15 +165,6 @@ function FormPostCheckout({
               />
               {valLet(inputs.adress) ? null : <span>Not valid</span>}
               <input
-                type="text"
-                name="name"
-                autoComplete="off"
-                placeholder="Who is receiving"
-                value={inputs.name}
-                onChange={handleOnChange}
-              />
-              {valLet(inputs.name) ? null : <span>Not valid</span>}
-              <input
                 name="adressNumber"
                 type="text"
                 autoComplete="off"
@@ -148,6 +173,16 @@ function FormPostCheckout({
                 onChange={handleOnChange}
               />
               {valN(inputs.adressNumber) ? null : <span>Not valid</span>}
+              <input
+                type="text"
+                name="name"
+                autoComplete="off"
+                placeholder="Who is receiving"
+                value={inputs.name}
+                onChange={handleOnChange}
+              />
+              {valLet(inputs.name) ? null : <span>Not valid</span>}
+
               <button
                 type="button"
                 disabled={
@@ -205,9 +240,12 @@ function FormPostCheckout({
             </div>
           )}
           {finish ? (
-            <div className={s.buttonMP}>
-              <MercadoPago items={items} totalAmount={totalAmount} />
-            </div>
+            <>
+              <div className={s.buttonMP}>
+                <MercadoPago items={items} totalAmount={totalAmount} />
+                <Coinbase totalAmount={totalAmount} />
+              </div>
+            </>
           ) : null}
         </div>
         <div className={s.resumeCart}>
@@ -228,7 +266,11 @@ function FormPostCheckout({
         </div>
 
         <div className={s.maps}>
-          <GoogleMaps retiro={checked1} andreani={checked2} />
+          <GoogleMaps
+            retiro={checked1}
+            andreani={checked2}
+            city={inputs.city}
+          />
         </div>
       </div>
     </div>

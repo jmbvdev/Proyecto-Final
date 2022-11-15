@@ -91,3 +91,111 @@ width: 100%;
 .img {
   max-width: 90px;
 }
+.input_container{
+  display: flex;
+ justify-content: flex-start;
+ align-items: center;
+
+  gap: 20px;
+}
+.search{
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+z-index: 2;
+  border-radius: 60px;
+  padding: 5px 10px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+}
+
+.search button {
+  font-size: 30px;
+  color: #4e524e;
+  position: relative;
+  top: 3px;
+
+}
+.search input::placeholder {
+  color: #071c089d;
+}
+.reset{
+  font-size: 30px;
+
+ color: #d5dcdb;
+cursor: pointer;
+background-color: transparent;
+}
+.container_search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.reset_container{
+margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.reset_container span{
+  font-family: "Dosis";
+  font-weight: bold;
+  font-size: small;
+}
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.pages_icon{
+background-color: #ccd1cc;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Dosis";
+
+
+}
+ .arrow{
+  color: #fff;
+  font-size: 30px;
+
+}
+.order{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+.order select{
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 2em;
+  line-height: 3;
+  background-color: #27262b;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-right: 30px;
+}

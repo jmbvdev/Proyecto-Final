@@ -11,12 +11,16 @@ import { useRef } from "react";
 import s from "../styles/userEdit.module.css";
 import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
-import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { GiPhone } from "react-icons/gi";
+import {MdLocationSearching}from "react-icons/md"
+import {MdLocationCity, MdLocationOn}from "react-icons/md"
 import { setCurrentUser } from "../Redux/actions/users/index.js";
 import ForgotenPassword from "./forgotenPassword";
 import axios from "axios";
+import {IoIosArrowBack}from "react-icons/io"
 import Swal from "sweetalert2";
+
+
 
 const UserEdit = () => {
   const initialState = {
@@ -35,6 +39,8 @@ const UserEdit = () => {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const fileRef = useRef(null);
   const [open, setOpen] = React.useState(false);
+  const [error, setError] = React.useState({});
+
   const sendNewPass = (e) => {
     e.preventDefault();
     setOpen(true);
@@ -43,6 +49,10 @@ const UserEdit = () => {
     if (fileRef.current) {
       fileRef.current.click();
     }
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   const handleImage = (e) => {
@@ -62,7 +72,7 @@ const UserEdit = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    //setError(validate({...input, [e.target.name] : e.target.value}))
+    setError(validate({...input, [e.target.name] : e.target.value}))
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -136,6 +146,12 @@ const UserEdit = () => {
 
   return (
     <div className={s.container}>
+       <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.profile}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
           <div className={s.input_label}>
@@ -163,12 +179,13 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
+              { error.displayName && (<p className={s.danger}>{error.displayName}</p>)}
             </div>
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>City</p>
             <div className={s.input_container}>
-              <BiUser className={s.user_icon} />
+              <MdLocationSearching className={s.user_icon} />
               <input
                 name="city"
                 value={input.city}
@@ -183,7 +200,7 @@ const UserEdit = () => {
             <p className={s.name_input}>Adress</p>
 
             <div className={s.input_container}>
-              <RiLockPasswordFill className={s.user_icon} />
+              <MdLocationOn className={s.user_icon} />
               <input
                 name="adress"
                 value={input.adress}
@@ -196,7 +213,7 @@ const UserEdit = () => {
             </div>
           </div>
           <div className={s.input_container}>
-            <RiLockPasswordLine className={s.user_icon} />
+            <MdLocationCity className={s.user_icon} />
             <input
               name="adressNumber"
               value={input.adressNumber}
@@ -240,7 +257,18 @@ const UserEdit = () => {
   );
 };
 
+const validate = input => {
+  let error = {};
+  if(!/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(input.displayName))  error.displayName = "Name invalid! (Ex : Juan Lopez)";
+  //if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(input.email))  error.email = "Email invalid! (Ex : juanlopez12@mail.com)";
+  //if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(input.password)) error.password = "Password invalid! (8-15 char., Cap. letter, at least 1 digit, No blanks, 1 special char)";
+  return error
+}
+
+
 export default UserEdit;
+
+
 
 /* 
 

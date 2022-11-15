@@ -159,6 +159,8 @@ gap: 4px;
  }
  .userPic{
  border-radius: 50%; 
+ /* height: 100px;
+ width: 100px; */
 }
 
 .positive_comments{

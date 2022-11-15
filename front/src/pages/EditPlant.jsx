@@ -2,23 +2,27 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DeleteProduct, GetProductDetails } from "../Redux/actions/products";
+
+import {
+  clearDetails,
+  DeleteProduct,
+  GetProductDetails,
+} from "../Redux/actions/products";
 import { GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
 import { FaDog } from "react-icons/fa";
+
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { AiFillHeart } from "react-icons/ai";
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
-
 import Loading from "../components/Loading";
-
 import { useRef } from "react";
 import s from "../styles/editPlant.module.css";
 import ShowProduct from "../components/ShowPlant";
 import { getPictureUrl, setPlantImage } from "../firebase/Controllers";
 import { validateEdit } from "../Util/validateEdit";
 import { editProduct } from "../Redux/actions/products";
+import { IoIosArrowBack } from "react-icons/io";
 
 const allCategories = ["easy care", "tabletop", "pet friendly"];
 const allSize = ["mini", "small", "medium", "large"];
@@ -93,7 +97,7 @@ const EditPlant = () => {
     // console.log(id)
     if (fileReader && files && files.length > 0) {
       fileReader.readAsArrayBuffer(files[0]);
-      fileReader.onload = async function () {
+      fileReader.onload = async function() {
         const imageData = fileReader.result;
 
         const res = await setPlantImage(id, imageData);
@@ -138,7 +142,8 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
-    navigate(-2);
+    dispatch(clearDetails());
+    navigate("/plants");
   }
 
   const handleOnSubmitForMod = (e) => {
@@ -159,6 +164,8 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    dispatch(clearDetails());
+    navigate("/plants");
   };
 
   const handleCategories = (e) => {
@@ -228,8 +235,22 @@ const EditPlant = () => {
   };
 
   const handleDelete = () => {
-    dispatch(DeleteProduct(id));
-    navigate(-2);
+    Swal.fire({
+      title: "Warning",
+      text: "Are you sure you want to delete this plant?",
+      icon: "error",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#72CE65",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#FF5733",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        dispatch(DeleteProduct(id));
+        dispatch(clearDetails());
+        navigate("/plants");
+      }
+    });
   };
 
   return (
@@ -239,6 +260,12 @@ const EditPlant = () => {
           <Loading />
         ) : (
           <div className={s.container}>
+                  <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
             <div className={s.wraper}>
               <div className={s.left}>
                 <form onSubmit={handleOnSubmit} className={s.form}>
@@ -400,8 +427,8 @@ const EditPlant = () => {
                   )}
 
                   {currentUser?.role[0] === "moderator" ? (
-                    <button type="button" onClick={handleOnSubmitForMod}>
-                      Update Stock
+                    <button type="button"  className={s.create_btn} onClick={handleOnSubmitForMod}>
+                      UPDATE STOCK
                     </button>
                   ) : null}
                 </form>

@@ -10,11 +10,11 @@
 }
 .card img{
     width: 100%;
+    height: 350px;
     caret-color: transparent;
 }
 .card_overlay{
     position: absolute;
-    margin-top: 10px;
     width: 90%;
     height: 350px;
     top: 0;
@@ -29,7 +29,6 @@
 }
 .card_overstock{
     position: absolute;
-    margin-top: 10px;
     width: 90%;
     height: 350px;
     top: 0;

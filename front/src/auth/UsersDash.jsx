@@ -91,31 +91,32 @@ const UserDetail = () => {
   };
 
   const handleSetAdmin = () => {
-    axios
-      .put(
-        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
-        { role: ["admin"] }
-      )
-      .then((res) => {
-        setUser(res.data);
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-right",
-          iconColor: "white",
-          customClass: {
-            popup: "colored-toast",
-          },
-          showConfirmButton: false,
-          timer: 2500,
-          timerProgressBar: false,
-        });
-        Promise.resolve(
-          Toast.fire({
-            icon: "info",
-            title: `This user is an admin now!`,
-          })
-        );
-      });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: true,
+      timer: 5000,
+      timerProgressBar: true,
+    });
+    Toast.fire({
+      icon: "question",
+      title: `Are you sure to set admin mode? Once it has been seted there is no way back!`,
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .put(
+            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/users/${id}`,
+            { role: ["admin"] }
+          )
+          .then((res) => {
+            setUser(res.data);
+          });
+      }
+    });
   };
   const handleSetModerator = () => {
     axios
@@ -217,9 +218,17 @@ const UserDetail = () => {
                     </div>
                   ) : (
                     <div>
-                      <button onClick={handleBanUser}>BAN USER</button>
-                      <button onClick={handleSetAdmin}>SET ADMIN ROLE</button>
-                      <button onClick={handleSetModerator}>SET MOD ROLE</button>
+                      {!user.disabled ? (
+                        <div>
+                          <button onClick={handleBanUser}>BAN USER</button>
+                          <button onClick={handleSetAdmin}>
+                            SET ADMIN ROLE
+                          </button>
+                          <button onClick={handleSetModerator}>
+                            SET MOD ROLE
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                   )
                 ) : null}
