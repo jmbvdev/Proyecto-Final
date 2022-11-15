@@ -1,7 +1,7 @@
 import {
   SAVE_CART,
   ADD_PRODUCT,
-  DELETE_PRODUCT,
+  DELETE_PRODUCT_SHOP,
   CHANGE_QUANTITY,
   DELETE_ALL,
   PURCHASE,
@@ -31,10 +31,10 @@ export const addProduct = (product, n) => {
   };
 };
 
-export const deleteProduct = (id) => {
+export const deleteProductShop = (id) => {
   localStorage.removeItem(id);
   return {
-    type: DELETE_PRODUCT,
+    type: DELETE_PRODUCT_SHOP,
     payload: id,
   };
 };

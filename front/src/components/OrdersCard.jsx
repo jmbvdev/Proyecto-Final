@@ -8,76 +8,115 @@ import s from "../styles/ordersUser.module.css"
 const OrdersCard = (props) => {
 
     const auxCart = [...props.data]
+    console.log("auxCart", auxCart)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUser = useSelector((state) => state.usersReducer.currentUser);
     const cart = useSelector((state) => state.shopCartReducer.products);
     const allProducts = useSelector((state) => state.productsReducer.allProducts)
-
+    console.log("cart", cart)
     const handleCreateSimilarOrder = () => {
         Swal.fire({
             title: 'Add order to cart?',
             showDenyButton: true,
-            showCancelButton: true,
+            showCancelButton: false,
             confirmButtonText: 'Add',
             denyButtonText: `Do not add`,
             allowOutsideClick: false,
         }).then((result) => {
 
             if (result.isConfirmed) {
-                let aux = []
-                cart.forEach((product) => {
-                    auxCart.forEach(item => {
-                        if (product.id === item.id) {
-                            aux.push({
-                                ...product,
-                                count: product.count + item.count
-                            })
-                        }
-                    })
-                })
-
-                let auxId = []
-                aux.forEach((item) => {
-                    auxId.push(item.id)
-                })
-                cart.forEach(item => {
-                    if (!auxId.includes(item.id)) {
-                        aux.push(item)
-                    }
-                })
-
-                let aux2 = []
-                aux.forEach((item) => {
-                    aux2.push(item.id)
-                })
-                auxCart.forEach(item => {
-                    if (!aux2.includes(item.id)) {
-                        aux.push(item)
-                    }
-                })
-
                 let a = []
                 let b = []
+                // console.log("cart", cart);
+                // console.log("auxCart", auxCart)
 
-                aux.forEach((item) => {
-                    allProducts.forEach((item2) => {
-                        if (item.id == item2.id) {
-                            if (item.count > item2.data.stock) {
-                                a.push({
-                                    ...item,
-                                    count: item2.data.stock
-                                })
-                                b.push({
-                                    name: item.name,
-                                    count: item2.data.stock
-                                })
-                            } else {
-                                a.push(item);
+                if (cart.length === 0) {
+                    let result = []
+                    auxCart.forEach((item) => {
+                        allProducts.forEach((product) => {
+                            if (item.id === product.id) {
+                                if (item.count > product.data.stock) {
+                                    a.push({
+                                        ...item,
+                                        count: product.data.stock,
+                                        stock: product.data.stock,
+                                    })
+                                    b.push({
+                                        name: item.name,
+                                        count: product.data.stock
+                                    })
+                                } else {
+                                    a.push({
+                                        ...item,
+                                        stock: product.data.stock,
+                                    });
+                                }
                             }
+                        })
+                    })
+
+                } else {
+                    let aux = []
+                    cart.forEach((product) => {
+
+                        auxCart.forEach(item => {
+                            if (product.id === item.id) {
+                                aux.push({
+                                    ...product,
+                                    count: product.count + item.count
+                                })
+                            }
+                        })
+                    })
+
+                    let auxId = []
+                    aux.forEach((item) => {
+                        auxId.push(item.id)
+                    })
+                    cart.forEach(item => {
+                        if (!auxId.includes(item.id)) {
+                            aux.push(item)
                         }
-                    });
-                });
+                    })
+
+                    let aux2 = []
+                    aux.forEach((item) => {
+                        aux2.push(item.id)
+                    })
+                    auxCart.forEach(item => {
+                        if (!aux2.includes(item.id)) {
+                            aux.push(item)
+                        }
+                    })
+
+                    aux.forEach((item) => {
+                        allProducts.forEach((product) => {
+                            if (item.id === product.id) {
+                                if (item.count > product.data.stock) {
+                                    a.push({
+                                        ...item,
+                                        count: product.data.stock,
+                                        stock: product.data.stock,
+                                    })
+                                    b.push({
+                                        name: item.name,
+                                        count: product.data.stock
+                                    })
+                                } else {
+                                    a.push({
+                                        ...item,
+                                        stock: product.data.stock,
+                                    });
+                                }
+                            }
+                        })
+                    })
+                }
+
+                console.log("a", a)
+
                 if (b.length > 0) {
                     dispatch(saveCart(
                         a,
@@ -88,9 +127,7 @@ const OrdersCard = (props) => {
                         icon: 'info',
                         text: `We do not have the required quantities of the following plants. We load the stock in existence to the cart: ${b.map(item => { return ` ${item.name}: ${item.count} ` })}`,
                     })
-
                 } else {
-
                     dispatch(saveCart(
                         a,
                         currentUser.uid))
@@ -147,7 +184,7 @@ const OrdersCard = (props) => {
                         </div>
                     </div >
             }
-            
+
         </div >
     )
 }

@@ -1,7 +1,7 @@
 import {
   SAVE_CART,
   ADD_PRODUCT,
-  DELETE_PRODUCT,
+  DELETE_PRODUCT_SHOP,
   CHANGE_QUANTITY,
   DELETE_ALL,
   PURCHASE,
@@ -39,7 +39,7 @@ export default function shopCartReducer(state = initialState, action) {
       ],
     };
   }
-  if (action.type === DELETE_PRODUCT) {
+  if (action.type === DELETE_PRODUCT_SHOP) {
     return {
       products: state.products.filter((p) => {
         return p.id !== action.payload;
