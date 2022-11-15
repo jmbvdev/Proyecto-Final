@@ -134,9 +134,6 @@ const UsersDash = () => {
             </button>
 
           </div>
-          <div>
-            
-          </div>
             <Table columns={columns} data={data} />
         </div>
     )
