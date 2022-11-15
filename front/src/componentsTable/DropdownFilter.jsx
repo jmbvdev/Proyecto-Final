@@ -28,7 +28,7 @@ const DropdownFilter = ({
         >
             <option value="">All</option>
             {options.map((option, i) => (
-                <option key={i} value={option}>
+                <option className={s.order_option} key={i} value={option}>
                     {option}
                 </option>
             ))}

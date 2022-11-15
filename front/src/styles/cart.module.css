@@ -146,10 +146,10 @@ margin: 10px;
 }
 .delete{
     color: rgba(164, 5, 5, 0.681);
-    font-size: 1.8rem;
+    font-size: 2rem;
     cursor: pointer;
     position: relative;
-    top: 3px;
+   
 }
 .delete:hover{
     color: rgba(200, 2, 2, 0.794);
@@ -248,6 +248,11 @@ margin: 10px;
 .discount_container{
     display: flex;
     flex-direction: column;
+}
+.fav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 @media (max-width: 1000px) {
     .check{
