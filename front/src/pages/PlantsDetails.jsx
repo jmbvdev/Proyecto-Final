@@ -6,10 +6,10 @@ import { clearDetails, GetProductDetails } from "../Redux/actions/products";
 import { GiLindenLeaf, GiTable } from "react-icons/gi";
 import { TbPlant2 } from "react-icons/tb";
 import { FaComment, FaCommentDots, FaDog } from "react-icons/fa";
-import {SiThymeleaf}from "react-icons/si"
+import { SiThymeleaf } from "react-icons/si";
 import s from "../styles/details.module.css";
 import { useState } from "react";
-import {RiEdit2Fill } from "react-icons/ri";
+import { RiEdit2Fill } from "react-icons/ri";
 import { addProduct, saveCart } from "../Redux/actions/shopCart";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
@@ -57,7 +57,6 @@ const PlantsDetails = () => {
     bgcolor: "transparent",
     border: "none",
     p: 4,
- 
   };
 
   useEffect(() => {
@@ -128,8 +127,6 @@ const PlantsDetails = () => {
       denyButtonColor: "rgba(11, 115, 147, 0.713)",
       confirmButtonText: "ok",
       confirmButtonColor: "rgb(9, 102, 74)",
-     
-
     }).then((res) => {
       if (res.isDenied) {
         navigate("/cart");
@@ -169,20 +166,27 @@ const PlantsDetails = () => {
   }
 
   const handleOpen = () => {
-    if (!currentUser) {return Swal.fire({
-      title: "Wait...",
-      text: "Your have to sign in to add a coment",
-      icon: "failure",
-      showDenyButton: false,
-      denyButtonText: "",
-      denyButtonColor: "rgba(11, 115, 147, 0.713)",
-      confirmButtonText: "Sign In",
-      confirmButtonColor: "rgb(9, 102, 74)",
-    }).then((res) => {
-      navigate("/sign-in");
-    });}
+    if (!currentUser) {
+      return Swal.fire({
+        title: "Wait...",
+        text: "Your have to sign in to add a coment",
+        icon: "failure",
+        showDenyButton: false,
+        denyButtonText: "",
+        denyButtonColor: "rgba(11, 115, 147, 0.713)",
+        confirmButtonText: "Sign In",
+        confirmButtonColor: "rgb(9, 102, 74)",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+    }
+    if (plant.logicalDeletion) {
+      return;
+    }
     const user = view.find((e) => e.data.userUID === currentUser.uid);
-    
+
     if (user) {
       Promise.resolve(
         Swal.fire({
@@ -201,7 +205,7 @@ const PlantsDetails = () => {
   };
   const handleOpenReview = () => {
     //if (!currentUser) return;
-   // const user = view.find((e) => e.data.userUID === currentUser.uid);
+    // const user = view.find((e) => e.data.userUID === currentUser.uid);
     // if (!currentUser) {
     //   Promise.resolve(
     //     Swal.fire({
@@ -215,7 +219,13 @@ const PlantsDetails = () => {
     // //   );
     //   return;
     //}
-    if(view.length===0)return Swal.fire("There are no comments, take the opportunity to leave one")
+    if (plant.logicalDeletion) {
+      return;
+    }
+    if (view.length === 0)
+      return Swal.fire(
+        "There are no comments, take the opportunity to leave one"
+      );
     setOpenReview(true);
   };
   const handleClose = () => setOpen(false);
@@ -223,17 +233,24 @@ const PlantsDetails = () => {
 
   return plant?.name ? (
     <div className={s.container}>
-       <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
+      <div className={s.button_container}>
+        <button onClick={() => navigate(-1)} className={s.back}>
+          <IoIosArrowBack />
+        </button>
+      </div>
+      <div>
+        <img src={plant?.image} alt="" />
+        {plant?.stock === 0 ? (
+          <div className={s.card_overstock}>
+            <p>Out of stock</p>
           </div>
-        <div>
-
-      <img src={plant?.image} alt="" />
-      {plant?.stock === 0 ? <div className={s.card_overstock}><p>Out of stock</p></div> : null}
-      {plant?.logicalDeletion ? <div className={s.card_overstock}><p>Discontinued product</p></div> : null}
-        </div>
+        ) : null}
+        {plant?.logicalDeletion ? (
+          <div className={s.card_overstock}>
+            <p>Discontinued product</p>
+          </div>
+        ) : null}
+      </div>
       <div className={s.details}>
         <h1>{plant?.name} </h1>
         <div>
@@ -262,15 +279,14 @@ const PlantsDetails = () => {
                 </div>
               );
             })}
-            <div className={s.place}>
-              {
-                plant?.place && plant?.place ==="indoor"?
-                <SiThymeleaf className={s.place_icon}/>:
-                <GiLindenLeaf className={s.place_icon}/>
-              }
-              <span>{plant?.place.toUpperCase()}</span>
-
-            </div>
+          <div className={s.place}>
+            {plant?.place && plant?.place === "indoor" ? (
+              <SiThymeleaf className={s.place_icon} />
+            ) : (
+              <GiLindenLeaf className={s.place_icon} />
+            )}
+            <span>{plant?.place.toUpperCase()}</span>
+          </div>
         </div>
         {plant?.small || plant?.medium || plant?.large ? (
           <MoreSizes
@@ -288,34 +304,37 @@ const PlantsDetails = () => {
             <h4>Stock</h4>
             <span>{plant?.stock}</span>
           </div>
-          {
-            plant?.stock > 0 ?
-          <div className={s.quantity}>
-            <button
-              disabled={
-                quantity === 1 || plant?.stock === 0 || plant?.logicalDeletion
-              }
-              onClick={() => setQuantity(quantity - 1)}
-            >
-              -
-            </button>
-            <p>{plant?.stock === 0 ? plant?.stock : quantity}</p>
-            <button
-              disabled={
-                quantity === plant?.stock ||
-                plant?.stock === 0 ||
-                plant?.logicalDeletion
-              }
-              onClick={() => setQuantity(quantity + 1)}
-            >
-              +
-            </button>
-          </div> : null
-          }
+          {plant?.stock > 0 ? (
+            <div className={s.quantity}>
+              <button
+                disabled={
+                  quantity === 1 || plant?.stock === 0 || plant?.logicalDeletion
+                }
+                onClick={() => setQuantity(quantity - 1)}
+              >
+                -
+              </button>
+              <p>{plant?.stock === 0 ? plant?.stock : quantity}</p>
+              <button
+                disabled={
+                  quantity === plant?.stock ||
+                  plant?.stock === 0 ||
+                  plant?.logicalDeletion
+                }
+                onClick={() => setQuantity(quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+          ) : null}
         </div>
         <div className={s.favorites}>
           <h4>Add to favorites</h4>
-          <FavButton id={id} user={currentUser?.uid} />
+          <FavButton
+            id={id}
+            user={currentUser?.uid}
+            log={plant?.logicalDeletion}
+          />
           {!currentUser || currentUser?.role?.[0] === "user" ? null : (
             <div className={s.edit_btn}>
               <h4>Edit</h4>
@@ -329,20 +348,20 @@ const PlantsDetails = () => {
           <h4>Add a review</h4>
 
           <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
-        <div>
-          {/* {currentUser ? ( */}
+          <div>
+            {/* {currentUser ? ( */}
             <div className={s.favorites}>
               <h4>See reviews</h4>
               <FaCommentDots className={s.hearth} onClick={handleOpenReview} />
             </div>
-          {/* ) : (
+            {/* ) : (
             // <button className={s.noreview} onClick={handleRedirect}>
             //   Sign in to leave a review
             // </button>
             null
           )
           } */}
-        </div>
+          </div>
         </div>
 
         {cart.findIndex((e) => e.id === id) !== -1 && (
@@ -377,7 +396,7 @@ const PlantsDetails = () => {
           >
             <Box sx={styleReview}>
               <View_Reviews
-              setOpenReview={setOpenReview}
+                setOpenReview={setOpenReview}
                 view={view}
                 user={currentUser?.uid}
                 setView={setView}

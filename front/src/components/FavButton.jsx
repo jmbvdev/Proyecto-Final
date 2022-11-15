@@ -5,9 +5,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function FavButton({ id, user, iamInFavPage, icon }) {
+export default function FavButton({ id, user, iamInFavPage, icon, log }) {
   const navigate = useNavigate();
   function handleFav(e) {
+    if (log) {
+      return;
+    }
     e.preventDefault();
     if (!user) {
       Swal.fire({
