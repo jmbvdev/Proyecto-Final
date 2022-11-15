@@ -18,6 +18,10 @@ const HomeList = () => {
     dispatch(GetAllProducts());
   }, []);
 
+  const handleScroll = () => {
+    window.scrollTo(0, {behavior: 'smooth'})
+  }
+
   return (
     <>
        <ScrollAnimation animateIn="fadeInDown" animateOnce={true} >
@@ -36,8 +40,9 @@ const HomeList = () => {
         </div>
       </div>
       <ScrollAnimation animateIn="fadeInDown" animateOnce={true} className={s.show}>
-        <Link className={s.show_a} to="/plants">
+        <Link className={s.show_a} to="/plants"><button onClick={handleScroll}>
           show all <AiOutlineRight className={s.show_arrow} />
+          </button>
         </Link>
     
 

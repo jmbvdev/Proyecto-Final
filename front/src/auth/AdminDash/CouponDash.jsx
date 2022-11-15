@@ -13,7 +13,6 @@ const CuponDash = () => {
 
   const initialState = {
     name: "",
-    count: "",
     discount: "",
   };
 
@@ -40,9 +39,12 @@ const CuponDash = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if(input.name !== "" && input.count !== "" && input.discount !== ""){
+    if(input.name !== "" && input.discount !== ""){
     axios.post(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/create`, input)
-    .then((res) => console.log(res.data));
+    .then((res) => {
+        setCoupons([...coupons, res])
+        return
+    });
     }
     setInput(initialState);
     Swal.fire({
@@ -116,9 +118,24 @@ const CuponDash = () => {
   };
 
   const handleDelete = name => {
+    Swal.fire({
+      title: "Confirm",
+      text: "Are yo sure you want to delete this coupon?",
+      icon: "question",
+      showDenyButton: true,
+      denyButtonText: "No",
+      denyButtonColor: "#FF5733",
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#72CE65",
+    });
+
     axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
-    .then(res => console.log(res.data))
-    alert(`${name} deleted`)
+    .then(res => {
+      console.log(res)
+    });
+
+    
+    setCoupons(coupons.filter(c => c.data.name !== name))      
   };
 
   const columns = React.useMemo(() => [
@@ -134,10 +151,6 @@ const CuponDash = () => {
     {
         Header: 'Info',
         columns: [
-                    {
-                        Header: 'Quantity',
-                        accessor: 'count'
-                    },
                     {
                       Header: 'Disount',
                       accessor: 'discount'
@@ -191,7 +204,7 @@ const data = coupons?.map(c => {
               />
               { error.name && (<p className={s.danger}>{error.name}</p>)}
             </div>
-            <div className={s.input_container}>
+            {/* <div className={s.input_container}>
               <input
                 className={s.input_text}
                 name="count"
@@ -202,7 +215,7 @@ const data = coupons?.map(c => {
                 min="1"
                 max="100"
               />
-            </div>
+            </div> */}
             <div className={s.input_container}>
               <input
                 className={s.input_text}
@@ -219,7 +232,6 @@ const data = coupons?.map(c => {
               <button
                 disabled={
                   !input.name ||
-                  !input.count ||
                   !input.discount ||
                   error.length>0
                 }
