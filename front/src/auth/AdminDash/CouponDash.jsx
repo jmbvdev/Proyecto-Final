@@ -40,23 +40,63 @@ const CuponDash = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if(input.name !== "" && input.discount !== ""){
-    axios.post(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/create`, input)
-    .then((res) => {
-        setCoupons([...coupons, res])
-        return
-    });
+
+      Swal.fire({
+        title: "Confirm",
+        text: "Are yo sure you want to create this coupon?",
+        icon: "question",
+        showDenyButton: true,
+        denyButtonText: "No",
+        denyButtonColor: "#FF5733",
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#72CE65",
+      }).then((res) => {
+        if(res.isConfirmed){
+          axios.post(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/create`, input)
+          .then((res) => {
+              setCoupons([...coupons, res])
+              const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-right",
+                  iconColor: "white",
+                  customClass: {
+                    popup: "colored-toast",
+                  },
+                  showConfirmButton: false,
+                  timer: 3500,
+                  timerProgressBar: false,
+                });
+              Promise.resolve(
+                Toast.fire({
+                  icon: "success",
+                  title: `Coupon succesfully created!`,
+               })
+          );
+              return
+          });
+        } else {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: false,
+          });
+          Promise.resolve(
+            Toast.fire({
+              icon: "error",
+              title: 'Coupon creation canceled',
+            })
+          );
+        }
+      })
     }
     setInput(initialState);
-    Swal.fire({
-      title: "Confirm",
-      text: "Are yo sure you want to create this coupon?",
-      icon: "question",
-      showDenyButton: true,
-      denyButtonText: "No",
-      denyButtonColor: "#FF5733",
-      confirmButtonText: "Yes",
-      confirmButtonColor: "#72CE65",
-    });
+
   };
 
   
@@ -127,15 +167,51 @@ const CuponDash = () => {
       denyButtonColor: "#FF5733",
       confirmButtonText: "Yes",
       confirmButtonColor: "#72CE65",
-    });
-
-    axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
-    .then(res => {
-      console.log(res)
-    });
-
-    
-    setCoupons(coupons.filter(c => c.data.name !== name))      
+    }).then(res => {
+      if(res.isConfirmed){
+        axios.delete(`http://localhost:5000/api-plants-b6153/us-central1/app/coupons/${name}`)
+        .then(res => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: false,
+          });
+        Promise.resolve(
+          Toast.fire({
+            icon: "success",
+            title: `Coupon succesfully deleted!`,
+         })
+        );
+        return
+        });
+        setCoupons(coupons.filter(c => c.data.name !== name))      
+      }
+      else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "error",
+            title: 'Coupon deletion canceled',
+          })
+        );
+      }
+    })
   };
 
   const columns = React.useMemo(() => [
