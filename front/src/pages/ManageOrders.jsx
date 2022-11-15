@@ -84,7 +84,8 @@ export default function ManageOrders() {
 
     axios
       .get(
-        "https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/all"
+        // "https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/all"
+        "http://localhost:5000/api-plants-b6153/us-central1/app/orders/all"
       )
       .then((res) => {
         setAuxOrders(res.data);
@@ -97,7 +98,6 @@ export default function ManageOrders() {
       .then((response) => {
         setAllusers(response.data)
       });
-
 
   };
 

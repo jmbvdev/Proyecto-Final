@@ -59,6 +59,7 @@ export const editProduct = (id, data) => {
       )
       .then((res) => {
         dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
+
         const Toast = Swal.mixin({
           toast: true,
           position: "top-right",
@@ -75,6 +76,7 @@ export const editProduct = (id, data) => {
             icon: "info",
             title: `The product has been updated`,
           })
+
         );
       });
   };

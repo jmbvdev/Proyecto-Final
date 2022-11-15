@@ -55,7 +55,7 @@ const PlantInfoBot = () => {
           plantDetail?.hasOwnProperty("details") &&plantDetail?.details
           }
           {
-             !plantDetail?.details.length && details?.hasOwnProperty("id") ?"this plant is not in hour store":null
+             !plantDetail?.details.length && details?.hasOwnProperty("id") ?"this plant is not in our store":null
           }
      
       </p>
