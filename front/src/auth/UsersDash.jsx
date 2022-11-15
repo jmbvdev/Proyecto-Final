@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 import { IoIosArrowBack } from "react-icons/io";
 import Swal from "sweetalert2";
+import avatar from "../images/avatar 1.gif";
 
 const UserDetail = () => {
   const [user, setUser] = React.useState(null);
@@ -186,9 +187,12 @@ const UserDetail = () => {
             <div className={s.specs}>
               <p>{user.customClaims?.role?.[0] || "User"}</p>
               <img
-                src={user.photoURL}
-                alt={user.displayName}
-                className={s.profile_pic}
+                src={user?.photoURL || avatar}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = "https://i.stack.imgur.com/4powQ.gif";
+                }}
+                alt="Not Found"
               />
               <h2>{user.displayName}</h2>
               <div className={s.text_specs}>

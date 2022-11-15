@@ -80,7 +80,11 @@ const CreatePlant = () => {
       fileReader.onload = async function() {
         const imageData = fileReader.result;
         // setImage(imageData)
-        Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
+        Swal.fire(
+          "Please wait a moment the image upload is being processed",
+          "",
+          "info"
+        );
         const res = await setPlantImage(id, imageData);
         console.log(res);
         const url = await getPictureUrl(id);
@@ -152,9 +156,8 @@ const CreatePlant = () => {
       stock: 0,
       type: "plant",
       logicalDeletion: false,
-    })
-    setImage("")
-    Swal.fire('Product created', '', 'info')
+    });
+    setImage("");
     dispatch(clearDetails());
   }
 

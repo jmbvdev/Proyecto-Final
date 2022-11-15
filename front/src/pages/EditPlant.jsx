@@ -66,7 +66,21 @@ const EditPlant = () => {
     dispatch(GetProductDetails(id)).then(() => {
       setIsLoading(false);
     });
+
+    return () => {
+      dispatch(clearDetails());
+    };
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (plant?.hasOwnProperty("name")) {
+      setInput({
+        ...input,
+        stock: plant.stock,
+        logicalDeletion: plant.logicalDeletion,
+      });
+    }
+  }, [plant]);
 
   const [error, setError] = useState({});
 
@@ -77,7 +91,7 @@ const EditPlant = () => {
     name: "",
     price: 0,
     size: [],
-    stock: plant?.stock,
+    stock: "0",
     //type: "",
     logicalDeletion: false,
   });
@@ -99,7 +113,11 @@ const EditPlant = () => {
       fileReader.readAsArrayBuffer(files[0]);
       fileReader.onload = async function() {
         const imageData = fileReader.result;
-        Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
+        Swal.fire(
+          "Please wait a moment the image upload is being processed",
+          "",
+          "info"
+        );
         const res = await setPlantImage(id, imageData);
         console.log(res);
         const url = await getPictureUrl(id);
@@ -136,10 +154,7 @@ const EditPlant = () => {
       size: input.size.length ? input.size[0] : plant.size,
       stock: parseInt(input.stock),
       // type: input.type,
-      logicalDeletion:
-        input.logicalDeletion !== plant.logicalDeletion
-          ? input.logicalDeletion
-          : plant.logicalDeletion,
+      logicalDeletion: input.logicalDeletion,
     };
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
@@ -158,10 +173,7 @@ const EditPlant = () => {
       size: plant.size,
       stock: parseInt(input.stock),
       // type: input.type,
-      logicalDeletion:
-        input.logicalDeletion !== plant.logicalDeletion
-          ? input.logicalDeletion
-          : plant.logicalDeletion,
+      logicalDeletion: input.logicalDeletion,
     };
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
@@ -260,12 +272,11 @@ const EditPlant = () => {
           <Loading />
         ) : (
           <div className={s.container}>
-                  <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
-
-          </div>
+            <div className={s.button_container}>
+              <button onClick={() => navigate(-1)} className={s.back}>
+                <IoIosArrowBack />
+              </button>
+            </div>
             <div className={s.wraper}>
               <div className={s.left}>
                 <form onSubmit={handleOnSubmit} className={s.form}>
@@ -428,31 +439,34 @@ const EditPlant = () => {
                   )}
 
                   {currentUser?.role[0] === "moderator" ? (
-                    <button type="button"  className={s.create_btn} onClick={handleOnSubmitForMod}>
+                    <button
+                      type="button"
+                      className={s.create_btn}
+                      onClick={handleOnSubmitForMod}
+                    >
                       UPDATE STOCK
                     </button>
                   ) : null}
                 </form>
               </div>
-
-              <div className={s.right}>
-                <ShowProduct
-                  image={image || plant?.image}
-                  name={input.name || plant?.name}
-                  details={input.details || plant?.details}
-                  categories={
-                    (input.categories.length && input.categories) ||
-                    plant?.categories
-                  }
-                  price={(input.price !== 0 && input.price) || plant?.price}
-                  logicalDeletion={
-                    input.logicalDeletion || plant?.logicalDeletion
-                  }
-                  type={plant?.type}
-                  stock={parseInt(input.stock)}
-                  size={(input.size.length && input.size) || plant?.size}
-                />
-              </div>
+              {!isLoading ? (
+                <div className={s.right}>
+                  <ShowProduct
+                    image={image || plant?.image}
+                    name={input.name || plant?.name}
+                    details={input.details || plant?.details}
+                    categories={
+                      (input.categories.length && input.categories) ||
+                      plant?.categories
+                    }
+                    price={(input.price !== 0 && input.price) || plant?.price}
+                    logicalDeletion={input.logicalDeletion}
+                    type={plant?.type}
+                    stock={parseInt(input.stock)}
+                    size={(input.size.length && input.size) || plant?.size}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         )}

@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import { RiCoupon2Fill, RiPlantFill } from "react-icons/ri";
-import avatar from "../images/avatar 1.gif"
-import { BiStats} from "react-icons/bi";
-import {IoIosArrowBack, IoIosCreate } from "react-icons/io";
+import avatar from "../images/avatar 1.gif";
+import { BiStats } from "react-icons/bi";
+import { IoIosArrowBack, IoIosCreate } from "react-icons/io";
 import s from "../styles/dashboard.module.css";
 import image from "../images/profile.webp";
 
-
 const Dashboard = () => {
-
   const user = useSelector((state) => state.usersReducer.currentUser);
   const [role, setRole] = React.useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -27,23 +25,20 @@ const Dashboard = () => {
 
   return (
     <div className={s.container}>
-           <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
-
-          </div>
+      <div className={s.button_container}>
+        <button onClick={() => navigate(-1)} className={s.back}>
+          <IoIosArrowBack />
+        </button>
+      </div>
       <div className={s.profile}>
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
           <img
-
             src={user?.photoURL || avatar}
-            onError ={({currentTarget})=> {
-              currentTarget.onerror=null;
-              currentTarget.src= "https://i.stack.imgur.com/4powQ.gif"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src = "https://i.stack.imgur.com/4powQ.gif";
             }}
-
             alt={user?.displayName}
             className={s.profile_pic}
           />
@@ -71,67 +66,71 @@ const Dashboard = () => {
             </div>
             {role === "admin" ? (
               <div className={s.btn_container}>
-                <div className={s.admin} onClick={() => navigate("/dashboard/users")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/dashboard/users")}
+                >
                   <FaUserCircle className={s.admin_icon} />
-                  <button >
-                    USERS
-                  </button>
+                  <button>USERS</button>
                 </div>
-                <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/dashboard/products")}
+                >
                   <RiPlantFill className={s.admin_icon} />
-                  <button >
-                    PRODUCTS
-                  </button>
+                  <button>PRODUCTS</button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/manage-order")}
+                >
                   <FaShoppingBag className={s.admin_icon} />
-                  <button>
-                    ORDERS
-                  </button>
+                  <button>ORDERS</button>
                 </div>
-                <div className={s.admin} onClick={() => navigate("/dashboard/coupons")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/dashboard/coupons")}
+                >
                   <RiCoupon2Fill className={s.admin_icon} />
-                  <button >
-                    COUPONS
-                  </button>
+                  <button>COUPONS</button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/create")}>
-                <IoIosCreate className={s.admin_icon} />
+                <div className={s.admin} onClick={() => navigate("/create")}>
+                  <IoIosCreate className={s.admin_icon} />
                   <button>CREATE</button>
-
                 </div>
-                <div className={s.admin} onClick={() => navigate("/stadistics")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/stadistics")}
+                >
                   <BiStats className={s.admin_icon} />
-                  <button >
-                    STATISTICS
-                  </button>
+                  <button>STATISTICS</button>
                 </div>
               </div>
             ) : role === "moderator" ? (
               <div className={s.btn_container}>
-                 <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/dashboard/products")}
+                >
                   <RiPlantFill className={s.admin_icon} />
-                  <button >
-                    PRODUCTS
-                  </button>
+                  <button>PRODUCTS</button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate("/manage-order")}
+                >
                   <FaShoppingBag className={s.admin_icon} />
-                  <button>
-                    ORDERS
-                  </button>
+                  <button>ORDERS</button>
                 </div>
-
-              
               </div>
             ) : role === "user" ? (
               <div className={s.btn_container}>
-
-<div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                <div
+                  className={s.admin}
+                  onClick={() => navigate(`/orders/${user?.uid}`)}
+                >
                   <FaShoppingBag className={s.admin_icon} />
-                  <button>
-                    ORDERS
-                  </button>
+                  <button>ORDERS</button>
                 </div>
               </div>
             ) : null}
