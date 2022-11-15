@@ -246,6 +246,21 @@ font-weight:bold ;
   .back:hover{
     background-color: rgba(6, 78, 56, 0.713);
   }
+  .card_overstock{
+    position: absolute;
+    width: 400px;
+    min-width: 335px;
+    height: 30px;
+    bottom: 0;
+    top: 18%;
+    transition: .5s ease;
+    background-color: #6a666667;
+    cursor: pointer;
+    color: rgb(240, 240, 240);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 @media (max-width: 768px) {
     .container{
         flex-direction: column;
@@ -256,7 +271,7 @@ font-weight:bold ;
     }
     .container img{
         width: 100%;
-        max-width: 340px;
+        max-width: 330px;
        
      
     
@@ -277,4 +292,10 @@ font-weight:bold ;
         width: 80%;
        
     }
+    .card_overstock{
+
+        width: 100%;
+        max-width: 330px;
+        height: 30px;
+      }
 }

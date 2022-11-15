@@ -28,6 +28,7 @@ const PlantsDetails = () => {
   const plant = useSelector(
     (state) => state.productsReducer.productDetails.data
   );
+
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const cart = useSelector((state) => state.shopCartReducer.products);
 
@@ -183,6 +184,7 @@ const PlantsDetails = () => {
   };
   const handleClose = () => setOpen(false);
   const handleCloseReview = () => setOpenReview(false);
+
   return plant?.name ? (
     <div className={s.container}>
        <div className={s.button_container}>
@@ -190,7 +192,12 @@ const PlantsDetails = () => {
               <IoIosArrowBack/>
             </button>
           </div>
+        <div>
+
       <img src={plant?.image} alt="" />
+      {plant?.stock === 0 ? <div className={s.card_overstock}><p>Out of stock</p></div> : null}
+      {plant?.logicalDeletion ? <div className={s.card_overstock}><p>Discontinued product</p></div> : null}
+        </div>
       <div className={s.details}>
         <h1>{plant?.name} </h1>
         <div>
@@ -245,6 +252,8 @@ const PlantsDetails = () => {
             <h4>Stock</h4>
             <span>{plant?.stock}</span>
           </div>
+          {
+            plant?.stock > 0 ?
           <div className={s.quantity}>
             <button
               disabled={
@@ -265,7 +274,8 @@ const PlantsDetails = () => {
             >
               +
             </button>
-          </div>
+          </div> : null
+          }
         </div>
         <div className={s.favorites}>
           <h4>Add to favorites</h4>

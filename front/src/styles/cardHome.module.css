@@ -63,3 +63,23 @@
     font-size: 20px;
 
 }
+.card_overstock{
+    position: absolute;
+    height: 20px;
+    top: 20px;
+    display: flex;
+   justify-content: center;
+   text-align: center;
+   align-items: center;
+    width: 270px;
+    cursor: pointer;
+   
+   
+}
+.card_overstock p{
+    color: #868a85;
+    font-size: larger;
+    width: 100%;
+    font-family: "Roboto";
+    background-color: rgba(255, 255, 255, 0.653);
+}
