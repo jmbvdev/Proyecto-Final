@@ -7,6 +7,7 @@ import {
   PURCHASE,
   LOAD_CART,
   CLEAR_CART,
+  UPDATE_CART
 } from "../../actions/shopCart/actiontypes.js";
 
 /* 
@@ -70,6 +71,12 @@ export default function shopCartReducer(state = initialState, action) {
   }
   if (action.type === CLEAR_CART) {
     return initialState;
+  }
+  if (action.type === UPDATE_CART) {
+    return {
+      ...state,
+      products: action.payload
+    }
   }
   return state;
 }

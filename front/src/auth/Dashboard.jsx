@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "../Redux/actions/users";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
-import { RiPlantFill } from "react-icons/ri";
+import { RiCoupon2Fill, RiPlantFill } from "react-icons/ri";
 import avatar from "../images/avatar 1.gif"
+import { BiStats} from "react-icons/bi";
+import {IoIosArrowBack, IoIosCreate } from "react-icons/io";
 import s from "../styles/dashboard.module.css";
 import image from "../images/profile.webp";
-import { Link } from "react-router-dom";
+
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.usersReducer.currentUser);
   const [role, setRole] = React.useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -27,6 +27,12 @@ const Dashboard = () => {
 
   return (
     <div className={s.container}>
+           <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.profile}>
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
@@ -63,52 +69,69 @@ const Dashboard = () => {
             </div>
             {role === "admin" ? (
               <div className={s.btn_container}>
-                <div className={s.admin}>
+                <div className={s.admin} onClick={() => navigate("/dashboard/users")}>
                   <FaUserCircle className={s.admin_icon} />
-                  <button onClick={() => navigate("/dashboard/users")}>
+                  <button >
                     USERS
                   </button>
                 </div>
-                <div className={s.admin}>
+                <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
                   <RiPlantFill className={s.admin_icon} />
-                  <button onClick={() => navigate("/dashboard/products")}>
+                  <button >
                     PRODUCTS
                   </button>
                 </div>
-                <div className={s.admin}>
+                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
                   <FaShoppingBag className={s.admin_icon} />
-                  <button onClick={() => navigate("/manage-order")}>
+                  <button>
                     ORDERS
                   </button>
                 </div>
-                <div className={s.admin}>
-                  <FaShoppingBag className={s.admin_icon} />
-                  <button onClick={() => navigate("/dashboard/coupons")}>
+                <div className={s.admin} onClick={() => navigate("/dashboard/coupons")}>
+                  <RiCoupon2Fill className={s.admin_icon} />
+                  <button >
                     COUPONS
                   </button>
-                  <RiPlantFill className={s.admin_icon} />
-                  <button onClick={() => navigate("/create")}>CREATE</button>
                 </div>
-                <div className={s.admin}>
-                  <RiPlantFill className={s.admin_icon} />
-                  <button onClick={() => navigate("/stadistics")}>
+                <div className={s.admin}  onClick={() => navigate("/create")}>
+                <IoIosCreate className={s.admin_icon} />
+                  <button>CREATE</button>
+
+                </div>
+                <div className={s.admin} onClick={() => navigate("/stadistics")}>
+                  <BiStats className={s.admin_icon} />
+                  <button >
                     STATISTICS
                   </button>
                 </div>
               </div>
             ) : role === "moderator" ? (
-              <div className={s.admin}>
-                <button onClick={() => navigate("/dashboard/products")}>
-                  PRODUCTS
-                </button>
-                <button onClick={() => navigate("/manage-order")}>
-                  ORDERS
-                </button>
+              <div className={s.btn_container}>
+                 <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
+                  <RiPlantFill className={s.admin_icon} />
+                  <button >
+                    PRODUCTS
+                  </button>
+                </div>
+                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                  <FaShoppingBag className={s.admin_icon} />
+                  <button>
+                    ORDERS
+                  </button>
+                </div>
+
+              
               </div>
             ) : role === "user" ? (
-              <button onClick={() => navigate(`/orders/${user.uid}`)}>
-                ORDERS
-              </button>
+              <div className={s.btn_container}>
+
+<div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                  <FaShoppingBag className={s.admin_icon} />
+                  <button>
+                    ORDERS
+                  </button>
+                </div>
+              </div>
             ) : null}
           </div>
         </div>

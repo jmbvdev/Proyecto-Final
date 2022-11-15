@@ -90,16 +90,11 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
                 <p className="link">FAQ</p>
               </li>
             </Link>
-            <Link to="/delivery" className="link_mobile">
-              <li>
-                <p className="link">Delivery</p>
-              </li>
-            </Link>
           </ul>
         </div>
 
         <div className="icons-container">
-          {user !== null ? (
+          {user ? (
             <div className="user">
               <div className="user_name">
                 <img src={auth.currentUser.photoURL || avatar} 

@@ -7,6 +7,7 @@ import {
   PURCHASE,
   LOAD_CART,
   CLEAR_CART,
+  UPDATE_CART
 } from "../../actions/shopCart/actiontypes.js";
 import axios from "axios";
 
@@ -139,3 +140,10 @@ export const cleanCartAfterLogOut = () => {
   localStorage.clear();
   return { type: CLEAR_CART };
 };
+
+export const updateCart = (cart) => {
+  return {
+    type: UPDATE_CART,
+    payload: cart,
+  };
+}

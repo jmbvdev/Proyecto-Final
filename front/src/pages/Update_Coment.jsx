@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import s from "../styles/update_coment.module.css";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
-import axios from "axios"
-import CardComent from "../components/CardComment"
+import axios from "axios";
+import CardComent from "../components/CardComment";
 
-
-
-
-
-const Update_Coment = ({ }) => {
-
+const Update_Coment = ({}) => {
   const Navigate = useNavigate();
   const id = useParams().comentid;
-  const plantsUID = useParams().plantsUID
+  const plantsUID = useParams().plantsUID;
   const user = useSelector((state) => state.usersReducer.currentUser);
   const [view, setView] = useState([]);
   const [value, setValue] = useState(0);
@@ -35,23 +30,21 @@ const Update_Coment = ({ }) => {
   ];
 
   useEffect(() => {
-
     //axios.get("http://localhost:5000/api-plants-b6153/us-central1/app/coments/C2IE5ETPfGe4ZRASGzcM")
     axios
       .get(
-        `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${plantsUID}`
+        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${plantsUID}`
       )
       //  axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${plantsUID}`)
       .then((res) => {
         setView(res.data.filter((e) => e.data.userUID === user.uid));
       });
-
   }, []);
 
   function handleSelect(e) {
     setUpdate({
       ...update,
-      star: e.target.value
+      star: e.target.value,
     });
   }
 
@@ -71,7 +64,6 @@ const Update_Coment = ({ }) => {
       comentspositive: [],
     });
   };
-
 
   const handleOnClick = () => {
 
@@ -139,7 +131,6 @@ const Update_Coment = ({ }) => {
                 </p>
               </div>
             ) : null}
-
           </div>
           <div className={s.input_container}>
             <Box
@@ -158,9 +149,7 @@ const Update_Coment = ({ }) => {
               />
             </Box>
           </div>
-          <div>
-
-          </div>
+          <div></div>
           <div>
             <button
               type="button"
@@ -173,19 +162,20 @@ const Update_Coment = ({ }) => {
         </form>
       </div>
       <div className={s.changeview}>
-        {
-          view.length ? (
-            <CardComent
-              image={view[0].data?.userImg}
-              name={view[0].data?.userName}
-              rate={update.star ? update.star : view[0].data?.star}
-              quote={update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive}
-            />)
-            : (null)}
-
+        {view.length ? (
+          <CardComent
+            image={view[0].data?.userImg}
+            name={view[0].data?.userName}
+            rate={update.star ? update.star : view[0].data?.star}
+            quote={
+              update.comentspositive.length
+                ? update.comentspositive
+                : view[0].data?.comentspositive
+            }
+          />
+        ) : null}
       </div>
-
     </div>
   );
 };
-export default Update_Coment
+export default Update_Coment;

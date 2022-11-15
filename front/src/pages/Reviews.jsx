@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 import avatar from "../images/avatar 1.gif"
 
-const Reviews = ({ setView }) => {
+const Reviews = ({ setView, close }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const id = useParams().id;
@@ -76,9 +76,8 @@ const Reviews = ({ setView }) => {
         showDenyButton: false,
         confirmButtonText: "ok",
         confirmButtonColor: "rgb(9, 102, 74)",
-      })
-    }
-    else {
+      });
+    } else {
       axios
         .post(
           "https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/coment",
@@ -92,6 +91,7 @@ const Reviews = ({ setView }) => {
           }
         )
         .then((res) => {
+          close(false);
           Swal.fire({
             title: "Success",
             text: "Your comment was successfully added",

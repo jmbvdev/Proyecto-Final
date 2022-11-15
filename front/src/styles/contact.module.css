@@ -1,0 +1,300 @@
+.container{
+    width: 100%;
+    height: auto;
+    caret-color: transparent;
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(49, 49, 49, 0.283),rgba(172, 185, 170, 0.876)), url("https://media.architecturaldigest.com/photos/5dcde00380598800086215f6/16:9/w_2560%2Cc_limit/Osofsky_Oct19-5.jpg"); 
+    background-repeat: no-repeat;
+    background-position: bottom;
+ 
+ 
+}
+.banner img{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-width: 150px;
+
+   
+}
+.banner_img{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-width: 150px;
+    position: relative;
+    top: 6px;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+
+}
+.contact img{
+    width: 30%;
+    min-width: 150px;
+    filter: contrast(1.5);
+    position: relative;
+    bottom: 30px;
+ 
+ 
+}
+.contact h1{
+    font-family: "Roboto";
+    color: rgb(27, 38, 31);
+    font-size: 3vw;
+    position: relative;
+    bottom: 25px;
+}
+.section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120vh;
+  
+    width: 100%;
+    background:#fff;
+    background-image: linear-gradient(90deg, rgba(252, 255, 255, 0.717) 31%, rgba(239, 239, 239, 0.846) 69%), url("https://sublimelistings.com/wp-content/uploads/2016/11/background-contact-form-02.jpg");
+}
+
+.form{
+    position: relative;
+    min-width: 1100px;
+    min-height: 550px;
+    display: flex;
+    z-index: 1000;
+    margin-top: 10rem;
+    
+  
+}
+ .contactInfo{
+position: absolute;
+top: 40px;
+width: 350px;
+height: calc(100% - 80px);
+background: #095a55;
+z-index: 1;
+padding: 40px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+box-shadow:0 20px 25px rgba(0,0,0,0.15) ;
+
+}
+.contactForm{
+    position: absolute;
+    padding: 70px 50px;
+    padding-left: 250px;
+    margin-left: 150px;
+    width: calc(100% - 150px);
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 50px 50px rgba(0,0,0,0.25);
+}
+.contactInfo h2{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    font-family: "Poppins";
+}
+.contactInfo ul{
+    position: relative;
+    margin: 20px 0;
+}
+.contactInfo ul li{
+    position: relative;
+   list-style: none;
+   display: flex;
+   margin: 20px 0;
+   cursor: pointer;
+   align-items:flex-start ;
+   color: #fff;
+}
+.location_icon{
+font-size: 30px;
+min-width: 30px;
+
+
+}
+.contactInfo span{
+    color: #fff; 
+    margin-left:10px;
+    font-weight: 300;
+}
+.social{
+    position: relative;
+    display: flex;
+}
+.social li a{
+    text-decoration: none;
+
+}
+.social_icon{
+    color: #fff;
+    font-size: 2.5rem;
+    margin-right:20px ;
+}
+.social_icon:hover{
+    color: rgb(99, 184, 158);
+   
+}
+.contactForm h2{
+    color: #0f3959;
+    font-size: 24px;
+    font-weight: 500;
+
+}
+.box{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+.input_container{
+    position: relative;
+    margin-bottom: 35px;
+    width: 47%;
+}
+.message{
+    width: 100%;
+}
+/* ~ */
+.input_container input,
+.message textarea{
+    width: 100%;
+    resize: none;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #777;
+    
+}
+.message textarea{
+    height: 120px;
+  
+}
+.input_container span{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 18px;
+ 
+    pointer-events: none;
+    font-weight: 300;
+    transition: 0.3s;
+}
+.message span{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 18px;
+ 
+    pointer-events: none;
+    font-weight: 300;
+    transition: 0.3s;
+}
+.message span:focus{
+    transform: translateY(-20px);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.input_container input:focus~span ,
+.input_container input:valid~span ,
+.message textarea:focus~span,
+.message textarea:valid~span{
+transform: translateY(-20px);
+font-size: 12px;
+font-weight: 400;
+letter-spacing: 1px;
+}
+.send input{
+    
+    position: relative;
+    cursor: pointer;
+    background-color: #095a55;
+    color: #fff;
+    border: none;
+    max-width: 150px;
+    padding: 12px;
+    text-align: center;
+
+}
+.send input:hover{
+    
+    background-color: #0d948b;
+
+}
+@media(max-width:1200px){
+  section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+ section::before{
+    display: none;
+ }
+    .form{
+width: 90%;
+margin: 50px;
+min-height: auto;
+flex-direction: column-reverse;
+   position: relative;
+    min-width: 350px;
+    min-height: auto;
+
+    }
+
+    .contactInfo{
+        width: 100%;
+        top: 0;
+        height: 700px;
+        position: relative;
+        box-shadow: none;
+    }
+    .contactForm{
+        position: relative;
+        width: 100%;
+        padding-left: 0;
+        margin-left: 0;
+        padding: 40px;
+        height: 700px;
+        box-shadow: none;
+    }
+}
+
+@media(max-width:450px){
+    .form{
+        min-width: 330px;
+    }
+.contactInfo{
+padding: 0px;
+}
+
+.contactInfo ul{
+    position: relative;
+    margin: 20px 0;
+    width: 80%;
+}
+.contactInfo ul li{
+    width: 80%;
+   align-items:center;
+   
+}
+.contactForm span{
+   font-size: 15px;
+}
+}

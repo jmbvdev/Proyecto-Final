@@ -6,7 +6,6 @@ import Discount from '../components/Discount';
 import ChatBot from 'react-simple-chatbot';
 import s from "../styles/home.module.css"
 import { ThemeProvider } from 'styled-components'
-import { useState } from 'react';
 import chatbot from "../images/chatbot.png"
 import { useNavigate } from 'react-router-dom';
 import {FcPhoneAndroid}from "react-icons/fc"

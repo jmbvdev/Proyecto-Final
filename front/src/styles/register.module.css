@@ -114,3 +114,8 @@
           width:80%;;
         }
       }
+
+    .danger {
+        font-size: 0.8rem;
+        color: #fff;
+    }

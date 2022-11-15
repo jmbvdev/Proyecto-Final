@@ -1,6 +1,7 @@
 import React from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import Swal from "sweetalert2";
 
 function ForgotenPassword({ close }) {
   const [email, setEmail] = React.useState("");
@@ -13,10 +14,43 @@ function ForgotenPassword({ close }) {
     e.preventDefault();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        window.alert("Reset email sent!");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "success",
+            title: `Check your email!`,
+          })
+        );
+        close(false);
       })
       .catch((error) => {
-        window.alert(error.message);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "error",
+            title: `${error.message}`,
+          })
+        );
       });
   }
   return (
