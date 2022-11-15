@@ -11,7 +11,7 @@ import {CiCircleCheck} from "react-icons/ci";
 import {CiCircleRemove} from "react-icons/ci";
 import {BiDetail} from "react-icons/bi";
 import {AiOutlineEdit} from "react-icons/ai";
-import DropdownFilter from '../../componentsTable/DropdownFilter';
+import SelectFilter from '../../componentsTable/SelectFilter';
 import { matchSorter } from "match-sorter";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
@@ -33,7 +33,7 @@ const ProductsDash = () => {
 
     const defaultColumn = React.useMemo(
       () => ({
-        Filter: DropdownFilter
+        Filter: SelectFilter
       }),
       []
     );

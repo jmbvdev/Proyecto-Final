@@ -7,7 +7,7 @@ const Coinbase = ({totalAmount}) => {
     const amount = totalAmount.toString();
     console.log(amount)
     React.useEffect(() => {
-        (async () => {await axios.get(`http://localhost:5000/api-plants-b6153/us-central1/app/coinbase/create-charge/${amount}`)
+        (async () => {await axios.get(`http://api-plants-b6153/us-central1/app/coinbase/create-charge/${amount}`)
         .then(response => {
             paymentUrl = response.data.hosted_url
             return paymentUrl
@@ -15,7 +15,7 @@ const Coinbase = ({totalAmount}) => {
     }, []);
     
     const handleLink = () => {
-        window.open(paymentUrl, '_blank')
+        window.open(paymentUrl, '_self')
     };
 
     return (
