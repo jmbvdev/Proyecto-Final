@@ -8,6 +8,7 @@ import { useState } from "react";
 import GlobalFilter from "./GlobalFilter";
 import Loading from "../../components/Loading";
 import {BiDetail} from "react-icons/bi";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const UsersDash = () => {
     
@@ -53,12 +54,14 @@ const UsersDash = () => {
 
     return (
       <>
+      
       {allUsers.length ? (
             <>
        <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
-       <div>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>PREV</button>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>NEXT</button>
+       <div className={s.pages}>
+          <button onClick={() => previousPage()} disabled={!canPreviousPage} className={s.pages_icon}><GrFormPrevious className={s.arrow}/></button>
+          
+          <button onClick={() => nextPage()} disabled={!canNextPage} className={s.pages_icon}><GrFormNext className={s.arrow} /></button>
        </div>
       <table {...getTableProps()} className={s.table}>
         <thead>
@@ -71,7 +74,7 @@ const UsersDash = () => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()} >
+        <tbody {...getTableBodyProps()}  >
           {page.map((row, i) => {
             prepareRow(row);
             return (
@@ -130,7 +133,9 @@ const UsersDash = () => {
                id: 'Detail',
                Header: 'Detail',
                Cell: ({row}) => (
-                 <Link to={`/users/detail/${row.values.uid}`}><BiDetail /></Link>
+                <div onClick={()=>navigate(`/users/detail/${row.values.uid}`)} className={s.details_icon_container}>
+                <BiDetail className={s.details_icon} />
+                </div>
                )
              }
            ])

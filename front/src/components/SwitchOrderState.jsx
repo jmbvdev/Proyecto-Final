@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Swal from "sweetalert2";
+import s from "../styles/switchOrder.module.css"
+import { TbSwitch3 } from 'react-icons/tb';
+import { FaWindowClose } from 'react-icons/fa';
 
 
 const stateAll = ["Order preparing", "Order shipped", "Order ready to pick up"]
@@ -80,76 +83,109 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
     }
 
     return (
+      <div className={s.container}>
+         <div className={s.close} onClick={handleCancel}>
+            <FaWindowClose className={s.close_icon}/>
+          </div>
+        {current_order ? (
+          <div>
+            <p>
+              <strong>SwitchOrderState</strong>
+            </p>
+            <p>
+              <strong>orderId:</strong> {current_order?.orderId}
+            </p>
+            <p>
+              <strong>date: </strong>{" "}
+              {new Date(current_order?.date).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>time: </strong>{" "}
+              {new Date(current_order?.date).toLocaleTimeString()}
+            </p>
+            <p>
+              <strong>userID: </strong> {current_order?.userID}
+            </p>
+            <p>
+              <strong>User name: </strong> {current_order?.user.displayName}
+            </p>
+            <p>
+              <strong>User email: </strong> {current_order?.user.email}
+            </p>
+            <p>
+              <strong>City:</strong> {current_order?.extras?.city}
+            </p>
+            <p>
+              <strong>Address:</strong> {current_order?.extras?.adress}
+            </p>
+            <p>
+              <strong>Address number:</strong>{" "}
+              {current_order?.extras?.adressNumber}
+            </p>
 
-        <div>
-            {
-                current_order ? (
-                    <div>
-                        <h3>SwitchOrderState</h3>
-                        <h3>orderId:  {current_order?.orderId}</h3>
-                        <h3>date:  {(new Date(current_order?.date)).toLocaleDateString()}</h3>
-                        <h3>time:  {(new Date(current_order?.date)).toLocaleTimeString()}</h3>
-                        <h3>userID:  {current_order?.userID}</h3>
-                        <h3>User name:  {current_order?.user.displayName}</h3>
-                        <h3>User email:  {current_order?.user.email}</h3>
-                        <h3>City: {current_order?.extras?.city}</h3>
-                        <h3>Address: {current_order?.extras?.adress}</h3>
-                        <h3>Address number: {current_order?.extras?.adressNumber}</h3>
-                       
-                        <hr></hr>
-                        {
-                            current_order?.cart.map((order, i) => (
-                                <div key={i}>
-                                    <h3>Name: {order?.name}</h3>
-                                    <img src={order?.image} alt="" height="50" />
-                                    <h3>productId: {order?.id}</h3>
-                                    <h3>count: {order?.count}</h3>
-                                    <h3>price: ${order?.price}</h3>
-                                    <hr></hr>
-                                </div>
-                            ))
-                        }
-                        <h3>Total Amount: {current_order?.extras?.totalAmount}</h3>
-                        <hr></hr>
-                        <h3>sendOption: {current_order?.extras?.sendOption}</h3>
-                        <hr></hr>
-                        <h3>{current_order?.state}</h3>
-                        <div>
-                            <select onChange={handleState}>
-                                <option value="select">state</option>
-                                {stateAll.map((el, i) => (
-                                    <option key={i} value={el}>
-                                        {el}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div>
-                            {optionState ? (
-                                <div>
-                                    <button type="button" onClick={handleDeleteState}>
-                                        x
-                                    </button>
-                                    <p>{optionState}</p>
-                                </div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <button type="button" onClick={handleSwitchState}>
-                                Switch State
-                            </button>
-                        </div>
-                        <div>
-                            <button type="button" onClick={handleCancel}>
-                                {optionState == '' ? 'Cancel' : 'Finalize'}
-                            </button>
-                            <br></br>
-                        </div>
-                    </div>
-                ) : (null)
-            }
-        </div>
-    )
+            <hr></hr>
+            <div className={s.wrap}>
+
+            {current_order?.cart.map((order, i) => (
+              <div key={i} className={s.specs_container}>
+                <div className={s.image}>
+                  <img src={order?.image} alt="" height="50" />
+                </div>
+                <div className={s.specs}>
+                  <p>
+                    {" "}
+                    <strong>Name:</strong> {order?.name}
+                  </p>
+                  <p>
+                    <strong>productId:</strong> {order?.id}
+                  </p>
+                  <p>
+                    <strong>count:</strong> {order?.count}
+                  </p>
+                  <p>
+                    <strong>price:</strong> ${order?.price}
+                  </p>
+                </div>
+                <div className={s.state_container}>
+                <h3>{current_order?.state}</h3>
+            <div className={s.order}>
+              <select onChange={handleState}>
+                <option value="select">state</option>
+                {stateAll.map((el, i) => (
+                  <option key={i} value={el}>
+                    {el}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              {optionState ? (
+                <div className={s.state}>
+                  <button type="button" onClick={handleDeleteState}>
+                    x
+                  </button>
+                  <p>{optionState}</p>
+                </div>
+              ) : null}
+            </div>
+            <div className={s.switch} onClick={handleSwitchState}>
+             <TbSwitch3 className={s.switch_icon}/>
+             <span>STATE</span>
+            </div>
+           
+                </div>
+                
+              </div>
+            ))}
+            </div>
+            <h3>Total Amount: {current_order?.extras?.totalAmount}</h3>
+            <hr></hr>
+            <h3>sendOption: {current_order?.extras?.sendOption}</h3>
+            <hr></hr>
+          </div>
+        ) : null}
+      </div>
+    );
 }
 
 export default SwitchOrderState
