@@ -2,10 +2,14 @@
   z-index: 10;
   position: fixed;
   display: flex;
-  width: 80vw;
-  height: 75vh;
-  background-color: #425a21b0;
-  border-radius: 1rem;
+  padding: 30px;
+  width: 55vw;
+  height: 85vh;
+  background-image: linear-gradient(rgba(155, 156, 155, 0.192),rgba(52, 53, 52, 0.945)), url("https://img.freepik.com/free-photo/midtown-manhattan-new-york-city-usa_181624-9030.jpg?w=2000"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  border-radius: 12px;
 }
 
 .modalBackground {
@@ -27,6 +31,9 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
+  background-color: #b4b5b450;
+  border-radius: 20px;
+  padding: 30px;
 }
 
 .modalForm > input {
@@ -41,28 +48,56 @@
   background: transparent;
   transition: border-color 0.2s;
   margin: 8px;
+  caret-color: #fff;
 }
 
 .modalForm > input::placeholder {
-  color: rgba(255, 255, 255, 0.552);
+  color: rgb(255, 253, 253);
+  font-family: "Poppins";
+  font-size: 0.8rem;
+
+
+}
+.modalForm > input:focus::placeholder {
+  color: transparent;
+  
 }
 
 .optionsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  width: 50%;
 }
 
 .resumeCart {
-  border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.855);
-  height: 70vh;
-  width: 18rem;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.608);
+  height: 28vh;
+  width: 70%;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   padding-right: 0.5rem;
+  overflow-y: scroll;
+}
+.resumeCart::-webkit-scrollbar-track {
+  border: 1px solid rgb(91, 91, 91);
+  padding: 2px 0;
+  background-color: #b4b5b40c;
+}
+
+.resumeCart::-webkit-scrollbar {
+  width: 10px;
+}
+
+.resumeCart::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(169, 169, 169, 0.3);
+  background-color: #16161650;
+  border: 1.5px solid rgb(14, 14, 14);
 }
 
 .maps {
@@ -76,7 +111,8 @@
 }
 
 .check {
-  margin: 1rem;
+  margin: 20px 8px;
+  cursor: pointer;
 }
 
 .imageResume {
@@ -90,8 +126,10 @@
   text-align: end;
   display: flex;
   width: 90%;
+  
   margin: 0.5rem;
   font-size: 0.8rem;
+
   justify-content: space-between;
 }
 
@@ -100,9 +138,246 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+
   padding-bottom: 0.5rem;
+
 }
 
 .totalAmount {
   align-self: flex-end;
+}
+.payment_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.payment_icon{
+  background-color: #3e3e3e;
+  color: #fff;
+  width: 30px;
+  font-size: small;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.payment_icon:hover{
+  background-color: #2d2d2d;
+}
+.optionsContainer span{
+  color: #5f5f5f;
+  font-family: "Dosis", sans-serif;
+  font-size: small;
+  font-weight: bold;
+}
+.button_container{
+  width: min-content;
+  position: absolute;
+  left: 15px;
+top: 20px;
+}
+.back{
+  background-color: rgb(55, 55, 55);
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.back:hover{
+  background-color: rgb(25, 25, 25);
+}
+.payment{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.local{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-image: linear-gradient(rgba(168, 169, 168, 0.411),rgba(54, 55, 54, 0.661)), url("https://cdn.shopify.com/s/files/1/0150/3513/8134/files/BWrPJ_yA_471ea0d5-d1e3-42a0-8048-4ab9e54040f6_480x480.jpg?v=1656546169");
+  background-repeat: no-repeat; 
+background-size: cover;
+  width: 230px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  margin-bottom: 20px;
+}
+.local:hover{
+  filter: contrast(1.2);
+ 
+}
+.local img{
+  
+  width: 130px;
+ 
+}
+.payment_span{
+  color: #fff;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+font-size: small;
+background-color: rgba(255, 255, 255, 0.152);
+border-radius: 8px;
+}
+
+.check_container{
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+ 
+
+}
+.andreani{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-image: linear-gradient(rgba(168, 169, 168, 0.411),rgba(54, 55, 54, 0.661)), url("https://nextluxury.com/wp-content/uploads/swing-bench-porch-ideas-johnston.escapes.jpg");
+  background-repeat: no-repeat; 
+background-size: cover;
+  width: 230px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  margin-bottom: 20px;
+}
+.andreani:hover{
+  filter: contrast(1.2);
+ 
+}
+.andreani img{
+  width: 150px;
+}
+.andreani_input{
+  margin-bottom: 10px;
+}
+.andreani_input input{
+  border-radius: 4px 0px 0px 4px;
+  border: none;
+  background-color: #ddd8d861;
+  color: #fff;
+}
+.andreani_input input::placeholder{
+
+  color: #fff;
+}
+.andreani_ok{
+  background-color: #d1cece;
+  color: #2d2d2d;
+  font-size: small;
+  font-family: "Poppins",sans-serif;
+  border-radius: 0px 4px 4px 0px;
+  font-weight: bold;
+  padding: 0px 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+}
+.andreani_ok:hover{
+  background-color: #adaaaa;
+ 
+
+}
+.andreani_result{
+  color: #d1cece;
+  font-size: small;
+}
+.pay_btn{
+  background-color: #adaaaa;
+  padding:  2px 8px;
+  font-family: "Poppins",sans-serif;
+  font-weight: bold;
+  font-size: small;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.crypto{
+display: flex;
+margin-top: 20px;
+gap: 5px;
+justify-content: center;
+align-items: center;
+background-color: #1c616f;
+color: rgb(235, 234, 234);
+border-radius: 8px;
+
+}
+.crypto:hover{
+
+  background-color: #123b44;
+ 
+  cursor: pointer;
+  }
+.crypto p{
+  font-family: "Roboto", serif;
+  font-size: small;
+  font-weight: bold;
+  padding: 0px 10px;
+
+}
+.coin{
+  font-size: 40px;
+ padding-left: 10px;
+}
+
+@media (max-width: 1000px) {
+ .modalContainer{
+  z-index: 10;
+ flex-direction: column;
+  padding: 30px;
+  width: 80vw;
+  height: 85vh;
+  overflow-y: scroll;
+  justify-content: center;
+  align-items: center;
+margin: 20px;
+ }
+
+ .modalForm {
+  margin: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  background-color: #b4b5b450;
+  border-radius: 20px;
+  padding: 30px;
+}
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+ margin-top: 30rem;
+}
+.resumeCart {
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.608);
+  height: 28vh;
+  width: 95%;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.5rem;
+  overflow-y: scroll;
+}
+.maps {
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  margin: 0px;
+  margin-top: 20px;
+  padding-left: 0px;
+ 
+}
 }

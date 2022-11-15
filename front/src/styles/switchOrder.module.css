@@ -129,6 +129,8 @@
   }
   .state_wraper{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
