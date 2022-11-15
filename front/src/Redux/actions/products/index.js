@@ -40,10 +40,10 @@ export const editProduct = (id, data) => {
         data
       )
       .then((res) => {
+        dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
         window.alert(
           `The product with ID: ${res.data.id} has been ${res.data.message}`
         );
-        dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
       });
   };
 };

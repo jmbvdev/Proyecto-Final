@@ -27,7 +27,7 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
             Swal.fire({
                 title: 'Do you want to save the changes?',
                 showDenyButton: true,
-                showCancelButton: true,
+                showCancelButton: false,
                 confirmButtonText: 'Save',
                 denyButtonText: `Don't save`,
                 allowOutsideClick: false,
@@ -37,34 +37,34 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
                 if (result.isConfirmed) {
                     Swal.fire('Wait a moment it is processing', '', 'success')
                     axios
-                      .put(
-                        //id order
-                        `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${order}`,
-                        {
-                          cart: current_order.cart,
-                          state: optionState,
-                          extras: "",
-                          email: current_order.user.email,
-                        }
-                      )
-                      .then((res) => {
-                        let aux = [];
-                        auxOrders.forEach((order) => {
-                          if (order.orderId == current_order.orderId) {
-                            aux.push({
-                              ...order,
-                              state: optionState,
+                        .put(
+                            //id order
+                            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${order}`,
+                            {
+                                cart: current_order.cart,
+                                state: optionState,
+                                extras: "",
+                                email: current_order.user.email,
+                            }
+                        )
+                        .then((res) => {
+                            let aux = [];
+                            auxOrders.forEach((order) => {
+                                if (order.orderId == current_order.orderId) {
+                                    aux.push({
+                                        ...order,
+                                        state: optionState,
+                                    });
+                                } else {
+                                    aux.push(order);
+                                }
                             });
-                          } else {
-                            aux.push(order);
-                          }
+                            console.log(aux);
+                            setAuxOrders(aux);
+                            setOptionState("");
+                            Swal.fire(`${res.data}`, "", "success");
+                            // setOrder('')
                         });
-                        console.log(aux);
-                        setAuxOrders(aux);
-                        setOptionState("");
-                        Swal.fire(`${res.data}`, "", "success");
-                        // setOrder('')
-                      });
 
                 } else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
@@ -92,6 +92,10 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
                         <h3>userID:  {current_order?.userID}</h3>
                         <h3>User name:  {current_order?.user.displayName}</h3>
                         <h3>User email:  {current_order?.user.email}</h3>
+                        <h3>City: {current_order?.extras?.city}</h3>
+                        <h3>Address: {current_order?.extras?.adress}</h3>
+                        <h3>Address number: {current_order?.extras?.adressNumber}</h3>
+                       
                         <hr></hr>
                         {
                             current_order?.cart.map((order, i) => (
@@ -105,6 +109,9 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
                                 </div>
                             ))
                         }
+                        <h3>Total Amount: {current_order?.extras?.totalAmount}</h3>
+                        <hr></hr>
+                        <h3>sendOption: {current_order?.extras?.sendOption}</h3>
                         <hr></hr>
                         <h3>{current_order?.state}</h3>
                         <div>
@@ -134,12 +141,9 @@ const SwitchOrderState = ({ order, orders, auxOrders, setOrder, setAuxOrders }) 
                         </div>
                         <div>
                             <button type="button" onClick={handleCancel}>
-                                Cancel
+                                {optionState == '' ? 'Cancel' : 'Finalize'}
                             </button>
                             <br></br>
-                            <button type="button" onClick={handleCancel}>
-                                Finalize
-                            </button>
                         </div>
                     </div>
                 ) : (null)
