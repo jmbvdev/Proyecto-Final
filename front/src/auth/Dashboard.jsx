@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingBag } from "react-icons/fa";
 import { RiCoupon2Fill, RiPlantFill } from "react-icons/ri";
+import avatar from "../images/avatar 1.gif"
 import { BiStats} from "react-icons/bi";
 import {IoIosArrowBack, IoIosCreate } from "react-icons/io";
 import s from "../styles/dashboard.module.css";
@@ -36,7 +37,11 @@ const Dashboard = () => {
         <img src={image} alt="" className={s.calatea} />
         <div className={s.specs}>
           <img
-            src={user?.photoURL}
+            src={user?.photoURL || avatar}
+            onError ={({currentTarget})=> {
+              currentTarget.onerror=null;
+              currentTarget.src= "https://i.stack.imgur.com/4powQ.gif"
+            }}
             alt={user?.displayName}
             className={s.profile_pic}
           />

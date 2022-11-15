@@ -133,6 +133,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+    
     navigate(-2);
   }
 
@@ -154,6 +155,7 @@ const EditPlant = () => {
           : plant.logicalDeletion,
     };
     dispatch(editProduct(id, product));
+   
   };
 
   const handleCategories = (e) => {

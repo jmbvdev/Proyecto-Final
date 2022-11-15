@@ -145,8 +145,20 @@ const PlantsDetails = () => {
   }
 
   const handleOpen = () => {
-    if (!currentUser) return;
+    if (!currentUser) {return Swal.fire({
+      title: "Wait...",
+      text: "Your have to sign in to add a coment",
+      icon: "failure",
+      showDenyButton: false,
+      denyButtonText: "",
+      denyButtonColor: "rgba(11, 115, 147, 0.713)",
+      confirmButtonText: "Sign In",
+      confirmButtonColor: "rgb(9, 102, 74)",
+    }).then((res) => {
+      navigate("/sign-in");
+    });}
     const user = view.find((e) => e.data.userUID === currentUser.uid);
+    
     if (user) {
       Promise.resolve(
         Swal.fire({
@@ -164,21 +176,22 @@ const PlantsDetails = () => {
     setOpen(true);
   };
   const handleOpenReview = () => {
-    if (!currentUser) return;
-    const user = view.find((e) => e.data.userUID === currentUser.uid);
-    if (!user) {
-      Promise.resolve(
-        Swal.fire({
-          title: "Eh",
-          text: "This plant still does not have any reviews",
-          icon: "info",
-          showDenyButton: false,
-          confirmButtonText: "ok",
-          confirmButtonColor: "rgb(9, 102, 74)",
-        })
-      );
-      return;
-    }
+    //if (!currentUser) return;
+   // const user = view.find((e) => e.data.userUID === currentUser.uid);
+    // if (!currentUser) {
+    //   Promise.resolve(
+    //     Swal.fire({
+    //       title: "Eh",
+    //       text: "This plant still does not have any reviews",
+    //       icon: "info",
+    //       showDenyButton: false,
+    //       confirmButtonText: "ok",
+    //       confirmButtonColor: "rgb(9, 102, 74)",
+    //     })
+    // //   );
+    //   return;
+    //}
+    if(view.length===0)return Swal.fire("There are no comments, take the opportunity to leave one")
     setOpenReview(true);
   };
   const handleClose = () => setOpen(false);
@@ -284,16 +297,18 @@ const PlantsDetails = () => {
 
           <AiFillStar className={s.star} close={setOpen} onClick={handleOpen} />
         <div>
-          {currentUser ? (
+          {/* {currentUser ? ( */}
             <div className={s.favorites}>
-              <h4>Watch reviews</h4>
+              <h4>See reviews</h4>
               <FaCommentDots className={s.hearth} onClick={handleOpenReview} />
             </div>
-          ) : (
-            <button className={s.noreview} onClick={handleRedirect}>
-              Sign in to leave a review
-            </button>
-          )}
+          {/* ) : (
+            // <button className={s.noreview} onClick={handleRedirect}>
+            //   Sign in to leave a review
+            // </button>
+            null
+          )
+          } */}
         </div>
         </div>
 
