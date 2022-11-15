@@ -77,7 +77,7 @@ const EditPlant = () => {
     name: "",
     price: 0,
     size: [],
-    stock: 0,
+    stock: plant?.stock,
     //type: "",
     logicalDeletion: false,
   });
@@ -99,7 +99,7 @@ const EditPlant = () => {
       fileReader.readAsArrayBuffer(files[0]);
       fileReader.onload = async function() {
         const imageData = fileReader.result;
-
+        Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
         const res = await setPlantImage(id, imageData);
         console.log(res);
         const url = await getPictureUrl(id);
@@ -134,7 +134,7 @@ const EditPlant = () => {
       name: input.name !== "" ? input.name : plant.name,
       price: input.price !== 0 ? input.price : plant.price,
       size: input.size.length ? input.size[0] : plant.size,
-      stock: parseInt(input.stock) + parseInt(plant?.stock),
+      stock: parseInt(input.stock),
       // type: input.type,
       logicalDeletion:
         input.logicalDeletion !== plant.logicalDeletion
@@ -156,7 +156,7 @@ const EditPlant = () => {
       name: plant.name,
       price: plant.price,
       size: plant.size,
-      stock: parseInt(input.stock) + parseInt(plant?.stock),
+      stock: parseInt(input.stock),
       // type: input.type,
       logicalDeletion:
         input.logicalDeletion !== plant.logicalDeletion
@@ -342,6 +342,7 @@ const EditPlant = () => {
                       type="number"
                       name="stock"
                       placeholder="stock"
+                      value={input.stock}
                       onChange={handleStock}
                       min="0"
                       max="1000000"
@@ -448,7 +449,7 @@ const EditPlant = () => {
                     input.logicalDeletion || plant?.logicalDeletion
                   }
                   type={plant?.type}
-                  stock={parseInt(input.stock) + parseInt(plant?.stock)}
+                  stock={parseInt(input.stock)}
                   size={(input.size.length && input.size) || plant?.size}
                 />
               </div>

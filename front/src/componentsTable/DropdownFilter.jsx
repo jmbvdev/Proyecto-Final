@@ -1,4 +1,5 @@
 import React from 'react'
+import s from "../styles/adminNav.module.css"
 
 
 // a dropdown list filter
@@ -17,6 +18,8 @@ const DropdownFilter = ({
 
     // Render a multi-select box
     return (
+        <div className={s.order}>
+            
         <select
             value={filterValue}
             onChange={(e) => {
@@ -30,6 +33,7 @@ const DropdownFilter = ({
                 </option>
             ))}
         </select>
+        </div>
     );
 }
 

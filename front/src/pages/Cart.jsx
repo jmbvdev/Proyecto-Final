@@ -11,7 +11,7 @@ import FavButton from "../components/FavButton";
 
 import {
   changeQuantity,
-  deleteProduct,
+  deleteProductShop,
   deleteAll,
   saveCart,
   purchase,
@@ -24,6 +24,7 @@ const Cart = () => {
   const [pago, setPago] = useState(false);
 
   const plants = useSelector((state) => state.shopCartReducer.products);
+  console.log("plants",plants);
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const Cart = () => {
       confirmButtonColor: "#FF5733",
     }).then((res) => {
       if (res.isConfirmed) {
+        console.log("plants[0]?.orderID", plants[0]?.orderID);
         dispatch(deleteAll(plants[0]?.orderID, currentUser?.uid));
       }
     });
@@ -114,7 +116,7 @@ const Cart = () => {
     }).then((res) => {
       if (res.isConfirmed) {
         plants.filter((p) => p.id === id);
-        dispatch(deleteProduct(id));
+        dispatch(deleteProductShop(id));
         if (currentUser) {
           dispatch(
             saveCart(

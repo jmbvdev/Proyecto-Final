@@ -28,7 +28,7 @@ const PlantInfoBot = () => {
   const details=  useSelector(
     (state) => state.productsReducer.productDetails
   );
-console.log(    details?.hasOwnProperty("id"))
+
   return (
     <div className={s.container}>
       <form action="">
@@ -55,7 +55,7 @@ console.log(    details?.hasOwnProperty("id"))
           plantDetail?.hasOwnProperty("details") &&plantDetail?.details
           }
           {
-             !plantDetail?.details.length && details?.hasOwnProperty("id") ?"this plant is not in hour store":null
+             !plantDetail?.details.length && details?.hasOwnProperty("id") ?"this plant is not in our store":null
           }
      
       </p>

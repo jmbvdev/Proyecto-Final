@@ -80,6 +80,7 @@ const CreatePlant = () => {
       fileReader.onload = async function() {
         const imageData = fileReader.result;
         // setImage(imageData)
+        Swal.fire('Please wait a moment the image upload is being processed', '', 'info')
         const res = await setPlantImage(id, imageData);
         console.log(res);
         const url = await getPictureUrl(id);
@@ -142,6 +143,18 @@ const CreatePlant = () => {
       logicalDeletion: input.logicalDeletion,
     };
     dispatch(createProduct(product));
+    setInput({
+      categories: [],
+      details: "",
+      name: "",
+      price: 0,
+      size: [],
+      stock: 0,
+      type: "plant",
+      logicalDeletion: false,
+    })
+    setImage("")
+    Swal.fire('Product created', '', 'info')
     dispatch(clearDetails());
   }
 
@@ -266,6 +279,7 @@ const CreatePlant = () => {
               <input
                 type="text"
                 name="name"
+                value={input.name}
                 placeholder="name"
                 autoComplete="off"
                 className={s.input_text}
@@ -278,6 +292,7 @@ const CreatePlant = () => {
               <input
                 type="text"
                 name="details"
+                value={input.details}
                 autoComplete="off"
                 placeholder="details"
                 className={s.input_text}
@@ -300,6 +315,7 @@ const CreatePlant = () => {
               <input
                 type="number"
                 name="price"
+                value={input.price}
                 placeholder="price"
                 className={s.input_text}
                 onChange={handlePrice}
@@ -313,6 +329,7 @@ const CreatePlant = () => {
               <input
                 type="number"
                 name="stock"
+                value={input.stock}
                 placeholder="stock"
                 className={s.input_text}
                 onChange={handleStock}
