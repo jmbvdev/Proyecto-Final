@@ -144,16 +144,17 @@ const UserEdit = () => {
 
   return (
     <div className={s.container}>
-
-       <div className={s.button_container}>
-            <button onClick={()=>{
-              navigate('/dashboard')
-              window.scrollTo(0, {behavior: 'smooth'})
-            }} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
-
-          </div>
+      <div className={s.button_container}>
+        <button
+          onClick={() => {
+            navigate("/dashboard");
+            window.scrollTo(0, { behavior: "smooth" });
+          }}
+          className={s.back}
+        >
+          <IoIosArrowBack />
+        </button>
+      </div>
 
       <div className={s.profile}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
@@ -183,9 +184,9 @@ const UserEdit = () => {
                 autoComplete="off"
               />
             </div>
-              {error.displayName && (
-                <p className={s.danger}>{error.displayName}</p>
-              )}
+            {error.displayName && (
+              <p className={s.danger}>{error.displayName}</p>
+            )}
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>City</p>
@@ -200,7 +201,7 @@ const UserEdit = () => {
                 autoComplete="off"
               />
             </div>
-              {error.city && <p className={s.danger}>{error.city}</p>}
+            {error.city && <p className={s.danger}>{error.city}</p>}
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>Adress</p>
@@ -218,23 +219,26 @@ const UserEdit = () => {
               />
             </div>
           </div>
-         <div className={s.input_label}>
-         <p className={s.name_input}>Adress number</p>
-         <div className={s.input_container}>
-            <MdLocationCity className={s.user_icon} />
-            <input
-              name="adressNumber"
-              value={input.adressNumber}
-              onChange={handleChange}
-              placheholder="Adress Number"
-              type="text"
-              className={s.input_text}
-              autoComplete="off"
-            />
+          <div className={s.input_label}>
+            <p className={s.name_input}>Adress number</p>
+            <div className={s.input_container}>
+              <MdLocationCity className={s.user_icon} />
+              <input
+                name="adressNumber"
+                value={input.adressNumber}
+                onChange={handleChange}
+                placheholder="Adress Number"
+                type="text"
+                className={s.input_text}
+                autoComplete="off"
+              />
+            </div>
           </div>
+
             {error.adressNumber && (
                 <p className={s.danger}>{error.adressNumber}</p>)}
          </div>
+
           <div className={s.input_label}>
             <p className={s.name_input}>phone</p>
             <div className={s.input_container}>
@@ -247,9 +251,9 @@ const UserEdit = () => {
                 className={s.input_text}
               />
             </div>
-              {error.phoneNumber && (
-                <p className={s.danger}>{error.phoneNumber}</p>
-              )}
+            {error.phoneNumber && (
+              <p className={s.danger}>{error.phoneNumber}</p>
+            )}
           </div>
 
           <button type="submit" className={s.update}>
@@ -276,19 +280,22 @@ const validate = (input) => {
   let error = {};
   if (input.displayName !== "" &&
     !/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
-      input.displayName
+      input.displayName && input.displayName
     )
   )
     error.displayName = "Name invalid! (Ex : Juan Lopez)";
 
+
   if (input.city !== "" &&
     !/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))
+
     error.city = "City invalid! (Ex : Boston, New Jersey, Santa Monica)";
 
   if (input.phoneNumber !== "" &&
     !/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/.test(
       input.phoneNumber
-    )
+    ) &&
+    input.phoneNumber
   )
     error.phoneNumber = "Number invalid! 8 digits a least 12 at most";
     

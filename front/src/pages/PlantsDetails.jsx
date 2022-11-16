@@ -75,7 +75,6 @@ const PlantsDetails = () => {
         )
         //  axios.get(`https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`)
         .then((res) => {
-          console.log(res.data);
           setView(res.data);
         });
     }

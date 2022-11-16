@@ -173,7 +173,7 @@ const OrdersCard = (props) => {
                 Edit
               </button>
             ) : null}
-            {props.state === "Order approved" ? (
+            {props.state !== "Pending" ? (
               <button onClick={handleCreateSimilarOrder} className={s.edit}>
                 Order repeat
               </button>

@@ -10,8 +10,10 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
+
 import avatar from "../images/avatar 1.gif"
 import { IoIosArrowBack } from "react-icons/io";
+
 
 const Reviews = ({ setView, close,handleClose }) => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const Reviews = ({ setView, close,handleClose }) => {
   const [coments, setComents] = useState({
     userUID: user?.uid,
     userName: user?.displayName,
-    userImg: user?.photoURL, 
+    userImg: user?.photoURL,
     star: "",
     plantsUID: id,
     comentspositive: [],
@@ -54,7 +56,6 @@ const Reviews = ({ setView, close,handleClose }) => {
           ...coments,
           comentspositive: [e.target.value],
         });
-
     }
   };
 
@@ -119,12 +120,15 @@ const Reviews = ({ setView, close,handleClose }) => {
 
           </div>
         <h2>Leave Your Comment</h2>
-        <img src={user?.photoURL ||avatar}
+        <img
+          src={user?.photoURL || avatar}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = "https://i.stack.imgur.com/4powQ.gif"
+            currentTarget.src = "https://i.stack.imgur.com/4powQ.gif";
           }}
-          className={s.userPic} alt="do not pose" />
+          className={s.userPic}
+          alt="do not pose"
+        />
         <h3>{user?.displayName}</h3>
 
         <div>
