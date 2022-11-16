@@ -335,6 +335,8 @@ export default function ManageOrders() {
           >
             <Box sx={style}>
             <SwitchOrderState
+            close={setOpen}
+            open={open}
             orders={orders}
             order={order}
             auxOrders={auxOrders}
