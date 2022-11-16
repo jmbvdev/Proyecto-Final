@@ -27,9 +27,9 @@ export default function Login() {
   };
   const handleVerify = () => {
     const user = auth.currentUser;
-    dispatch(setCurrentUser(null));
-    history("/sign-in");
     signOut(auth).then(() => {
+      dispatch(setCurrentUser(null));
+      history("/sign-in");
       const Toast = Swal.mixin({
         toast: true,
         position: "top-right",
