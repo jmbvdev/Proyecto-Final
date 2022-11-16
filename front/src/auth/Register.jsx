@@ -60,9 +60,9 @@ export default function Register() {
           await updateProfile(auth.currentUser, {
             displayName: input.displayName,
           });
+          dispatch(setCurrentUser(null));
           await sendEmailVerification(auth.currentUser);
           await signOut(auth);
-          dispatch(setCurrentUser(null));
           const Toast = Swal.mixin({
             toast: true,
             position: "top-right",
@@ -95,6 +95,7 @@ export default function Register() {
             timer: 2500,
             timerProgressBar: false,
           });
+          console.log(err);
           Promise.resolve(
             Toast.fire({
               icon: "error",
@@ -129,7 +130,7 @@ export default function Register() {
   const handleChange = (e) => {
     e.preventDefault();
 
-    setError(validate({...input, [e.target.name] : e.target.value}))
+    setError(validate({ ...input, [e.target.name]: e.target.value }));
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -157,7 +158,9 @@ export default function Register() {
                 onChange={handleChange}
                 placeholder="Complete name"
               />
-            { error.displayName && (<p className={s.danger}>{error.displayName}</p>)}
+              {error.displayName && (
+                <p className={s.danger}>{error.displayName}</p>
+              )}
             </div>
             <div className={s.input_container}>
               <input
@@ -167,7 +170,7 @@ export default function Register() {
                 onChange={handleChange}
                 placeholder="Email"
               />
-              { error.email && (<p className={s.danger}>{error.email}</p>)}
+              {error.email && <p className={s.danger}>{error.email}</p>}
             </div>
             <div className={s.input_container}>
               <input
@@ -178,7 +181,7 @@ export default function Register() {
                 placeholder="Password"
                 type={"password"}
               />
-              { error.password && (<p className={s.danger}>{error.password}</p>)}
+              {error.password && <p className={s.danger}>{error.password}</p>}
               <input
                 className={s.input_text}
                 name="password2"
@@ -187,10 +190,11 @@ export default function Register() {
                 placeholder="Repeat your password"
                 type={"password"}
               />
-              { error.password2 && (<p className={s.danger}>{error.password2}</p>)}
+              {error.password2 && <p className={s.danger}>{error.password2}</p>}
             </div>
             <div>
               <button
+
                 disabled={
                   !input.email ||
                   !input.password ||
@@ -198,6 +202,7 @@ export default function Register() {
                   input.password !== input.password2 ||
                   error.lenght > 0
                 }
+
                 className={s.register_btn}
                 type="submit"
               >
@@ -209,13 +214,15 @@ export default function Register() {
       </div>
     </div>
   );
-};
+}
 
-const validate = input => {
+const validate = (input) => {
   let error = {};
+
   if(!/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(input.displayName))  error.displayName = "Name invalid! (Ex : Juan Lopez)";
   if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(input.email))  error.email = "Email invalid! (Ex : juanlopez12@mail.com)";
   if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(input.password)) error.password = "Password invalid! (8-15 char., Cap. letter, at least 1 digit, No blanks)";
   if(input.password !== input.password2) error.password2 = 'Both password must be equal';
   return error
 }
+

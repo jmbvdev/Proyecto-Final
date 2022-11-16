@@ -47,7 +47,7 @@ const PlantsDetails = () => {
     transform: "translate(-50%, -50%)",
     bgcolor: "transparent",
     border: "none",
-    p: 4,
+    p: 0,
   };
   const styleReview = {
     position: "absolute",
@@ -56,7 +56,7 @@ const PlantsDetails = () => {
     transform: "translate(-50%, -50%)",
     bgcolor: "transparent",
     border: "none",
-    p: 4,
+    p: 0,
   };
 
   useEffect(() => {
@@ -384,7 +384,7 @@ const PlantsDetails = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Reviews setView={setView} close={setOpen} />
+              <Reviews setView={setView} close={setOpen} handleClose={handleClose} />
             </Box>
           </Modal>
         </div>

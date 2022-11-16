@@ -2,6 +2,8 @@ import React from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import Swal from "sweetalert2";
+import {IoIosArrowBack} from "react-icons/io"
+import s from "../styles/forgottenPass.module.css";
 
 function ForgotenPassword({ close }) {
   const [email, setEmail] = React.useState("");
@@ -10,6 +12,12 @@ function ForgotenPassword({ close }) {
     e.preventDefault();
     setEmail(e.target.value);
   }
+
+  const closeModal = (e) => {
+    if (e.currentTarget != e.target) return;
+    close(false);
+  };
+
   function handleOnClick(e) {
     e.preventDefault();
     sendPasswordResetEmail(auth, email)
@@ -54,23 +62,32 @@ function ForgotenPassword({ close }) {
       });
   }
   return (
-    <div>
-      <button
-        onClick={() => {
-          close(false);
-        }}
-      >
-        X
-      </button>
-      <input
-        type="email"
-        onChange={handleOnChange}
-        placeholder="Your email..."
-        value={email}
-      />
-      <button disabled={!email} onClick={handleOnClick}>
-        Send password reset
-      </button>
+    <div onClick={closeModal} className={s.modalBackground}>
+      <div className={s.modalContainer}>
+      <div className={s.button_container}>
+            <button className={s.back}  onClick={() => {
+            close(false);
+          }}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
+      
+        <input
+          className={s.modalInput}
+          type="email"
+          onChange={handleOnChange}
+          placeholder="Your email..."
+          value={email}
+        />
+        <button
+          className={s.register_btn}
+          disabled={!email}
+          onClick={handleOnClick}
+        >
+          Send password reset
+        </button>
+      </div>
     </div>
   );
 }
