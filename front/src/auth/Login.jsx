@@ -27,28 +27,25 @@ export default function Login() {
   };
   const handleVerify = () => {
     const user = auth.currentUser;
-    signOut(auth).then(() => {
-      dispatch(setCurrentUser(null));
-      history("/sign-in");
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-right",
-        iconColor: "white",
-        customClass: {
-          popup: "colored-toast",
-        },
-        showConfirmButton: true,
-        timer: 6000,
-        timerProgressBar: true,
-      });
-      Toast.fire({
-        icon: "info",
-        title: `Your account is not verified. Check your email and do the verification proccess. Press Ok if you want to resend the email!`,
-      }).then((res) => {
-        if (res.isConfirmed) {
-          sendEmailVerification(user);
-        }
-      });
+    history("/sign-in");
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: true,
+      timer: 6000,
+      timerProgressBar: true,
+    });
+    Toast.fire({
+      icon: "info",
+      title: `Your account is not verified. Check your email and do the verification proccess. Press Ok if you want to resend the email!`,
+    }).then((res) => {
+      if (res.isConfirmed) {
+        sendEmailVerification(user);
+      }
     });
   };
 

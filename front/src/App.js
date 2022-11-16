@@ -16,7 +16,7 @@ import { auth } from "./firebase/firebase.js";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import ScrollToTop from "react-scroll-to-top";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -62,6 +62,12 @@ function App() {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {
+        if (!authenticatedUser?.emailVerified) {
+          signOut(auth).then(() => {
+            dispatch(setCurrentUser(null));
+          });
+          return;
+        }
         if (authenticatedUser) {
           const role = await authenticatedUser.getIdTokenResult(true);
           dispatch(
