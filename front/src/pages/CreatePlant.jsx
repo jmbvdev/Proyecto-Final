@@ -58,7 +58,8 @@ const CreatePlant = () => {
   }, [currentUser]);
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/dashboard');
+    window.scrollTo(0, {behavior: 'smooth'})
   };
 
   const fileRef = useRef(null);
@@ -159,6 +160,7 @@ const CreatePlant = () => {
     });
     setImage("");
     dispatch(clearDetails());
+    window.scrollTo(0, {behavior: 'smooth'})
   }
 
   const handleCategories = (e) => {

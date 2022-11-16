@@ -9,8 +9,10 @@ import bestProducts from "../images/bestProducts.webp"
 import logo from "../images/logo-sinfondo.png"
 import "chartkick/chart.js";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 import ScrollAnimation from 'react-animate-on-scroll';
 import s from "../styles/stadistics.module.css"
+
 
 function Stadistics() {
   const navigate = useNavigate();
@@ -55,6 +57,15 @@ function Stadistics() {
   }, [sales]);
 
   return (
+
+    <>
+    <button onClick={() => {
+      navigate('/dashboard')
+      window.scrollTo(0, {behavior: 'smooth'})
+    }}>
+      <IoIosArrowBack />
+    </button>
+
     <div className={s.container}>
       <header className={s.banner} >
                 <ScrollAnimation animateIn="fadeIn" animateOnce={true}  className={s.contact} >
@@ -92,6 +103,7 @@ function Stadistics() {
    
             </div>
     </div>
+    </>
   );
 }
 

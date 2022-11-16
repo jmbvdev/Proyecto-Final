@@ -26,7 +26,8 @@ const CuponDash = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/dashboard');
+    window.scrollTo(0, {behavior: 'smooth'})
   };
 
   React.useEffect(() => {

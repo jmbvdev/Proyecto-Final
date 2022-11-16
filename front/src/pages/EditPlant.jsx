@@ -159,6 +159,7 @@ const EditPlant = () => {
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
     navigate("/plants");
+    window.scrollTo(0, {behavior: 'smooth'})
   }
 
   const handleOnSubmitForMod = (e) => {
@@ -178,6 +179,7 @@ const EditPlant = () => {
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
     navigate("/plants");
+    window.scrollTo(0, {behavior: 'smooth'})
   };
 
   const handleCategories = (e) => {
@@ -261,6 +263,7 @@ const EditPlant = () => {
         dispatch(DeleteProduct(id));
         dispatch(clearDetails());
         navigate("/plants");
+        window.scrollTo(0, {behavior: 'smooth'})
       }
     });
   };
@@ -272,11 +275,14 @@ const EditPlant = () => {
           <Loading />
         ) : (
           <div className={s.container}>
-            <div className={s.button_container}>
-              <button onClick={() => navigate(-1)} className={s.back}>
-                <IoIosArrowBack />
-              </button>
-            </div>
+
+                  <div className={s.button_container}>
+            <button onClick={()=>navigate(`/plants/details/${id}`)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
+
             <div className={s.wraper}>
               <div className={s.left}>
                 <form onSubmit={handleOnSubmit} className={s.form}>

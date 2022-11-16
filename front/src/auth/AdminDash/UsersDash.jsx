@@ -32,7 +32,8 @@ const UsersDash = () => {
     }, [allUsers]);
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/dashboard');
+    window.scrollTo(0, {behavior: 'smooth'})
   };
 
     const Table = ({ columns, data}) => {
@@ -133,7 +134,10 @@ const UsersDash = () => {
                id: 'Detail',
                Header: 'Detail',
                Cell: ({row}) => (
-                <div onClick={()=>navigate(`/users/detail/${row.values.uid}`)} className={s.details_icon_container}>
+                <div onClick={()=>{
+                  navigate(`/users/detail/${row.values.uid}`)
+                  window.scrollTo(0, {behavior: 'smooth'})
+                  }} className={s.details_icon_container}>
                 <BiDetail className={s.details_icon} />
                 </div>
                )
