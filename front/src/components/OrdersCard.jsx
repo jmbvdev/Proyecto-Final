@@ -194,6 +194,8 @@ const OrdersCard = (props) => {
                   ).toLocaleTimeString()}
                 </span>
               </div>
+              <p>Total Amount:</p>
+              <span>$ {props?.extras?.totalAmount}</span>
             </div>
             <div className={s.card_list}>
               {props.data.length > 0 &&
