@@ -7,7 +7,11 @@ import { useGlobalFilter, useSortBy, useTable } from 'react-table';
 import { useNavigate } from "react-router-dom";
 import GlobalFilter from "./GlobalFilter";
 import Loading from "../../components/Loading";
+import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import { RiCoupon2Fill } from "react-icons/ri";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 const CuponDash = () => {
 
   const initialState = {
@@ -18,6 +22,7 @@ const CuponDash = () => {
   const [input, setInput] = React.useState(initialState);
   const [error, setError] = React.useState({});
   const [coupons, setCoupons] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -36,6 +41,16 @@ const CuponDash = () => {
     setInput((prev) => ({ ...prev, [input.name]: input.value }));
   }, [input.name, input.value]);
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "transparent",
+    border: "none",
+    p: 4,
+  };
+  const handleClose = () => setOpen(false);
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if(input.name !== "" && input.discount !== ""){
@@ -121,8 +136,10 @@ const CuponDash = () => {
       <>
       {coupons.length ? (
             <>
+      <div className={s.container_table}>
       <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGlobalFilter={setGlobalFilter} globalFilter={state.globalFilter} />
-      <table {...getTableProps()} className="">
+
+      <table {...getTableProps()} className={s.table}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -146,6 +163,7 @@ const CuponDash = () => {
                 })}
               </tbody>
             </table>
+      </div>
             </>
            ) :
             <Loading />
@@ -242,7 +260,10 @@ const tableHooks = hooks => {
       id: 'Delete',
       Header: 'Delete',
       Cell: ({row}) => (
-        <button onClick={e => handleDelete(row.values.name)}>DELETE</button>
+        <div className={s.details_icon_container} onClick={e => handleDelete(row.values.name)}>
+          <MdDeleteForever className={s.details_icon}/>
+
+        </div>
       )
     }
   ])
@@ -318,11 +339,25 @@ const data = coupons?.map(c => {
                 GENERATE
               </button>
             </div>
+            <div className={s.coupon_list_btn} onClick={()=>setOpen(true)}>
+              <RiCoupon2Fill className={s.coupon_icon}/>
+              <span>LIST</span>
+
+            </div>
+            <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+            <Table columns={columns} data={data} />
+            </Box>
+          </Modal>
           </form>
         </div>
       </div>
     </div>
-      <Table columns={columns} data={data} />
     </div>
     )
 };
