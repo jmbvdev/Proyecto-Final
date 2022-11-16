@@ -17,7 +17,7 @@ const Update_Coment = ({}) => {
   const user = useSelector((state) => state.usersReducer.currentUser);
   const [view, setView] = useState([]);
   const [value, setValue] = useState(0);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const [update, setUpdate] = useState({
     star: "",
     comentspositive: [],
@@ -68,12 +68,9 @@ const Update_Coment = ({}) => {
   };
 
   const handleOnClick = () => {
-
     if (!update.comentspositive.length && !update.star) {
       Swal.fire("Are you sure don't make the changes ?");
-    }
-    else {
-
+    } else {
       Swal.fire({
         title: "Warning",
         text: "Are you sure you want to update this comment?",
@@ -83,110 +80,103 @@ const Update_Coment = ({}) => {
         denyButtonColor: "#FF5733",
         confirmButtonText: "yes, Update",
         confirmButtonColor: "rgba(11, 115, 147, 0.713)",
-
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            axios
-              .put(
-                `http://localhost:5000/api-plants-b6153/us-central1/app/coments/${id}`,
-                // `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
-                {
-                  star: update.star !== "" ? update.star : view[0].data.star,
-                  comentspositive: update.comentspositive.length ? update.comentspositive : view[0].data?.comentspositive,
-                }
-              )
-            Navigate(-1)
-          }
-        })
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.put(
+            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
+            {
+              star: update.star !== "" ? update.star : view[0].data.star,
+              comentspositive: update.comentspositive.length
+                ? update.comentspositive
+                : view[0].data?.comentspositive,
+            }
+          );
+          Navigate(-1);
+        }
+      });
     }
-  }
-
-
+  };
 
   return (
     <div>
       <div className={s.container}>
-      <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
-              <IoIosArrowBack/>
-            </button>
-
-          </div>
-          <div className={s.wraper}>
-
-        <form className={s.form}>
-          <h2>Update Your Comment</h2>
-          <div>
-            <select
-              onChange={handleSelectComent}
-              className={s.recomendations_select}
-            >
-              <option value="select">Select a recomendation</option>
-              {positive.map((el, i) => (
-                <option key={i} value={el}>
-                  {el}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            {update.comentspositive.length ? (
-              <div className={s.categories_option}>
-                <button type="button" onClick={handleDeleteSComent}>
-                  x
-                </button>
-                <p className={s.positive_comments}>
-                  {update.comentspositive[0]}
-                </p>
-              </div>
-            ) : null}
-          </div>
-          <div className={s.input_container}>
-            <Box
-              sx={{
-                "& > legend": { mt: 2 },
-              }}
-            >
-              <Typography component="legend">Star rating</Typography>
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(e, newValue) => {
-                  setValue(newValue);
-                  handleSelect(e);
+        <div className={s.button_container}>
+          <button onClick={() => navigate(-1)} className={s.back}>
+            <IoIosArrowBack />
+          </button>
+        </div>
+        <div className={s.wraper}>
+          <form className={s.form}>
+            <h2>Update Your Comment</h2>
+            <div>
+              <select
+                onChange={handleSelectComent}
+                className={s.recomendations_select}
+              >
+                <option value="select">Select a recomendation</option>
+                {positive.map((el, i) => (
+                  <option key={i} value={el}>
+                    {el}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              {update.comentspositive.length ? (
+                <div className={s.categories_option}>
+                  <button type="button" onClick={handleDeleteSComent}>
+                    x
+                  </button>
+                  <p className={s.positive_comments}>
+                    {update.comentspositive[0]}
+                  </p>
+                </div>
+              ) : null}
+            </div>
+            <div className={s.input_container}>
+              <Box
+                sx={{
+                  "& > legend": { mt: 2 },
                 }}
-              />
-            </Box>
-          </div>
-          <div></div>
-          <div>
-            <button
-              type="button"
-              onClick={handleOnClick}
-              className={s.create_btn}
-            >
-              Update comments
-            </button>
-          </div>
-        </form>
+              >
+                <Typography component="legend">Star rating</Typography>
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(e, newValue) => {
+                    setValue(newValue);
+                    handleSelect(e);
+                  }}
+                />
+              </Box>
+            </div>
+            <div></div>
+            <div>
+              <button
+                type="button"
+                onClick={handleOnClick}
+                className={s.create_btn}
+              >
+                Update comments
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className={s.changeview}>
+          {view.length ? (
+            <CardComent
+              image={view[0].data?.userImg}
+              name={view[0].data?.userName}
+              rate={update.star ? update.star : view[0].data?.star}
+              quote={
+                update.comentspositive.length
+                  ? update.comentspositive
+                  : view[0].data?.comentspositive
+              }
+            />
+          ) : null}
+        </div>
       </div>
-      <div className={s.changeview}>
-        {view.length ? (
-          <CardComent
-            image={view[0].data?.userImg}
-            name={view[0].data?.userName}
-            rate={update.star ? update.star : view[0].data?.star}
-            quote={
-              update.comentspositive.length
-                ? update.comentspositive
-                : view[0].data?.comentspositive
-            }
-          />
-        ) : null}
-      </div>
-          </div>
-
     </div>
   );
 };
