@@ -12,6 +12,7 @@ import s from "../styles/register.module.css";
 import { setCurrentUser } from "../Redux/actions/users";
 import plans from "../images/plans.webp";
 import Swal from "sweetalert2";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Register() {
   const initialState = {
@@ -134,6 +135,12 @@ export default function Register() {
 
   return (
     <div className={s.container}>
+        <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.wraper}>
         <div className={s.image}>
           <img src={plans} alt="" />

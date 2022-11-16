@@ -12,15 +12,13 @@ import s from "../styles/userEdit.module.css";
 import image from "../images/edit.webp";
 import { BiUser } from "react-icons/bi";
 import { GiPhone } from "react-icons/gi";
-import {MdLocationSearching}from "react-icons/md"
-import {MdLocationCity, MdLocationOn}from "react-icons/md"
+import { MdLocationSearching } from "react-icons/md";
+import { MdLocationCity, MdLocationOn } from "react-icons/md";
 import { setCurrentUser } from "../Redux/actions/users/index.js";
 import ForgotenPassword from "./forgotenPassword";
 import axios from "axios";
-import {IoIosArrowBack}from "react-icons/io"
+import { IoIosArrowBack } from "react-icons/io";
 import Swal from "sweetalert2";
-
-
 
 const UserEdit = () => {
   const initialState = {
@@ -72,7 +70,7 @@ const UserEdit = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setError(validate({...input, [e.target.name] : e.target.value}))
+    setError(validate({ ...input, [e.target.name]: e.target.value }));
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -146,6 +144,7 @@ const UserEdit = () => {
 
   return (
     <div className={s.container}>
+
        <div className={s.button_container}>
             <button onClick={()=>{
               navigate('/dashboard')
@@ -155,10 +154,11 @@ const UserEdit = () => {
             </button>
 
           </div>
+
       <div className={s.profile}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
           <div className={s.input_label}>
-            <p className={s.name_input}>User image:</p>
+            <p className={s.name_input}>User image</p>
             <div className={s.input_container}>
               <button type="button" onClick={handleFile}></button>
               <input
@@ -171,7 +171,7 @@ const UserEdit = () => {
             </div>
           </div>
           <div className={s.input_label}>
-            <p className={s.name_input}>user name</p>
+            <p className={s.name_input}>User name</p>
             <div className={s.input_container}>
               <BiUser className={s.user_icon} />
               <input
@@ -182,8 +182,10 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
-              { error.displayName && (<p className={s.danger}>{error.displayName}</p>)}
             </div>
+              {error.displayName && (
+                <p className={s.danger}>{error.displayName}</p>
+              )}
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>City</p>
@@ -197,8 +199,8 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
-              { error.city && (<p className={s.danger}>{error.city}</p>)}
             </div>
+              {error.city && <p className={s.danger}>{error.city}</p>}
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>Adress</p>
@@ -216,18 +218,21 @@ const UserEdit = () => {
               />
             </div>
           </div>
-          <div className={s.input_container}>
+         <div className={s.input_label}>
+         <p className={s.name_input}>Adress number</p>
+         <div className={s.input_container}>
             <MdLocationCity className={s.user_icon} />
             <input
               name="adressNumber"
               value={input.adressNumber}
               onChange={handleChange}
-              placheholder="N°"
+              placheholder="Adress Number"
               type="text"
               className={s.input_text}
               autoComplete="off"
             />
           </div>
+         </div>
           <div className={s.input_label}>
             <p className={s.name_input}>phone</p>
             <div className={s.input_container}>
@@ -239,8 +244,10 @@ const UserEdit = () => {
                 placeholder="Phone Number"
                 className={s.input_text}
               />
-              { error.phoneNumber && (<p className={s.danger}>{error.phoneNumber}</p>)}
             </div>
+              {error.phoneNumber && (
+                <p className={s.danger}>{error.phoneNumber}</p>
+              )}
           </div>
 
           <button type="submit" className={s.update}>
@@ -262,18 +269,26 @@ const UserEdit = () => {
   );
 };
 
-const validate = input => {
+const validate = (input) => {
   let error = {};
-  if(!/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(input.displayName))  error.displayName = "Name invalid! (Ex : Juan Lopez)";
-  if(!/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))  error.city = "City invalid! (Ex : Boston, New Jersey, Santa Monica)";
-  if(!/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/.test(input.phoneNumber)) error.phoneNumber = "Number invalid! 8 digits a least 12 at most";
-  return error
-}
-
+  if (
+    !/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
+      input.displayName
+    )
+  )
+    error.displayName = "Name invalid! (Ex : Juan Lopez)";
+  if (!/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))
+    error.city = "City invalid! (Ex : Boston, New Jersey, Santa Monica)";
+  if (
+    !/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/.test(
+      input.phoneNumber
+    )
+  )
+    error.phoneNumber = "Number invalid! 8 digits a least 12 at most";
+  return error;
+};
 
 export default UserEdit;
-
-
 
 /* 
 

@@ -19,12 +19,9 @@ const OrdersUser = () => {
   const [orden, setOrden] = useState("");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const dataState = async () => {
-      try {
-        if (!currentUser) {
-          throw "no existe usuario"
-        }
+  const dataState = async () => {
+    try {
+      if (currentUser) {
         let a = await axios.get(
           `https://us-central1-api-plants-b6153.cloudfunctions.net/app/orders/${currentUser.uid}`
         );
@@ -32,7 +29,7 @@ const OrdersUser = () => {
           return {
             state: item.data?.state,
             userID: item.data?.userID,
-            // orderid: item?.orderid,
+            orderid: item?.orderid,
             date: item.data?.date,
             data: item.data?.cart,
           };
@@ -40,19 +37,20 @@ const OrdersUser = () => {
         setState(result);
         setAux(result);
         setOriginal([...result]);
-      } catch (error) {
-        console.error(error)
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    };
-    dataState()
+  useEffect(() => {
+    dataState();
   }, [currentUser]);
 
   const handleUserInput = (e) => {
     e.preventDefault();
     setName(e.target.value);
   };
-
 
   const handleSearchName = async (e) => {
     if (name === "") {
@@ -78,43 +76,46 @@ const OrdersUser = () => {
     let orderDate =
       e.target.value === "des"
         ? state.sort((a, b) => {
-          if (a.date._seconds > b.date._seconds) {
-            return 1;
-          }
-          if (a.date._seconds < b.date._seconds) {
-            return -1;
-          }
-          return 0;
-        })
+            if (a.date._seconds > b.date._seconds) {
+              return 1;
+            }
+            if (a.date._seconds < b.date._seconds) {
+              return -1;
+            }
+            return 0;
+          })
         : state.sort((a, b) => {
-          if (a.date._seconds > b.date._seconds) {
-            return -1;
-          }
-          if (a.date._seconds < b.date._seconds) {
-            return 1;
-          }
-          return 0;
-        });
+            if (a.date._seconds > b.date._seconds) {
+              return -1;
+            }
+            if (a.date._seconds < b.date._seconds) {
+              return 1;
+            }
+            return 0;
+          });
     setState(orderDate);
     setOrden(`${e.target.value}`);
   };
 
   const updateOriginal = (newproducts) => {
-
-    const auxiliar = original.map(item => {
+    const auxiliar = original.map((item) => {
       if (item.state === "Pending") {
         return {
           ...item,
-          data: newproducts
-        }
+          data: newproducts,
+        };
       } else {
-        return item
+        return item;
       }
-    })
-    dispatch(updateCart(newproducts))
-    setOriginal([...auxiliar])
-    setState([...auxiliar])
-  }
+    });
+    dispatch(updateCart(newproducts));
+    if (auxiliar.findIndex((item) => item.state === "Pending") < 0) {
+      dataState();
+    } else {
+      setOriginal([...auxiliar]);
+      setState([...auxiliar]);
+    }
+  };
 
   // console.log("state", state)
 
@@ -152,10 +153,10 @@ const OrdersUser = () => {
               className={s.reset}
             />
           </div>
-          <div className={s.favorite_list} >
+          <div className={s.favorite_list}>
             {state.map((ord, i) => (
               <OrdersCard
-                // orderid={ord?.orderid}
+                orderid={ord?.orderid}
                 state={ord?.state}
                 userID={ord?.userID}
                 date={ord?.date}
@@ -165,7 +166,6 @@ const OrdersUser = () => {
               />
             ))}
           </div>
-
         </div>
       </div>
     </div>

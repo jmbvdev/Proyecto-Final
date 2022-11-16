@@ -4,6 +4,8 @@ import { PieChart } from "react-chartkick";
 import "chartkick/chart.js";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.jsx";
+import s from "../styles/stadisticstables.module.css";
+import { IoIosArrowBack } from "react-icons/io";
 
 function SalesCount() {
   const navigate = useNavigate();
@@ -57,11 +59,17 @@ function SalesCount() {
 
   if (!sales) return <Loading />;
   return (
-    <div>
-      <button onClick={() => navigate("/stadistics")}>Back</button>
-      <button onClick={() => navigate("/stadistics/salesAmount")}>
+    <div className={s.Container}>
+      <div className={s.button_container}>
+        <button className={s.back} onClick={() => navigate("/stadistics")}>
+          <IoIosArrowBack />
+        </button>
+      </div>
+      <button onClick={() => navigate("/stadistics/salesAmount")} className={s.amount_btn}>
         Go to Sales Amount
       </button>
+      <div className={s.order}>
+
       <h3>SALES COUNT</h3>
       <select onChange={handleOnPeriod}>
         <option value="2022-09-10,2022-09-16">09/10 - 15/10</option>
@@ -71,6 +79,7 @@ function SalesCount() {
         <option value="2022-11-07,2022-11-14">07/11 - 13/11</option>
         <option value="2022-11-14,2022-11-20">14/11 - 20/11</option>
       </select>
+      </div>
       <PieChart data={period} empty="No sales for the stipulated period" />
     </div>
   );

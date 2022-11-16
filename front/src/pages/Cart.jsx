@@ -19,11 +19,11 @@ import s from "../styles/cart.module.css";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
-
+  const allProd = useSelector((state) => state.productsReducer.productsBackUp);
   const [pago, setPago] = useState(false);
 
   const plants = useSelector((state) => state.shopCartReducer.products);
-  console.log("plants",plants);
+
   const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,7 +65,6 @@ const Cart = () => {
   function handleOnPurchase(e) {
     e.preventDefault();
     if (!currentUser) {
-
       Swal.fire({
         title: "Warning",
         text: "You are not registered! Do you want to sign in?",
@@ -99,6 +98,43 @@ const Cart = () => {
       );
       return;
     }
+
+    let auxStock = [];
+    let auxLogDel = [];
+    plants.forEach((item) => {
+      allProd.forEach((prod) => {
+        if (prod.id === item.id && prod.data.stock < item.count) {
+          auxStock.push(prod);
+        }
+        if (prod.id === item.id && prod.data.logicalDeletion) {
+          auxLogDel.push(prod);
+        }
+      });
+    });
+
+    if (auxStock.length || auxLogDel.length) {
+      Promise.resolve(
+        Swal.fire({
+          title: "Warning",
+          text: `There are some products in your cart that are out of stock or discontinued!  
+            ${auxStock.map((item) => {
+              return ` ${item.data.name}: Max stock: ${item.data.stock}. `;
+            })}
+            ${auxLogDel.map((item) => {
+              return `Discontinued product: ${item.data.name}.`;
+            })}
+            Please, take off that items to continue`,
+          icon: "error",
+          showDenyButton: false,
+          denyButtonText: "No",
+          denyButtonColor: "#72CE65",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#FF5733",
+        })
+      );
+      return;
+    }
+
     setPago(true);
   }
 
@@ -174,14 +210,17 @@ const Cart = () => {
                     <h3>${p.price * p.count}</h3>
                     <div className={s.total_btn}>
                       <div className={s.fav}>
-
-                      <FavButton id={p.id} user={currentUser?.uid} className={s.heart_icon}/>
-                      <button
-                        onClick={() => handleDeletePlant(p.id)}
-                        className={s.delete}
-                      >
-                        <MdDeleteForever />
-                      </button>
+                        <FavButton
+                          id={p.id}
+                          user={currentUser?.uid}
+                          className={s.heart_icon}
+                        />
+                        <button
+                          onClick={() => handleDeletePlant(p.id)}
+                          className={s.delete}
+                        >
+                          <MdDeleteForever />
+                        </button>
                       </div>
                     </div>
                   </div>

@@ -127,3 +127,10 @@
     background-color: #27262b;
     border: 1px solid #27262b;
   }
+  .state_wraper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }

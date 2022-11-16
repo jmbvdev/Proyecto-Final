@@ -10,7 +10,7 @@ const PopularPlants = () => {
   const allPlants = useSelector(
     (state) => state.productsReducer.productsBackUp
   );
-  const plants = allPlants.filter((p) => !p.data.logicalDeletion).slice(27, 30);
+  const plants = allPlants.filter((p) => !p.data.logicalDeletion).slice(30, 33);
 
 
   return (
