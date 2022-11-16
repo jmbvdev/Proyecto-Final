@@ -206,12 +206,31 @@ right: 20px;
     font-size: small;
     caret-color: transparent;
   }
-  .register button{
+  .register button a{
     font-size: medium;
+    text-decoration: none;
     color: #fff;
     cursor: pointer;
     caret-color: transparent;
   }
+  .button_container{
+    width: min-content;
+    position: absolute;
+    left: 15px;
+  top: 8rem;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
   @media (max-width: 800px) {
     .container{
       height: 100vh;

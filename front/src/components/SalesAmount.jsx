@@ -78,9 +78,11 @@ function SalesAmount() {
           <IoIosArrowBack />
         </button>
       </div>
-      <button onClick={() => navigate("/stadistics/salesCount")}>
+      <button className={s.amount_btn} onClick={() => navigate("/stadistics/salesCount")}>
         Go to Sales Count
       </button>
+      <div className={s.order}>
+
       <h3>SALES AMOUNT</h3>
       <select onChange={handleOnPeriod}>
         <option value="2022-09-10,2022-09-16">09/10 - 15/10</option>
@@ -90,6 +92,7 @@ function SalesAmount() {
         <option value="2022-11-07,2022-11-14">07/11 - 13/11</option>
         <option value="2022-11-14,2022-11-21">14/11 - 20/11</option>
       </select>
+      </div>
       <PieChart
         data={period}
         prefix="$"

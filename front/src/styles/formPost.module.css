@@ -150,6 +150,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 .payment_icon{
   background-color: #3e3e3e;
@@ -231,7 +232,7 @@ border-radius: 8px;
   justify-content: center;
   align-items: center;
 
- 
+
 
 }
 .andreani{
@@ -297,6 +298,9 @@ background-size: cover;
   cursor: pointer;
   margin-bottom: 10px;
 }
+.pay_btn:hover{
+  background-color: #c9c8c8;
+}
 .crypto{
 display: flex;
 margin-top: 20px;
@@ -310,7 +314,7 @@ border-radius: 8px;
 }
 .crypto:hover{
 
-  background-color: #123b44;
+  background-color: #165361;
  
   cursor: pointer;
   }
@@ -318,12 +322,12 @@ border-radius: 8px;
   font-family: "Roboto", serif;
   font-size: small;
   font-weight: bold;
-  padding: 0px 10px;
+  padding: 0px 10px 0px 4px;
 
 }
 .coin{
   font-size: 40px;
- padding-left: 10px;
+ padding-left: 8px;
 }
 
 @media (max-width: 1000px) {

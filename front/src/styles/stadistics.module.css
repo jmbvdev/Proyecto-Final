@@ -1,0 +1,165 @@
+.container{
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.39),rgba(255, 255, 255, 0.795)), url("https://jhackshaw.com/static/e2abe78af7fbc319a44ed08254130c95/66b50/hero-background.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(201, 201, 201, 0.39),rgba(199, 204, 204, 0.658)), url("https://img.freepik.com/premium-photo/financial-graphs-charts-blurred-business-center-background-invesment-trading-concept_161452-4553.jpg?w=2000"); 
+    background-repeat: no-repeat;
+    background-position: center;
+ 
+ 
+}
+.banner img{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-width: 150px;
+    filter: drop-shadow( 5px 5px 10px rgb(155, 131, 171));
+
+   
+}
+.banner_img{
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-width: 150px;
+    position: relative;
+    top: 6px;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+
+}
+.contact img{
+    width: 30%;
+    min-width: 150px;
+    filter: contrast(1.5);
+    position: relative;
+    bottom: 30px;
+ 
+ 
+}
+.contact h1{
+    font-family: "Roboto";
+    color: rgb(27, 38, 31);
+    font-size: 3vw;
+    position: relative;
+    bottom: 25px;
+}
+.card{
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.card span{
+    font-size: 1.5rem;
+    font-family: "Dosis";
+    font-weight: bold;
+    color: rgb(16, 44, 69);
+    margin-top: 10px;
+ 
+}
+.card img{
+width: 100%;
+
+}
+.card img:hover{
+    filter: drop-shadow( 5px 5px 10px rgb(155, 131, 171));
+}
+.card_container{
+    margin-top:5rem;
+    margin-bottom:5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sales{
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.sales span{
+    font-size: 1.5rem;
+    font-family: "Dosis";
+    font-weight: bold;
+    color: rgb(16, 44, 69);
+  
+ 
+}
+.sales img{
+width: 100%;
+
+}
+.sales img:hover{
+    filter: drop-shadow( 5px 5px 10px rgb(155, 131, 171));
+}
+
+.amount{
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.amount span{
+    font-size: 1.5rem;
+    font-family: "Dosis";
+    font-weight: bold;
+    color: rgb(16, 44, 69);
+    margin-top: 10px;
+  
+ 
+}
+.amount img{
+width: 100%;
+
+}
+.amount img:hover{
+    filter: drop-shadow( 5px 5px 10px rgb(155, 131, 171));
+}
+
+.products{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.products span{
+    font-size: 1.5rem;
+    font-family: "Dosis";
+    font-weight: bold;
+    color: rgb(16, 44, 69);
+ 
+  
+ 
+}
+.products img{
+width: 100%;
+
+}
+.products img:hover{
+    filter: drop-shadow( 5px 5px 10px rgba(155, 131, 171, 0.656));
+}

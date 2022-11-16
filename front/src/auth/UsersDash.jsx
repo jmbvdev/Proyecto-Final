@@ -188,6 +188,7 @@ const UserDetail = () => {
               <p>{user.customClaims?.role?.[0] || "User"}</p>
               <img
                 src={user?.photoURL || avatar}
+                className={s.profile_pic}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
                   currentTarget.src = "https://i.stack.imgur.com/4powQ.gif";

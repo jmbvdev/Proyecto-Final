@@ -61,6 +61,8 @@ function BestProducts() {
           <IoIosArrowBack />
         </button>
       </div>
+      <div className={s.order}>
+
       <h4>BEST PRODUCTS</h4>
       <select onChange={handleOnPeriod}>
         <option value="1">1</option>
@@ -70,6 +72,7 @@ function BestProducts() {
         <option value="8">8</option>
         <option value="10">10</option>
       </select>
+      </div>
       <BarChart
         xtitle="Sales count"
         ytitle="Products"
