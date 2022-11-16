@@ -144,6 +144,7 @@ const EditPlant = () => {
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
     navigate("/plants");
+    window.scrollTo(0, {behavior: 'smooth'})
   }
 
   const handleOnSubmitForMod = (e) => {
@@ -166,6 +167,7 @@ const EditPlant = () => {
     dispatch(editProduct(id, product));
     dispatch(clearDetails());
     navigate("/plants");
+    window.scrollTo(0, {behavior: 'smooth'})
   };
 
   const handleCategories = (e) => {
@@ -249,6 +251,7 @@ const EditPlant = () => {
         dispatch(DeleteProduct(id));
         dispatch(clearDetails());
         navigate("/plants");
+        window.scrollTo(0, {behavior: 'smooth'})
       }
     });
   };
@@ -261,7 +264,7 @@ const EditPlant = () => {
         ) : (
           <div className={s.container}>
                   <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
+            <button onClick={()=>navigate(`/plants/details/${id}`)} className={s.back}>
               <IoIosArrowBack/>
             </button>
 

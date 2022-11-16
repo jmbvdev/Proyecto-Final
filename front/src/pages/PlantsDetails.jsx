@@ -85,6 +85,7 @@ const PlantsDetails = () => {
   function handleEdit(e) {
     e.preventDefault();
     navigate(`/plants/edit/${id}`);
+    window.scrollTo(0, {behavior: 'smooth'})
   }
   function handleComents(e) {
     e.preventDefault();

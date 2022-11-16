@@ -28,7 +28,10 @@ const Dashboard = () => {
   return (
     <div className={s.container}>
            <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
+            <button onClick={()=>{
+              navigate(-1)
+              window.scrollTo(0, {behavior: 'smooth'})
+              }} className={s.back}>
               <IoIosArrowBack/>
             </button>
 
@@ -55,7 +58,10 @@ const Dashboard = () => {
             </p>
             <div className={s.container_btn}>
               <button
-                onClick={() => navigate("/dashboard/edit")}
+                onClick={() => {
+                  navigate("/dashboard/edit")
+                  window.scrollTo(0, {behavior: 'smooth'})
+              }}
                 className={s.edit_btn}
               >
                 CLICK TO EDIT
@@ -71,36 +77,54 @@ const Dashboard = () => {
             </div>
             {role === "admin" ? (
               <div className={s.btn_container}>
-                <div className={s.admin} onClick={() => navigate("/dashboard/users")}>
+                <div className={s.admin} onClick={() => {
+                  navigate("/dashboard/users")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <FaUserCircle className={s.admin_icon} />
                   <button >
                     USERS
                   </button>
                 </div>
-                <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
+                <div className={s.admin} onClick={() => {
+                  navigate("/dashboard/products")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <RiPlantFill className={s.admin_icon} />
                   <button >
                     PRODUCTS
                   </button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                <div className={s.admin}  onClick={() => {
+                  navigate("/manage-order")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <FaShoppingBag className={s.admin_icon} />
                   <button>
                     ORDERS
                   </button>
                 </div>
-                <div className={s.admin} onClick={() => navigate("/dashboard/coupons")}>
+                <div className={s.admin} onClick={() => {
+                  navigate("/dashboard/coupons")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <RiCoupon2Fill className={s.admin_icon} />
                   <button >
                     COUPONS
                   </button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/create")}>
+                <div className={s.admin}  onClick={() => {
+                  navigate("/create")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                 <IoIosCreate className={s.admin_icon} />
                   <button>CREATE</button>
 
                 </div>
-                <div className={s.admin} onClick={() => navigate("/stadistics")}>
+                <div className={s.admin} onClick={() => {
+                  navigate("/stadistics")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <BiStats className={s.admin_icon} />
                   <button >
                     STATISTICS
@@ -109,13 +133,19 @@ const Dashboard = () => {
               </div>
             ) : role === "moderator" ? (
               <div className={s.btn_container}>
-                 <div className={s.admin} onClick={() => navigate("/dashboard/products")}>
+                 <div className={s.admin} onClick={() => {
+                  navigate("/dashboard/products")
+                  window.scrollTo(0, {behavior: 'smooth'})
+                }}>
                   <RiPlantFill className={s.admin_icon} />
                   <button >
                     PRODUCTS
                   </button>
                 </div>
-                <div className={s.admin}  onClick={() => navigate("/manage-order")}>
+                <div className={s.admin}  onClick={() => {
+                  navigate("/manage-order")
+                  window.scrollTo(0, {behavior: 'smooth'})  
+                }}>
                   <FaShoppingBag className={s.admin_icon} />
                   <button>
                     ORDERS
@@ -127,7 +157,10 @@ const Dashboard = () => {
             ) : role === "user" ? (
               <div className={s.btn_container}>
 
-<div className={s.admin}  onClick={() => navigate("/manage-order")}>
+<div className={s.admin}  onClick={() => {
+  navigate("/manage-order")
+  window.scrollTo(0, {behavior: 'smooth'})
+}}>
                   <FaShoppingBag className={s.admin_icon} />
                   <button>
                     ORDERS

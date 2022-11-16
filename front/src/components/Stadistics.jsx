@@ -3,6 +3,7 @@ import axios from "axios";
 import { LineChart, PieChart } from "react-chartkick";
 import "chartkick/chart.js";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Stadistics() {
   const navigate = useNavigate();
@@ -47,12 +48,20 @@ function Stadistics() {
   }, [sales]);
 
   return (
+    <>
+    <button onClick={() => {
+      navigate('/dashboard')
+      window.scrollTo(0, {behavior: 'smooth'})
+    }}>
+      <IoIosArrowBack />
+    </button>
     <div>
       <button onClick={() => navigate("newUsers")}>New Users</button>
       <button onClick={() => navigate("salesCount")}>Sales Count</button>
       <button onClick={() => navigate("salesAmount")}>Sales Amount</button>
       <button onClick={() => navigate("bestProducts")}>Best products</button>
     </div>
+    </>
   );
 }
 

@@ -24,7 +24,8 @@ const ProductsDash = () => {
 
 
     const handleBack = () => {
-      navigate(-1);
+      navigate('/dashboard');
+      window.scrollTo(0, {behavior: 'smooth'})
     };
 
     function matchSorterFn(rows, id, filterValue) {

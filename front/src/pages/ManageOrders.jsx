@@ -254,7 +254,10 @@ export default function ManageOrders() {
   return (
     <div className={s.container}>
            <div className={s.button_container}>
-            <button onClick={()=>navigate(-1)} className={s.back}>
+            <button onClick={()=>{
+              navigate('/dashboard')
+              window.scrollTo(0, {behavior: 'smooth'})
+            }} className={s.back}>
               <IoIosArrowBack/>
             </button>
 
