@@ -10,9 +10,12 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
-import avatar from "../images/avatar 1.gif";
 
-const Reviews = ({ setView, close }) => {
+import avatar from "../images/avatar 1.gif"
+import { IoIosArrowBack } from "react-icons/io";
+
+
+const Reviews = ({ setView, close,handleClose }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const id = useParams().id;
@@ -108,7 +111,14 @@ const Reviews = ({ setView, close }) => {
 
   return (
     <div className={s.container}>
+      
       <form className={s.form}>
+      <div className={s.button_container}>
+            <button onClick={()=>handleClose(true)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
         <h2>Leave Your Comment</h2>
         <img
           src={user?.photoURL || avatar}

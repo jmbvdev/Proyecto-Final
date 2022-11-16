@@ -2,6 +2,7 @@ import React from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import Swal from "sweetalert2";
+import {IoIosArrowBack} from "react-icons/io"
 import s from "../styles/forgottenPass.module.css";
 
 function ForgotenPassword({ close }) {
@@ -63,13 +64,15 @@ function ForgotenPassword({ close }) {
   return (
     <div onClick={closeModal} className={s.modalBackground}>
       <div className={s.modalContainer}>
-        <button
-          onClick={() => {
+      <div className={s.button_container}>
+            <button className={s.back}  onClick={() => {
             close(false);
-          }}
-        >
-          X
-        </button>
+          }}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
+      
         <input
           className={s.modalInput}
           type="email"

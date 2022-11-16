@@ -19,18 +19,18 @@ export default function Register() {
     displayName: "",
     email: "",
     password: "",
+    password2: "",
   };
 
   const [input, setInput] = React.useState(initialState);
-  const [password2, setPassword2] = React.useState("");
   const [error, setError] = React.useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (input.displayName && input.email && input.password && password2) {
-      if (input.password !== password2) {
+    if (input.displayName && input.email && input.password && input.password2) {
+      if (input.password !== input.password2) {
         const Toast = Swal.mixin({
           toast: true,
           position: "top-right",
@@ -185,8 +185,8 @@ export default function Register() {
               <input
                 className={s.input_text}
                 name="password2"
-                value={password2}
-                onChange={(e) => setPassword2(e.target.value)}
+                value={input.password2}
+                onChange={handleChange}
                 placeholder="Repeat your password"
                 type={"password"}
               />
@@ -194,7 +194,15 @@ export default function Register() {
             </div>
             <div>
               <button
-                disabled={!input.email || !input.password}
+
+                disabled={
+                  !input.email ||
+                  !input.password ||
+                  !input.displayName ||
+                  input.password !== input.password2 ||
+                  error.lenght > 0
+                }
+
                 className={s.register_btn}
                 type="submit"
               >
@@ -210,24 +218,11 @@ export default function Register() {
 
 const validate = (input) => {
   let error = {};
-  if (
-    !/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
-      input.displayName
-    )
-  )
-    error.displayName = "Name invalid! (Ex : Juan Lopez)";
-  if (
-    !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
-      input.email
-    )
-  )
-    error.email = "Email invalid! (Ex : juanlopez12@mail.com)";
-  if (
-    !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(
-      input.password
-    )
-  )
-    error.password =
-      "Password invalid! (8-15 char., Cap. letter, at least 1 digit, No blanks, 1 special char)";
-  return error;
-};
+
+  if(!/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(input.displayName))  error.displayName = "Name invalid! (Ex : Juan Lopez)";
+  if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(input.email))  error.email = "Email invalid! (Ex : juanlopez12@mail.com)";
+  if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(input.password)) error.password = "Password invalid! (8-15 char., Cap. letter, at least 1 digit, No blanks)";
+  if(input.password !== input.password2) error.password2 = 'Both password must be equal';
+  return error
+}
+
