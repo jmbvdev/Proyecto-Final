@@ -25,34 +25,39 @@ export default function Login() {
     e.preventDefault();
     handleOpen(true);
   };
-  /*  const handleVerify = () => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-right",
-      iconColor: "white",
-      customClass: {
-        popup: "colored-toast",
-      },
-      showConfirmButton: true,
-      timer: 6000,
-      timerProgressBar: true,
+  const handleVerify = () => {
+    const user = auth.currentUser;
+    dispatch(setCurrentUser(null));
+    history("/sign-in");
+    signOut(auth).then(() => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: true,
+        timer: 6000,
+        timerProgressBar: true,
+      });
+      Toast.fire({
+        icon: "info",
+        title: `Your account is not verified. Check your email and do the verification proccess. Press Ok if you want to resend the email!`,
+      }).then((res) => {
+        if (res.isConfirmed) {
+          sendEmailVerification(user);
+        }
+      });
     });
-    Toast.fire({
-      icon: "info",
-      title: `Your account is not verified. Check your email and do the verification proccess. Press Ok if you want to resend the email!`,
-    }).then((res) => {
-      if (res.isConfirmed) {
-        sendEmailVerification(user);
-      }
-    });
-  }; */
+  };
 
   const handleLogin = () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           auth.currentUser.emailVerified === false
-            ? history("/sign-in")
+            ? handleVerify()
             : history("/");
         })
         .catch((err) => {

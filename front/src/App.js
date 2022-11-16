@@ -67,8 +67,8 @@ function App() {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {
-        if (authenticatedUser) {
-          if (!authenticatedUser.emailVerified) {
+        if (authenticatedUser && authenticatedUser.emailVerified) {
+          /* if (!authenticatedUser.emailVerified) {
             const Toast = Swal.mixin({
               toast: true,
               position: "top-right",
@@ -90,23 +90,23 @@ function App() {
               signOut(auth).then(() => {
                 dispatch(setCurrentUser(null));
               });
-            });
-          } else {
-            const role = await authenticatedUser.getIdTokenResult(true);
-            dispatch(
-              setCurrentUser({
-                ...authenticatedUser,
-                role: role.claims.role || ["user"],
-                adress: role.claims.adress || "",
-                adressNumber: role.claims.adressNumber || "",
-                city: role.claims.city || "",
-              })
-            );
-            dispatch(loadCart(authenticatedUser.uid));
-          }
+            }); */
+
+          const role = await authenticatedUser.getIdTokenResult(true);
+          dispatch(
+            setCurrentUser({
+              ...authenticatedUser,
+              role: role.claims.role || ["user"],
+              adress: role.claims.adress || "",
+              adressNumber: role.claims.adressNumber || "",
+              city: role.claims.city || "",
+            })
+          );
+          dispatch(loadCart(authenticatedUser.uid));
         }
       }
     );
+
     return unSubscribeAuth;
   }, []);
 

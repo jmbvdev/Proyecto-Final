@@ -60,7 +60,9 @@ export default function Register() {
             displayName: input.displayName,
           });
           dispatch(setCurrentUser(null));
-          /* const Toast = Swal.mixin({
+          await sendEmailVerification(auth.currentUser);
+          await signOut(auth);
+          const Toast = Swal.mixin({
             toast: true,
             position: "top-right",
             iconColor: "white",
@@ -76,7 +78,7 @@ export default function Register() {
               icon: "success",
               title: `User succesfully created. Please check your email to verify!`,
             })
-          ); */
+          );
           navigate("/");
           setInput(initialState);
           return;
