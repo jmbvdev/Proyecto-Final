@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
-import avatar from "../images/avatar 1.gif"
+import avatar from "../images/avatar 1.gif";
 
 const Reviews = ({ setView, close }) => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Reviews = ({ setView, close }) => {
   const [coments, setComents] = useState({
     userUID: user?.uid,
     userName: user?.displayName,
-    userImg: user?.photoURL, 
+    userImg: user?.photoURL,
     star: "",
     plantsUID: id,
     comentspositive: [],
@@ -53,7 +53,6 @@ const Reviews = ({ setView, close }) => {
           ...coments,
           comentspositive: [e.target.value],
         });
-
     }
   };
 
@@ -111,12 +110,15 @@ const Reviews = ({ setView, close }) => {
     <div className={s.container}>
       <form className={s.form}>
         <h2>Leave Your Comment</h2>
-        <img src={user?.photoURL ||avatar}
+        <img
+          src={user?.photoURL || avatar}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = "https://i.stack.imgur.com/4powQ.gif"
+            currentTarget.src = "https://i.stack.imgur.com/4powQ.gif";
           }}
-          className={s.userPic} alt="do not pose" />
+          className={s.userPic}
+          alt="do not pose"
+        />
         <h3>{user?.displayName}</h3>
 
         <div>

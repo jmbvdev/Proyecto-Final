@@ -11,7 +11,6 @@ import CardComent from "../components/CardComment";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Update_Coment = ({}) => {
-  const Navigate = useNavigate();
   const id = useParams().comentid;
   const plantsUID = useParams().plantsUID;
   const user = useSelector((state) => state.usersReducer.currentUser);
@@ -82,16 +81,36 @@ const Update_Coment = ({}) => {
         confirmButtonColor: "rgba(11, 115, 147, 0.713)",
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.put(
-            `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
-            {
-              star: update.star !== "" ? update.star : view[0].data.star,
-              comentspositive: update.comentspositive.length
-                ? update.comentspositive
-                : view[0].data?.comentspositive,
-            }
-          );
-          Navigate(-1);
+          axios
+            .put(
+              `https://us-central1-api-plants-b6153.cloudfunctions.net/app/coments/${id}`,
+              {
+                star: update.star !== "" ? update.star : view[0].data.star,
+                comentspositive: update.comentspositive.length
+                  ? update.comentspositive
+                  : view[0].data?.comentspositive,
+              }
+            )
+            .then(() => {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-right",
+                iconColor: "white",
+                customClass: {
+                  popup: "colored-toast",
+                },
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+              });
+              Promise.resolve(
+                Toast.fire({
+                  icon: "success",
+                  title: `Coment updated!`,
+                })
+              );
+              navigate(-1);
+            });
         }
       });
     }
