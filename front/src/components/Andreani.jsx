@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import s from "../styles/formPost.module.css"
+import s from "../styles/formPost.module.css";
 
 function Andreani({ totalproducts, totalAmount }) {
   const [CP, setCP] = React.useState("");
@@ -29,26 +29,17 @@ function Andreani({ totalproducts, totalAmount }) {
   return (
     <div className={s.andreani_input}>
       <input type="text" placeholder="CP" value={CP} onChange={handleChange} />
-      <button onClick={shipingAmount} className={s.andreani_ok}>OK</button>
+      <button onClick={shipingAmount} className={s.andreani_ok}>
+        OK
+      </button>
       {amount && totalAmount < 1100 ? (
-        <h4  className={s.andreani_result}>You pay in destiny: ${amount}</h4>
+        <h4 className={s.andreani_result}>You pay in destiny: ${amount}</h4>
       ) : null}
-      {totalAmount >= 1100 ? <h4 className={s.andreani_result}>Free Shiping!</h4> : null}
+      {totalAmount >= 1100 ? (
+        <h4 className={s.andreani_result}>Free Shiping!</h4>
+      ) : null}
     </div>
   );
 }
 
 export default Andreani;
-
-// precio envio andreani siguiente get:
-//https://apisqa.andreani.com/v1/tarifas?cpDestino=2000&contrato=300006611&cliente=CL0003750&sucursalOrigen=BAR&bultos[0][valorDeclarado]=1200&bultos[0][volumen]=10&bultos[0][kilos]=0.3&bultos[0][altoCm]=10&bultos[0][largoCm]=10&bultos[0][anchoCm]=10
-
-//cpDestino le llega por input de envio, volumen es por cantidad de paquetes, si es small que valga 10 en bultos y 0.3kg en peso, 10cm en alto 10 en largo y 10 en ancho.
-//si es medium que sume 15 en butlos 0.5 en peso 15 en alto 15 en largo y 15 en ancho
-//si es large que sume 20 en bultos 0.8 en peso 20 en alto 20 en largo y 20 en alto
-//si es mini que sume 5 en bultos 0.2 en kg 5cm 5cm 5cm
-//todo dividido 10
-
-//renderizar el resultado de los inputs.
-//mostrar sucursales cercanas a la ciudad elegida.
-//mostrar direccion de envio o ubic actual.
