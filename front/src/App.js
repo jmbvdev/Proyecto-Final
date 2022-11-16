@@ -16,7 +16,11 @@ import { auth } from "./firebase/firebase.js";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./Redux/actions/users/index";
 import { loadCart } from "./Redux/actions/shopCart/index.js";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  signOut,
+  sendEmailVerification,
+} from "firebase/auth";
 import ScrollToTop from "react-scroll-to-top";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -42,6 +46,7 @@ import NewUsers from "./components/NewUsers";
 import SalesCount from "./components/SalesCount";
 import SalesAmount from "./components/SalesAmount";
 import BestProducts from "./components/BestProducts";
+import Swal from "sweetalert2";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -62,24 +67,43 @@ function App() {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {
-        if (!authenticatedUser?.emailVerified) {
-          signOut(auth).then(() => {
-            dispatch(setCurrentUser(null));
-          });
-          return;
-        }
         if (authenticatedUser) {
-          const role = await authenticatedUser.getIdTokenResult(true);
-          dispatch(
-            setCurrentUser({
-              ...authenticatedUser,
-              role: role.claims.role || ["user"],
-              adress: role.claims.adress || "",
-              adressNumber: role.claims.adressNumber || "",
-              city: role.claims.city || "",
-            })
-          );
-          dispatch(loadCart(authenticatedUser.uid));
+          if (!authenticatedUser.emailVerified) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-right",
+              iconColor: "white",
+              customClass: {
+                popup: "colored-toast",
+              },
+              showConfirmButton: true,
+              timer: 6000,
+              timerProgressBar: true,
+            });
+            Toast.fire({
+              icon: "info",
+              title: `Your account is not verified. Please check your email and do the verification proccess. Press Ok if you want to resend the email!`,
+            }).then((res) => {
+              if (res.isConfirmed) {
+                sendEmailVerification(auth.currentUser);
+              }
+              signOut(auth).then(() => {
+                dispatch(setCurrentUser(null));
+              });
+            });
+          } else {
+            const role = await authenticatedUser.getIdTokenResult(true);
+            dispatch(
+              setCurrentUser({
+                ...authenticatedUser,
+                role: role.claims.role || ["user"],
+                adress: role.claims.adress || "",
+                adressNumber: role.claims.adressNumber || "",
+                city: role.claims.city || "",
+              })
+            );
+            dispatch(loadCart(authenticatedUser.uid));
+          }
         }
       }
     );

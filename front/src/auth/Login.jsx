@@ -25,9 +25,7 @@ export default function Login() {
     e.preventDefault();
     handleOpen(true);
   };
-  const handleVerify = () => {
-    const user = auth.currentUser;
-    history("/sign-in");
+  /*  const handleVerify = () => {
     const Toast = Swal.mixin({
       toast: true,
       position: "top-right",
@@ -47,14 +45,14 @@ export default function Login() {
         sendEmailVerification(user);
       }
     });
-  };
+  }; */
 
   const handleLogin = () => {
     if (email !== null && password !== null) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           auth.currentUser.emailVerified === false
-            ? handleVerify()
+            ? history("/sign-in")
             : history("/");
         })
         .catch((err) => {
