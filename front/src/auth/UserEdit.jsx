@@ -152,7 +152,7 @@ const UserEdit = () => {
       <div className={s.profile}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={s.specs}>
           <div className={s.input_label}>
-            <p className={s.name_input}>User image:</p>
+            <p className={s.name_input}>User image</p>
             <div className={s.input_container}>
               <button type="button" onClick={handleFile}></button>
               <input
@@ -165,7 +165,7 @@ const UserEdit = () => {
             </div>
           </div>
           <div className={s.input_label}>
-            <p className={s.name_input}>user name</p>
+            <p className={s.name_input}>User name</p>
             <div className={s.input_container}>
               <BiUser className={s.user_icon} />
               <input
@@ -176,10 +176,10 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
+            </div>
               {error.displayName && (
                 <p className={s.danger}>{error.displayName}</p>
               )}
-            </div>
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>City</p>
@@ -193,8 +193,8 @@ const UserEdit = () => {
                 className={s.input_text}
                 autoComplete="off"
               />
-              {error.city && <p className={s.danger}>{error.city}</p>}
             </div>
+              {error.city && <p className={s.danger}>{error.city}</p>}
           </div>
           <div className={s.input_label}>
             <p className={s.name_input}>Adress</p>
@@ -212,7 +212,9 @@ const UserEdit = () => {
               />
             </div>
           </div>
-          <div className={s.input_container}>
+         <div className={s.input_label}>
+         <p className={s.name_input}>Adress number</p>
+         <div className={s.input_container}>
             <MdLocationCity className={s.user_icon} />
             <input
               name="adressNumber"
@@ -224,6 +226,7 @@ const UserEdit = () => {
               autoComplete="off"
             />
           </div>
+         </div>
           <div className={s.input_label}>
             <p className={s.name_input}>phone</p>
             <div className={s.input_container}>
@@ -235,10 +238,10 @@ const UserEdit = () => {
                 placeholder="Phone Number"
                 className={s.input_text}
               />
+            </div>
               {error.phoneNumber && (
                 <p className={s.danger}>{error.phoneNumber}</p>
               )}
-            </div>
           </div>
 
           <button type="submit" className={s.update}>

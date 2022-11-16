@@ -48,6 +48,8 @@ function NewUsers() {
           <IoIosArrowBack />
         </button>
       </div>
+      <div className={s.order}>
+
       <h3>NEW USERS</h3>
       <h4>{`Total users now: ${total}`}</h4>
       <select onChange={handleOnPeriod}>
@@ -65,6 +67,7 @@ function NewUsers() {
         <option value="2022-11-01,2022-11-30">November</option>
         <option value="2022-12-01,2022-12-31">December</option>
       </select>
+      </div>
       <LineChart
         xtitle="Days"
         ytitle="New Users"

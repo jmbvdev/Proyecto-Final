@@ -13,6 +13,7 @@ import ForgotenPassword from "./forgotenPassword";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ export default function Login() {
   const history = useNavigate();
   const [open, handleOpen] = useState(false);
   const dispatch = useDispatch();
-
+const navigate= useNavigate()
   const redirectToPasswordReset = (e) => {
     e.preventDefault();
     handleOpen(true);
@@ -116,6 +117,12 @@ export default function Login() {
 
   return (
     <div className={s.container}>
+          <div className={s.button_container}>
+            <button onClick={()=>navigate(-1)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
       <div className={s.wraper}>
         <div className={s.login}>
           <div className={s.specs}>
@@ -169,7 +176,7 @@ export default function Login() {
               <div className={s.register}>
                 <p>Don't have an account?</p>
                 <button>
-                  <Link to="/register">SIGN UP</Link>
+                  <Link to="/register" >SIGN UP</Link>
                 </button>
               </div>
             </div>
