@@ -57,7 +57,10 @@ function BestProducts() {
   return (
     <div className={s.Container}>
       <div className={s.button_container}>
-        <button className={s.back} onClick={() => navigate(-1)}>
+      <button className={s.back} onClick={() => {
+          navigate("/stadistics")
+          window.scrollTo(0, {behavior: 'smooth'})
+          }}>
           <IoIosArrowBack />
         </button>
       </div>
