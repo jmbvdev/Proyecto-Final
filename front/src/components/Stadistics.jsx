@@ -82,19 +82,31 @@ function Stadistics() {
             </header>
             <div className={s.card_container}>
 
-      <div onClick={() => navigate("newUsers")} className={s.card}>
+      <div onClick={() => {
+        navigate("newUsers")
+        window.scrollTo(0, {behavior: 'smooth'})
+        }} className={s.card}>
         <img src={users} alt="users" />
         <span>NEW USERS</span>
       </div>
-      <div onClick={() => navigate("salesCount")} className={s.sales}>
+      <div onClick={() => {
+        navigate("salesCount")
+        window.scrollTo(0, {behavior: 'smooth'})
+    }} className={s.sales}>
         <img src={pie} alt="users" />
         <span>SALES COUNT</span>
       </div>
-      <div onClick={() => navigate("salesCount")} className={s.amount}>
+      <div onClick={() => {
+        navigate("salesCount")
+        window.scrollTo(0, {behavior: 'smooth'})
+        }} className={s.amount}>
         <img src={amount} alt="users" />
         <span>SALES AMOUNT</span>
       </div>
-      <div  onClick={() => navigate("bestProducts")} className={s.products}>
+      <div  onClick={() => {
+        navigate("bestProducts")
+        window.scrollTo(0, {behavior: 'smooth'})
+        }} className={s.products}>
         <img src={bestProducts} alt="users" />
         <span>BEST PRODUCTS</span>
       </div>
