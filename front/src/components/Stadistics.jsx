@@ -1,18 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { LineChart, PieChart } from "react-chartkick";
-import image from "../images/chart.webp"
-import users from "../images/users.webp"
-import pie from "../images/pie.webp"
-import amount from "../images/amount.webp"
-import bestProducts from "../images/bestProducts.webp"
-import logo from "../images/logo-sinfondo.png"
+import image from "../images/chart.webp";
+import users from "../images/users.webp";
+import pie from "../images/pie.webp";
+import amount from "../images/amount.webp";
+import bestProducts from "../images/bestProducts.webp";
+import logo from "../images/logo-sinfondo.png";
 import "chartkick/chart.js";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import ScrollAnimation from 'react-animate-on-scroll';
-import s from "../styles/stadistics.module.css"
-
+import ScrollAnimation from "react-animate-on-scroll";
+import s from "../styles/stadistics.module.css";
 
 function Stadistics() {
   const navigate = useNavigate();
@@ -57,64 +56,84 @@ function Stadistics() {
   }, [sales]);
 
   return (
-
     <>
-    <button onClick={() => {
-      navigate('/dashboard')
-      window.scrollTo(0, {behavior: 'smooth'})
-    }}>
-      <IoIosArrowBack />
-    </button>
+    <div className={s.button_container}>
+    <button
+    className={s.back}
+        onClick={() => {
+          navigate("/dashboard");
+          window.scrollTo(0, { behavior: "smooth" });
+        }}
+      >
+        <IoIosArrowBack />
+      </button>
 
-    <div className={s.container}>
-      <header className={s.banner} >
-                <ScrollAnimation animateIn="fadeIn" animateOnce={true}  className={s.contact} >
-                <div className={s.contact}>
-                <img src={logo} alt="girl" />
-                    <h1>Stadistics</h1>
-                </div>
-          </ScrollAnimation>
-                   
-          <ScrollAnimation animateIn="fadeInRight" animateOnce={true} className={s.banner_img} >
-               
-                <img src={image} alt="girl on the phone"   />
-          </ScrollAnimation>
-            </header>
-            <div className={s.card_container}>
-
-      <div onClick={() => {
-        navigate("newUsers")
-        window.scrollTo(0, {behavior: 'smooth'})
-        }} className={s.card}>
-        <img src={users} alt="users" />
-        <span>NEW USERS</span>
-      </div>
-      <div onClick={() => {
-        navigate("salesCount")
-        window.scrollTo(0, {behavior: 'smooth'})
-    }} className={s.sales}>
-        <img src={pie} alt="users" />
-        <span>SALES COUNT</span>
-      </div>
-      <div onClick={() => {
-        navigate("salesCount")
-        window.scrollTo(0, {behavior: 'smooth'})
-        }} className={s.amount}>
-        <img src={amount} alt="users" />
-        <span>SALES AMOUNT</span>
-      </div>
-      <div  onClick={() => {
-        navigate("bestProducts")
-        window.scrollTo(0, {behavior: 'smooth'})
-        }} className={s.products}>
-        <img src={bestProducts} alt="users" />
-        <span>BEST PRODUCTS</span>
-      </div>
-
-
-   
-            </div>
     </div>
+
+      <div className={s.container}>
+        <header className={s.banner}>
+          <ScrollAnimation
+            animateIn="fadeIn"
+            animateOnce={true}
+            className={s.contact}
+          >
+            <div className={s.contact}>
+              <img src={logo} alt="girl" />
+              <h1>Stadistics</h1>
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation
+            animateIn="fadeInRight"
+            animateOnce={true}
+            className={s.banner_img}
+          >
+            <img src={image} alt="girl on the phone" />
+          </ScrollAnimation>
+        </header>
+        <div className={s.card_container}>
+          <div
+            onClick={() => {
+              navigate("newUsers");
+              window.scrollTo(0, { behavior: "smooth" });
+            }}
+            className={s.card}
+          >
+            <img src={users} alt="users" />
+            <span>NEW USERS</span>
+          </div>
+          <div
+            onClick={() => {
+              navigate("salesCount");
+              window.scrollTo(0, { behavior: "smooth" });
+            }}
+            className={s.sales}
+          >
+            <img src={pie} alt="users" />
+            <span>SALES COUNT</span>
+          </div>
+          <div
+            onClick={() => {
+              navigate("salesAmount");
+              window.scrollTo(0, { behavior: "smooth" });
+            }}
+            className={s.amount}
+          >
+            <img src={amount} alt="users" />
+            <span>SALES AMOUNT</span>
+          </div>
+          <div
+            onClick={() => {
+              navigate("bestProducts");
+              window.scrollTo(0, { behavior: "smooth" });
+            }}
+            className={s.products}
+          >
+            <img src={bestProducts} alt="users" />
+            <span>BEST PRODUCTS</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

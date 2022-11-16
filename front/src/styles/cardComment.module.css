@@ -44,3 +44,16 @@
     color: #596e62;
     font-size: 1rem;
 }
+@media(max-width:768px){
+    .container{
+width: 100%;
+    
+      margin: 20px 0px ;
+    }
+    .container img{
+      width: 50px;
+     
+    }
+   
+  
+  }

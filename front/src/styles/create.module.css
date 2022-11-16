@@ -159,8 +159,8 @@ gap: 4px;
  }
  .userPic{
  border-radius: 50%; 
- /* height: 100px;
- width: 100px; */
+ height: 100px;
+ width: 100px;
 }
 
 .positive_comments{
@@ -178,4 +178,31 @@ gap: 4px;
     overflow: hidden;
     border-radius: 4px;
  
+}
+.button_container{
+  width: min-content;
+  position: absolute;
+  left: 15px;
+top: 0;
+}
+.back{
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@media(max-width:768px){
+  .container{
+    width: 80vw;
+    min-width: 330px;
+
+  }
+  .form{
+    width: 100%;
+  }
 }

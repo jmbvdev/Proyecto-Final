@@ -7,6 +7,7 @@ import axios from "axios";
 import s from "../styles/review.module.css";
 import Swal from "sweetalert2";
 import avatar from "../images/avatar 1.gif"
+import { IoIosArrowBack } from "react-icons/io";
 
 function View_Reviews({ view, setView, user, userUID, comentid,  setOpenReview }) {
   const navigate = useNavigate();
@@ -66,6 +67,14 @@ function View_Reviews({ view, setView, user, userUID, comentid,  setOpenReview }
 
   return (
     <div className={s.reviews}>
+      
+      <div className={s.button_container}>
+            <button onClick={()=>setOpenReview(false)} className={s.back}>
+              <IoIosArrowBack/>
+            </button>
+
+          </div>
+
       <h3>Your opinion is important for us!</h3>
       <div className={s.reviews_list}>
         {view?.map((e, i) => (
