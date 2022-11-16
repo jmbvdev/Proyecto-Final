@@ -32,6 +32,7 @@ const OrdersUser = () => {
             orderid: item?.orderid,
             date: item.data?.date,
             data: item.data?.cart,
+            extras: item.data?.extras,
           };
         });
         setState(result);
@@ -162,6 +163,7 @@ const OrdersUser = () => {
                 date={ord?.date}
                 data={ord?.data}
                 updateOriginal={updateOriginal}
+                extras={ord?.extras}
                 key={i}
               />
             ))}
