@@ -232,6 +232,8 @@ const UserEdit = () => {
               autoComplete="off"
             />
           </div>
+            {error.adressNumber && (
+                <p className={s.danger}>{error.adressNumber}</p>)}
          </div>
           <div className={s.input_label}>
             <p className={s.name_input}>phone</p>
@@ -271,20 +273,30 @@ const UserEdit = () => {
 
 const validate = (input) => {
   let error = {};
-  if (
+  if (input.displayName !== "" &&
     !/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
       input.displayName
     )
   )
     error.displayName = "Name invalid! (Ex : Juan Lopez)";
-  if (!/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))
+
+  if (input.city !== "" &&
+    !/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/.test(input.city))
     error.city = "City invalid! (Ex : Boston, New Jersey, Santa Monica)";
-  if (
+
+  if (input.phoneNumber !== "" &&
     !/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){6})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){8}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/.test(
       input.phoneNumber
     )
   )
     error.phoneNumber = "Number invalid! 8 digits a least 12 at most";
+    
+    if (input.adressNumber !== "" &&
+      !/^[0-9]+$/.test(
+        input.adressNumber
+      )
+    )
+      error.adressNumber = "Adress number invalid! (Ex : 1543)";  
   return error;
 };
 
