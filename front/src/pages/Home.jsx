@@ -88,8 +88,13 @@ const Home = ({isSearch}) => {
         {
           id:"6",
           component: (
-            <div className={s.buy_plants} onClick={()=>navigate("/plants")}> 
-            <button>Go to plants</button>
+            <div className={s.buy_plants} > 
+            <button onClick={()=>{
+              navigate("/plants")
+              window.scrollTo(0, {behavior: 'smooth'})
+              }}>
+                Go to plants
+              </button>
            
 
            </div>

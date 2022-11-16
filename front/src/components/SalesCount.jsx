@@ -61,13 +61,18 @@ function SalesCount() {
   return (
     <div className={s.Container}>
       <div className={s.button_container}>
-        <button className={s.back} onClick={() => navigate("/stadistics")}>
+        <button className={s.back} onClick={() => {
+          navigate("/stadistics")
+          window.scrollTo(0, {behavior: 'smooth'})
+          }}>
           <IoIosArrowBack />
         </button>
       </div>
-      <button onClick={() => navigate("/stadistics/salesAmount")}>
+      <button onClick={() => navigate("/stadistics/salesAmount")} className={s.amount_btn}>
         Go to Sales Amount
       </button>
+      <div className={s.order}>
+
       <h3>SALES COUNT</h3>
       <select onChange={handleOnPeriod}>
         <option value="2022-09-10,2022-09-16">09/10 - 15/10</option>
@@ -77,6 +82,7 @@ function SalesCount() {
         <option value="2022-11-07,2022-11-14">07/11 - 13/11</option>
         <option value="2022-11-14,2022-11-20">14/11 - 20/11</option>
       </select>
+      </div>
       <PieChart data={period} empty="No sales for the stipulated period" />
     </div>
   );

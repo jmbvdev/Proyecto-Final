@@ -120,3 +120,161 @@
         font-size: 0.8rem;
         color: #fff;
     }
+
+    
+.table{
+    border-radius: 12px;
+
+    
+    display: inline-block;
+    width: 70vw;
+ background-color: #dfdada57;
+color: #fff;
+
+ border-spacing: 5px;
+ font-weight: lighter;
+ margin-bottom: 3rem;
+ padding: 30px;
+ 
+}
+
+.table th{
+    background-color: #3e776f;
+    border-bottom: 3px solid #3b5a45;
+   padding: 10px 80px;
+
+   border-radius: 2px;
+
+ 
+   
+}
+.table th:hover{
+  background-color: #5cb3a7;
+}
+.table td{
+  padding: 20px;
+  font-family: "Dosis";
+  width: 100%;
+  font-size: 20px;
+  border-radius: 2px;
+
+ 
+}
+
+  .table tr{
+    font-weight: lighter;
+  
+    width: 100%;
+    background-color: #27262b;
+   
+ 
+
+    
+
+  }
+  .container h2{
+    font-family: "Inter";
+  }
+
+
+.input_container{
+  display: flex;
+ justify-content: flex-start;
+ align-items: center;
+
+  gap: 20px;
+}
+.search{
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+z-index: 2;
+  border-radius: 60px;
+  padding: 5px 10px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+  caret-color: #000;
+}
+
+.search button {
+  font-size: 30px;
+  color: #4e524e;
+  position: relative;
+  top: 3px;
+
+}
+.search input::placeholder {
+  color: #071c089d;
+}
+.reset{
+  font-size: 30px;
+
+ color: #d5dcdb;
+cursor: pointer;
+background-color: transparent;
+}
+.container_search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.reset_container{
+margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.reset_container span{
+  font-family: "Dosis";
+  font-weight: bold;
+  font-size: small;
+}
+.container_table{
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #6b8879 0%, #737373 100%);
+    padding-top: 30px;
+    
+    
+}
+.details_icon_container{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  cursor: pointer;
+  }
+  .details_icon{
+    font-size: 25px;
+    color: rgb(246, 101, 101);
+  }
+  .coupon_list_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 4px;
+    width: 65%;
+    margin-left: 3rem;
+    border: 2px dashed #f5f6ca;
+    cursor: pointer;
+  }
+  .coupon_icon{
+    font-size: 30px;
+    color: #f5f6ca;
+  }
+  .coupon_list_btn span{
+    font-size: 17px;
+    color: #f5f6ca;
+    font-family: "Roboto";
+  }

@@ -57,10 +57,15 @@ function BestProducts() {
   return (
     <div className={s.Container}>
       <div className={s.button_container}>
-        <button className={s.back} onClick={() => navigate(-1)}>
+      <button className={s.back} onClick={() => {
+          navigate("/stadistics")
+          window.scrollTo(0, {behavior: 'smooth'})
+          }}>
           <IoIosArrowBack />
         </button>
       </div>
+      <div className={s.order}>
+
       <h4>BEST PRODUCTS</h4>
       <select onChange={handleOnPeriod}>
         <option value="1">1</option>
@@ -70,6 +75,7 @@ function BestProducts() {
         <option value="8">8</option>
         <option value="10">10</option>
       </select>
+      </div>
       <BarChart
         xtitle="Sales count"
         ytitle="Products"
