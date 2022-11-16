@@ -66,3 +66,28 @@
     justify-content: center;
     align-items: center;
 }
+@media(max-width:800px){
+    .banner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-size: cover;
+        background-image: linear-gradient(rgba(243, 238, 238, 0.399),rgba(156, 167, 155, 0.725)), url("https://www.lifeplanters.eu/wp-content/uploads/2022/07/Why-People-Love-Plants-in-Their-Garden.jpg"); 
+        background-repeat: no-repeat;
+        background-position: center;
+     
+     
+    }
+    .banner img{
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        min-width: 150px;
+    
+       
+    }
+    .faq{
+        width: 90%;
+    }
+  
+  }

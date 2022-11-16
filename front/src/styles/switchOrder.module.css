@@ -5,9 +5,10 @@
     flex-direction: column;
     gap: 5px;
     width: 50vw;
+    max-width: 70vw;
     border-radius: 20px;
     font-size: 15px;
-   height: 75vh;
+   height: auto;
 
 }
 .container p{

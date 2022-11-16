@@ -22,8 +22,11 @@ const CardComment = ({ image, name, quote, rate, borrar, edit }) => {
                     <span>{rate}</span>
                 </div>
             </div>
-                <span >{borrar}</span>
+            <div className={s.btns}>
+
+                <span  >{borrar}</span>
                 <span>{edit}</span>
+            </div>
 
 
         </div>

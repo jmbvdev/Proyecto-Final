@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
-import { GrClose } from "react-icons/gr";
+import { VscClose } from "react-icons/vsc";
 import s from "../styles/searchBox.module.css";
 import { useNavigate } from "react-router-dom";
 import { clearDetails, GetProductDetails } from "../Redux/actions/products";
@@ -46,12 +46,15 @@ const SearchBox = ({ setIsSearch }) => {
   return (
     <div>
       <div className={s.container}>
-        <button onClick={setIsSearch} className={s.close}>
-          <GrClose className={s.close_icon} />
-        </button>
+        <div className={s.button_container}>
+          <button onClick={() => setIsSearch()} className={s.back}>
+            <VscClose />
+          </button>
+        </div>
         <form onSubmit={handleOnSubmit} action="" className={s.search}>
           <input
             autoComplete="off"
+            className={s.searchTerm}
             type="text"
             value={search}
             onChange={handelOnChange}
@@ -59,12 +62,10 @@ const SearchBox = ({ setIsSearch }) => {
             name="q"
           />
 
-          <button type="submit">
+          <button type="submit" className={s.searchButton}>
             <RiSearchLine />
           </button>
         </form>
-      </div>
-      <div className={s.container_search}>
         <div className={s.search_results}>
           {search &&
             findResults.map((p) => {
@@ -82,6 +83,7 @@ const SearchBox = ({ setIsSearch }) => {
             })}
         </div>
       </div>
+      <div className={s.container_search}></div>
     </div>
   );
 };

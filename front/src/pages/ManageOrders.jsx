@@ -21,6 +21,7 @@ import Swal from "sweetalert2";
 import { GrFormNext, GrFormPrevious, GrNext, GrPrevious } from "react-icons/gr";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { borderColor } from "@mui/system";
 
 export const COLUMNS = [
   {
@@ -92,7 +93,8 @@ export default function ManageOrders() {
     transform: "translate(-50%, -50%)",
     bgcolor: "transparent",
     border: "none",
-    p: 4,
+
+      
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
