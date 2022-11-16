@@ -62,3 +62,32 @@
 .delete:hover{
   color: rgba(200, 2, 2, 0.794);
 }
+.button_container{
+  width: min-content;
+  position: absolute;
+  left: 15px;
+top: 5rem;
+}
+.back{
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@media(max-width:768px){
+  .reviews{
+    width: 70vw;
+    min-width: 330px;
+    height: 80vh;
+  }
+  .reviews_list{
+    width: 100%;
+    padding: 0px 30px;
+  }
+
+}

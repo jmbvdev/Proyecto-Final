@@ -4,6 +4,7 @@
     background-image: linear-gradient(rgba(255, 255, 255, 0.39),rgba(255, 255, 255, 0.795)), url("https://jhackshaw.com/static/e2abe78af7fbc319a44ed08254130c95/66b50/hero-background.jpg"); 
     background-repeat: no-repeat;
     background-size: cover;
+    caret-color: transparent;
 }
 .banner{
     display: flex;
@@ -163,3 +164,21 @@ width: 100%;
 .products img:hover{
     filter: drop-shadow( 5px 5px 10px rgba(155, 131, 171, 0.656));
 }
+.button_container{
+    width: min-content;
+    position: absolute;
+    left: 15px;
+  top: 8rem;
+  z-index: 10;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
