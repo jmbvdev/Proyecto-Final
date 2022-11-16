@@ -15,9 +15,14 @@
   z-index: 10;
   position: fixed;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+gap: 20px;
   padding: 30px;
-  width: 55vw;
-  height: 15vh;
+width: 450px;
+min-width: 330px;
+  height: 40vh;
   background-image: linear-gradient(
       rgba(110, 169, 135, 0.682),
       rgb(167, 191, 173)
@@ -70,4 +75,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.button_container{
+  width: min-content;
+  position: absolute;
+  left: 15px;
+top: 5px;
+}
+.back{
+  background-color: rgb(17, 55, 37);
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+@media (max-width: 500px) {
+  .modalContainer{
+    width: 330px;
+  }
+.register_btn{
+  width: 80%;
+}
+ 
+}
+@media (max-width: 400px) {
+  .modalContainer{
+    width: 250px;
+    min-width: 200px;
+  }
+.register_btn{
+  width: 80%;
+}
+ 
 }
