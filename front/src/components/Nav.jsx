@@ -123,7 +123,7 @@ const Nav = ({ setIsSearch, setIsVideoShow }) => {
         <div className="icons-container">
           {user ? (
             <div className="user">
-              <div className="user_name">
+              <div className="user_name" onClick={()=>navigate("/dashboard")}>
 
                 <img src={user?.photoURL || avatar} 
                 onError ={({currentTarget})=> {

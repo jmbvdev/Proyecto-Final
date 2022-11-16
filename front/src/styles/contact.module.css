@@ -255,6 +255,7 @@ flex-direction: column-reverse;
    position: relative;
     min-width: 350px;
     min-height: auto;
+    z-index: 1;
 
     }
 

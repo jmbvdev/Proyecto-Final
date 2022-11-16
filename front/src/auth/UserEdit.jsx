@@ -233,7 +233,7 @@ const UserEdit = () => {
                 autoComplete="off"
               />
             </div>
-          </div>
+        
 
             {error.adressNumber && (
                 <p className={s.danger}>{error.adressNumber}</p>)}

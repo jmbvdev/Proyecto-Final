@@ -36,7 +36,15 @@
 .review span{
     font-size: 2rem;
     color:  #328656;
+ 
 }
+.btns{
+    display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
 .quote{
     padding: 10px;
     font-family: "Lore",sans-serif;
@@ -54,6 +62,24 @@ width: 100%;
       width: 50px;
      
     }
-   
-  
+    .star{
+        font-size: 20px;
+
+       }
+       .btns{
+         
+           display: flex;
+           flex-direction: column;
+        
+       }
+       .quote{
+        padding: 5px;
+        font-size: 1rem;
+    }
+    .review{
+        gap: 5px;
+    }
+    .specs{
+        width: 100%;
+    }
   }

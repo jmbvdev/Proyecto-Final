@@ -241,8 +241,9 @@ margin-left: 20px;
   font-size: small;
 }
 .container_table{
-    background-color: #8BC6EC;
-    background-image: linear-gradient(135deg, #6b8879 0%, #737373 100%);
+  background-image: linear-gradient(rgba(129, 131, 131, 0.182),rgba(206, 208, 206, 0.782)), url("https://img.freepik.com/fotos-premium/textura-marmol-verde-fondo-ilustracion-piedra_167650-2760.jpg?w=2000"); 
+    background-repeat: repeat;
+    background-size: contain;
     padding-top: 30px;
     
     
