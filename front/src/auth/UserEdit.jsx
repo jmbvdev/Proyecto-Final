@@ -253,8 +253,7 @@ const UserEdit = () => {
           <button type="submit" className={s.update}>
             UPDATE
           </button>
-        </form>
-        {user?.providerData?.[0].providerId.includes("google") ? null : (
+          {user?.providerData?.[0].providerId.includes("google") ? null : (
           <div>
             <button type="button" onClick={sendNewPass} className={s.update}>
               Set new Password
@@ -262,6 +261,8 @@ const UserEdit = () => {
             {open ? <ForgotenPassword close={setOpen} /> : null}
           </div>
         )}
+        </form>
+        
 
         <img src={image} className={s.calatea} />
       </div>
