@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import {RiBitCoinLine}from "react-icons/ri"
+import s from "../../styles/formPost.module.css"
 
 
 const Coinbase = ({totalAmount}) => {
@@ -19,7 +21,11 @@ const Coinbase = ({totalAmount}) => {
     };
 
     return (
-        <button onClick={handleLink}>PAY WITH CRYPTO</button>
+        <div onClick={handleLink} className={s.crypto}>
+            <RiBitCoinLine className={s.coin}/>
+            <p>PAY WITH CRYPTO</p>
+
+        </div>
     )
 };
 

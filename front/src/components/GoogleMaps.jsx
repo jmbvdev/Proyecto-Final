@@ -9,8 +9,8 @@ import {
 import { useEffect } from "react";
 import s from "../styles/googlemaps.module.css";
 const containerStyle = {
-  height: "25rem",
-  width: "25rem",
+  height: "70vh",
+  width: "100%",
   borderRadius: "1rem",
 };
 
@@ -144,12 +144,14 @@ function GoogleMaps({ retiro, andreani, city }) {
             setZoom(12);
           }}
         >
-          <div>
-            <h4>Search your city to find a Calathea Market!</h4>
+          <div className={s.search_city}>
+            <h4 >Search your city to find a Calathea Market!</h4>
             <input className={s.inputs} type="text" defaultValue={city} />
           </div>
         </StandaloneSearchBox>
       ) : null}
+      <div className={s.google}>
+        
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -181,6 +183,7 @@ function GoogleMaps({ retiro, andreani, city }) {
           <Marker position={center} label={"You"} draggable={true} />
         ) : null}
       </GoogleMap>
+      </div>
     </div>
   ) : (
     <></>

@@ -8,7 +8,10 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/actions/users";
+import {IoIosArrowBack} from "react-icons/io"
 import Coinbase from "./Coinbase/Coinbase";
+import girl from "../images/plantgirl.webp"
+import andreani from "../images/andreani.webp"
 
 function FormPostCheckout({
   items,
@@ -182,8 +185,10 @@ function FormPostCheckout({
                 onChange={handleOnChange}
               />
               {valLet(inputs.name) ? null : <span>Not valid</span>}
+              <div className={s.payment_btn}>
 
               <button
+               className={s.payment_icon}
                 type="button"
                 disabled={
                   !inputs.name ||
@@ -199,18 +204,26 @@ function FormPostCheckout({
               >
                 Ok
               </button>
+              </div>
             </form>
           ) : (
             <div>
+              <div className={s.button_container}>
+
               <button
+               className={s.back}
                 onClick={() => {
                   setValid(false);
                   setFinish(false);
                 }}
               >
-                Back
+                   <IoIosArrowBack/>
               </button>
-              <label>
+              </div>
+              <div className={s.payment}>
+
+              <div className={s.local}>
+                <div className={s.check_container}>
                 <input
                   className={s.check}
                   type="radio"
@@ -218,9 +231,12 @@ function FormPostCheckout({
                   checked={checked1}
                   onChange={handleCheckbox1}
                 />
-                Retiro por local
-              </label>
-              <label>
+                  <p className={s.payment_span}>Local pickup</p>
+                </div>
+                <img src={girl} alt="girl" />
+              </div>
+              <div className={s.andreani}>
+                <div className={s.check_container}>
                 <input
                   className={s.check}
                   type="radio"
@@ -228,27 +244,34 @@ function FormPostCheckout({
                   checked={checked2}
                   onChange={handleCheckbox2}
                 />
-                Envio con Andreani
-              </label>
+                <p className={s.payment_span}>  Shipping with Andreani</p>
+              
+              </div>
+              <img src={andreani} alt="andreani" />
+
+                </div>
               {checked2 ? (
                 <Andreani
                   totalAmount={totalAmount}
                   totalproducts={Math.pow(1.1, totalprod)}
                 />
               ) : null}
-              <button onClick={handleFinish}>Proceed to payment</button>
+              <button className={s.pay_btn} onClick={handleFinish}>Proceed to payment</button>
+              </div>
             </div>
           )}
           {finish ? (
             <>
               <div className={s.buttonMP}>
                 <MercadoPago items={items} totalAmount={totalAmount} />
+                
                 <Coinbase totalAmount={totalAmount} />
               </div>
             </>
           ) : null}
-        </div>
-        <div className={s.resumeCart}>
+          {
+            !valid ?
+            <div className={s.resumeCart}>
           {items.map((plant) => {
             return (
               <div className={s.divResume}>
@@ -263,7 +286,11 @@ function FormPostCheckout({
             );
           })}
           <h4 className={s.totalAmount}>Total: ${totalAmount}</h4>
+        </div>:null
+          }
+          
         </div>
+        
 
         <div className={s.maps}>
           <GoogleMaps

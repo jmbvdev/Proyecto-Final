@@ -319,13 +319,15 @@ export default function ManageOrders() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <SwitchOrderState
-                orders={orders}
-                order={order}
-                auxOrders={auxOrders}
-                setOrder={setOrder}
-                setAuxOrders={setAuxOrders}
-              />
+            <SwitchOrderState
+            close={setOpen}
+            open={open}
+            orders={orders}
+            order={order}
+            auxOrders={auxOrders}
+            setOrder={setOrder}
+            setAuxOrders={setAuxOrders} />
+
             </Box>
           </Modal>
         </div>

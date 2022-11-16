@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import s from "../styles/formPost.module.css"
 
 function Andreani({ totalproducts, totalAmount }) {
   const [CP, setCP] = React.useState("");
@@ -26,13 +27,13 @@ function Andreani({ totalproducts, totalAmount }) {
   };
 
   return (
-    <div>
+    <div className={s.andreani_input}>
       <input type="text" placeholder="CP" value={CP} onChange={handleChange} />
-      <button onClick={shipingAmount}>Ok!</button>
+      <button onClick={shipingAmount} className={s.andreani_ok}>OK</button>
       {amount && totalAmount < 1100 ? (
-        <h4>You pay in destiny: ${amount}</h4>
+        <h4  className={s.andreani_result}>You pay in destiny: ${amount}</h4>
       ) : null}
-      {totalAmount >= 1100 ? <h4>Free Shiping!</h4> : null}
+      {totalAmount >= 1100 ? <h4 className={s.andreani_result}>Free Shiping!</h4> : null}
     </div>
   );
 }
