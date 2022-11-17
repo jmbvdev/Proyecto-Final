@@ -16,7 +16,13 @@ const Carousel = ({ isSearch }) => {
       >
         <h1>Welcome</h1>
         <p>hope you enjoy your visit and find the right plant for you</p>
-        <button className={s.shop_btn} onClick={() => navigate("/plants")}>
+        <button
+          className={s.shop_btn}
+          onClick={() => {
+            navigate("/plants");
+            window.scrollTo(0, { behavior: "smooth" });
+          }}
+        >
           SHOP NOW
         </button>
       </ScrollAnimation>
