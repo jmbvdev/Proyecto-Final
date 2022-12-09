@@ -1,0 +1,142 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(189, 202, 195, 0.38),rgba(206, 208, 206, 0.763)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+
+}
+.wraper{
+   width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 450px;
+
+}
+.image img{
+    width: 100%;
+    box-shadow: 0px 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    border-radius: 20px;
+    caret-color: transparent;
+    position: relative;
+    left: 20px;
+    }
+
+    .register{
+        width: 100%;
+        background-color: #425a21f5;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .title{
+        font-family: "Inter";
+        color: rgb(246, 251, 245);
+      margin-top: 20px;
+      caret-color: transparent;
+    }
+
+    .welcome{
+        margin: 10px;
+        color: rgb(246, 251, 245);
+        caret-color: transparent;
+    }
+
+    .input_container{
+        background-color: transparent;
+       margin: 0 30px;
+    }
+    .input_text{
+        font-family: inherit;
+        width: 80%;
+        border: 0;
+        border-bottom: 1px solid rgb(246, 243, 243);
+        outline: 0;
+        font-size: 14px;
+        color: #fff;
+        background: transparent;
+        transition: border-color 0.2s;
+        margin: 10px;
+    }
+    .input_text::placeholder{
+        color:rgba(255, 255, 255, 0.625);
+    }
+
+    .register_btn{
+       background-color: #f4eed8;
+       padding: 8px 12px;
+       border: none;
+       border-radius: 3px;
+       color: rgb(12, 65, 28);
+       font-size: 13px;
+       font-weight:bold;
+       margin-top: 20px;
+       margin-bottom: 10px;
+       width: 65%;
+       cursor: pointer;
+       caret-color: transparent;
+    }
+    .sign_btn_container{
+        display: flex;
+        flex-direction: column;
+        caret-color: transparent;
+      
+   
+    }
+    .register_btn:hover{
+        background-color: #efd678;
+    }
+    .button_container{
+        width: min-content;
+        position: absolute;
+        left: 15px;
+      top: 8rem;
+      }
+      .back{
+        background-color: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .danger{
+        color:rgb(228, 97, 97);
+        font-size:small;
+        font-family: "Inter",sans-serif;
+     }
+      
+
+    @media (max-width: 800px) {
+        .container{
+          height: 100vh;
+        }
+        .image{
+         display: none;
+        }
+        .wraper{
+     
+         flex-direction: column-reverse;
+         justify-content: center;
+         align-items: center;
+        }
+        .register{
+          width:80%;;
+        }
+      }
+
+  

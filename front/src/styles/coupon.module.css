@@ -1,0 +1,281 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(189, 202, 195, 0.38),rgba(206, 208, 206, 0.763)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+
+}
+.wraper{
+   width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 450px;
+
+}
+.image img{
+    width: 100%;
+    box-shadow: 0px 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    border-radius: 20px;
+    caret-color: transparent;
+    position: relative;
+    left: 20px;
+    }
+
+    .register{
+        width: 100%;
+        background-color: #425a21f5;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .title{
+        font-family: "Inter";
+        color: rgb(246, 251, 245);
+      margin-top: 20px;
+      caret-color: transparent;
+    }
+
+    .welcome{
+        margin: 10px;
+        color: rgb(246, 251, 245);
+        caret-color: transparent;
+    }
+
+    .input_container{
+        background-color: transparent;
+       margin: 0 30px;
+    }
+    .input_text{
+        font-family: inherit;
+        width: 80%;
+        border: 0;
+        border-bottom: 1px solid rgb(246, 243, 243);
+        outline: 0;
+        font-size: 14px;
+        color: #fff;
+        background: transparent;
+        transition: border-color 0.2s;
+        margin: 10px;
+    }
+    .input_text::placeholder{
+        color:rgba(255, 255, 255, 0.625);
+    }
+
+    .register_btn{
+       background-color: #f4eed8;
+       padding: 8px 12px;
+       border: none;
+       border-radius: 3px;
+       color: rgb(12, 65, 28);
+       font-size: 13px;
+       font-weight:bold;
+       margin-top: 20px;
+       margin-bottom: 10px;
+       width: 65%;
+       cursor: pointer;
+       caret-color: transparent;
+    }
+    .sign_btn_container{
+        display: flex;
+        flex-direction: column;
+        caret-color: transparent;
+      
+   
+    }
+    .register_btn:hover{
+        background-color: #efd678;
+    }
+
+    .button_container{
+        width: min-content;
+        position: absolute;
+        left: 15px;
+      top: 8rem;
+      }
+      .back{
+        background-color: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+    .danger {
+        font-size: 0.8rem;
+        color: #fff;
+    }
+
+    
+.table{
+    border-radius: 12px;
+
+    
+    display: inline-block;
+    width: 70vw;
+ background-color: #dfdada57;
+color: #fff;
+
+ border-spacing: 5px;
+ font-weight: lighter;
+ margin-bottom: 3rem;
+ padding: 30px;
+ 
+}
+
+.table th{
+    background-color: #3e776f;
+    border-bottom: 3px solid #3b5a45;
+   padding: 10px 80px;
+
+   border-radius: 2px;
+
+ 
+   
+}
+.table th:hover{
+  background-color: #5cb3a7;
+}
+.table td{
+  padding: 20px;
+  font-family: "Dosis";
+  width: 100%;
+  font-size: 20px;
+  border-radius: 2px;
+
+ 
+}
+
+  .table tr{
+    font-weight: lighter;
+  
+    width: 100%;
+    background-color: #27262b;
+   
+ 
+
+    
+
+  }
+  .container h2{
+    font-family: "Inter";
+  }
+
+
+.input_container{
+  display: flex;
+ justify-content: flex-start;
+ align-items: center;
+
+  gap: 20px;
+}
+.search{
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+z-index: 2;
+  border-radius: 60px;
+  padding: 5px 10px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+  caret-color: #000;
+}
+
+.search button {
+  font-size: 30px;
+  color: #4e524e;
+  position: relative;
+  top: 3px;
+
+}
+.search input::placeholder {
+  color: #071c089d;
+}
+.reset{
+  font-size: 30px;
+
+ color: #d5dcdb;
+cursor: pointer;
+background-color: transparent;
+}
+.container_search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.reset_container{
+margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.reset_container span{
+  font-family: "Dosis";
+  font-weight: bold;
+  font-size: small;
+}
+.container_table{
+  background-image: linear-gradient(rgba(129, 131, 131, 0.182),rgba(206, 208, 206, 0.782)), url("https://img.freepik.com/fotos-premium/textura-marmol-verde-fondo-ilustracion-piedra_167650-2760.jpg?w=2000"); 
+    background-repeat: repeat;
+    background-size: contain;
+    padding-top: 30px;
+    
+    
+}
+.details_icon_container{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  cursor: pointer;
+  }
+  .details_icon{
+    font-size: 25px;
+    color: rgb(246, 101, 101);
+  }
+  .coupon_list_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 4px;
+    width: 65%;
+    margin-left: 3rem;
+    border: 2px dashed #f5f6ca;
+    cursor: pointer;
+  }
+  .coupon_icon{
+    font-size: 30px;
+    color: #f5f6ca;
+  }
+  .coupon_list_btn span{
+    font-size: 17px;
+    color: #f5f6ca;
+    font-family: "Roboto";
+  }

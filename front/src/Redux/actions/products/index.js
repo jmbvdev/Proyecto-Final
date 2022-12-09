@@ -6,9 +6,10 @@ import {
   FILTER_BY,
   ORDER_BY,
   GET_PRODUCT_DETAILS,
-  CLEAR_DETAILS
+  CLEAR_DETAILS,
 } from "./actiontypes";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //faltan los .catch para manejar errores del lado del front
 
@@ -22,20 +23,34 @@ export const GetAllProducts = () => {
   };
 };
 
-
 export const createProduct = (data) => {
   return async (dispatch) => {
     let response = await axios.post(
-      "http://localhost:5000/api-plants-b6153/us-central1/app/products/create",
+      "https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/create",
       data
     );
-    // console.log(response.data);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+    });
+    Promise.resolve(
+      Toast.fire({
+        icon: "info",
+        title: `The product has been created`,
+      })
+    );
     return dispatch({ type: CREATE_PRODUCT, payload: response.data });
   };
 };
 
-
-export const EditProduct = (id, data) => {
+export const editProduct = (id, data) => {
   return async (dispatch) => {
     axios
       .put(
@@ -43,8 +58,26 @@ export const EditProduct = (id, data) => {
         data
       )
       .then((res) => {
-        window.alert(res.data.message);
-        dispatch({ type: EDIT_PRODUCT, payload: res.data });
+        dispatch({ type: EDIT_PRODUCT, payload: res.data.data });
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `The product has been updated`,
+          })
+
+        );
       });
   };
 };
@@ -56,19 +89,32 @@ export const DeleteProduct = (id) => {
         `https://us-central1-api-plants-b6153.cloudfunctions.net/app/products/${id}/delete`
       )
       .then((res) => {
-        window.alert(res.data.message);
         dispatch({ type: DELETE_PRODUCT, payload: id });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: false,
+        });
+        Promise.resolve(
+          Toast.fire({
+            icon: "info",
+            title: `The product has been deleted`,
+          })
+        );
       });
   };
 };
 
-//ordenar por precio asc or desc
 export const OrderBy = (order) => {
   return { type: ORDER_BY, payload: order };
 };
 
-//por tipo de producto (plant, planter, accessory) es string, por size (es array), por categorie (es array), por interior/exterior(string), por precio(int). manejarlo en un estado local que vaya cambiando los filtros. el estado local seria un array:
-// ["all" (o "plant"...), "all" or "medium", "all" or "pet friendly", "all" (o "interior"...)]
 export const FilterBy = (filt) => {
   return { type: FILTER_BY, payload: filt };
 };
@@ -84,7 +130,6 @@ export const GetProductDetails = (id) => {
       );
   };
 };
-
 
 export function clearDetails() {
   return {

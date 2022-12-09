@@ -1,0 +1,98 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 10rem;
+    
+}
+.details{
+   display: flex;
+   flex-direction: column;
+   justify-content: left;
+   text-align: left;
+   gap: 5px;
+   margin: 10px;
+   caret-color: transparent;
+}
+.details h1{
+    font-family: "Lora", sans-serif;
+    border-bottom: 1px solid rgba(1, 47, 33, 0.561);
+    font-size: 25px;
+    width: 100%;
+   
+}
+.details h4{
+    font-family: "Lora", sans-serif;
+    margin-bottom: 2px;
+}
+.details p{
+ 
+    font-family: "Poppins";
+    display: block;
+    font-size: smaller;
+    line-height: 1.3rem;
+    width: 100%;
+    caret-color: transparent;
+    word-wrap: break-word;
+
+   
+}
+
+.categories{
+    display: flex;
+    gap: 2rem;
+    caret-color: transparent;
+}
+.categories_container{
+display: flex;
+width: 50px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+justify-items: center;
+justify-content: center;
+text-align: center;
+}
+.categories_container span{
+    font-size: 10px;
+font-weight:bold ;
+    font-family: "Dosis";
+  
+  
+}
+.table{
+    font-size: 2rem;
+    margin-top: 10px;
+}
+.price h3{
+    font-weight: 600;
+    color: rgb(9, 102, 74);
+
+}
+
+.price{
+    display: flex;
+    gap: 3rem;
+    caret-color: transparent;
+    margin-top: 20px;
+}
+
+
+.specs{
+    display: flex;
+    flex-direction: column;
+}
+.types{
+    display: flex;
+    margin-top: 20px;
+    gap: 1rem;
+}
+.details_p{
+    width: 320px;
+    overflow-y:scroll;
+    max-height: 150px;
+}

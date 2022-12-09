@@ -1,0 +1,219 @@
+.container{
+ background-color:  #5BB9B8;
+ background-image: linear-gradient(rgba(133, 172, 149, 0.581),rgba(206, 208, 206, 0.763)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+ background-repeat: no-repeat;
+ background-size: cover;
+ padding: 20px;
+ line-height: 1.6;
+ color: #fff;
+
+ height: auto;
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+ text-align: left;
+ flex-direction: column;
+ caret-color: transparent;
+
+
+ font-family: 'Poppins', sans-serif;
+}
+
+.table{
+    border-radius: 12px;
+
+    
+    display: inline-block;
+    width: 90vw;
+ background-color: #dfdada57;
+
+
+ border-spacing: 5px;
+ font-weight: lighter;
+ margin-bottom: 3rem;
+ padding: 30px;
+ 
+}
+
+.table th{
+    background-color: #3e776f;
+    border-bottom: 3px solid #3b5a45;
+   padding: 10px 50px;
+
+   border-radius: 2px;
+
+ 
+   
+}
+.table th:hover{
+  background-color: #5cb3a7;
+}
+.table td{
+  padding: 20px;
+  font-family: "Dosis";
+  width: 100%;
+  font-size: 20px;
+  border-radius: 2px;
+
+ 
+}
+
+  .table tr{
+    font-weight: lighter;
+  
+    width: 100%;
+    background-color: #27262b;
+   
+ 
+
+    
+
+  }
+  .container h2{
+    font-family: "Inter";
+  }
+  .button_container{
+    width: 100%;
+    display: flex;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+.img {
+  max-width: 90px;
+}
+.input_container{
+  display: flex;
+ justify-content: flex-start;
+ align-items: center;
+
+  gap: 20px;
+}
+.search{
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+z-index: 2;
+  border-radius: 60px;
+  padding: 5px 10px;
+}
+.search input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  color: #063108;
+  caret-color: #000;
+}
+
+.search button {
+  font-size: 30px;
+  color: #4e524e;
+  position: relative;
+  top: 3px;
+
+}
+.search input::placeholder {
+  color: #071c089d;
+}
+.reset{
+  font-size: 30px;
+
+ color: #d5dcdb;
+cursor: pointer;
+background-color: transparent;
+}
+.container_search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.reset_container{
+margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.reset_container span{
+  font-family: "Dosis";
+  font-weight: bold;
+  font-size: small;
+}
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+.pages_icon{
+background-color: #ccd1cc;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Dosis";
+
+
+}
+ .arrow{
+  color: #fff;
+  font-size: 30px;
+
+}
+.order{
+  display: flex;
+
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+.order select{
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  display: flex;
+  width: 7rem;
+  height: 2em;
+  line-height: 3;
+  background-color: #27262b;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-right: 0px;
+}
+.order_option{
+  color: #fff;
+  background-color: #3b5a45;
+}
+.details_icon_container{
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+cursor: pointer;
+}
+.details_icon{
+  font-size: 25px;
+}

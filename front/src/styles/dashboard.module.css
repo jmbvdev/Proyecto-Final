@@ -1,0 +1,197 @@
+.container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    caret-color: transparent;
+    background-image: linear-gradient(#b4b2b2a7, rgba(206, 208, 206, 0.919)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1");
+
+}
+
+.profile {
+    margin-top: 5rem;
+    width: 70%;
+    height: 500px;
+    display: flex;
+    border-radius: 12px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    margin-bottom: 10rem;
+
+}
+
+.profile_pic {
+    border-radius: 50%;
+    width: 100px;
+    border: solid 5px #bdc5b8;
+}
+
+.specs {
+
+    background-color: #3f4d1f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 0px 12px 12px 0px;
+}
+
+.specs h2 {
+    font-family: "Dosis", sans-serif;
+    color: #bdc5b8;
+}
+
+.text_specs p {
+    color: #ececec;
+    font-size: medium;
+    caret-color: transparent;
+}
+
+.edit_btn {
+    margin-top: 20px;
+    font-family: "Inter";
+    background-color: #ececec;
+    font-size: small;
+    padding: 8px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #3f4d1f;
+    border-radius: 2px;
+
+}
+
+.edit_btn:hover {
+    background-color: #d5dad1;
+}
+
+.calatea {
+    border-radius: 12px 0px 0px 12px;
+
+
+}
+
+.admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+
+
+
+
+
+}
+
+.admin_icon {
+    color: #d5dad1;
+    font-size: 25px;
+
+}
+
+.admin button {
+    cursor: pointer;
+    color: #d5dad1;
+    font-family: "Dosis";
+    font-weight: bold;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+}
+
+.container_btn {
+
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+
+}
+
+.btn_container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.back {
+    background-color: #000;
+    position: absolute;
+    left: 30px;
+    margin-top: 20px;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+
+    .container {
+        height: 150vh;
+
+    }
+
+    .profile {
+        flex-direction: column;
+
+        margin-top: 2rem;
+        width: 50%;
+
+    }
+
+    .calatea {
+        border-radius: 12px 12px 0px 0px;
+
+    }
+
+    .specs {
+
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 0px 0px 12px 12px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .profile {
+        flex-direction: column;
+        margin-top: 2rem;
+        width: 90%;
+        margin-bottom: 20rem;
+
+
+    }
+
+    .calatea {
+        border-radius: 12px 12px 0px 0px;
+
+    }
+
+    .specs {
+
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 0px 0px 12px 12px;
+    }
+
+}

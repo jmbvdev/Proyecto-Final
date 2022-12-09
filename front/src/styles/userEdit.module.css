@@ -1,0 +1,229 @@
+.container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(#898888a7,rgba(206, 208, 206, 0.919)), url("https://img.freepik.com/free-photo/calathea-orbifolia-green-natural-leaves_53876-97398.jpg?w=1060&t=st=1666755011~exp=1666755611~hmac=ac0749d368f3630a1c3271e77649311f29ad7047064eee60c0483e5b400fa9d1"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.profile{
+    margin-top: 5rem;
+    width: 70%;
+    height: 80vh;
+    margin-bottom: 10rem;
+    display: flex;
+    border-radius: 12px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    
+}
+
+.profile_pic{
+    border-radius: 50%;
+    width: 100px;
+    border: solid 5px #bdc5b8 ;
+}
+.specs{
+    background-color: #3f4d1f;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    justify-items: left;
+    align-content: center;
+    align-items: center;
+
+    width: 100%;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 12px 0px 0px 12px;
+}
+.specs h2{
+    font-family: "Dosis", sans-serif;
+    color: #bdc5b8;
+}
+.text_specs p{
+    color: #ececec;
+    font-size: medium;
+}
+.edit_btn{
+    margin-top: 20px;
+    font-family: "Inter";
+    background-color: #ececec;
+    font-size: small;
+    padding: 8px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #3f4d1f;
+    border-radius: 2px;
+   
+}
+.edit_btn:hover{
+    background-color: #d5dad1;
+}
+.calatea{
+    border-radius: 0px 12px 12px 0px;
+    caret-color: transparent;
+
+}
+
+.input_container{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+ 
+
+}
+.user_icon{
+    color: #bdc5b8;
+    width: 25px;
+}
+
+.input_text{
+    font-family: "Inter";
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgb(246, 243, 243);
+    outline: 0;
+    font-size: 13px;
+    color: #fff;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 8px;
+}
+.input_text::placeholder{
+    color:rgba(255, 255, 255, 0.625);
+}
+.name_input{
+    color: #bdc5b8;
+    font-family: "Dosis";
+    text-align: left;
+    font-size: small;
+}
+.file{
+    width: 190px;
+}
+.file[type=file]::file-selector-button {
+    border: none;
+    padding: .2em .4em;
+    border-radius: .2em;
+    background-color:#617153c0;
+    font-family: "Dosis";
+    color: #ececec;
+    transition: 0.5s;
+    margin-top: 5px;
+  }
+  
+  .file[type=file]::file-selector-button:hover {
+    background-color:#ececec;
+    color: #102202;
+    cursor: pointer;
+  
+  }
+  .update{
+    background-color: #ececec;
+   padding: 4px 30px;
+   font-family: "Inter";
+   font-size: small;
+   font-weight: bold;
+   border-radius: 4px;
+  }
+  .update:hover{
+    background-color: #b2aeae;
+    cursor: pointer;
+    caret-color: transparent;
+  }
+  .button_container{
+    width: min-content;
+    position: absolute;
+    left: 10px;
+   margin-top: 1rem;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .danger{
+    color:rgb(228, 97, 97);
+    padding: 2px;
+    font-size:small;
+    font-family: "Inter",sans-serif;
+ }
+  
+  
+  @media (max-width: 1200px) {
+    .container{
+        height: 180vh;
+    }
+    .profile{
+        flex-direction: column;
+
+        margin-top: 2rem;
+    
+        width: 50%;
+         
+    }
+    .calatea{
+        border-radius: 0px 0px 12px 12px;
+    
+    }
+    .specs{
+      
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+}
+@media (max-width: 768px) {
+    .container{
+        height: 180vh;
+
+    }
+    .profile{
+        flex-direction: column;
+        margin-top: 2rem;
+        width: 90%;
+    
+         
+    }
+    .calatea{
+        border-radius: 0px 0px 12px 12px;
+    
+    }
+    .specs{
+      
+        width: 100%;
+        gap: 20px;
+        padding: 50px;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+}
+
+.back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+@media (max-width: 600px) {
+    .container{
+        height: 150vh;
+
+    }
+}

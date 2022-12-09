@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     display: flex;
+   
 }
 .title{
     font-weight:  600;
@@ -19,7 +20,7 @@
     line-height:  40px; 
     margin-top:  50px; 
     font-family: Inter, sans-serif; 
-    color: #3f423a; 
+    color: #312d50; 
     border-bottom: #3f423a solid 2px;
  
 }
@@ -47,7 +48,7 @@
     align-items: center;
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 10rem;
   
 
 

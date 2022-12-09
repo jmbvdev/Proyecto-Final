@@ -53,6 +53,7 @@
 
 .categories {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -66,7 +67,7 @@
     justify-items: center;
     color: #fff;
     border-radius: 12px 0px 12px 0px;
-    background-image: url("https://media.architecturaldigest.com/photos/5dcde00380598800086215f6/16:9/w_2560%2Cc_limit/Osofsky_Oct19-5.jpg");
+    
     background-size: cover;
 }
 
@@ -371,4 +372,25 @@
     flex-direction: column;
     justify-content: left;
     align-items: center;
+}
+
+.reset{
+   font-size: 35px;
+   margin-right: 20px;
+cursor: pointer;
+background-color: transparent;
+}
+@media (max-width: 1300px) {
+ 
+.categories {
+   justify-content: center;
+   align-items: center;
+}
+.filters{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 }

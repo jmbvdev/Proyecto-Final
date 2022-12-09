@@ -1,0 +1,263 @@
+.container{
+    width: 100%;
+    height: auto;
+    caret-color: transparent;
+    background-color: #ffffff;
+background-image: linear-gradient(180deg, #ffffff 0%, #a9c6ab 50%);
+
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(19, 24, 21, 0.524),rgba(196, 215, 217, 0.876)), url("https://cdn.concreteplayground.com/content/uploads/2015/03/garden-life-st-peters-plants-supplied.jpeg"); 
+    background-repeat: no-repeat;
+    background-position: center;
+ 
+ 
+}
+.banner img{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    min-width: 150px;
+
+   
+}
+.image_banner{
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    min-width: 150px;
+    position: relative;
+    top: 6px;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+
+}
+.contact img{
+    width: 30%;
+    min-width: 150px;
+    filter: contrast(1.5);
+    position: relative;
+    bottom: 30px;
+ 
+ 
+}
+.contact h1{
+    font-family: "Roboto";
+    color: rgb(27, 38, 31);
+    font-size: 3vw;
+    position: relative;
+    bottom: 25px;
+}
+.about{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(144, 158, 149, 0.801),rgba(215, 209, 209, 0.453)), url("https://youmedia-cdn.leeds-list.com/wp-content/uploads/2020/12/22171900/plant-point-sept-19-max-wailes-20.jpg"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 18rem;
+  
+    height: 25rem;
+    position: relative;
+    margin-bottom: 10rem;
+ 
+ 
+}
+.about_cat{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(208, 212, 210, 0.701),rgba(145, 144, 144, 0.803)), url("https://media.architecturaldigest.com/photos/5dcde0245ff5e60008e76f52/master/w_1600%2Cc_limit/Osofsky_Oct19-571.jpg"); 
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin-top: 18rem;
+  
+    height: 25rem;
+    position: relative;
+    margin-bottom: 10rem;
+}
+.about_reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(144, 158, 149, 0.375),rgba(215, 209, 209, 0.552)), url("https://img.freepik.com/premium-photo/bahai-gardens-during-cloudy-day_645882-4186.jpg?w=2000"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 18rem;
+  
+    height: 25rem;
+    position: relative;
+    margin-bottom: 10rem;
+}
+.about_reverse img{
+    position: absolute;
+right: 0;
+    bottom:0 ;
+    max-width:500px;
+    height: auto;
+    min-width: 250px;
+}
+.about img{
+    position: absolute;
+
+    bottom:0 ;
+    max-width:550px;
+    height: auto;
+    min-width: 250px;
+
+
+   
+}
+.about_cat img{
+    position: absolute;
+
+    bottom:0 ;
+    max-width:650px;
+    height: auto;
+    min-width: 250px;
+}
+.image{
+    position: absolute;
+
+    bottom:0 ;
+    max-width:550px;
+    height: 100%;
+
+    min-width: 250px;
+}
+.image_reverse{
+    position: absolute;
+
+    bottom:0 ;
+    right: 0;
+    max-width:550px;
+    height: 100%;
+
+    min-width: 250px;
+}
+.about_main{
+    position: absolute;
+    width: 50%;
+    right: 0;
+    margin-right: 2rem;
+   text-align: left;
+}
+.about_main_reverse{
+    position: absolute;
+    width: 50%;
+    left: 0;
+    margin-left: 2rem;
+   text-align: left;
+}
+.about_main_reverse p{
+    font-family: "Dosis";
+    font-size: 2rem;
+    background-color: rgba(240, 248, 255, 0.302);
+    padding: 18px;
+    border-radius: 10px;
+    color: rgb(35, 44, 40);
+}
+.about_main p{
+    font-family: "Dosis";
+    font-size: 2rem;
+    background-color: rgba(240, 248, 255, 0.302);
+    padding: 18px;
+    border-radius: 10px;
+    color: rgb(35, 44, 40);
+}
+.about_main_reverse strong{
+    font-family: "Dosis";
+    font-size: 2rem;
+    color: rgb(35, 44, 40);
+
+}
+.about_main strong{
+    font-family: "Dosis";
+    font-size: 2rem;
+    color: rgb(35, 44, 40);
+
+}
+@media(max-width:1100px){
+    .about img{
+        position: relative;
+        width: 100%;
+    max-width: 380px;
+    height: 100%;
+    min-width: 150px;
+    
+    
+       
+    }
+    .about_reverse img{
+        position: relative;
+        width: 100%;
+    max-width: 380px;
+    height: 100%;
+    min-width: 150px;
+    
+    
+       
+    }
+    .about_cat img{
+       display: none;
+    
+    }
+
+}
+@media(max-width:768px){
+    .about img{
+   display: none;
+    }
+    .about_reverse img{
+        display: none;
+         }
+    .about{
+        height: 100vh;
+        margin-top: 4rem;
+    }
+    .about_reverse{
+        height: 100vh;
+        margin-top: 4rem;
+    }
+    .about_main{
+        width: 100%;
+        margin-right: 0;
+        text-align: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .about_main p{
+        padding: 20px;
+        margin: 30px;
+    }
+    .about_main_reverse{
+        width: 100%;
+        margin-left: 0;
+        text-align: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .about_main_reverse p{
+        padding: 20px;
+        margin: 30px;
+    }
+
+
+}

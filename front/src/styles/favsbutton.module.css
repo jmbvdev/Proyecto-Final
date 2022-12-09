@@ -1,0 +1,8 @@
+.hearth {
+  font-size: 2rem;
+  color: rgba(9, 102, 74, 0.713);
+}
+.hearth:hover {
+  color: rgb(9, 102, 74);
+  cursor: pointer;
+}

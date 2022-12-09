@@ -1,51 +1,33 @@
+import React from "react";
+import video from "../video/plants.mp4";
+import s from "../styles/carousel.module.css";
+import { useNavigate } from "react-router-dom";
+import ScrollAnimation from "react-animate-on-scroll";
+const Carousel = ({ isSearch }) => {
+  const navigate = useNavigate();
+  return (
+    <div className={s.container}>
+      <video src={video} autoPlay loop muted />
+      <ScrollAnimation
+        animateIn="fadeIn"
+        animateOnce={true}
+        delay={600}
+        className={isSearch ? s.content_hyde : s.content}
+      >
+        <h1>Welcome</h1>
+        <p>hope you enjoy your visit and find the right plant for you</p>
+        <button
+          className={s.shop_btn}
+          onClick={() => {
+            navigate("/plants");
+            window.scrollTo(0, { behavior: "smooth" });
+          }}
+        >
+          SHOP NOW
+        </button>
+      </ScrollAnimation>
+    </div>
+  );
+};
 
-import s from '../styles/Carousel.module.css';
-import {BsCircle, BsFillCaretLeftFill} from "react-icons/bs";
-import {BsFillCaretRightFill} from 'react-icons/bs';
-import {FaDotCircle} from 'react-icons/fa'
-import foto1 from '../images/carousel/art.png'
-import foto2 from '../images/carousel/big.png'
-import foto3 from '../images/carousel/hoya.png'
-
- export default function Carousel() {
-    return (
-      <div>
-      <div className={s.conteItemscarousel}  >
-        <div className={s.itemcarousel} id="foto1">
-            <div className={s.tarjetacarousel}>
-                        <img src={foto1} className={s.imagen}/>
-                        </div>                        
-                        <div className={s.flechascarousel}>
-                          <a href="#foto3" className={s.flechaccion}><BsFillCaretLeftFill/></a>
-                          <a href="#foto2" className={s.flechaccion}><BsFillCaretRightFill/></a>
-                        </div>
-                                    </div>
-                                    <div className={s.itemcarousel}>
-            <div className={s.tarjetacarousel}  id="foto2">
-            <img src={foto2} className={s.imagen}/>
-                        </div>                        
-                        <div className={s.flechascarousel}>
-                        <a href="#foto1" className={s.flechaccion}><BsFillCaretLeftFill/></a>
-                        <a href="#foto3" className={s.flechaccion}><BsFillCaretRightFill/></a>
-                        </div>
-                                    </div>     
-                                    <div className={s.itemcarousel}>
-            <div className={s.tarjetacarousel} id="foto3">
-            <img src={foto3} className={s.imagen}/>
-                        </div>                        
-                        <div className={s.flechascarousel}>
-                        <a href="#foto2" className={s.flechaccion}><BsFillCaretLeftFill/></a>
-                        <a href="#foto1" className={s.flechaccion}><BsFillCaretRightFill/></a>
-                        </div>
-                                    </div> 
-                    
-            </div>
-            <div>
-            <a href="#foto1" className={s.punto}><FaDotCircle/></a>
-            <a href="#foto2" className={s.punto}><FaDotCircle/></a>
-            <a href="#foto3" className={s.punto}><FaDotCircle/></a>
-                                                  
-              </div>   
-            </div>
-    )
-}  
+export default Carousel;

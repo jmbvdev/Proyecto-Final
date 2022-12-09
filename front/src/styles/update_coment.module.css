@@ -1,0 +1,203 @@
+
+.button_container{
+    width: min-content;
+    position: absolute;
+    left: 15px;
+  top: 8rem;
+  }
+  .back{
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+ .wraper{
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 100%;
+  
+  
+    padding: 20px;
+    width: 400px;
+    height: auto;
+  
+  background-color: rgba(255, 255, 255, 0.485);
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+ .wraper h2{
+    font-family: "Inter",sans-serif;
+    color: rgba(7, 62, 35, 0.775);
+    font-weight: light;
+    caret-color: transparent;
+
+}
+.wraper h3{
+  color: rgba(17, 42, 30, 0.581);
+}
+
+.container{
+ 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(230, 235, 232, 0.729),rgba(253, 253, 253, 0.33)), url("https://img.freepik.com/foto-gratis/diseno-textura-marmol-verde_53876-94945.jpg?w=2000"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+}
+
+.image_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    cursor: pointer;
+    caret-color: transparent;
+  
+}
+
+.image_input button{
+    color: #fff;
+    cursor: pointer;
+}
+.image_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.image_btn p{
+    color: #fff;
+    font-family: "Josefin Sans", sans-serif;
+    caret-color: transparent;
+}
+.input_container input{
+    font-family: inherit;
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid rgb(205, 202, 202);
+  outline: 0;
+  font-size: 1rem;
+  color: #fff;
+  padding: 10px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+}
+.input_container input::placeholder{
+    color:rgba(255, 255, 255, 0.625);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .form {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  .categories{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+    caret-color: transparent;
+
+  }
+  .categories label{
+    color: #fff;
+    font-size: medium;
+    font-weight: solid;
+    font-family: "Josefin Sans";
+    font-size: medium;
+
+  }
+  .categories select{
+    padding: 0px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .categories select option{
+    cursor: pointer;
+    
+  }
+  .categories_option{
+    display: flex;
+    flex-direction: row;
+ 
+    justify-content: center;
+    align-items: center;
+gap: 4px;
+  }
+  .categories_option button{
+    color: rgba(253, 87, 87, 0.644);
+    font-size: medium;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+ .categories_option p{
+    color:rgba(13, 67, 27, 0.813);
+    font-size: small;
+    font-weight: bold;
+  }
+ .create_btn{
+    background-color: rgba(16, 123, 43, 0.813);
+    color: #fff;
+    padding:  6px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: "Josefin Sans",sans-serif;
+    font-size: medium;
+    caret-color: transparent;
+ }
+ .create_btn:hover{
+    background-color:rgba(16, 123, 43, 0.704) ;
+ }
+ .errors{
+    color:rgb(228, 97, 97);
+    padding: 10px;
+    font-size:14px;
+    font-family: "Inter",sans-serif;
+ }
+ .userPic{
+ border-radius: 50%; 
+}
+
+.positive_comments{
+  color: rgba(11, 84, 29, 0.813);
+}
+.recomendations_select{
+  color: #fff;
+    cursor: pointer;
+    font-size: medium;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    line-height: 3;
+    border: none;
+    background: rgba(11, 84, 29, 0.813);
+    overflow: hidden;
+    border-radius: 4px;
+ 
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -44,6 +44,7 @@
     justify-content: center;
     align-items: center;
     caret-color: transparent;
+    margin-bottom: 8rem;
     
 }
 .title{
@@ -64,4 +65,9 @@
     display: flex;
     justify-content: left;
     align-items: center;
+}
+@media (max-width: 768px) {
+    .list{
+        width: 100%;
+    }
 }
